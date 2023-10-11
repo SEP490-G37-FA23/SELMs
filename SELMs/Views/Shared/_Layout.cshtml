@@ -1,0 +1,146 @@
+﻿@{
+    if (Session["USERNAME"] == null)
+    {
+        Response.Redirect("~/Home/Login");
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.0/alasql.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Moment.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Eonasdan Bootstrap DateTimePicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+<!-- Bootstrap JS -->
+@*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
+
+<!-- Eonasdan Bootstrap DateTimePicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div style="width:100% !important">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="display:flex;flex-direction: row;">
+                    <li>@Html.ActionLink("Kinh Doanh", "DSKhachHang", "KhachHang", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Mua Hàng", "DSHangHoa", "HangHoa", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Nhân viên", "DSPhongBan", "PhongBan", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Kế toán", "DSHangHoa", "HangHoa", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Kho vận", "DSKho", "Kho", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Phân quyền", "XLPhanQuyen", "PhanQuyen", new { area = "" }, null)</li>
+
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                </ul>
+                <div class="nav navbar-nav" style="padding: 0 15px; text-align: right; margin-left:34% !important">
+                    <h4 style="margin-bottom:5px;color:white">@Session["HO_VA_TEN"]</h4>
+                    <div class="section-tab">
+                        <div class="section-content" style="margin-left:10px">
+                            <a href="/Home/Login" class="logout" style="color:white;font-size:12px">LOGOUT</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Menu dọc bên trái -->
+
+
+    <div class="container body-content">
+        <div class="sidebar">
+            <ul class="nav" ng-show="MenuKD">
+                <li>@Html.ActionLink("Khách hàng", "DSKhachHang", "KhachHang", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Báo giá", "Index", "Help", new { area = "" }, null)</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Báo giá<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Tạo báo giá", "TaoBaoGia", "BaoGia", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Danh sách báo giá", "DSBaoGia", "BaoGia", new { area = "" }, null)</li>
+
+                        @*<li><a href="/BaoCaoBH/BaoCaoBanHang">Chi tiết bán hàng</a></li>*@
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("Đơn bán hàng", "Index", "Help", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Phiếu xuất kho", "Index", "Help", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Xuất hóa đơn", "Index", "Help", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Help", "Index", "Help", new { area = "" }, null)</li>
+
+
+                <!-- Thêm các mục menu khác nếu cần -->
+            </ul>
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    const MenuKD = false;
+</script>
+<style>
+    /* CSS cho menu dọc bên trái */
+    .sidebar {
+        height: 100%; /* Chiều cao của menu dọc bên trái sẽ kéo dài từ đầu đến chân trang */
+        width: 250px; /* Độ rộng của menu dọc bên trái */
+        position: fixed; /* Giữ menu cố định khi cuộn trang */
+        left: 0;
+        background-color: #222; /* Màu nền của menu */
+        padding-top: 20px; /* Khoảng cách từ trên xuống các mục menu */
+    }
+
+        .sidebar ul {
+            list-style-type: none; /* Xóa đi các dấu đầu dòng trong danh sách */
+            padding: 0;
+        }
+
+            .sidebar ul li {
+                padding: 8px 20px; /* Khoảng cách giữa các mục menu */
+            }
+
+                .sidebar ul li a {
+                    color: #fff; /* Màu chữ cho các liên kết */
+                    text-decoration: none;
+                    display: block; /* Hiển thị liên kết làm toàn bộ chiều rộng của mục menu */
+                }
+
+                    /* Hiển thị màu nền khác khi di chuột qua các mục menu */
+                    .sidebar ul li a:hover {
+                        background-color: #444;
+                    }
+</style>
+

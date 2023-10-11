@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "MembersList";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+<script src="~/Content/js/HumanResouce/MemberCtrl.js"></script>
+<h3 class="text-center" style="color:#0094ffff;font-size:30px;">Danh sách thành viên</h3>
+<div ng-app="myApp" ng-controller="MemberCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["USERNAME"]" />
+    <div id="notification" class="col-md-12"></div>
+    <br />
+    <div class="col-md-12">
+        <br />
+        <div style="text-align:left;">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CreateNewMember">Thêm mới thành viên</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#ImportNewMembersList">Import danh sách thành viên</button>
+            <button class="btn btn-primary" style="margin-left: 77% !important;" ng-click="XuatExcel()">Xuất excel</button>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <table class="table table-bordered sticky-table" style="margin-top:20px;">
+            <thead>
+                <tr>
+                    <th style="min-width:60px">Mã nhân viên</th>
+                    <th style="min-width:150px">Họ và tên</th>
+                    <th style="min-width:60px">Giới tính</th>
+                    <th style="min-width:60px">Vị trí  </th>
+                    <th style="min-width:40px">Email</th>
+                    <th style="min-width:80px">Hotline</th>
+                    <th style="min-width:120px">Tác vụ</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input type="text" ng-model="tukhoa1" name="tencongty" placeholder="Tên công ty" ng-change="SearchKhachHang('tukhoa1',tukhoa1)" ng-model-options="{debounce:1000}" class="input-form form-control"></th>
+                    <th></th>
+                    <th></th>
+                    <th><input type="text" ng-model="tukhoa2" name="tinh" placeholder="Tỉnh" ng-change="SearchKhachHang('tukhoa2',tukhoa2)" ng-model-options="{debounce:1000}" class="input-form form-control"></th>
+                    <th></th>
+                    <th></th>
+                   
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                <tr ng-repeat="item in ListMembers">
+                    <td class="text-left">{{item.username}}</td>
+                    <td class="text-left"> {{item.fullname}} </td>
+                    <td class="text-left">{{item.gender==1?'Nam':'Nữ'}}</td>
+                    <td class="text-left">{{item.position_code}}</td>
+                    <td class="text-left">{{item.email}}</td>
+                    <td class="text-left">{{item.hotline}}</td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#suakhachhang" ng-click="GetKH(item)"> <i class="far fa-edit"></i></button>
+                        <button class="btn btn-danger" ng-click="DeleteKH(item)"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+
+                </tr>
+                <tr style="font-weight:bold;">
+                    <td colspan="6">Tổng số thành viên:</td>
+                    <td> {{SumKH}}</td>
+
+                </tr>
+                <!--Detail row-->
+            </tbody>
+        </table>
+        <div class="row col-md-12" style="margin-left: 38% !important;">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous" ng-click="LoadListKhachHang(page-1)" ng-disabled="page==1">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link"> <span aria-hidden="true">{{page}}</span></a></li>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next" ng-click="LoadListKhachHang(page+1)" ng-disabled="ListKhachHang.length<15">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+    </div>
+
+</div>
