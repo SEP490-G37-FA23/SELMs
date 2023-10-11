@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage
+namespace SELMs.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

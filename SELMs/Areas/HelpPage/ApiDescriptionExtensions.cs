@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage
+namespace SELMs.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

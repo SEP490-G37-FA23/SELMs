@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ERP_QLBH_BQD.Controllers.HumanResourceManagement
+namespace SELMs.Controllers.HumanResource
 {
     public class HumanResourceController : Controller
     {

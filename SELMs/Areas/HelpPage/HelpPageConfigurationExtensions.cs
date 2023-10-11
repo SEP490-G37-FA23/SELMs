@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using ERP_QLBH_BQD.Areas.HelpPage.ModelDescriptions;
-using ERP_QLBH_BQD.Areas.HelpPage.Models;
+using SELMs.Areas.HelpPage.ModelDescriptions;
+using SELMs.Areas.HelpPage.Models;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage
+namespace SELMs.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

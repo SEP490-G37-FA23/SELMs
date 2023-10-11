@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using ERP_QLBH_BQD.Areas.HelpPage.ModelDescriptions;
-using ERP_QLBH_BQD.Areas.HelpPage.Models;
+using SELMs.Areas.HelpPage.ModelDescriptions;
+using SELMs.Areas.HelpPage.Models;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage.Controllers
+namespace SELMs.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

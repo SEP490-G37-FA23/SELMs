@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using ERP_QLBH_BQD.Areas.HelpPage.ModelDescriptions;
+using SELMs.Areas.HelpPage.ModelDescriptions;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage
+namespace SELMs.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

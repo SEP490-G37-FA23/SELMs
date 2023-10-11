@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ERP_QLBH_BQD
+namespace SELMs
 {
     public class BundleConfig
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace ERP_QLBH_BQD.Areas.HelpPage.ModelDescriptions
+namespace SELMs.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation
     {

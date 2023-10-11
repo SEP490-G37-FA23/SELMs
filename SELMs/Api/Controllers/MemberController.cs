@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using log4net;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using System;
@@ -13,6 +14,9 @@ namespace SELMs.Api.HumanResource
 {
     public class MemberController : ApiController
     {
+
+        private static readonly ILog Log = LogManager.GetLogger(typeof(MemberController));
+
         private SELMsEntities db = new SELMsEntities();
         // GET: Api_Member
         #region Danh sách khách hàng
@@ -20,14 +24,26 @@ namespace SELMs.Api.HumanResource
         [Route("api/Api_Member/GetMembersList")]
         public async Task<IHttpActionResult> GetMemberList(Argument args)
         {
-            dynamic returnedData = null;
-            returnedData = db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
+            try
             {
-                username = args.username,
-            }
-            , commandType: CommandType.StoredProcedure).ToList();
+                dynamic returnedData = null;
+                returnedData = db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
+                {
+                    username = args.username,
+                }
+                , commandType: CommandType.StoredProcedure).ToList();
 
-            return returnedData;
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                return InternalServerError();
+                throw;
+            }
+
+
         }
         #endregion
     }

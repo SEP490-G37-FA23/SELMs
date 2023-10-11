@@ -1,4 +1,4 @@
-namespace ERP_QLBH_BQD.Areas.HelpPage
+namespace SELMs.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

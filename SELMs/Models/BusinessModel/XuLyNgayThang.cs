@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace ERP_QLBH_BQD.Models.BusinessModel
+namespace SELMs.Models.BusinessModel
 {
     public class XuLyNgayThang
     {

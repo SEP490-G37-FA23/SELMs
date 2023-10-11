@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace ERP_QLBH_BQD
+namespace SELMs
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -18,6 +18,7 @@ namespace ERP_QLBH_BQD
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }
