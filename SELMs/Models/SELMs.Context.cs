@@ -13,10 +13,10 @@ namespace SELMs.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SELMsEntities : DbContext
+    public partial class SELMsContext : DbContext
     {
-        public SELMsEntities()
-            : base("name=SELMsEntities")
+        public SELMsContext()
+            : base("name=SELMsContext")
         {
         }
     

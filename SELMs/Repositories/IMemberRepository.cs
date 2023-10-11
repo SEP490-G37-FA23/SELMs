@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SELMs.Models.BusinessModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SELMs.Repositories
 {
     public interface IMemberRepository
     {
-        dynamic getMemberList();
+        dynamic getMemberList(Argument arg);
         dynamic getMember();
         dynamic saveMember(dynamic member);
         dynamic updateMember(dynamic member);

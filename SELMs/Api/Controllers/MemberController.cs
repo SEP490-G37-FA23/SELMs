@@ -2,6 +2,8 @@
 using log4net;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
+using SELMs.Repositories;
+using SELMs.Repositories.Implements;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,10 +16,10 @@ namespace SELMs.Api.HumanResource
 {
     public class MemberController : ApiController
     {
-
         private static readonly ILog Log = LogManager.GetLogger(typeof(MemberController));
 
-        private SELMsEntities db = new SELMsEntities();
+        private IMemberRepository repository = new MemberRepository();
+
         // GET: Api_Member
         #region Danh sách khách hàng
         [HttpPost]
@@ -26,13 +28,8 @@ namespace SELMs.Api.HumanResource
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
-                {
-                    username = args.username,
-                }
-                , commandType: CommandType.StoredProcedure).ToList();
-
+                dynamic returnedData = null;                
+                returnedData = await repository.getMemberList(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)
