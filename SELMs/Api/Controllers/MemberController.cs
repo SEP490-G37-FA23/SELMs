@@ -29,7 +29,7 @@ namespace SELMs.Api.HumanResource
             try
             {
                 dynamic returnedData = null;                
-                returnedData = await repository.getMemberList(args);
+                returnedData = await repository.GetMemberList(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)

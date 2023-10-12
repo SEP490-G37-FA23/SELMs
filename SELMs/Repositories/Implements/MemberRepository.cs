@@ -13,17 +13,17 @@ namespace SELMs.Repositories.Implements
     {
         private SELMsContext db = new SELMsContext();
 
-        public dynamic deleteMember(dynamic member)
+        public dynamic DeleteMember(dynamic member)
         {
             throw new NotImplementedException();
         }
 
-        public dynamic getMember()
+        public dynamic GetMember()
         {
             throw new NotImplementedException();
         }
 
-        public dynamic getMemberList(Argument args)
+        public dynamic GetMemberList(Argument args)
         {
             dynamic members = null;
             members = db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
@@ -34,13 +34,13 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
-        public dynamic saveMember(dynamic member)
+        public dynamic SaveMember(dynamic member)
         {
 
             throw new NotImplementedException();
         }
 
-        public dynamic updateMember(dynamic member)
+        public dynamic UpdateMember(dynamic member)
         {
             throw new NotImplementedException();
         }
