@@ -61,6 +61,23 @@ namespace SELMs.Api.HumanResource
             }
         }
 
+        public async Task<IHttpActionResult> SaveMember(dynamic member)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await service.SaveMember(member);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                return InternalServerError();
+                throw;
+            }
+        }
+
         #endregion
     }
 }
