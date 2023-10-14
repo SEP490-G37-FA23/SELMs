@@ -14,5 +14,6 @@ namespace SELMs.Repositories
         void SaveMember(dynamic member);
         void UpdateMember(dynamic member);
         dynamic DeleteMember(dynamic member);
+        string GetLastMemberCode(string prefix);
     }
 }

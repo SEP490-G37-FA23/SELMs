@@ -27,7 +27,7 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetMemberList(Argument args)
         {
-            dynamic members = db.Users.ToList();
+            dynamic members = db.Users.ToListAsync();
             
             return members;
         }
@@ -42,6 +42,13 @@ namespace SELMs.Repositories.Implements
         {
             db.Entry<User>(member).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public string GetLastMemberCode(string prefix)
+        {
+            User obj = db.Users.Where(u => u.member_code.StartsWith(prefix)).OrderBy(u => u.member_code).Last();
+            string result = obj.member_code;
+            return result;
         }
     }
 }
