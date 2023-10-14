@@ -3,8 +3,8 @@
     ViewBag.Title = "MembersList";
     Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
 }
-<script src="~/Content/js/HumanResouce/MemberCtrl.js"></script>
-<div ng-app="myApp" ng-controller="MemberCtrl" style="display:inline-block;width:100%;">
+<script src="~/Content/js/HumanResouce/MemberListCtrl.js"></script>
+<div ng-app="myApp" ng-controller="MemberListCtrl" style="display:inline-block;width:100%;">
     <input type="hidden" id="username" name="username" value="@Session["USERNAME"]" />
     <div id="notification" class="col-md-12"></div>
     <br />
@@ -55,23 +55,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>ductm</td>
-                                    <td>Tran Minh Duc</td>
-                                    <td>Nam</td>
-                                    <td>Manager</td>
-                                    <td>ductm1406@gmail.com</td>
-                                    <td>0704119916</td>
+                                <tr ng-repeat="item in ListMembers">
+                                    <td>{{item.member_code}}</td>
+                                    <td>{{item.fullname}}</td>
+                                    <td>{{item.gender==1?'Nam':'Nữ'}}</td>
+                                    <td>{{item.position_code}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.hotline}}</td>
                                     <td>
-                                        <button class="btn btn-warning" data-toggle="modal"
-                                                data-target="#suakhachhang" ng-click="GetKH(item)">
-                                            <i class="far fa-edit"></i>button 1
-                                        </button>
-                                        <button class="btn btn-danger" ng-click="DeleteKH(item)">
-                                            <i class="fas fa-trash-alt"></i>button 2
-                                        </button>
                                         <a class="btn btn-primary" data-bs-toggle="modal"
-                                           data-bs-target="#user-details">Details</a>
+                                           data-bs-target="#user-details" >Details</a>
+                                        <button class="btn btn-danger" ng-click="MarkMemberQuit(item)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+
                                     </td>
                                 </tr>
                                 <tr>

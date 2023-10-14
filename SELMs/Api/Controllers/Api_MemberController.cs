@@ -9,9 +9,9 @@ using SELMs.Services;
 
 namespace SELMs.Api.HumanResource
 {
-	public class MemberController : ApiController
+	public class Api_MemberController : ApiController
 	{
-		private static readonly ILog Log = LogManager.GetLogger(typeof(MemberController));
+		private static readonly ILog Log = LogManager.GetLogger(typeof(Api_MemberController));
 
 
 		private readonly IMemberService memberService = new MemberService();
@@ -23,12 +23,12 @@ namespace SELMs.Api.HumanResource
 		#region Danh sách khách hàng
 		[HttpPost]
 		[Route("api/Api_Member/GetMembersList")]
-		public async Task<IHttpActionResult> GetMemberList(Argument args)
+		public dynamic GetMemberList(Argument args)
 		{
 			try
 			{
 				dynamic returnedData = null;
-				returnedData = await memberRepository.GetMemberList(args);
+				returnedData =  memberRepository.GetMemberList(args);
 				return Ok(returnedData);
 			}
 			catch (Exception ex)
