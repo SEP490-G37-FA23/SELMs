@@ -4,6 +4,7 @@ using SELMs.Models.BusinessModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -18,9 +19,10 @@ namespace SELMs.Repositories.Implements
             throw new NotImplementedException();
         }
 
-        public dynamic GetMember()
+        public dynamic GetMember(int id)
         {
-            throw new NotImplementedException();
+            dynamic member = db.Users.Where(u => u.user_id == id).FirstOrDefault();
+            return member;
         }
 
         public dynamic GetMemberList(Argument args)
@@ -34,15 +36,16 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
-        public dynamic SaveMember(dynamic member)
+        public void SaveMember(dynamic member)
         {
-
-            throw new NotImplementedException();
+            db.Users.Add(member);
+            db.SaveChanges();
         }
 
-        public dynamic UpdateMember(dynamic member)
+        public void UpdateMember(dynamic member)
         {
-            throw new NotImplementedException();
+            db.Entry<User>(member).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

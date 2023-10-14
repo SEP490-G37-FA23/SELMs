@@ -21,7 +21,7 @@ namespace SELMs.Api.HumanResource
         private IMemberRepository repository = new MemberRepository();
 
         // GET: Api_Member
-        #region Danh sách khách hàng
+        #region Get member list
         [HttpPost]
         [Route("api/Api_Member/GetMembersList")]
         public async Task<IHttpActionResult> GetMemberList(Argument args)
@@ -39,9 +39,25 @@ namespace SELMs.Api.HumanResource
                 return InternalServerError();
                 throw;
             }
-
-
         }
+
+        public async Task<IHttpActionResult> GetMember(int id)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await repository.GetMember(id);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                return InternalServerError();
+                throw;
+            }
+        }
+
         #endregion
     }
 }

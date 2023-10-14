@@ -10,9 +10,9 @@ namespace SELMs.Repositories
     public interface IMemberRepository
     {
         dynamic GetMemberList(Argument arg);
-        dynamic GetMember();
-        dynamic SaveMember(dynamic member);
-        dynamic UpdateMember(dynamic member);
+        dynamic GetMember(int id);
+        void SaveMember(dynamic member);
+        void UpdateMember(dynamic member);
         dynamic DeleteMember(dynamic member);
     }
 }
