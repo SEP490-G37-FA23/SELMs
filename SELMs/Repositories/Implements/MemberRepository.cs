@@ -27,12 +27,8 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetMemberList(Argument args)
         {
-            dynamic members = null;
-            members = db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
-            {
-                username = args.username,
-            }
-                , commandType: CommandType.StoredProcedure).ToList();
+            dynamic members = db.Users.ToList();
+            
             return members;
         }
 
