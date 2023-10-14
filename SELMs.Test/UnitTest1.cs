@@ -16,7 +16,7 @@ namespace SELMs.Test
 		[Fact]
 		public async Task Test1()
 		{
-			MemberController memberController = new();
+			ApiMemberController memberController = new();
 
 			var a = await memberController.GetMemberList(null);
 

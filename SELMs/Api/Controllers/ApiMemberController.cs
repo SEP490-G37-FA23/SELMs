@@ -16,9 +16,9 @@ using System.Web.Http;
 
 namespace SELMs.Api.HumanResource
 {
-    public class MemberController : ApiController
+    public class ApiMemberController : ApiController
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(MemberController));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiMemberController));
 
         private IMemberRepository repository = new MemberRepository();
         private IMemberService service = new MemberService();
@@ -26,7 +26,7 @@ namespace SELMs.Api.HumanResource
         // GET: Api_Member
         #region Get member list
         [HttpPost]
-        [Route("api//GetMembersList")]
+        [Route("api/Members")]
         public async Task<IHttpActionResult> GetMemberList(Argument args)
         {
             try
@@ -44,6 +44,8 @@ namespace SELMs.Api.HumanResource
             }
         }
 
+        [HttpGet]
+        [Route("api/Member/{id}")]
         public async Task<IHttpActionResult> GetMember(int id)
         {
             try
