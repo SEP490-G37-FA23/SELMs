@@ -27,4 +27,10 @@
     <ProjectReference Include="..\SELMs\SELMs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers.Test\" />
+    <Folder Include="Services.Test\" />
+    <Folder Include="Repositories.Test\" />
+  </ItemGroup>
+
 </Project>
