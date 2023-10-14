@@ -4,6 +4,8 @@ using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using SELMs.Repositories;
 using SELMs.Repositories.Implements;
+using SELMs.Services;
+using SELMs.Services.Implements;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,11 +21,12 @@ namespace SELMs.Api.HumanResource
         private static readonly ILog Log = LogManager.GetLogger(typeof(MemberController));
 
         private IMemberRepository repository = new MemberRepository();
+        private IMemberService service = new MemberService();
 
         // GET: Api_Member
         #region Get member list
         [HttpPost]
-        [Route("api/Api_Member/GetMembersList")]
+        [Route("api//GetMembersList")]
         public async Task<IHttpActionResult> GetMemberList(Argument args)
         {
             try
