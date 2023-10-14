@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "MembersList";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+<script src="~/Content/js/HumanResouce/MemberCtrl.js"></script>
+<div ng-app="myApp" ng-controller="MemberCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["USERNAME"]" />
+    <div id="notification" class="col-md-12"></div>
+    <br />
+
+    @*<div class="pagetitle">
+        <h1>Danh Sách Thành Viên</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/User/MembersList">Members List</a></li>
+            </ol>
+        </nav>
+    </div>*@
+
+    <section class="section">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Danh Sách Thành Viên</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <a class="btn btn-primary" href="@Url.Action("AddNewMember", "User")">Thêm thành viên mới</a>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary">Thêm danh sách thành viên mới</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary">Xuất file Excel</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p></p>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã nhân viên</th>
+                                    <th scope="col">Họ và Tên</th>
+                                    <th scope="col">Giới tính</th>
+                                    <th scope="col">Vị trí</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ductm</td>
+                                    <td>Tran Minh Duc</td>
+                                    <td>Nam</td>
+                                    <td>Manager</td>
+                                    <td>ductm1406@gmail.com</td>
+                                    <td>0704119916</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-toggle="modal"
+                                                data-target="#suakhachhang" ng-click="GetKH(item)">
+                                            <i class="far fa-edit"></i>button 1
+                                        </button>
+                                        <button class="btn btn-danger" ng-click="DeleteKH(item)">
+                                            <i class="fas fa-trash-alt"></i>button 2
+                                        </button>
+                                        <a class="btn btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#user-details">Details</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tổng số thành viên</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+@Html.Partial("MemberDetails")

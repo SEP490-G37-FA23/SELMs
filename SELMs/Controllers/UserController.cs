@@ -6,12 +6,24 @@ using System.Web.Mvc;
 
 namespace SELMs.Controllers.HumanResource
 {
-    public class HumanResourceController : Controller
+    public class UserController : Controller
     {
         // GET: HumanResource
         public ActionResult MembersList()
         {
             return View();
+        }
+
+        //Get: NewMember
+        [HttpGet]
+        public ActionResult AddNewMember()
+        {
+            return View();
+        }
+
+        public ActionResult MemberDetails()
+        {
+            return PartialView();
         }
     }
 }
