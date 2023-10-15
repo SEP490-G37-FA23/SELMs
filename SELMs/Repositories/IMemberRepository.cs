@@ -6,7 +6,7 @@ namespace SELMs.Repositories
 {
     public interface IMemberRepository
     {
-        dynamic GetMemberList(Argument arg);
+        dynamic GetMemberList();
         dynamic SearchMembers(Argument arg);
         dynamic GetMember(int id);
         void SaveMember(User member);

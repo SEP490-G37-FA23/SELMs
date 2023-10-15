@@ -9,7 +9,7 @@ namespace SELMs.Services
 {
     public interface IMemberService
     {
-        Task SaveMember(dynamic member);
-        Task UpdateMember(int id, dynamic member);
+        Task SaveMember(User member);
+        Task UpdateMember(int id, User member);
     }
 }

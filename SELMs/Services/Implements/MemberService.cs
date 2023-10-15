@@ -13,20 +13,24 @@ namespace SELMs.Services.Implements
     public class MemberService : IMemberService
     {
         private IMemberRepository repository = new MemberRepository();
-        public async Task SaveMember(dynamic member)
+        public async Task SaveMember(User member)
         {
-            User mem = (User)member;
+            User mem = member;
 
             //Generate member code
             List<string> nameParts = mem.fullname.Split(' ').ToList();
             string memCode = nameParts.Last();
             string lastMemCode = repository.GetLastMemberCode(memCode);
-            foreach (string item in nameParts)
+            if (nameParts.Count > 1)
             {
-                if (item.Equals(nameParts.Last()))
-                    memCode += item.First().ToString().ToUpper();
+                foreach (string item in nameParts)
+                {
+                    if (!item.Equals(nameParts.Last()))
+                        memCode += item.First().ToString().ToUpper();
+                }
             }
-            if (lastMemCode != null)
+
+            if (lastMemCode.Length > 0)
             {
                 string num = lastMemCode.Replace(memCode, "");
                 if (num.Count() > 0)
@@ -49,14 +53,12 @@ namespace SELMs.Services.Implements
             repository.SaveMember(mem);
         }
 
-        public async Task UpdateMember(int id, dynamic member)
+        public async Task UpdateMember(int id, User member)
         {
-            User mem = repository.GetMember(id);
-            if (mem != null)
+            if (await repository.GetMember(id) != null)
             {
-                mem = (User)member;
-                mem.user_id = id;
-                repository.UpdateMember(mem);
+                member.user_id = id;
+                repository.UpdateMember(member);
             }
         }
     }
