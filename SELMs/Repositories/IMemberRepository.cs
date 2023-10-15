@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using SELMs.Models;
 using SELMs.Models.BusinessModel;
 
 namespace SELMs.Repositories
@@ -8,9 +9,9 @@ namespace SELMs.Repositories
         dynamic GetMemberList(Argument arg);
         dynamic SearchMembers(Argument arg);
         dynamic GetMember(int id);
-        void SaveMember(dynamic member);
-        void UpdateMember(dynamic member);
-        dynamic DeleteMember(dynamic member);
+        void SaveMember(User member);
+        void UpdateMember(User member);
+        dynamic DeleteMember(User member);
         string GetLastMemberCode(string prefix);
     }
 }

@@ -90,13 +90,12 @@ namespace SELMs.Api.HumanResource
         #region Add new member
         [HttpPost]
         [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(dynamic member)
+        public async Task<IHttpActionResult> SaveMember(User member)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = await service.SaveMember(member);
-                return Ok(returnedData);
+                await service.SaveMember(member);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -110,14 +109,13 @@ namespace SELMs.Api.HumanResource
 
         #region Update member
         [HttpPut]
-        [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(int id, dynamic member)
+        [Route("api/Member/Update/{id}")]
+        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] User member)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = await service.UpdateMember(id, member);
-                return Ok(returnedData);
+                await service.UpdateMember(id, member);
+                return Ok();
             }
             catch (Exception ex)
             {

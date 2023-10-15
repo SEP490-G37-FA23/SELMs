@@ -19,7 +19,7 @@ namespace SELMs.Repositories.Implements
 	{
 		private SELMsContext db = new SELMsContext();
 
-		public dynamic DeleteMember(dynamic member)
+		public dynamic DeleteMember(User member)
 		{
 			throw new NotImplementedException();
 		}
@@ -48,13 +48,13 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
-        public void SaveMember(dynamic member)
+        public void SaveMember(User member)
         {
             db.Users.Add(member);
             db.SaveChangesAsync();
         }
 
-        public void UpdateMember(dynamic member)
+        public void UpdateMember(User member)
         {
             db.Entry<User>(member).State = EntityState.Modified;
             db.SaveChangesAsync();

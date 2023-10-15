@@ -13,7 +13,7 @@ namespace SELMs.Services.Implements
     public class MemberService : IMemberService
     {
         private IMemberRepository repository = new MemberRepository();
-        public void SaveMember(dynamic member)
+        public async Task SaveMember(dynamic member)
         {
             User mem = (User)member;
 
@@ -49,7 +49,7 @@ namespace SELMs.Services.Implements
             repository.SaveMember(mem);
         }
 
-        public void UpdateMember(int id, dynamic member)
+        public async Task UpdateMember(int id, dynamic member)
         {
             User mem = repository.GetMember(id);
             if (mem != null)
