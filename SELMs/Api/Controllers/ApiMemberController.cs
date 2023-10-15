@@ -1,5 +1,8 @@
-﻿using Dapper;
+﻿using AutoMapper;
+using Dapper;
 using log4net;
+using SELMs.Api.DTOs;
+using SELMs.App_Start;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using SELMs.Repositories;
@@ -22,17 +25,18 @@ namespace SELMs.Api.HumanResource
 
         private IMemberRepository repository = new MemberRepository();
         private IMemberService service = new MemberService();
+        private IMapper mapper = MapperConfig.Initialize();
 
         // GET: Api_Member
         #region Get member list
         [HttpPost]
         [Route("api/Members")]
-        public async Task<IHttpActionResult> GetMemberList(Argument args)
+        public async Task<IHttpActionResult> GetMemberList()
         {
             try
             {
                 dynamic returnedData = null;                
-                returnedData = await repository.GetMemberList(args);
+                returnedData = await repository.GetMemberList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -90,13 +94,13 @@ namespace SELMs.Api.HumanResource
         #region Add new member
         [HttpPost]
         [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(dynamic member)
+        public async Task<IHttpActionResult> SaveMember(UserDTO member)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = await service.SaveMember(member);
-                return Ok(returnedData);
+                User user = mapper.Map<User>(member);
+                await service.SaveMember(user);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -110,14 +114,14 @@ namespace SELMs.Api.HumanResource
 
         #region Update member
         [HttpPut]
-        [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(int id, dynamic member)
+        [Route("api/Member/Update/{id}")]
+        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO member)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = await service.UpdateMember(id, member);
-                return Ok(returnedData);
+                User mem = mapper.Map<User>(member);
+                await service.UpdateMember(id, mem);
+                return Ok();
             }
             catch (Exception ex)
             {

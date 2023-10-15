@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SELMs.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace SELMs.Services
 {
     public interface IMemberService
     {
-        void SaveMember(dynamic member);
-        void UpdateMember(int id, dynamic member);
+        Task SaveMember(User member);
+        Task UpdateMember(int id, User member);
     }
 }

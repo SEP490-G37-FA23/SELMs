@@ -15,14 +15,14 @@ using System.Web;
 
 namespace SELMs.Repositories.Implements
 {
-	public class MemberRepository : IMemberRepository
-	{
-		private SELMsEntities db = new SELMsEntities();
+    public class MemberRepository : IMemberRepository
+    {
+        private SELMsContext db = new SELMsContext();
 
-		public dynamic DeleteMember(dynamic member)
-		{
-			throw new NotImplementedException();
-		}
+        public dynamic DeleteMember(User member)
+        {
+            throw new NotImplementedException();
+        }
 
         public dynamic GetMember(int id)
         {
@@ -30,10 +30,10 @@ namespace SELMs.Repositories.Implements
             return member;
         }
 
-        public dynamic GetMemberList(Argument args)
+        public dynamic GetMemberList()
         {
             dynamic members = db.Users.ToListAsync();
-            
+
             return members;
         }
 
@@ -58,23 +58,28 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
-        public void SaveMember(dynamic member)
+        public void SaveMember(User member)
         {
             db.Users.Add(member);
             db.SaveChangesAsync();
         }
 
-        public void UpdateMember(dynamic member)
+        public void UpdateMember(User member)
         {
-            db.Entry<User>(member).State = EntityState.Modified;
+            User orgMember = db.Users.Where(u => u.user_id == member.user_id).FirstOrDefault();
+            db.Entry(orgMember).CurrentValues.SetValues(member);
             db.SaveChangesAsync();
         }
 
         public string GetLastMemberCode(string prefix)
         {
-            User obj = db.Users.Where(u => u.member_code.StartsWith(prefix)).OrderBy(u => u.member_code).Last();
-            string result = obj.member_code;
-            return result;
+            User obj = db.Users.Where(u => u.member_code.StartsWith(prefix)).OrderByDescending(u => u.member_code).FirstOrDefault();
+            if (obj != null)
+            {
+                string result = obj.member_code == null ? "" : obj.member_code;
+                return result;
+            }
+            return "";
         }
     }
 }

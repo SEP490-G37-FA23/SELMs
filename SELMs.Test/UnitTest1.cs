@@ -18,7 +18,7 @@ namespace SELMs.Test
 		{
 			ApiMemberController memberController = new();
 
-			var a = await memberController.GetMemberList(null);
+			var a = await memberController.GetMemberList();
 
 			output.WriteLine(a.ToString());
 			Assert.NotNull(a);
