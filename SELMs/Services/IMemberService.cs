@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SELMs.Services
 {
-	public interface IMemberService
-	{
-		Task<dynamic> MarkMemberQuit(dynamic member);
-
-		Task<dynamic> UpdateMember(dynamic member);
-		//Task<dynamic> GetMemberByUsername(string username);
-	}
+    public interface IMemberService
+    {
+        void SaveMember(dynamic member);
+    }
 }

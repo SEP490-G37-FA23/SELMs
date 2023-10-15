@@ -2,35 +2,51 @@
 using SELMs.Models;
 using SELMs.Repositories;
 using SELMs.Repositories.Implements;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SELMs.Services
+namespace SELMs.Services.Implements
 {
-	public class MemberService : IMemberService
-	{
+    public class MemberService : IMemberService
+    {
+        private IMemberRepository repository = new MemberRepository();
+        public void SaveMember(dynamic member)
+        {
+            User mem = (User)member;
 
-		private readonly IMemberRepository memberRepository = new MemberRepository();
+            //Generate member code
+            List<string> nameParts = mem.fullname.Split(' ').ToList();
+            string memCode = nameParts.Last();
+            string lastMemCode = repository.GetLastMemberCode(memCode);
+            foreach (string item in nameParts)
+            {
+                if (item.Equals(nameParts.Last()))
+                    memCode += item.First().ToString().ToUpper();
+            }
+            if (lastMemCode != null)
+            {
+                string num = lastMemCode.Replace(memCode, "");
+                if (num.Count() > 0)
+                {
+                    num = (Convert.ToInt32(lastMemCode) + 1).ToString();
+                    memCode += num;
+                }
+                else
+                {
+                    memCode += "1";
+                }
+            }
 
-		public async Task<dynamic> MarkMemberQuit(dynamic member)
-		{
+            // Set attributes
+            mem.hire_date = DateTime.Now;
+            mem.is_admin = false;
+            mem.active = true;
+            mem.member_code = memCode;
 
-			// (member.isActive = 0)
-
-			return await memberRepository.UpdateMember();
-		}
-
-		public async Task<dynamic> UpdateMember(dynamic memberToUpdate)
-		{
-
-
-			dynamic memberFound = await memberRepository.GetMemberByCodeOrUsername((memberToUpdate as User).member_code);
-
-			if (memberFound != null)
-			{
-				// map DTO later for member properties
-				// memberFound = mapper.Map<User>(memberToUpdate)
-			}
-
-			return await memberRepository.UpdateMember();
-		}
-	}
+            repository.SaveMember(mem);
+        }
+    }
 }
