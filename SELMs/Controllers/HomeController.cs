@@ -45,7 +45,7 @@ namespace SELMs.Controllers
 
 
 
-                return RedirectToAction("MembersList", "HumanResource", new { area = "" });
+                return RedirectToAction("MembersList", "User", new { area = "" });
             }
             ViewBag.error = "Bạn đã đăng nhập sai";
             return View();

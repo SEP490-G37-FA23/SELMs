@@ -17,7 +17,7 @@ namespace SELMs.Repositories.Implements
 {
 	public class MemberRepository : IMemberRepository
 	{
-		private SELMsContext db = new SELMsContext();
+		private SELMsEntities db = new SELMsEntities();
 
 		public dynamic DeleteMember(dynamic member)
 		{
@@ -37,6 +37,16 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
+	public dynamic GetMemberList(Argument args)
+		{
+			dynamic members = null;
+			members =  db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
+			{
+				username = args.username,
+			}
+				, commandType: CommandType.StoredProcedure).ToList();
+			return members;
+		}
         public dynamic SearchMembers(Argument arg)
         {
             dynamic members = null;
