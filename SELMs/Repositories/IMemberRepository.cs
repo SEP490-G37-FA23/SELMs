@@ -3,15 +3,14 @@ using SELMs.Models.BusinessModel;
 
 namespace SELMs.Repositories
 {
-	public interface IMemberRepository
-	{
-		dynamic GetMemberList(Argument arg);
-		dynamic GetMember();
-		dynamic SaveMember(dynamic member);
-		Task<dynamic> UpdateMember();
-		dynamic DeleteMember(dynamic member);
-		Task<dynamic> GetMemberByCodeOrUsername(string memberCodeOrUsername);
-
-
-	}
+    public interface IMemberRepository
+    {
+        dynamic GetMemberList(Argument arg);
+        dynamic SearchMembers(Argument arg);
+        dynamic GetMember(int id);
+        void SaveMember(dynamic member);
+        void UpdateMember(dynamic member);
+        dynamic DeleteMember(dynamic member);
+        string GetLastMemberCode(string prefix);
+    }
 }
