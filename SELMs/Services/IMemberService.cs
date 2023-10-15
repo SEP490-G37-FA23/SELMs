@@ -9,5 +9,6 @@ namespace SELMs.Services
     public interface IMemberService
     {
         void SaveMember(dynamic member);
+        void UpdateMember(int id, dynamic member);
     }
 }

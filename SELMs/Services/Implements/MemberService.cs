@@ -48,5 +48,16 @@ namespace SELMs.Services.Implements
 
             repository.SaveMember(mem);
         }
+
+        public void UpdateMember(int id, dynamic member)
+        {
+            User mem = repository.GetMember(id);
+            if (mem != null)
+            {
+                mem = (User)member;
+                mem.user_id = id;
+                repository.UpdateMember(mem);
+            }
+        }
     }
 }

@@ -37,6 +37,17 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
+        public dynamic SearchMembers(Argument arg)
+        {
+            dynamic members = null;
+            members = db.Database.Connection.QueryAsync<dynamic>("Proc_GetMembersList", new
+            {
+                username = arg.username,
+            }
+                , commandType: CommandType.StoredProcedure);
+            return members;
+        }
+
         public void SaveMember(dynamic member)
         {
             db.Users.Add(member);
