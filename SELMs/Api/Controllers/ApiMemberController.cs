@@ -43,7 +43,9 @@ namespace SELMs.Api.HumanResource
                 throw;
             }
         }
+        #endregion
 
+        #region Get member by id
         [HttpGet]
         [Route("api/Member/{id}")]
         public async Task<IHttpActionResult> GetMember(int id)
@@ -62,7 +64,11 @@ namespace SELMs.Api.HumanResource
                 throw;
             }
         }
+        #endregion
 
+        #region Add new member
+        [HttpPost]
+        [Route("api/Member/NewMember")]
         public async Task<IHttpActionResult> SaveMember(dynamic member)
         {
             try
@@ -79,7 +85,6 @@ namespace SELMs.Api.HumanResource
                 throw;
             }
         }
-
         #endregion
     }
 }

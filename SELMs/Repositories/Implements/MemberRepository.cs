@@ -21,7 +21,7 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetMember(int id)
         {
-            dynamic member = db.Users.Where(u => u.user_id == id).FirstOrDefault();
+            dynamic member = db.Users.Where(u => u.user_id == id).FirstOrDefaultAsync();
             return member;
         }
 
@@ -35,13 +35,13 @@ namespace SELMs.Repositories.Implements
         public void SaveMember(dynamic member)
         {
             db.Users.Add(member);
-            db.SaveChanges();
+            db.SaveChangesAsync();
         }
 
         public void UpdateMember(dynamic member)
         {
             db.Entry<User>(member).State = EntityState.Modified;
-            db.SaveChanges();
+            db.SaveChangesAsync();
         }
 
         public string GetLastMemberCode(string prefix)
