@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('MemberCtrl', function ($scope, $http, $sce) {
+app.controller('MemberListCtrl', function ($scope, $http,$sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -67,9 +67,37 @@ app.controller('MemberCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
+    
     $scope.LoadMembersList();
-    $scope.SearchKhachHang = (field, value) => {
-        data[field] = value;
-        $scope.LoadListKhachHang(1);
-    }
+    //$scope.SearchMembers = (field, value) => {
+    //    data[field] = value;
+    //    $scope.LoadListMembers();
+    //}
+
+    //$scope.loadMemberDetails = function (memberId) {
+    //    var partialUrl = "/MemberDetails?member_id=" + memberId;
+
+    //    $http.get(partialUrl)
+    //        .then(function (response) {
+    //            $("#user-details .modal-body").html(response.data);
+    //        })
+    //        .catch(function (error) {
+    //            $scope.ErrorSystem('fail');
+    //        });
+    //}
+
+
+    //$scope.loadMemberDetails = function (memberId) {
+    //    var partialUrl = "/MemberDetails?member_id=" + memberId;
+
+    //    $http.get(partialUrl)
+    //        .then(function (response) {
+    //            $("#user-details .modal-body").html(response.data);
+    //        })
+    //        .catch(function (error) {
+    //            $scope.ErrorSystem(error);
+    //        });
+    //}
+
+    
 });
