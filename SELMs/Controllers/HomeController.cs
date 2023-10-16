@@ -30,7 +30,7 @@ namespace SELMs.Controllers
             public string password { get; set; }
         }
 
-        private SELMsEntities db = new SELMsEntities();
+        private SELMsContext db = new SELMsContext();
         [HttpPost]
         public ActionResult Login(string username, string password)
         {

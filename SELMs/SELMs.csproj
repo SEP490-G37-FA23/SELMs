@@ -192,7 +192,7 @@
     <Compile Include="Controllers\Equipment\ImportEquipmentsController.cs" />
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HumanResource\HumanResourceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -758,9 +758,13 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\_PartialMember.cshtml" />
+    <Content Include="Views\User\AddNewMember.cshtml" />
+    <Content Include="Views\User\MemberDetails.cshtml" />
+    <Content Include="Views\User\MembersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\HumanResource\" />
     <Folder Include="Controllers\Member\" />
     <Folder Include="obj\Debug\" />
     <Folder Include="Services\Implements\" />
