@@ -194,7 +194,7 @@
     <Compile Include="Controllers\Equipment\ImportEquipmentsController.cs" />
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HumanResource\HumanResourceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -765,6 +765,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\HumanResource\" />
     <Folder Include="Controllers\Member\" />
     <Folder Include="obj\Debug\" />
     <Folder Include="Views\EquipmentManagementReports\" />

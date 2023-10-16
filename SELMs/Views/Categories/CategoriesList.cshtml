@@ -4,5 +4,88 @@
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
-<h2>CategoriesList</h2>
+<section class="section">
+    <h1>Danh sách danh mục thiết bị</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">List of Category</li>
+        </ol>
+    </nav>
+    <form class="mt-5">
 
+        <div class="card">
+            <div class="mt-4 ms-3">
+                <button type="button" class="btn btn-primary">
+                    Thêm danh mục
+                    mới
+                </button>
+                <button type="button" class="btn btn-primary ms-2">
+                    Xuất
+                    Excel
+                </button>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Mã danh mục</th>
+                            <th scope="col">Tên danh mục</th>
+                            <th scope="col">SL thiết bị</th>
+                            <th scope="col">Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <td>
+                                <input class="btn-primary">
+                            </td>
+                            <td>
+                                <input class="btn-primary">
+                            </td>
+                            <td></td>
+                            <td></td>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>RB-1</td>
+                            <td>Robot</td>
+                            <td>4</td>
+                            <td>
+                                <button class="btn btn-primary col-5 me-5">Sửa nhanh</button><button class="btn btn-danger col-5">
+                                    Xóa
+                                </button>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>RB-1</td>
+                            <td>Robot</td>
+                            <td>4</td>
+                            <td>
+                                <button class="btn btn-primary col-6">Sửa nhanh</button><button class="btn btn-danger col-6">
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>RB-1</td>
+                            <td>Robot</td>
+                            <td>4</td>
+                            <td>
+                                <button class="btn btn-primary col-6">Sửa nhanh</button><button class="btn btn-danger col-6">
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+
+    </form>
+</section>
