@@ -151,9 +151,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Controllers\MemberController.cs" />
+    <Compile Include="Api\Controllers\ApiMemberController.cs" />
+    <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -259,6 +261,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
+    <Compile Include="Services\IMemberService.cs" />
+    <Compile Include="Services\Implements\MemberService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -767,7 +771,6 @@
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="Controllers\Member\" />
     <Folder Include="obj\Debug\" />
-    <Folder Include="Services\Implements\" />
     <Folder Include="Views\EquipmentManagementReports\" />
   </ItemGroup>
   <ItemGroup>

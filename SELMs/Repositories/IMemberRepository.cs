@@ -1,18 +1,17 @@
-﻿using SELMs.Models.BusinessModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using SELMs.Models;
+using SELMs.Models.BusinessModel;
 
 namespace SELMs.Repositories
 {
     public interface IMemberRepository
     {
-        dynamic GetMemberList(Argument arg);
-        dynamic GetMember();
-        dynamic SaveMember(dynamic member);
-        dynamic UpdateMember(dynamic member);
-        dynamic DeleteMember(dynamic member);
+        dynamic GetMemberList();
+        dynamic SearchMembers(Argument arg);
+        dynamic GetMember(int id);
+        void SaveMember(User member);
+        void UpdateMember(User member);
+        dynamic DeleteMember(User member);
+        string GetLastMemberCode(string prefix);
     }
 }
