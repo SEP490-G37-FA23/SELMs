@@ -762,6 +762,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\_PartialMember.cshtml" />
+    <Content Include="Views\Categories\CategoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,21 +5,18 @@
 }
 
 <section class="section">
-    <h1>Danh sách danh mục thiết bị</h1>
+    <h4 class="text-center">Danh sách danh mục thiết bị</h4>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item">List of Category</li>
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/Categories/CategoriesList.cshtml">Danh sách danh mục thiết bị</a></li>
         </ol>
     </nav>
     <form class="mt-5">
 
         <div class="card">
             <div class="mt-4 ms-3">
-                <button type="button" class="btn btn-primary">
-                    Thêm danh mục
-                    mới
-                </button>
+                <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Categories")">Thêm danh mục mới</a>
                 <button type="button" class="btn btn-primary ms-2">
                     Xuất
                     Excel
@@ -29,21 +26,21 @@
                 <table class="table table-bordered mt-5">
                     <thead>
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã danh mục</th>
-                            <th scope="col">Tên danh mục</th>
-                            <th scope="col">SL thiết bị</th>
-                            <th scope="col">Tác vụ</th>
+                            <th>STT</th>
+                            <th>Mã danh mục</th>
+                            <th>Tên danh mục</th>
+                            <th>SL thiết bị</th>
+                            <th>Tác vụ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row"></th>
                             <td>
-                                <input class="btn-primary">
+                                <input placeholder="Search...">
                             </td>
                             <td>
-                                <input class="btn-primary">
+                                <input placeholder="Search...">
                             </td>
                             <td></td>
                             <td></td>
@@ -53,9 +50,9 @@
                             <td>Robot</td>
                             <td>4</td>
                             <td>
-                                <button class="btn btn-primary col-5 me-5">Sửa nhanh</button><button class="btn btn-danger col-5">
-                                    Xóa
-                                </button>
+                                <a class="btn btn-success mx-1" href="@Url.Action("CategoryDetail", "Categories")"><i class="fas fa-info-circle"></i></a>
+                                <button class="btn btn-primary mx-3"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger "><i class="fas fa-trash-alt"></i></button>
                             </td>
 
                         </tr>
@@ -65,9 +62,9 @@
                             <td>Robot</td>
                             <td>4</td>
                             <td>
-                                <button class="btn btn-primary col-6">Sửa nhanh</button><button class="btn btn-danger col-6">
-                                    Xóa
-                                </button>
+                                <button class="btn btn-success mx-1" href="@Url.Action("CategoryDetail", "Categories")"><i class="fas fa-info-circle"></i></button>
+                                <button class="btn btn-primary mx-3"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
                         <tr>
@@ -76,9 +73,9 @@
                             <td>Robot</td>
                             <td>4</td>
                             <td>
-                                <button class="btn btn-primary col-6">Sửa nhanh</button><button class="btn btn-danger col-6">
-                                    Xóa
-                                </button>
+                                <button class="btn btn-success mx-1" href="@Url.Action("CategoryDetail", "Categories")"><i class="fas fa-info-circle"></i></button>
+                                <button class="btn btn-primary mx-3"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </td>
                         </tr>
 
