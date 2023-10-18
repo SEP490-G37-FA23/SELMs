@@ -2,16 +2,9 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using Dapper;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace SELMs.Repositories.Implements
 {

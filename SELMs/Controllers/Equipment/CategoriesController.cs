@@ -18,5 +18,9 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
+        public ActionResult CategoryDetail()
+        {
+            return View();
+        }
     }
 }
