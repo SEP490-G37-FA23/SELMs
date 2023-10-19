@@ -19,6 +19,7 @@ using System.Web.Http;
 
 namespace SELMs.Api.HumanResource
 {
+    [RoutePrefix("api/v1")]
     public class ApiMemberController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiMemberController));
@@ -29,8 +30,8 @@ namespace SELMs.Api.HumanResource
 
         // GET: Api_Member
         #region Get member list
-        [HttpPost]
-        [Route("api/Members")]
+        [HttpGet]
+        [Route("members")]
         public async Task<IHttpActionResult> GetMemberList()
         {
             try
@@ -51,7 +52,7 @@ namespace SELMs.Api.HumanResource
 
         #region Search Member
         [HttpPost]
-        [Route("api/Members/Search")]
+        [Route("members/search")]
         public async Task<IHttpActionResult> SearchMembers(Argument args)
         {
             try
@@ -72,7 +73,7 @@ namespace SELMs.Api.HumanResource
 
         #region Get member by id
         [HttpGet]
-        [Route("api/Member/{id}")]
+        [Route("members/{id}")]
         public async Task<IHttpActionResult> GetMember(int id)
         {
             try
@@ -93,7 +94,7 @@ namespace SELMs.Api.HumanResource
 
         #region Add new member
         [HttpPost]
-        [Route("api/Member/NewMember")]
+        [Route("members/new-member")]
         public async Task<IHttpActionResult> SaveMember(UserDTO member)
         {
             try
@@ -114,7 +115,7 @@ namespace SELMs.Api.HumanResource
 
         #region Update member
         [HttpPut]
-        [Route("api/Member/Update/{id}")]
+        [Route("members/{id}")]
         public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO member)
         {
             try

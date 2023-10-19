@@ -765,6 +765,7 @@
     <Content Include="Views\User\AddNewMember.cshtml" />
     <Content Include="Views\User\MemberDetails.cshtml" />
     <Content Include="Views\User\MembersList.cshtml" />
+    <Content Include="Views\Categories\CategoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
