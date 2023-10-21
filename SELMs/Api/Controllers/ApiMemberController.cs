@@ -46,7 +46,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return InternalServerError();
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -67,7 +67,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return BadRequest(ex.StackTrace);
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -88,7 +88,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return InternalServerError();
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -96,8 +96,8 @@ namespace SELMs.Api.HumanResource
 
         #region Add new member
         [HttpPost]
-        [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(dynamic member)
+        [Route("api/member/new-member")]
+        public async Task<IHttpActionResult> SaveMember(UserDTO member)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return InternalServerError();
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -130,7 +130,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return InternalServerError();
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }

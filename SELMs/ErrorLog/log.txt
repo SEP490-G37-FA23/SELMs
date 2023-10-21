@@ -68,3 +68,85 @@ System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure
    at SELMs.Api.HumanResource.ApiMemberController.<SearchMembers>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 61
 ClientConnectionId:968b972b-92d4-4869-ae03-cdf808859e6a
 Error Number:2812,State:62,Class:16
+2023-10-21 19:15:10,173 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'Proc_GetMembersList'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Dapper.SqlMapper.<QueryAsync>d__33`1.MoveNext() in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 419
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Api.HumanResource.ApiMemberController.<SearchMembers>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 63
+ClientConnectionId:2d9f990b-dc8e-4d2e-8970-7de0254e09f2
+Error Number:2812,State:62,Class:16
+2023-10-21 19:18:33,160 [6] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: No overload for method 'Map' takes '1' arguments
+   at CallSite.Target(Closure , CallSite , IMapper , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 104
+2023-10-21 19:23:17,870 [8] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 62
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 22
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
+2023-10-21 19:23:42,414 [9] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 62
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 22
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
+2023-10-21 19:23:59,848 [6] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 62
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 22
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
+2023-10-21 19:50:22,620 [5] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 62
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 22
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
+2023-10-21 19:50:49,019 [5] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 62
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\MemberService.cs:line 22
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
