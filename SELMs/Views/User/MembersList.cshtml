@@ -10,13 +10,13 @@
     <br />
 
     @*<div class="pagetitle">
-        <h1>Danh Sách Thành Viên</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/User/MembersList">Members List</a></li>
-            </ol>
-        </nav>
-    </div>*@
+            <h1>Danh Sách Thành Viên</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/User/MembersList">Members List</a></li>
+                </ol>
+            </nav>
+        </div>*@
 
     <section class="section">
 
@@ -42,7 +42,7 @@
                             <p></p>
                         </div>
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Mã nhân viên</th>
@@ -51,6 +51,15 @@
                                     <th scope="col">Vị trí</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Số điện thoại</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col"><input type="text" ng-model="memberCode" ng-change="LoadMembersList()" class="form-control"  ng-model-options="{debounce:700}"/></th>
+                                    <th scope="col"><input type="text" ng-model="memberCode" ng-change="LoadMembersList()" class="form-control"  ng-model-options="{debounce:700}"/></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -64,7 +73,7 @@
                                     <td>{{item.hotline}}</td>
                                     <td>
                                         <a class="btn btn-primary" data-bs-toggle="modal"
-                                           data-bs-target="#user-details" >Details</a>
+                                           data-bs-target="#user-details" ng-click="LoadMemberDetails(item)">Details</a>
                                         <button class="btn btn-danger" ng-click="MarkMemberQuit(item)">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
@@ -85,7 +94,6 @@
             </div>
         </div>
     </section>
-
+    @Html.Partial("MemberDetails")
 </div>
 
-@Html.Partial("MemberDetails")

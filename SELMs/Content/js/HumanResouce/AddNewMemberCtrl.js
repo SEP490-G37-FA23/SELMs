@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('MemberListCtrl', function ($scope, $http,$sce) {
+app.controller('AddNewMemberCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -33,7 +33,7 @@ app.controller('MemberListCtrl', function ($scope, $http,$sce) {
         var notificationElement = document.getElementById('notification');
         notificationElement.textContent = 'Error: ' + errorMessage;
         notificationElement.style.backgroundColor = '#f5aaaa';
-        notificationElement.style.width = '300px';
+        notificationElement.style.width = '1000px';
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
@@ -42,67 +42,34 @@ app.controller('MemberListCtrl', function ($scope, $http,$sce) {
     }
 
     $scope.SuccessSystem = function (successMessage) {
-        console.log("ok");
         // This function handles success messages and displays the success message as a notification.
         var notificationElement = document.getElementById('notification');
         notificationElement.textContent = 'Success: ' + successMessage;
         notificationElement.style.backgroundColor = '#97c797';
-        notificationElement.style.width = '300px';
+        notificationElement.style.width = '1000px';
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
-
+    };
 
         // You can customize the notification style and appearance here.
+
+    $scope.newMember = {
+        fullname: '',
+        dateOfBirth: null,
+        gender: true,
+        hotline: '',
+        email: '',
+        resignationDate: null,
+        wordTerm: '',
+        positionCode: '',
+        skill: '',
+        jobDescription:''
     }
 
-
-    //===============Danh sách khách hàng=====================
-    $scope.fullname = '';
-    $scope.memberCode = '';
-    $scope.LoadMembersList = function () {
-        var data = {
-            username: username,
-            isadmin: 0,
-            fullname: $scope.fullname,
-            memberCode: $scope.memberCode
-        }
-        $http.post(origin + '/api/Members/List', data).then(function (response) {
-            $scope.ListMembers = response.data;
-        });
-    }
-    
-    $scope.LoadMembersList();
-  
-
-    $scope.LoadMemberDetails = function (item) {
-
-        var partialUrl = origin +  '/api/Member/' + item.user_id;
-
-        $http.get(partialUrl)
-            .then(function (response) {
-                $scope.DetailMember = response.data.Result;
-                //$("#user-details .modal-body").html(response.data);
-            })
-            .catch(function (error) {
-                $scope.ErrorSystem('fail' + error);
-            });
+    $scope.test = 'ok'
+    $scope.CreateNewMember = function (newMember) {
+        console.log(newMember);
     }
 
-    $scope.MarkMemberQuit = function (item) {
-        var partialUrl = origin + '/api/Member/MarkMemberQuit' + item.user_id;
-        $http.post(partialUrl)
-            .then(function (response) {
-                if (response.status == 200) {
-                    $scope.SuccessSystem(response.data);
-                } else {
-                    $scope.ErrorSystem(response.data.Message);
-                }
-            })
-            .catch(function (error) {
-                $scope.ErrorSystem('fail' + error);
-            });
-    }
-
-    
-});
+    });

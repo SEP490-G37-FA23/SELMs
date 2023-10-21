@@ -6,7 +6,7 @@
 
 <div class="modal fade" id="user-details" tabindex="-1">
     <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
+        <div class="modal-content"  style="width:1500px; margin-left:-400px;">
             <div class="modal-header">
                 <h5 class="modal-title">Thông tin chi tiết</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -36,22 +36,25 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="inputName5" class="form-label">Họ và tên</label>
-                                            <input type="text" class="form-control" id="inputName5" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.fullname" disabled>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="inputDob5" class="form-label">Ngày sinh</label>
-                                            <input type="date" class="form-control" id="inputDob5" disabled>
+                                            <label for="inputDob5" class="form-label">Ngày sinh</label>{{DetailMember.date_of_birth| date: 'dd/MM/yyyy'}}
+                                            <input type="text" id="dateOfBirth" autocomplete="off" datepicker ng-model="DetailMember.date_of_birth"class="form-control input-form">
                                         </div>
+                                        <script>
+                                            $("#dateOfBirth").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
+                                        </script>
+                                    </div>
                                         <div class="col-md-6">
                                             <label for="inputMemCode5" class="form-label">Mã nhân viên</label>
-                                            <input type="password" class="form-control" id="inputMemCode5" disabled>
+                                            <input type="password" class="form-control" ng-model="DetailMember.member_code">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputGender" class="form-label">Giới tính</label>
-                                            <select id="inputGender" class="form-select" disabled>
-                                                <option selected>Nam</option>
-                                                <option>Nữ</option>
-                                                <option>Khác</option>
+                                            <select id="inputGender" class="form-select" ng-model="DetailMember.gender">
+                                                <option value="1">Nam</option>
+                                                <option value="0">Nữ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -66,11 +69,11 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="inputPhoneNumber" class="form-label">Số điện thoại</label>
-                                            <input type="text" class="form-control" id="inputPhoneNumber" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.hotline">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputEmail" class="form-label">Địa chỉ Email</label>
-                                            <input type="text" class="form-control" id="inputEmail" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.email">
                                         </div>
                                     </div>
                                 </div>
@@ -84,27 +87,24 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="inputDateAssign" class="form-label">Ngày ký hợp đồng</label>
-                                            <input type="date" class="form-control" id="inputDateAssign" disabled>
+                                            <input type="date" class="form-control" ng-model="DetailMember.resignation_date">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputDuration" class="form-label">Thời hạn hợp đồng</label>
-                                            <input type="text" class="form-control" id="inputDuration" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.work_term">
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="inputDateBye" class="form-label">Ngày hết hạn hợp đồng</label>
-                                            <input type="date" class="form-control" id="inputDateBye" disabled>
-                                        </div>
+                                       
                                         <div class="col-md-6">
                                             <label for="inputPosition" class="form-label">Vị trí công việc</label>
-                                            <input type="text" class="form-control" id="inputPosition" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.position_code">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputExperience" class="form-label">Kinh nghiệm</label>
-                                            <input type="text" class="form-control" id="inputExperience" disabled>
+                                            <input type="text" class="form-control" ng-model="DetailMember.skill">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputJD" class="form-label">Mô tả công việc</label>
-                                            <input type="text" class="form-control" id="inputJD">
+                                            <input type="text" class="form-control" ng-model="DetailMember.job_description">
                                         </div>
                                     </div>
                                 </div>

@@ -12,7 +12,9 @@ using SELMs.Services.Implements;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -43,7 +45,7 @@ namespace SELMs.Api.HumanResource
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
                 return InternalServerError();
                 throw;
             }
@@ -79,13 +81,13 @@ namespace SELMs.Api.HumanResource
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.GetMember(id);
+                returnedData = repository.GetMember(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
                 return InternalServerError();
                 throw;
             }
@@ -94,8 +96,8 @@ namespace SELMs.Api.HumanResource
 
         #region Add new member
         [HttpPost]
-        [Route("members/new-member")]
-        public async Task<IHttpActionResult> SaveMember(UserDTO member)
+        [Route("api/Member/NewMember")]
+        public async Task<IHttpActionResult> SaveMember(dynamic member)
         {
             try
             {
@@ -106,7 +108,7 @@ namespace SELMs.Api.HumanResource
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
                 return InternalServerError();
                 throw;
             }
@@ -127,7 +129,7 @@ namespace SELMs.Api.HumanResource
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
                 return InternalServerError();
                 throw;
             }

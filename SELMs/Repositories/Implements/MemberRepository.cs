@@ -36,6 +36,8 @@ namespace SELMs.Repositories.Implements
 			members =  db.Database.Connection.QueryAsync<dynamic>("Proc_GetMembersList", new
 			{
 				username = args.username,
+                fullname = args.fullname,
+                memberCode = args.memberCode
 			}
 				, commandType: CommandType.StoredProcedure);
 			return members;
