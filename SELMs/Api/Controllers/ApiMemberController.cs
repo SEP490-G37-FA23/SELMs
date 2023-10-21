@@ -65,7 +65,7 @@ namespace SELMs.Api.HumanResource
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                return BadRequest(ex.StackTrace);
                 throw;
             }
         }

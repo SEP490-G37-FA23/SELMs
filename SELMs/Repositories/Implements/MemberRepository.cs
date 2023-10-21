@@ -33,11 +33,11 @@ namespace SELMs.Repositories.Implements
 	public dynamic GetMemberList(Argument args)
 		{
 			dynamic members = null;
-			members =  db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
+			members =  db.Database.Connection.QueryAsync<dynamic>("Proc_GetMembersList", new
 			{
 				username = args.username,
 			}
-				, commandType: CommandType.StoredProcedure).ToList();
+				, commandType: CommandType.StoredProcedure);
 			return members;
 		}
         public dynamic SearchMembers(Argument arg)
