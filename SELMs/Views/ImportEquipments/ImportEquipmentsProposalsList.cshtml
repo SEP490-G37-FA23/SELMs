@@ -1,8 +1,144 @@
 ﻿
 @{
-    ViewBag.Title = "ImportEquipmentsImportEquipmentsProposalsList";
+    ViewBag.Title = "ImportEquipmentsProposalsList";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
-<h2>ImportEquipmentsImportEquipmentsProposalsList</h2>
+<section class="section">
+    <h4 class="text-center">Danh sách phiếu nhập thiết bị</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/ImportEquipmentsProposalsList.cshtml">Danh sách phiếu nhập thiết bị</a></li>
+        </ol>
+    </nav>
+    <form class="mt-5">
+        <div class="card">
+            <div class="mt-3 ms-3 row">
+                <div class="col-2">
+                    <a class="btn btn-primary" href="@Url.Action("CreateNewImportEquipmentsProposal", "ImportEquipments")">Thêm đơn mới</a>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary ms-3">Xuất Excel</button>
+                </div>
+                <div class="col-3">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect" aria-label="Trạng thái">
+                            <option selected>Đang chờ</option>
+                            <option value="1">Đã duyệt</option>
+                            <option value="2">Đã hủy</option>
+                        </select>
+                        <label for="floatingSelect">Trạng thái</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label for="inputDate" class=" col-form-label">Từ</label>
+                    <div >
+                        <input type="date" class="form-control">
+                    </div>
+                    <label for="inputDate" class="col-form-label">Đến</label>
+                    <div>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary ms-3">Lọc</button>
+                </div>
+                
+
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã phiếu nhập</th>
+                            <th>Ngày tạo đơn</th>
+                            <th>Người cung cấp</th>
+                            <th>Dự án yêu cầu</th>
+                            <th>Người tạo đơn</th>
+                            <th>Nội dung </th>
+                            <th>Tổng thiết bị</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <input placeholder="Search..." style="width:70%" >
+                            </td>
+                            <td></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        <tr>
+                            <th>1</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("ImportEquipmentsProposalsDetail", "ImportEquipments")"><i class="fas fa-info-circle"></i></a>
+                                <button class="btn btn-primary"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("ImportEquipmentsProposalsDetail", "ImportEquipments")"><i class="fas fa-info-circle"></i></a>
+                                <button class="btn btn-primary"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("ImportEquipmentsProposalsDetail", "ImportEquipments")"><i class="fas fa-info-circle"></i></a>
+                                <button class="btn btn-primary"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </form>
+</section>
+
 

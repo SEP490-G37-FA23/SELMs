@@ -1,23 +1,29 @@
 ﻿
 @{
-    ViewBag.Title = "CreateNewImportEquipmentsProposal";
+    ViewBag.Title = "ImportEquipmentsProposalsDetail";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
-<section class="section">
-    <h4 class="text-center">Phiếu nhập thiết bị</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/ImportEquipmentsProposalsList.cshtml">Danh sách phiếu nhập thiết bị</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/CreateNewImportEquipmentsProposal.cshtml"></a>Tạo đơn nhập thiết bị</li>
-        </ol>
-    </nav>
-    <form class="row mt-5">
-        <div>
-            <h4 class="card-title">Thông tin chung</h4>
+<div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="#general_infor" class="nav-link active" role="tab" data-toggle="tab">Thông tin chung</a>
+        </li>
+        <li class="nav-item">
+            <a href="#detail" class="nav-link" role="tab" data-toggle="tab">Thông tin chi tiết</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="general_infor">
+            <h4 class="card-title text-center">Thông tin chung</h4>
             <div class="row mb-3">
-                <label class=" col-form-label" for="inputName5">Người tạo đơn</label>
+                <label class=" col-form-label" for="inputName5">Mã phiếu nhập</label>
+                <div>
+                    <input type="text" class="form-control" id="inputText">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class=" col-form-label" for="inputName5">Người cung cấp</label>
                 <div>
                     <input type="text" class="form-control" id="inputText">
                 </div>
@@ -38,9 +44,30 @@
             </div>
 
             <div class="row mb-3">
-                <label class=" col-form-label" for="inputName5">Người cung cấp</label>
+                <label class=" col-form-label">Trạng thái phê duyệt</label>
                 <div>
-                    <input type="text" class="form-control" id="inputText">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class=" col-form-label">Người phê duyệt</label>
+                <div>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class=" col-form-label">Ngày phê duyệt</label>
+                <div>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class=" col-form-label">Tổng số thiết bị</label>
+                <div>
+                    <input type="number" class="form-control">
                 </div>
             </div>
 
@@ -73,15 +100,11 @@
                 <textarea class="form-control" placeholder="Yêu cầu nhập hàng" id="floatingTextarea"></textarea>
             </div>
         </div>
-        <div>
-            <h4 class="card-title">Thông tin chi tiết</h4>
+        <div role="tabpanel" class="tab-pane" id="detail">
+            <h4 class="card-title text-center mb-3">Thông tin chi tiết</h4>
             <div class="card">
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-sm-8 mt-3">
-                            <input class="form-control" type="file" id="formFile">
-                        </div>
-                    </div>
+                    <a class="btn btn-success mb-3"><i class="far fa-save" style="color: #ffffff;"></i>  Lưu</a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -90,8 +113,8 @@
                                 <th scope="col">Tên thiết bị</th>
                                 <th scope="col">Thông số kĩ thuật</th>
                                 <th scope="col">Đơn vị tính</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Nhóm thiết bị</th>
+                                <th scope="col">Tác vụ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,7 +125,7 @@
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
-                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                <td><a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Tạo thiết bị mới</a></td>
                             <tr>
                             <tr>
                                 <th scope="row">2</th>
@@ -111,7 +134,7 @@
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
-                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                <td><a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Tạo thiết bị mới</a></td>
                             <tr>
                             <tr>
                                 <th scope="row">3</th>
@@ -120,7 +143,7 @@
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
-                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                <td><a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Tạo thiết bị mới</a></td>
                             <tr>
                             <tr>
                                 <th scope="row">4</th>
@@ -129,23 +152,23 @@
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
                                 <td><input type="text" style="border: hidden; width: 80%"></td>
-                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                <td><a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Tạo thiết bị mới</a></td>
                             <tr>
                         </tbody>
                     </table>
+
                     <div>
-                        <button type="button" class="btn btn-primary ms-2">Tạo đơn</button>
+                        <a class="btn btn-success">Duyệt đơn</a>
+                        <a class="btn btn-danger">Duyệt đơn</a>
 
-                        <label class="ms-5">Tổng số thiết bị</label>
-                        <input>
-                        <label class="ms-5">Tổng số tiền</label>
-                        <input>
-
+                    </div>
+                    <div class="input-group mt-3">
+                        <span class="input-group-text bg-success" style="color:white">Ghi chú duyệt đơn</span>
+                        <textarea class="form-control" aria-label="Ghi chú duyệt đơn"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</section>
-
+    </div>
+</div>
 
