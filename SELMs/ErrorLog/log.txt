@@ -150,3 +150,13 @@ System.FormatException: Input string was not in a correct format.
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
    at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 105
+2023-10-22 22:12:29,704 [7] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'System.Data.Entity.DynamicProxies.Category_C17D96C3077C791430F1E8551D78F1C562DEC23EF4F9774A2A4D50CF57020D41' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.CategoryService.<UpdateCategory>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Services\Implements\CategoryService.cs:line 17
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.Controllers.ApiCategoryController.<UpdateCategory>d__8.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 123

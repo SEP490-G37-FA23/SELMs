@@ -151,7 +151,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
+    <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -259,9 +261,13 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
+    <Compile Include="Repositories\Implements\CategoryRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
+    <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IMemberService.cs" />
+    <Compile Include="Services\Implements\CategoryService.cs" />
     <Compile Include="Services\Implements\MemberService.cs" />
   </ItemGroup>
   <ItemGroup>
