@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Configuration;
 
 namespace SELMs.Services.Implements
 {
@@ -27,6 +28,7 @@ namespace SELMs.Services.Implements
             mem.active = true;
             mem.member_code = code;
             mem.username = code;
+            mem.password = ConfigurationManager.AppSettings["DefaultPassword"];
 
             repository.SaveMember(mem);
         }
