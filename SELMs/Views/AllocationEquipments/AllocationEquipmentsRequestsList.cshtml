@@ -4,5 +4,60 @@
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
-<h2>AllocationEquipmentsRequestsList</h2>
+<div class="pagetitle">
+    <h1>Danh sách yêu cầu cấp phát thiết bị</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Allocation Requests List</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh sách yêu cầu cấp phát thiết bị</h5>
+
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" href="@Url.Action("CreateNewAllocationEquipmentsRequest", "AllocationEquipments")">Tạo yêu cầu mới</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Mã Đơn</th>
+                                <th scope="col">Người yêu cầu</th>
+                                <th scope="col">Người tiếp nhận</th>
+                                <th scope="col">Ngày yêu cầu</th>
+                                <th scope="col">Phòng lab</th>
+                                <th scope="col">Tổng số thiết bị</th>
+                                <th scope="col">Mô tả</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
