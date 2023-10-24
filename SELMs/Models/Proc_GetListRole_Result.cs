@@ -10,16 +10,12 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application
+    public partial class Proc_GetListRole_Result
     {
-        public int application_id { get; set; }
-        public string ir_application_code { get; set; }
-        public string requester { get; set; }
-        public string request_date { get; set; }
-        public string performer { get; set; }
-        public int total_equipment { get; set; }
-        public bool status { get; set; }
+        public int role_id { get; set; }
+        public string role_code { get; set; }
+        public string role_name { get; set; }
+        public Nullable<bool> is_active { get; set; }
     }
 }

@@ -25,8 +25,8 @@ namespace SELMs.Services.Implements
             // Set attributes
             mem.hire_date = DateTime.Now;
             mem.is_admin = false;
-            mem.active = true;
-            mem.member_code = code;
+            mem.is_active = true;
+            mem.user_code = code;
             mem.username = code;
             mem.password = ConfigurationManager.AppSettings["DefaultPassword"];
 

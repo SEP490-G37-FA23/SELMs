@@ -10,16 +10,13 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application
+    public partial class sp_helpdiagrams_Result
     {
-        public int application_id { get; set; }
-        public string ir_application_code { get; set; }
-        public string requester { get; set; }
-        public string request_date { get; set; }
-        public string performer { get; set; }
-        public int total_equipment { get; set; }
-        public bool status { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

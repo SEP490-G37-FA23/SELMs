@@ -12,14 +12,13 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application
+    public partial class Equipment_Project_History
     {
-        public int application_id { get; set; }
-        public string ir_application_code { get; set; }
-        public string requester { get; set; }
-        public string request_date { get; set; }
-        public string performer { get; set; }
-        public int total_equipment { get; set; }
-        public bool status { get; set; }
+        public int id { get; set; }
+        public Nullable<int> project_id { get; set; }
+        public string system_equiment_code { get; set; }
+        public Nullable<System.DateTime> from_date { get; set; }
+        public Nullable<System.DateTime> to_date { get; set; }
+        public string note { get; set; }
     }
 }

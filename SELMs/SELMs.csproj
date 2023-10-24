@@ -211,10 +211,31 @@
     <Compile Include="Models\Equipment.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment_Allocation_Application.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipment_Allocation_Application_Detail.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipment_Handover_Form.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipment_Handover_Form_Detail.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Equipment_Import_Application.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Import_Application_Detail.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipment_Location_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Equipment_Project_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory_Request_Application.cs">
@@ -223,13 +244,19 @@
     <Compile Include="Models\Inventory_Request_Application_Detail.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Kpi.cs">
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Member_Project_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListMember_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListRole_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Project_Equipment.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project_Investment_Cost_Application.cs">
@@ -238,7 +265,7 @@
     <Compile Include="Models\Project_Investment_Cost_Application_Detail.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Project_Member.cs">
+    <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SELMs.Context.cs">
@@ -256,7 +283,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tag.cs">
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">

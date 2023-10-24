@@ -14,17 +14,18 @@ namespace SELMs.Models
     
     public partial class Equipment_Import_Application
     {
-        public string application_code { get; set; }
+        public int application_id { get; set; }
+        public string ei_application_code { get; set; }
         public Nullable<System.DateTime> application_date { get; set; }
         public string created_by { get; set; }
         public string supplier { get; set; }
-        public string notes { get; set; }
-        public Nullable<decimal> total_equipments { get; set; }
+        public Nullable<int> total_equipments { get; set; }
         public Nullable<decimal> total_price { get; set; }
+        public string desciption { get; set; }
+        public string note { get; set; }
         public string status { get; set; }
         public Nullable<System.DateTime> approved_date { get; set; }
         public string approver { get; set; }
         public string approver_notes { get; set; }
-        public int application_id { get; set; }
     }
 }

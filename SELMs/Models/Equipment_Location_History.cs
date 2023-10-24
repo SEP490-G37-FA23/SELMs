@@ -12,16 +12,13 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project_Equipment
+    public partial class Equipment_Location_History
     {
-        public int project_id { get; set; }
-        public int equipment_id { get; set; }
-        public Nullable<System.DateTime> borrow_date { get; set; }
-        public int application_id { get; set; }
-        public string borrower { get; set; }
-        public string equipment_status { get; set; }
-    
-        public virtual Equipment Equipment { get; set; }
-        public virtual Project Project { get; set; }
+        public int id { get; set; }
+        public string location_code { get; set; }
+        public string system_equiment_code { get; set; }
+        public Nullable<System.DateTime> from_date { get; set; }
+        public Nullable<System.DateTime> to_date { get; set; }
+        public string note { get; set; }
     }
 }

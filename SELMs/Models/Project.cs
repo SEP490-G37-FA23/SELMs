@@ -14,15 +14,6 @@ namespace SELMs.Models
     
     public partial class Project
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
-        {
-            this.Project_Equipment = new HashSet<Project_Equipment>();
-            this.Project_Investment_Cost_Application = new HashSet<Project_Investment_Cost_Application>();
-            this.Project_Member = new HashSet<Project_Member>();
-            this.Tags = new HashSet<Tag>();
-        }
-    
         public int project_id { get; set; }
         public string project_code { get; set; }
         public string project_name { get; set; }
@@ -31,15 +22,8 @@ namespace SELMs.Models
         public string manager { get; set; }
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
-        public string status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project_Equipment> Project_Equipment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project_Investment_Cost_Application> Project_Investment_Cost_Application { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project_Member> Project_Member { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tags { get; set; }
+        public Nullable<System.DateTime> create_date { get; set; }
+        public string creater { get; set; }
+        public bool status { get; set; }
     }
 }

@@ -56,10 +56,10 @@ namespace SELMs.Repositories.Implements
 
         public string GetLastMemberCode(string prefix)
         {
-            User obj = db.Users.Where(u => u.member_code.StartsWith(prefix)).OrderByDescending(u => u.member_code).FirstOrDefault();
+            User obj = db.Users.Where(u => u.user_code.StartsWith(prefix)).OrderByDescending(u => u.user_code).FirstOrDefault();
             if (obj != null)
             {
-                string result = obj.member_code == null ? "" : obj.member_code;
+                string result = obj.user_code == null ? "" : obj.user_code;
                 return result;
             }
             return "";

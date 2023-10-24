@@ -12,14 +12,13 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application
+    public partial class Location
     {
-        public int application_id { get; set; }
-        public string ir_application_code { get; set; }
-        public string requester { get; set; }
-        public string request_date { get; set; }
-        public string performer { get; set; }
-        public int total_equipment { get; set; }
-        public bool status { get; set; }
+        public int location_id { get; set; }
+        public string location_code { get; set; }
+        public string location_desciption { get; set; }
+        public string classroom { get; set; }
+        public Nullable<int> position_level { get; set; }
+        public bool is_active { get; set; }
     }
 }

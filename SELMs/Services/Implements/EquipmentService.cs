@@ -20,7 +20,7 @@ namespace SELMs.Services.Implements
             {
                 string code = "E";
                 code += num < 10000 ? num.ToString("D4") : num.ToString();
-                equip.equipment_code = code;
+                equip.system_equipment_code = code;
             }
             repository.SaveEquipments(equipments);
         }
@@ -29,7 +29,7 @@ namespace SELMs.Services.Implements
         {
             Equipment eq = equipment;
             string code = GenerateEquipmentCode();
-            eq.equipment_code = code;
+            eq.system_equipment_code = code;
             repository.SaveEquipment(eq);
         }
 

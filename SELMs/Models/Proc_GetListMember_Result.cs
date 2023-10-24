@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class User
+    public partial class Proc_GetListMember_Result
     {
         public int user_id { get; set; }
         public string user_code { get; set; }

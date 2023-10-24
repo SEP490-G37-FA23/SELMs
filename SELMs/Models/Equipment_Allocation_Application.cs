@@ -12,22 +12,20 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project_Investment_Cost_Application
+    public partial class Equipment_Allocation_Application
     {
         public int application_id { get; set; }
-        public string pic_application_code { get; set; }
-        public Nullable<System.DateTime> application_date { get; set; }
-        public Nullable<int> project_id { get; set; }
-        public string title { get; set; }
-        public string reason { get; set; }
-        public string notes { get; set; }
+        public string ea_application_code { get; set; }
+        public System.DateTime application_date { get; set; }
+        public string application_processer { get; set; }
         public string creater { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
-        public Nullable<decimal> total_cost { get; set; }
-        public string attachment_path { get; set; }
-        public string status { get; set; }
-        public Nullable<System.DateTime> approve_date { get; set; }
+        public Nullable<int> project_id { get; set; }
+        public int total_equipments { get; set; }
+        public string notes { get; set; }
+        public string desciption { get; set; }
+        public string approver_note { get; set; }
+        public Nullable<System.DateTime> approved_date { get; set; }
         public string approver { get; set; }
-        public string approver_notes { get; set; }
+        public string status { get; set; }
     }
 }

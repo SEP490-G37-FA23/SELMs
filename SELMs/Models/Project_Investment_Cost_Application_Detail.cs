@@ -15,11 +15,9 @@ namespace SELMs.Models
     public partial class Project_Investment_Cost_Application_Detail
     {
         public int application_detail_id { get; set; }
-        public int application_id { get; set; }
+        public string pic_application_code { get; set; }
         public string explaination { get; set; }
         public Nullable<decimal> amount { get; set; }
         public string notes { get; set; }
-    
-        public virtual Project_Investment_Cost_Application Project_Investment_Cost_Application { get; set; }
     }
 }

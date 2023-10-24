@@ -12,15 +12,12 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project_Member
+    public partial class sysdiagram
     {
-        public int project_id { get; set; }
-        public int user_id { get; set; }
-        public string position_code { get; set; }
-        public string notes { get; set; }
-        public string status { get; set; }
-    
-        public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
