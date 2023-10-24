@@ -17,8 +17,14 @@ namespace SELMs.App_Start
             {
                 //Configuring Employee and EmployeeDTO
                 cfg.CreateMap<UserDTO, User>().ReverseMap();
+
                 //Configuring Category and CategoryDTO
                 cfg.CreateMap<CategoryDTO, Category>().ReverseMap();
+
+                //Configuring Equipment and EquipmentDTO
+                cfg.CreateMap<EquipmentDTO, Equipment>().ReverseMap();
+                cfg.CreateMap<List<EquipmentDTO>, List<Equipment>>().ReverseMap();
+
                 //Any Other Mapping Configuration ....
             });
 

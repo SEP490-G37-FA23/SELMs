@@ -1,7 +1,9 @@
-﻿using SELMs.Models;
+﻿using Dapper;
+using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -38,7 +40,13 @@ namespace SELMs.Repositories.Implements
 
         public dynamic SearchCategories(Argument arg)
         {
-            throw new NotImplementedException();
+            dynamic categories = null;
+            categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetCategoryList", new
+            {
+                username = arg.username,
+            }
+                , commandType: CommandType.StoredProcedure);
+            return categories;
         }
 
         public void UpdateCategory(Category category)

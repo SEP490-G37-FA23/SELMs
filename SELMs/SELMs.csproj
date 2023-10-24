@@ -152,8 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -262,12 +264,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
+    <Compile Include="Repositories\IEquipmentRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
+    <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\MemberService.cs" />
   </ItemGroup>
   <ItemGroup>

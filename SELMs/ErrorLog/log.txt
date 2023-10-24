@@ -160,3 +160,23 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'System.Data.Entity.Dynam
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
    at SELMs.Api.Controllers.ApiCategoryController.<UpdateCategory>d__8.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 123
+2023-10-23 16:36:53,037 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiMemberController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.HumanResource.ApiMemberController.<GetMember>d__6.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 85
+2023-10-23 16:43:00,916 [8] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiMemberController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.HumanResource.ApiMemberController.<GetMember>d__6.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 85
+2023-10-23 16:46:04,089 [6] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiCategoryController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategory>d__6.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 82
+2023-10-23 16:48:47,146 [9] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiCategoryController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategory>d__6.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 82

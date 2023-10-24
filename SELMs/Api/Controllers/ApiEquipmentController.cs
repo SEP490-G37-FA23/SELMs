@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Dapper;
 using log4net;
 using SELMs.Api.DTOs;
 using SELMs.App_Start;
@@ -11,35 +10,32 @@ using SELMs.Services;
 using SELMs.Services.Implements;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
 using System.Linq;
-using System.Text;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
-namespace SELMs.Api.HumanResource
+namespace SELMs.Api.Controllers
 {
-    [RoutePrefix("api/v1")]
-    public class ApiMemberController : ApiController
+    public class ApiEquipmentController : ApiController
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiMemberController));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiEquipmentController));
 
-        private IMemberRepository repository = new MemberRepository();
-        private IMemberService service = new MemberService();
+        private IEquipmentRepository repository = new EquipmentRepository();
+        private IEquipmentService service = new EquipmentService();
         private IMapper mapper = MapperConfig.Initialize();
 
-        // GET: Api_Member
-        #region Get member list
+        // GET: Api_Equipment
+        #region Get equipment list
         [HttpGet]
-        [Route("members")]
-        public async Task<IHttpActionResult> GetMemberList()
+        [Route("equipments")]
+        public async Task<IHttpActionResult> GetEquipmentList()
         {
             try
             {
-                dynamic returnedData = null;                
-                returnedData = await repository.GetMemberList();
+                dynamic returnedData = null;
+                returnedData = await repository.GetEquipmentList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -52,15 +48,15 @@ namespace SELMs.Api.HumanResource
         }
         #endregion
 
-        #region Search Member
+        #region Search Equipment
         [HttpPost]
-        [Route("members/search")]
-        public async Task<IHttpActionResult> SearchMembers(Argument args)
+        [Route("equipments/search")]
+        public async Task<IHttpActionResult> SearchEquipments(Argument args)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.SearchMembers(args);
+                returnedData = await repository.SearchEquipments(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -73,16 +69,16 @@ namespace SELMs.Api.HumanResource
         }
         #endregion
 
-        #region Get member by id
+        #region Get equipment by id
         [HttpGet]
-        [Route("members/{id}")]
-        public async Task<IHttpActionResult> GetMember(int id)
+        [Route("equipments/{id}")]
+        public async Task<IHttpActionResult> GetEquipment(int id)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.GetMember(id);
-                return Ok(returnedData != null ? returnedData : new User());
+                returnedData = repository.GetEquipment(id);
+                return Ok(returnedData);
             }
             catch (Exception ex)
             {
@@ -94,15 +90,36 @@ namespace SELMs.Api.HumanResource
         }
         #endregion
 
-        #region Add new member
+        #region Add new equipment
         [HttpPost]
-        [Route("api/member/new-member")]
-        public async Task<IHttpActionResult> SaveMember(UserDTO member)
+        [Route("api/equipments/new-equipment")]
+        public async Task<IHttpActionResult> SaveEquipment(EquipmentDTO dto)
         {
             try
             {
-                User user = mapper.Map<User>(member);
-                await service.SaveMember(user);
+                Equipment equipment = mapper.Map<Equipment>(dto);
+                service.SaveEquipment(equipment);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+        
+        #region Import equipments
+        [HttpPost]
+        [Route("api/equipments/import-equipments")]
+        public async Task<IHttpActionResult> ImportEquipments(List<EquipmentDTO> dtos)
+        {
+            try
+            {
+                List<Equipment> equipments = mapper.Map<List<Equipment>>(dtos);
+                service.ImportEquipments(equipments);
                 return Ok();
             }
             catch (Exception ex)
@@ -115,15 +132,15 @@ namespace SELMs.Api.HumanResource
         }
         #endregion
 
-        #region Update member
+        #region Update equipment
         [HttpPut]
-        [Route("members/{id}")]
-        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO member)
+        [Route("equipmenties/{id}")]
+        public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
         {
             try
             {
-                User mem = mapper.Map<User>(member);
-                await service.UpdateMember(id, mem);
+                Equipment mem = mapper.Map<Equipment>(equipment);
+                service.UpdateEquipment(id, mem);
                 return Ok();
             }
             catch (Exception ex)
