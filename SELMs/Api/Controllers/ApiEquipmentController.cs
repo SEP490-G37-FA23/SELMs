@@ -134,7 +134,7 @@ namespace SELMs.Api.Controllers
 
         #region Update equipment
         [HttpPut]
-        [Route("equipmenties/{id}")]
+        [Route("equipments/{id}")]
         public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
         {
             try

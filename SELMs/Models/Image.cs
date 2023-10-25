@@ -16,6 +16,6 @@ namespace SELMs.Models
     {
         public int image_id { get; set; }
         public string image_name { get; set; }
-        public string content { get; set; }
+        public byte[] content { get; set; }
     }
 }
