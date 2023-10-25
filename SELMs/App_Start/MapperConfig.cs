@@ -25,6 +25,10 @@ namespace SELMs.App_Start
                 cfg.CreateMap<EquipmentDTO, Equipment>().ReverseMap();
                 cfg.CreateMap<List<EquipmentDTO>, List<Equipment>>().ReverseMap();
 
+                //Configuring Equipment and EquipmentDTO
+                cfg.CreateMap<ImageDTO, Image>().ReverseMap();
+                cfg.CreateMap<List<ImageDTO>, List<Image>>().ReverseMap();
+
                 //Any Other Mapping Configuration ....
             });
 
