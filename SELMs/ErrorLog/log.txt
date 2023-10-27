@@ -180,3 +180,69 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for me
    at CallSite.Target(Closure , CallSite , ApiCategoryController , Object )
    at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
    at SELMs.Api.Controllers.ApiCategoryController.<GetCategory>d__6.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 82
+2023-10-26 13:14:00,234 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 104
+2023-10-26 13:16:41,834 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 104
+2023-10-26 13:16:58,111 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: The string was not recognized as a valid DateTime. There is an unknown word starting at index 0.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<SaveMember>d__7.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 104
