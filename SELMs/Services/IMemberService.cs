@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SELMs.Services
 {
     public interface IMemberService
     {
-        Task SaveMember(User member);
-        Task UpdateMember(int id, User member);
+        Task<User> CreateNewMember(UserDTO member);
+        Task UpdateMember(int id, UserDTO member);
     }
 }
