@@ -13,7 +13,7 @@ namespace SELMs.Repositories
         dynamic GetCategoryList();
         dynamic SearchCategories(Argument arg);
         dynamic GetCategory(int id);
-        void SaveCategory(Category category);
+        dynamic SaveCategory(Category category);
         void UpdateCategory(Category category);
         void DeleteCategory(int id);
     }
