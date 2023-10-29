@@ -156,6 +156,7 @@
     <Compile Include="Api\Controllers\ApiImageController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
+    <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />

@@ -94,12 +94,12 @@ namespace SELMs.Api.Controllers
         #region Add new category
         [HttpPost]
         [Route("api/categories/new-category")]
-        public async Task<IHttpActionResult> SaveCategory([FromBody]CategoryDTO dto, [FromBody]List<EquipmentDTO> equipmentDtos)
+        public async Task<IHttpActionResult> SaveCategory([FromBody]CategoryRequest categoryRequest)
         {
             try
             {
-                Category category = mapper.Map<Category>(dto);
-                List<Equipment> equipments = mapper.Map<List<Equipment>>(equipmentDtos);
+                Category category = mapper.Map<Category>(categoryRequest.category);
+                List<Equipment> equipments = mapper.Map<List<Equipment>>(categoryRequest.equipments);
                 service.SaveCategory(category,equipments);
                 return Ok();
             }
@@ -115,7 +115,7 @@ namespace SELMs.Api.Controllers
 
         #region Update category
         [HttpPut]
-        [Route("categoryies/{id}")]
+        [Route("categories/{id}")]
         public async Task<IHttpActionResult> UpdateCategory(int id, [FromBody] CategoryDTO category)
         {
             try
