@@ -100,12 +100,13 @@ namespace SELMs.Api.HumanResource
         #region Add new member
         [HttpPost]
         [Route("members/new-member")]
-        public async Task<IHttpActionResult> CreateNewMember(UserDTO member)
+        public async Task<IHttpActionResult> CreateNewMember(User dto)
         {
             try
             {
-                await service.CreateNewMember(member);
-                return Ok(service.CreateNewMember(member));
+                User member = mapper.Map<User>(dto);
+                var result = service.SaveMember(member);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -120,10 +121,11 @@ namespace SELMs.Api.HumanResource
         #region Update member
         [HttpPost]
         [Route("members/update/{id}")]
-        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO member)
+        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO dto)
         {
             try
             {
+                User member = mapper.Map<User>(dto);
                 await service.UpdateMember(id, member);
                 return Ok();
             }
@@ -156,7 +158,7 @@ namespace SELMs.Api.HumanResource
                 }
                 else if (arg.text1 != arg.text2)
                 {
-                    return BadRequest("Mật khẩu mới điền lại không giống nhau!!!");
+                    return BadRequest("Mật khẩu nhập lại không trùng khớp.");
                 }
                 return BadRequest();
 
@@ -172,10 +174,10 @@ namespace SELMs.Api.HumanResource
         }
         #endregion
 
-        #region mark-quit member
+        #region resign member
         [HttpPost]
-        [Route("members/mark-quit/{id}")]
-        public async Task<IHttpActionResult> MarkQuit(int id)
+        [Route("members/resign/{id}")]
+        public async Task<IHttpActionResult> ResignMember(int id)
         {
             try
             {
