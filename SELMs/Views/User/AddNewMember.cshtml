@@ -3,8 +3,10 @@
     ViewBag.Title = "AddNewMember";
     Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
 }
-
-<body>
+<script src="~/Content/js/HumanResouce/AddNewMemberCtrl.js"></script>
+<div ng-app="myApp" ng-controller="AddNewMemberCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["USERNAME"]" />
+    <div id="notification" class="col-md-12"></div>
     <section class="section">
         <form class="row g-3">
             <div class="row">
@@ -26,22 +28,20 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="inputName5" class="form-label">Họ và tên</label>
-                                    <input type="text" class="form-control" id="inputName5">
+                                    <input type="text" class="form-control" ng-model="NewMember.fullname">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputDob5" class="form-label">Ngày sinh</label>
-                                    <input type="date" class="form-control" id="inputDob5">
+                                    <input type="text" id="dateOfBirth" autocomplete="off" datepicker ng-model="NewMember.date_of_birth" class="form-control input-form">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="inputMemCode5" class="form-label">Mã nhân viên</label>
-                                    <input type="password" class="form-control" id="inputMemCode5">
-                                </div>
+                                <script>
+                                    $("#dateOfBirth").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
+                                </script>
                                 <div class="col-md-6">
                                     <label for="inputGender" class="form-label">Giới tính</label>
-                                    <select id="inputGender" class="form-select">
-                                        <option selected>Nam</option>
-                                        <option>Nữ</option>
-                                        <option>Khác</option>
+                                    <select id="inputGender" class="form-select" ng-model="NewMember.gender">
+                                        <option value="1">Nam</option>
+                                        <option value="0">Nữ</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,11 +56,15 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="inputPhoneNumber" class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="inputPhoneNumber">
+                                    <input type="text" class="form-control" ng-model="NewMember.hotline">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Địa chỉ Email</label>
-                                    <input type="text" class="form-control" id="inputEmail">
+                                    <input type="text" class="form-control" ng-model="NewMember.email">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputEmail" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" ng-model="NewMember.address">
                                 </div>
                             </div>
                         </div>
@@ -72,61 +76,47 @@
                         <div class="card-body">
                             <h4 class="card-title">Thông tin công việc</h4>
                             <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="inputDateAssign" class="form-label">Ngày ký hợp đồng</label>
-                                    <input type="date" class="form-control" id="inputDateAssign">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputDuration" class="form-label">Thời hạn hợp đồng</label>
-                                    <input type="text" class="form-control" id="inputDuration">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputDateBye" class="form-label">Ngày hết hạn hợp đồng</label>
-                                    <input type="date" class="form-control" id="inputDateBye">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputPosition" class="form-label">Vị trí công việc</label>
-                                    <input type="text" class="form-control" id="inputPosition">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputExperience" class="form-label">Kinh nghiệm</label>
-                                    <input type="text" class="form-control" id="inputExperience">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputJD" class="form-label">Mô tả công việc</label>
-                                    <input type="text" class="form-control" id="inputJD">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="inputDateAssign" class="form-label">Ngày ký hợp đồng</label>
+                                        <input type="text" id="hireDate" class="form-control" ng-model="NewMember.hire_date">
+                                        <script>
+                                            $("#hireDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
+                                        </script>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputDuration" class="form-label">Thời hạn hợp đồng</label>
+                                        <input type="text" class="form-control" ng-model="NewMember.work_term">
+                                    </div>
 
-                <div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Tạo tài khoản</h4>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="inputUsername" class="form-label">Tên đăng nhập</label>
-                                    <input type="text" class="form-control" id="inputUsername">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputNewPass" class="form-label">Mật khẩu mới</label>
-                                    <input type="text" class="form-control" id="inputNewPass">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputReNewPass" class="form-label">Nhập lại mật khẩu mới</label>
-                                    <input type="text" class="form-control" id="inputReNewPass">
+                                    <div class="col-md-6">
+                                        <label for="inputPosition" class="form-label">Vị trí công việc</label>
+                                        <select ng-model="NewMember.role_code" class="form-control">
+                                            <option ng-repeat="item in ListRoles" value="{{item.role_code}}">{{item.role_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputExperience" class="form-label">Kinh nghiệm</label>
+                                        <input type="text" class="form-control" ng-model="NewMember.skill">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputJD" class="form-label">Mô tả công việc</label>
+                                        <input type="text" class="form-control" ng-model="NewMember.job_description">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputJD" class="form-label">Admin</label>
+                                        <input type="checkbox" ng-model="NewMember.is_admin" ng-checked="NewMember.is_admin">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Thêm nhân viên mới</button>
+                    <button type="submit" class="btn btn-primary" ng-click="CreateNewMember(NewMember)">Thêm nhân viên mới</button>
                 </div>
             </div>
         </form>
     </section>
-</body>
+</div>
 

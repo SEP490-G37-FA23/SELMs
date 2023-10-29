@@ -15,5 +15,12 @@ namespace SELMs.Models.BusinessModel
         public string username { set; get; }
         public string memberCode { set; get; }
 
+        public bool isadmin { set; get; }
+        public string role { set; get; }
+        public string text { set; get; }
+        public string text1 { set; get; }
+        public string text2 { set; get; }
+
+
     }
 }
