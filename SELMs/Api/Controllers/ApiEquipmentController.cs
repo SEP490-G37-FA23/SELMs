@@ -110,7 +110,7 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
-        
+
         #region Import equipments
         [HttpPost]
         [Route("api/equipments/import-equipments")]
@@ -141,6 +141,26 @@ namespace SELMs.Api.Controllers
             {
                 Equipment mem = mapper.Map<Equipment>(equipment);
                 service.UpdateEquipment(id, mem);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete Equipment
+        [HttpDelete]
+        [Route("equipments/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteEquipments(int id)
+        {
+            try
+            {
+                repository.DeleteEquipment(id);
                 return Ok();
             }
             catch (Exception ex)
