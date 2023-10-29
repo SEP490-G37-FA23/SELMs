@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Equipment\ImportEquipmentsController.cs" />
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectPortfolioController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -820,6 +821,11 @@
     <Content Include="Views\User\MembersList.cshtml" />
     <Content Include="Views\Categories\CategoryDetail.cshtml" />
     <Content Include="Views\ImportEquipments\ImportEquipmentsProposalsDetail.cshtml" />
+    <Content Include="Views\ProjectPortfolio\ViewProjectList.cshtml" />
+    <Content Include="Views\ProjectPortfolio\CreateNewProject.cshtml" />
+    <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
+    <Content Include="Views\ProjectPortfolio\ViewProjectMember.cshtml" />
+    <Content Include="Views\ProjectPortfolio\ViewProjectEquipments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
