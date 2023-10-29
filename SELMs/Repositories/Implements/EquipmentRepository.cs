@@ -16,7 +16,7 @@ namespace SELMs.Repositories.Implements
         public void DeleteEquipment(int id)
         {
             dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
-            if (equipment != null) db.Categories.Remove(equipment);
+            if (equipment != null) db.Equipments.Remove(equipment);
             db.SaveChangesAsync();
         }
 
