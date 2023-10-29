@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

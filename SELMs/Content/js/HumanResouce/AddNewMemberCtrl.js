@@ -54,22 +54,61 @@ app.controller('AddNewMemberCtrl', function ($scope, $http, $sce) {
 
         // You can customize the notification style and appearance here.
 
-    $scope.newMember = {
+    $scope.NewMember = {
         fullname: '',
-        dateOfBirth: null,
-        gender: true,
+        role_code: 'MB',
+        is_admin: false,
+        date_of_birth: '',
         hotline: '',
         email: '',
-        resignationDate: null,
-        wordTerm: '',
-        positionCode: '',
+        gender: true,
+        address:'',
+        avatar_img: '',
+        hire_date: '',
+        work_term: '',
         skill: '',
-        jobDescription:''
+        job_description: '',
+        is_active: true
     }
 
-    $scope.test = 'ok'
-    $scope.CreateNewMember = function (newMember) {
-        console.log(newMember);
+    $scope.LoadRolesList = function () {
+
+        $http.post(origin + '/api/v1/members/roles').then(function (response) {
+            $scope.ListRoles = response.data;
+        });
+    }
+
+    $scope.LoadRolesList();
+
+    $scope.CreateNewMember = function (member) {
+        console.log(member);
+        var dateOfBirth = $("#dateOfBirth").val();
+        var hireDate = $("#hireDate").val();
+        var data = {
+            fullname: member.fullname,
+            role_code: member.role_code,
+            is_admin: member.is_admin,
+            date_of_birth: dateOfBirth,
+            hotline: member.hotline,
+            email: member.email,
+            gender: member.gender == 1 ? true : false,
+            address: member.address,
+            avatar_img: member.avatar_img,
+            hire_date: hireDate,
+            work_term: member.work_term,
+            skill: member.skill,
+            job_description: member.job_description,
+            is_active: true,
+            is_admin: member.is_admin
+        }
+        var partialUrl = origin + '/api/v1/members/new-member';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Thêm mới thành viên có username là ' + response.Result.username + ' thành công!');
+                $scope.LoadMembersList();
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
     }
 
     });

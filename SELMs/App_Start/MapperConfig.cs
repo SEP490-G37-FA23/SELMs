@@ -19,7 +19,8 @@ namespace SELMs.App_Start
                 cfg.CreateMap<UserDTO, User>()
                 .ForMember(des => des.date_of_birth, act => act.MapFrom(src => DateTime.Parse(src.date_of_birth)))
                 .ForMember(des => des.hire_date, act => act.MapFrom(src => DateTime.Parse(src.hire_date)))
-                .ForMember(des => des.resignation_date, act => act.MapFrom(src => DateTime.Parse(src.resignation_date)));
+                .ForMember(des => des.resignation_date, act => act.MapFrom(src => DateTime.Parse(src.resignation_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 cfg.CreateMap<User, UserDTO>()
                 .ForMember(des => des.date_of_birth, act => act.MapFrom(src => src.date_of_birth.ToString()))

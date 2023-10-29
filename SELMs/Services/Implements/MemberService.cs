@@ -35,9 +35,11 @@ namespace SELMs.Services.Implements
 
         public async Task UpdateMember(int id, User member)
         {
-            if (await repository.GetMember(id) != null)
+            var orgMember = await repository.GetMember(id);
+            if (orgMember != null)
             {
                 member.user_id = id;
+                member.password = orgMember.password;
                 repository.UpdateMember(member);
             }
         }
@@ -69,6 +71,8 @@ namespace SELMs.Services.Implements
                     memCode += "1";
                 }
             }
+            memCode = memCode.Replace("Đ", "D");
+            memCode = memCode.Replace("đ", "d");
             return memCode;
         }
 
