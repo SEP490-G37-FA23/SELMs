@@ -14,7 +14,8 @@ namespace SELMs.Api.DTOs
         public string equipment_name { get; set; }
         public Nullable<int> equipment_img { get; set; }
         public string serial_no { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
+        //public Nullable<System.DateTime> create_date { get; set; }
+        public string create_date { get; set; }
         public string unit { get; set; }
         public string specification { get; set; }
         public Nullable<int> img { get; set; }
