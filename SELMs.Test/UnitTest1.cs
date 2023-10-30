@@ -1,3 +1,4 @@
+using System.Web.Http.Results;
 using SELMs.Api.HumanResource;
 using Xunit.Abstractions;
 
@@ -17,11 +18,11 @@ namespace SELMs.Test
 		public async Task Test1()
 		{
 			ApiMemberController memberController = new();
-
-			var a = await memberController.GetMemberList();
+			//OkNegotiatedContentResult<dynamic>;
+			var a = await memberController.GetMemberList(null);
 
 			output.WriteLine(a.ToString());
-			Assert.NotNull(a);
+			Assert.IsType<OkNegotiatedContentResult<dynamic>>(a);
 		}
 	}
 }

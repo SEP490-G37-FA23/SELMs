@@ -3,3 +3,73 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The best overloaded metho
    at CallSite.Target(Closure , CallSite , DbSet`1 , Object )
    at SELMs.Repositories.Implements.EquipmentRepository.DeleteEquipment(Int32 id) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Repositories\Implements\EquipmentRepository.cs:line 19
    at SELMs.Api.Controllers.ApiEquipmentController.<DeleteEquipments>d__10.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 163
+2023-10-30 21:38:20,965 [7] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+System.ArgumentException: Keyword not supported: 'metadata'.
+   at System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   at System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   at System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   at System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   at System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.SetConnectionString(DbConnection connection, DbConnectionPropertyInterceptionContext`1 interceptionContext)
+   at System.Data.Entity.Internal.LazyInternalConnection.TryInitializeFromAppConfig(String name, AppConfig config)
+   at System.Data.Entity.Internal.LazyInternalConnection.Initialize()
+   at System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ForEachAsync[T](IDbAsyncEnumerable`1 source, Action`1 action, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
+   at SELMs.Repositories.Implements.CategoryRepository.GetCategoryList() in G:\FPT\Semester_9\Capstone\Project\SELMs\Repositories\Implements\CategoryRepository.cs:line 31
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategoryList>d__4.MoveNext() in G:\FPT\Semester_9\Capstone\Project\SELMs\Api\Controllers\ApiCategoryController.cs:line 39
+2023-10-30 21:38:37,923 [6] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+System.ArgumentException: Keyword not supported: 'metadata'.
+   at System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   at System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   at System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   at System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   at System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.SetConnectionString(DbConnection connection, DbConnectionPropertyInterceptionContext`1 interceptionContext)
+   at System.Data.Entity.Internal.LazyInternalConnection.TryInitializeFromAppConfig(String name, AppConfig config)
+   at System.Data.Entity.Internal.LazyInternalConnection.Initialize()
+   at System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at SELMs.Repositories.Implements.CategoryRepository.GetCategory(Int32 id) in G:\FPT\Semester_9\Capstone\Project\SELMs\Repositories\Implements\CategoryRepository.cs:line 25
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategory>d__6.MoveNext() in G:\FPT\Semester_9\Capstone\Project\SELMs\Api\Controllers\ApiCategoryController.cs:line 81
+2023-10-30 21:39:33,127 [9] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.ArgumentException: Keyword not supported: 'metadata'.
+   at System.Data.Common.DbConnectionOptions.ParseInternal(Hashtable parsetable, String connectionString, Boolean buildChain, Hashtable synonyms, Boolean firstKey)
+   at System.Data.Common.DbConnectionOptions..ctor(String connectionString, Hashtable synonyms, Boolean useOdbcRules)
+   at System.Data.SqlClient.SqlConnectionString..ctor(String connectionString)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnectionOptions(String connectionString, DbConnectionOptions previous)
+   at System.Data.ProviderBase.DbConnectionFactory.GetConnectionPoolGroup(DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolOptions, DbConnectionOptions& userConnectionOptions)
+   at System.Data.SqlClient.SqlConnection.ConnectionString_Set(DbConnectionPoolKey key)
+   at System.Data.SqlClient.SqlConnection.set_ConnectionString(String value)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext](TTarget target, Action`2 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.SetConnectionString(DbConnection connection, DbConnectionPropertyInterceptionContext`1 interceptionContext)
+   at System.Data.Entity.Internal.LazyInternalConnection.TryInitializeFromAppConfig(String name, AppConfig config)
+   at System.Data.Entity.Internal.LazyInternalConnection.Initialize()
+   at System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at SELMs.Repositories.Implements.MemberRepository.GetMember(Int32 id) in G:\FPT\Semester_9\Capstone\Project\SELMs\Repositories\Implements\MemberRepository.cs:line 24
+   at SELMs.Api.HumanResource.ApiMemberController.<GetMember>d__7.MoveNext() in G:\FPT\Semester_9\Capstone\Project\SELMs\Api\Controllers\ApiMemberController.cs:line 81
