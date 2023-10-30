@@ -100,7 +100,7 @@ namespace SELMs.Api.HumanResource
         #region Add new member
         [HttpPost]
         [Route("members/new-member")]
-        public async Task<IHttpActionResult> CreateNewMember(User dto)
+        public async Task<IHttpActionResult> CreateNewMember(UserDTO dto)
         {
             try
             {
