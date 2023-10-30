@@ -2,9 +2,11 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Security;
 using Dapper;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SELMs.Repositories.Implements
 {
@@ -23,38 +25,26 @@ namespace SELMs.Repositories.Implements
             return member;
         }
 
-        public dynamic GetMemberList()
-        {
-            dynamic members = db.Users.ToListAsync();
 
-            return members;
-        }
-
-	public dynamic GetMemberList(Argument args)
-		{
-			dynamic members = null;
-			members =  db.Database.Connection.Query<dynamic>("Proc_GetMembersList", new
-			{
-				username = args.username,
-			}
-				, commandType: CommandType.StoredProcedure).ToList();
-			return members;
-		}
-        public dynamic SearchMembers(Argument arg)
+        public dynamic GetMemberList(Argument arg)
         {
             dynamic members = null;
             members = db.Database.Connection.QueryAsync<dynamic>("Proc_GetMembersList", new
             {
                 username = arg.username,
+                isadmin = arg.isadmin,
+                role = arg.role,
+                text = arg.text
             }
                 , commandType: CommandType.StoredProcedure);
             return members;
         }
 
-        public void SaveMember(User member)
+        public dynamic SaveMember(User member)
         {
             db.Users.Add(member);
             db.SaveChangesAsync();
+            return member;
         }
 
         public void UpdateMember(User member)
@@ -66,13 +56,21 @@ namespace SELMs.Repositories.Implements
 
         public string GetLastMemberCode(string prefix)
         {
-            User obj = db.Users.Where(u => u.member_code.StartsWith(prefix)).OrderByDescending(u => u.member_code).FirstOrDefault();
+            User obj = db.Users.Where(u => u.user_code.StartsWith(prefix)).OrderByDescending(u => u.user_code).FirstOrDefault();
             if (obj != null)
             {
-                string result = obj.member_code == null ? "" : obj.member_code;
+                string result = obj.user_code == null ? "" : obj.user_code;
                 return result;
             }
             return "";
+        }
+
+        public dynamic GetRoleList()
+        {
+            dynamic members = null;
+            members = db.Database.Connection.QueryAsync<dynamic>("Proc_GetRolesList"
+                , commandType: CommandType.StoredProcedure);
+            return members;
         }
     }
 }

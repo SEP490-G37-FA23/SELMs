@@ -4,29 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4edb053827d345eb8fd0668d3d023bf1" Name="Diagram1" ZoomLevel="91">
-        <EntityTypeShape EntityType="SELMsModel.Category" Width="1.5" PointX="1.5" PointY="1.625" />
-        <EntityTypeShape EntityType="SELMsModel.Equipment" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SELMsModel.Equipment_Import_Application" Width="1.5" PointX="8.75" PointY="1.5" />
-        <EntityTypeShape EntityType="SELMsModel.Equipment_Import_Application_Detail" Width="1.5" PointX="8.75" PointY="6.5" />
-        <EntityTypeShape EntityType="SELMsModel.Inventory_Request_Application" Width="1.5" PointX="8.75" PointY="10.5" />
-        <EntityTypeShape EntityType="SELMsModel.Inventory_Request_Application_Detail" Width="1.5" PointX="10.75" PointY="1.5" />
-        <EntityTypeShape EntityType="SELMsModel.Kpi" Width="1.5" PointX="10.75" PointY="4.5" />
-        <EntityTypeShape EntityType="SELMsModel.Project" Width="1.5" PointX="0.75" PointY="6.875" />
-        <EntityTypeShape EntityType="SELMsModel.Project_Investment_Cost_Application" Width="1.5" PointX="3" PointY="11" />
-        <EntityTypeShape EntityType="SELMsModel.Project_Investment_Cost_Application_Detail" Width="1.5" PointX="5.25" PointY="11.875" />
-        <EntityTypeShape EntityType="SELMsModel.Tag" Width="1.5" PointX="3" PointY="5.375" />
-        <EntityTypeShape EntityType="SELMsModel.User" Width="1.5" PointX="3.75" PointY="16.125" />
-        <EntityTypeShape EntityType="SELMsModel.Project_Equipment" Width="1.5" PointX="6" PointY="3.375" />
-        <EntityTypeShape EntityType="SELMsModel.Project_Member" Width="1.5" PointX="6" PointY="7.375" />
-        <AssociationConnector Association="SELMsModel.Project_Equipment_FK_Equipment_equipment_id" />
-        <AssociationConnector Association="SELMsModel.Project_Equipment_FK_Project_project_id" />
-        <AssociationConnector Association="SELMsModel.Project_Investment_Cost_Application_FK_Project_project_id" />
-        <AssociationConnector Association="SELMsModel.Project_Member_FK_Project_project_id" />
-        <AssociationConnector Association="SELMsModel.Project_Investment_Cost_Application_Detail_FK_Project_Investment_Cost_Application_application_id" />
-        <AssociationConnector Association="SELMsModel.Project_Member_FK_User_user_id" />
-        <AssociationConnector Association="SELMsModel.Equipment_Category" />
-        <AssociationConnector Association="SELMsModel.Project_Tag" />
+      <Diagram DiagramId="31875f6ba82d498cb7d0a3005f247717" Name="Diagram1">
+        <EntityTypeShape EntityType="SELMsModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Allocation_Application" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Allocation_Application_Detail" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Handover_Form" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Handover_Form_Detail" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Import_Application" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Import_Application_Detail" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Location_History" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Equipment_Project_History" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Image" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Inventory_Request_Application" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Inventory_Request_Application_Detail" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Location" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Member_Project_History" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Project" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Project_Investment_Cost_Application" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Project_Investment_Cost_Application_Detail" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.Role" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.sysdiagram" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SELMsModel.User" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

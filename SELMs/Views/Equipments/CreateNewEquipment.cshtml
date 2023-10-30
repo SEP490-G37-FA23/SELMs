@@ -4,5 +4,90 @@
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
-<h2>CreateNewEquipment</h2>
+<div class="pagetitle">
+    <!--Start Page Title-->
+    <h1>Thông tin thiết bị mới</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">List of Equipments</li>
+            <li class="breadcrumb-item active">Create new Equipments</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Thêm thiết bị mới</h5>
+
+            <!-- Multi Columns Form -->
+            <form class="row g-3">
+                <div class="col-md-4">
+                    <label for="equipId" class="form-label">Mã Thiết bị</label>
+                    <input type="text" class="form-control" id="equipId">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipName" class="form-label">Tên thiết bị</label>
+                    <input type="email" class="form-control" id="equipName">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipQR" class="form-label">Mã QR</label>
+                    <input type="" class="form-control" id="equipQR">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipSeri" class="form-label">Số Seri</label>
+                    <input type="text" class="form-control" id="equipSeri">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipUnit" class="form-label">Đơn vị</label>
+                    <select id="equipUnit" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="equipGroup" class="form-label">Nhóm thiết bị</label>
+                    <select id="equipGroup" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="equipLocation" class="form-label">Vị trí</label>
+                    <select id="equipLocation" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="equipPrice" class="form-label">Giá</label>
+                    <input type="text" class="form-control" id="equipPrice">
+                </div>
+                <div class="col-md-4">
+                    <label for="dateOfEntry" class="form-label">Ngày nhập</label>
+                    <input type="text" class="form-control" id="dateOfEntry">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipStatus" class="form-label">Trạng thái</label>
+                    <input type="text" class="form-control" id="equipStatus">
+                </div>
+                <div class="col-md-4">
+                    <label for="equipRemark" class="form-label">Ghi chú</label>
+                    <input type="text" class="form-control" id="equipRemark">
+                </div>
+                <div class="col-md-4">
+                    <label for="response" class="form-label">Người chịu trách nhiệm</label>
+                    <input type="text" class="form-control" id="response">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form><!-- End Multi Columns Form -->
+
+        </div>
+    </div>
+</section>
+
 

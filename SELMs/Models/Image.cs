@@ -12,16 +12,10 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project_Equipment
+    public partial class Image
     {
-        public int project_id { get; set; }
-        public int equipment_id { get; set; }
-        public Nullable<System.DateTime> borrow_date { get; set; }
-        public int application_id { get; set; }
-        public string borrower { get; set; }
-        public string equipment_status { get; set; }
-    
-        public virtual Equipment Equipment { get; set; }
-        public virtual Project Project { get; set; }
+        public int image_id { get; set; }
+        public string image_name { get; set; }
+        public byte[] content { get; set; }
     }
 }

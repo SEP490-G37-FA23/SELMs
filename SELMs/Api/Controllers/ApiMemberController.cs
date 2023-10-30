@@ -12,13 +12,17 @@ using SELMs.Services.Implements;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace SELMs.Api.HumanResource
 {
+    [RoutePrefix("api/v1")]
     public class ApiMemberController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiMemberController));
@@ -27,44 +31,46 @@ namespace SELMs.Api.HumanResource
         private IMemberService service = new MemberService();
         private IMapper mapper = MapperConfig.Initialize();
 
+        private SELMsContext db = new SELMsContext();
+
         // GET: Api_Member
         #region Get member list
         [HttpPost]
-        [Route("api/Members")]
-        public async Task<IHttpActionResult> GetMemberList()
+        [Route("members")]
+        public async Task<IHttpActionResult> GetMemberList(Argument arg)
         {
             try
             {
                 dynamic returnedData = null;                
-                returnedData = await repository.GetMemberList();
+                returnedData = await repository.GetMemberList(arg);
                 return Ok(returnedData);
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
         #endregion
 
-        #region Search Member
+        #region Get role list
         [HttpPost]
-        [Route("api/Members/Search")]
-        public async Task<IHttpActionResult> SearchMembers(Argument args)
+        [Route("members/roles")]
+        public async Task<IHttpActionResult> GetRoleList()
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.SearchMembers(args);
+                returnedData = await repository.GetRoleList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -72,20 +78,20 @@ namespace SELMs.Api.HumanResource
 
         #region Get member by id
         [HttpGet]
-        [Route("api/Member/{id}")]
+        [Route("members/{id}")]
         public async Task<IHttpActionResult> GetMember(int id)
         {
             try
             {
                 dynamic returnedData = null;
                 returnedData = await repository.GetMember(id);
-                return Ok(returnedData);
+                return Ok(returnedData != null ? returnedData : new User());
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
@@ -93,41 +99,99 @@ namespace SELMs.Api.HumanResource
 
         #region Add new member
         [HttpPost]
-        [Route("api/Member/NewMember")]
-        public async Task<IHttpActionResult> SaveMember(UserDTO member)
+        [Route("members/new-member")]
+        public async Task<IHttpActionResult> CreateNewMember(User dto)
         {
             try
             {
-                User user = mapper.Map<User>(member);
-                await service.SaveMember(user);
-                return Ok();
+                User member = mapper.Map<User>(dto);
+                var result = service.SaveMember(member);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }
         #endregion
 
         #region Update member
-        [HttpPut]
-        [Route("api/Member/Update/{id}")]
-        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO member)
+        [HttpPost]
+        [Route("members/update/{id}")]
+        public async Task<IHttpActionResult> UpdateMember(int id, [FromBody] UserDTO dto)
         {
             try
             {
-                User mem = mapper.Map<User>(member);
-                await service.UpdateMember(id, mem);
+                User member = mapper.Map<User>(dto);
+                await service.UpdateMember(id, member);
                 return Ok();
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return InternalServerError();
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region change-password member
+        [HttpPost]
+        [Route("members/change-password/{id}")]
+        public async Task<IHttpActionResult> ChangePassword(int id,Argument arg)
+        {
+            try
+            {
+                User mem = db.Users.Where(x => x.user_id == id).FirstOrDefault();
+                if(arg.text == mem.password && arg.text1 == arg.text2)
+                {
+                    mem.password = arg.text1;
+                    db.SaveChanges();
+                    return Ok("Cập nhật mật khẩu thành công!");
+                }else if (arg.text != mem.password)
+                {
+                    return BadRequest("Nhập sai mật khẩu!!!");
+                }
+                else if (arg.text1 != arg.text2)
+                {
+                    return BadRequest("Mật khẩu nhập lại không trùng khớp.");
+                }
+                return BadRequest();
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region resign member
+        [HttpPost]
+        [Route("members/resign/{id}")]
+        public async Task<IHttpActionResult> ResignMember(int id)
+        {
+            try
+            {
+                User mem = db.Users.Where(x => x.user_id == id).FirstOrDefault();
+                mem.resignation_date = DateTime.Now;
+                mem.is_active = false;
+                db.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
         }

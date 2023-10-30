@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
+using System.Configuration;
 
 namespace SELMs.Services.Implements
 {
@@ -18,8 +20,34 @@ namespace SELMs.Services.Implements
             User mem = member;
 
             //Generate member code
-            List<string> nameParts = mem.fullname.Split(' ').ToList();
-            string memCode = nameParts.Last();
+            string code = generateMemberCode(mem.fullname);
+
+            // Set attributes
+            mem.hire_date = DateTime.Now;
+            mem.is_admin = false;
+            mem.is_active = true;
+            mem.user_code = code;
+            mem.username = code;
+            mem.password = ConfigurationManager.AppSettings["DefaultPassword"];
+
+            repository.SaveMember(mem);
+        }
+
+        public async Task UpdateMember(int id, User member)
+        {
+            var orgMember = await repository.GetMember(id);
+            if (orgMember != null)
+            {
+                member.user_id = id;
+                member.password = orgMember.password;
+                repository.UpdateMember(member);
+            }
+        }
+
+        string generateMemberCode(string name)
+        {
+            List<string> nameParts = name.Split(' ').ToList();
+            string memCode = RemoveDiacritics(nameParts.Last());
             string lastMemCode = repository.GetLastMemberCode(memCode);
             if (nameParts.Count > 1)
             {
@@ -35,7 +63,7 @@ namespace SELMs.Services.Implements
                 string num = lastMemCode.Replace(memCode, "");
                 if (num.Count() > 0)
                 {
-                    num = (Convert.ToInt32(lastMemCode) + 1).ToString();
+                    num = (Convert.ToInt32(num) + 1).ToString();
                     memCode += num;
                 }
                 else
@@ -43,23 +71,26 @@ namespace SELMs.Services.Implements
                     memCode += "1";
                 }
             }
-
-            // Set attributes
-            mem.hire_date = DateTime.Now;
-            mem.is_admin = false;
-            mem.active = true;
-            mem.member_code = memCode;
-
-            repository.SaveMember(mem);
+            memCode = memCode.Replace("Đ", "D");
+            memCode = memCode.Replace("đ", "d");
+            return memCode;
         }
 
-        public async Task UpdateMember(int id, User member)
+        string RemoveDiacritics(string s)
         {
-            if (await repository.GetMember(id) != null)
+            string normalizedString = s.Normalize(NormalizationForm.FormD);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (char c in normalizedString)
             {
-                member.user_id = id;
-                repository.UpdateMember(member);
+                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
             }
+
+            return stringBuilder.ToString();
         }
+
     }
 }

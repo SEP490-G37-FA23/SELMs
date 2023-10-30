@@ -41,9 +41,7 @@ namespace SELMs.Controllers
                 Session["isadmin"] = user.is_admin;
                 Session["username"] = user.username;
                 Session["fullname"] = user.fullname;
-                Session["position"] = user.position_code;
-
-
+                Session["role"] = user.role_code;
 
                 return RedirectToAction("MembersList", "User", new { area = "" });
             }
