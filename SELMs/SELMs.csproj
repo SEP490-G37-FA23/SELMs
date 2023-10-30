@@ -203,6 +203,7 @@
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectPortfolioController.cs" />
+    <Compile Include="Controllers\Project\ProjectInvestmentCostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -826,6 +827,13 @@
     <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectMember.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectEquipments.cshtml" />
+    <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
+    <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
+    <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
+    <Content Include="Views\AllocationEquipments\AllocationEquipmentRequestDetails.cshtml" />
+    <Content Include="Views\Equipments\ViewEquipmentDetails.cshtml" />
+    <Content Include="Views\AllocationEquipments\AllocationEquipmentList.cshtml" />
+    <Content Include="Views\AllocationEquipments\CreateNewAllocationEquipment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

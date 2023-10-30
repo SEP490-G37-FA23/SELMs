@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "AllocationEquipmentList";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <h4 class="text-center">Danh sách vị trí thiết bị</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/AllocationEquipment.cshtml">Danh sách vị trí thiết bị</a></li>
+        </ol>
+    </nav>
+    <form class="mt-5">
+
+        <div class="card">
+            <div class="mt-4 ms-3">
+                <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Categories")">Thêm danh mục mới</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã chuẩn</th>
+                            <th>Cấp độ</th>
+                            <th>Vị trí cha</th>
+                            <th>Miêu tả</th>
+                            <th>Mã QR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </form>
+</section>
+
+
