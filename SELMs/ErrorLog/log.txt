@@ -105,3 +105,37 @@ System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure
    at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in D:\FULearning\Fall2023\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 45
 ClientConnectionId:ec3a2db2-897f-4385-92b6-62bcc444a39b
 Error Number:2812,State:62,Class:16
+2023-10-30 14:40:59,635 [6] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'Proc_GetRolesList'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Dapper.SqlMapper.<QueryAsync>d__33`1.MoveNext() in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 419
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Api.HumanResource.ApiMemberController.<GetRoleList>d__6.MoveNext() in D:\FULearning\Fall2023\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 66
+ClientConnectionId:980bdbb3-9e50-4667-83ec-98c9c8196223
+Error Number:2812,State:62,Class:16
+2023-10-30 14:40:59,932 [7] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure 'Proc_GetMembersList'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Dapper.SqlMapper.<QueryAsync>d__33`1.MoveNext() in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 419
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in D:\FULearning\Fall2023\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 45
+ClientConnectionId:980bdbb3-9e50-4667-83ec-98c9c8196223
+Error Number:2812,State:62,Class:16
