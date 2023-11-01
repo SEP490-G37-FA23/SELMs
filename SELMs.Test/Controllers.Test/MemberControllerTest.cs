@@ -100,6 +100,29 @@ namespace SELMs.Test.Controllers.Test
 		}
 
 
+
+		[Theory]
+		[InlineData(-1)]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(2)]
+		public async Task TestResignMember_ReturnOk(int id)
+		{
+			try
+			{
+				var actionResult = await apiMemberController.ResignMember(id);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				string content = await response.Content.ReadAsStringAsync();
+
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
 		#endregion
 	}
 
