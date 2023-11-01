@@ -1,4 +1,5 @@
 ﻿using SELMs.Api.HumanResource;
+using SELMs.Models.BusinessModel;
 using Xunit.Abstractions;
 
 namespace SELMs.Test.Controllers.Test
@@ -19,21 +20,21 @@ namespace SELMs.Test.Controllers.Test
 
 		#region Iteration 1
 
-		[Fact]
-		public async Task TestGetMemberList_ReturnOk()
+		[Theory]
+		[MemberData(nameof(ControllerTestData.GetTestData), MemberType = typeof(ControllerTestData))]
+		public async Task TestGetMemberList_ReturnOk(Argument argument)
 		{
 			try
 			{
-				var actionResult = await apiMemberController.get();
+				var actionResult = await apiMemberController.GetMemberList(argument);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				var content = await response.Content.ReadAsStringAsync();
+				string content = await response.Content.ReadAsStringAsync();
 
 				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-
 			}
 			catch (Exception ex)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.Fail("Test case failed by exception\n" + ex.Message);
 			}
 
 		}
@@ -54,7 +55,6 @@ namespace SELMs.Test.Controllers.Test
 				string content = await response.Content.ReadAsStringAsync();
 
 				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-
 			}
 			catch (Exception ex)
 			{
@@ -65,21 +65,16 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-
-
-
-
-
-
-
 		[Fact]
 		public async Task TestCreateNewMember_ReturnOk()
 		{
 			try
 			{
-				var a = await apiMemberController.CreateNewMember(null);
+				var actionResult = await apiMemberController.CreateNewMember(null);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine("Test case passed");
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 			}
 			catch (Exception ex)
 			{
@@ -106,5 +101,30 @@ namespace SELMs.Test.Controllers.Test
 
 
 		#endregion
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public class ControllerTestData
+	{
+		public static IEnumerable<object[]> GetTestData()
+		{
+			yield return new object[] { new Argument() { fullname = "tan" } };
+			yield return new object[] { new Argument() { fullname = "dat" } };
+		}
 	}
 }
