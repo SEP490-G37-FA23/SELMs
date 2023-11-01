@@ -32,10 +32,11 @@ namespace SELMs.Repositories.Implements
             return categories;
         }
 
-        public void SaveCategory(Category category)
+        public dynamic SaveCategory(Category category)
         {
             db.Categories.Add(category);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+            return category;
         }
 
         public dynamic SearchCategories(Argument arg)

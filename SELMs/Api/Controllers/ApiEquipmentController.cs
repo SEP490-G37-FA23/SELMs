@@ -169,5 +169,25 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Delete Equipment
+        [HttpDelete]
+        [Route("equipments/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteEquipments(int id)
+        {
+            try
+            {
+                repository.DeleteEquipment(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
     }
 }

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "ViewProjectMember";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+
+<div class="pagetitle">
+    <!--Start Page Title-->
+    <h1>Danh sách thành viên dự án</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/ProjectPortfolio/ViewProjectList">Projects List</a></li>
+            <li class="breadcrumb-item active"><a href="/ProjectPortfolio/ViewProjectMember">View Project's Members</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh Sách Thành Viên Dự Án</h5>
+
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" href="@Url.Action("", "")">Thêm thành viên mới</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">Thêm danh sách thành viên mới</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary">Xuất file Excel</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã nhân viên</th>
+                                <th scope="col">Họ và Tên</th>
+                                <th scope="col">Vị trí</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ductm</td>
+                                <td>Tran Minh Duc</td>
+                                <td>Manager</td>
+                                <td>
+                                    <select id="projectStatus" class="form-select">
+                                        <option selected>Active</option>
+                                        <option>Inactive</option>
+                                        <option>Left</option>
+                                    </select>
+                                </td>
+                                <td>    </td>
+                            </tr>
+                            <tr>
+                                <td>Tổng số thành viên</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
