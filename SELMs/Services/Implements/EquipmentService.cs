@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using SELMs.Repositories;
 using SELMs.Repositories.Implements;
 using System;
@@ -25,12 +26,14 @@ namespace SELMs.Services.Implements
             repository.SaveEquipments(equipments);
         }
 
-        public async Task SaveEquipment(Equipment equipment)
+
+        public async Task SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             Equipment eq = equipment;
             string code = GenerateEquipmentCode();
             eq.system_equipment_code = code;
-            repository.SaveEquipment(eq);
+            repository.SaveEquipment(eq, location_id, ListComponentEquips);
+
         }
 
         public async Task UpdateEquipment(int id, Equipment equipment)
