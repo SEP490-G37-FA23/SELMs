@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ViewProjectEquipments";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+
+<div class="pagetitle">
+    <!--Start Page Title-->
+    <h1>Danh Sách Thiết Bị Dự Án</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/ProjectPortfolio/ViewProjectList">Projects List</a></li>
+            <li class="breadcrumb-item active"><a href="/ProjectPortfolio/ViewProjectEquipments">View Project's Equipments</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh Sách Thiết Bị Dự Án</h5>
+
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" href="@Url.Action("", "")">Đề xuất mượn</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">Thêm danh sách thiết bị mới</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary">Xuất file Excel</button>
+                        </div>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã thiết bị</th>
+                                <th scope="col">Tên thiết bị</th>
+                                <th scope="col">Ngày mượn</th>
+                                <th scope="col">Đơn vị</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Người mượn</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ductm</td>
+                                <td>Tran Minh Duc</td>
+                                <td>29/10/2023</td>
+                                <td>người</td>
+                                <td>1</td>
+                                <td>LyMT</td>
+                                <td>hỏng nửa người</td>
+                                <td>
+                                    <button class="btn btn-primary">edit</button>
+                                    <button class="btn btn-secondary">trả</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+

@@ -9,7 +9,7 @@ namespace SELMs.Repositories
         dynamic GetMemberList(Argument arg);
         dynamic GetRoleList();
         dynamic GetMember(int id);
-        void SaveMember(User member);
+        dynamic SaveMember(User member);
         void UpdateMember(User member);
         dynamic DeleteMember(User member);
         string GetLastMemberCode(string prefix);

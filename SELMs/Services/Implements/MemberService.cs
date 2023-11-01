@@ -9,85 +9,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Configuration;
-using SELMs.Api.DTOs;
-using SELMs.Models.BusinessModel;
 
 namespace SELMs.Services.Implements
 {
     public class MemberService : IMemberService
     {
         private IMemberRepository repository = new MemberRepository();
-        private SELMsContext db = new SELMsContext();
-        private ProcessDateTime pdt = new ProcessDateTime();
-
-        public async Task UpdateMember(int id, UserDTO member)
+        public async Task SaveMember(User member)
         {
-            DateTime? dateOfBirth = null;
-            DateTime? hireDate = null;
-            if (member.date_of_birth != "")
-            {
-                dateOfBirth = pdt.Processdatetime(member.date_of_birth);
-            }
-            if (member.hire_date != "")
-            {
-                hireDate  = pdt.Processdatetime(member.hire_date);
-            }
-            User mem = db.Users.Where(x => x.user_id == id).FirstOrDefault();
-            mem.role_code = member.role_code;
-            mem.is_admin = member.is_admin;
-            mem.date_of_birth = dateOfBirth;
-            mem.hotline = member.hotline;
-            mem.email = member.email;
-            mem.gender = member.gender;
-            mem.address = member.address;
-            mem.avatar_img = member.avatar_img;
-            mem.hire_date = hireDate;
-            mem.work_term = member.work_term;
-            mem.skill = member.skill;
-            mem.job_description = member.job_description;
-            mem.is_active = member.is_active;
-            db.SaveChanges();
-        }
+            User mem = member;
 
-        public async Task<User> CreateNewMember(UserDTO member)
-        {
-            string code = generateMemberCode(member.fullname);
+            //Generate member code
+            string code = generateMemberCode(mem.fullname);
 
             // Set attributes
-
-
-            DateTime? dateOfBirth = null;
-            DateTime? hireDate = null;
-            if (member.date_of_birth != "")
-            {
-                dateOfBirth = pdt.Processdatetime(member.date_of_birth);
-            }
-            if (member.hire_date != "")
-            {
-                hireDate = pdt.Processdatetime(member.hire_date);
-            }
-
-            User mem = new User();
+            mem.hire_date = DateTime.Now;
+            mem.is_admin = false;
+            mem.is_active = true;
             mem.user_code = code;
             mem.username = code;
             mem.password = ConfigurationManager.AppSettings["DefaultPassword"];
-            mem.fullname = member.fullname;
-            mem.role_code = member.role_code;
-            mem.is_admin = member.is_admin;
-            mem.date_of_birth = dateOfBirth;
-            mem.hotline = member.hotline;
-            mem.email = member.email;
-            mem.gender = member.gender;
-            mem.address = member.address;
-            mem.avatar_img = member.avatar_img;
-            mem.hire_date = hireDate;
-            mem.work_term = member.work_term;
-            mem.skill = member.skill;
-            mem.job_description = member.job_description;
-            mem.is_active = member.is_active;
-            db.Users.Add(mem);
-            db.SaveChanges();
-            return mem;
+
+            repository.SaveMember(mem);
+        }
+
+        public async Task UpdateMember(int id, User member)
+        {
+            var orgMember = await repository.GetMember(id);
+            if (orgMember != null)
+            {
+                member.user_id = id;
+                member.password = orgMember.password;
+                repository.UpdateMember(member);
+            }
         }
 
         string generateMemberCode(string name)
@@ -107,7 +61,7 @@ namespace SELMs.Services.Implements
             if (lastMemCode.Length > 0)
             {
                 string num = lastMemCode.Replace(memCode, "");
-                if (num != "")
+                if (num.Count() > 0)
                 {
                     num = (Convert.ToInt32(num) + 1).ToString();
                     memCode += num;
@@ -118,6 +72,7 @@ namespace SELMs.Services.Implements
                 }
             }
             memCode = memCode.Replace("Đ", "D");
+            memCode = memCode.Replace("đ", "d");
             return memCode;
         }
 

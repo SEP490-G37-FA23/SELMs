@@ -40,10 +40,11 @@ namespace SELMs.Repositories.Implements
             return members;
         }
 
-        public void SaveMember(User member)
+        public dynamic SaveMember(User member)
         {
             db.Users.Add(member);
             db.SaveChangesAsync();
+            return member;
         }
 
         public void UpdateMember(User member)

@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "CreateNewProject";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+
+<div class="pagetitle">
+    <!--Start Page Title-->
+    <h1>Thêm dự án mới</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="/ProjectPortfolio/ViewProjectList">Projects List</a></li>
+            <li class="breadcrumb-item active"><a href="/ProjectPortfolio/CreateNewProject">Create New Project</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <form class="row g-3">
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Thông tin dự án</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="projectName" class="form-label">Tên dự án</label>
+                            <input type="text" class="form-control" id="projectName">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectGido" class="form-label">Viết tắt</label>
+                            <input type="text" class="form-control" id="projectGido">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="projectDescription" class="form-label">Mô tả dự án</label>
+                            <input type="text" class="form-control" id="projectDescription">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectRefer" class="form-label">Lĩnh vực</label>
+                            <input type="text" class="form-control" id="projectRefer">
+                        </div>
+                        <div class="col-md-6">
+                            <laber for="projectTag" class="form-label">Tags</laber>
+                            <input type="text" class="form-control" id="projectTag">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectManager" class="form-label">Người quản lý</label>
+                            <input type="text" class="form-control" id="projectManager">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectStatus" class="form-label">Status</label>
+                            <select id="projectStatus" class="form-select">
+                                <option selected>Pending</option>
+                                <option>Activate</option>
+                                <option>Overdue</option>
+                                <option>Finished</option>
+                                <option>Canceled</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectStartDate" class="form-label">Ngày bắt đầu</label>
+                            <input type="Date" class="form-control" id="projectStartDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="projectEndDate" class="form-label">Ngày kết thúc</label>
+                            <input type="Date" class="form-control" id="projectEndDate">
+                        </div>
+
+                        <div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="member-tab" data-bs-toggle="tab"
+                                            data-bs-target="#member" type="button" role="tab" aria-controls="home"
+                                            aria-selected="true">
+                                        Members
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="task-tab" data-bs-toggle="tab"
+                                            data-bs-target="#task" type="button" role="tab" aria-controls="task"
+                                            aria-selected="false">
+                                        Tasks
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="equipment-tab" data-bs-toggle="tab"
+                                            data-bs-target="#equipment" type="button" role="tab"
+                                            aria-controls="equipment" aria-selected="false">
+                                        Equipments
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="cost-tab" data-bs-toggle="tab"
+                                            data-bs-target="#cost" type="button" role="tab" aria-controls="cost"
+                                            aria-selected="false">
+                                        Chi phí
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2" id="myTabContent">
+                                <div class="tab-pane fade show active" id="member" role="tabpanel"
+                                     aria-labelledby="member-tab">
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã nhân viên</th>
+                                                <th scope="col">Họ và Tên</th>
+                                                <th scope="col">Giới tính</th>
+                                                <th scope="col">Vị trí</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ductm</td>
+                                                <td>Tran Minh Duc</td>
+                                                <td>Nam</td>
+                                                <td>Manager</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <button type="button" class="btn btn-primary">Thêm thành viên</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="task" role="tabpanel"
+                                     aria-labelledby="task-tab">
+                                    Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos
+                                    quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque
+                                    aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae
+                                    mollitia dolores. Ut laboriosam voluptatum dicta.
+                                </div>
+                                <div class="tab-pane fade" id="equipment" role="tabpanel"
+                                     aria-labelledby="equipment-tab">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã thiết bị</th>
+                                                <th scope="col">Tên thiết bị</th>
+                                                <th scope="col">Ngày mượn</th>
+                                                <th scope="col">Đơn vị</th>
+                                                <th scope="col">Số lượng</th>
+                                                <th scope="col">Người mượn</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Tác vụ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ductm</td>
+                                                <td>Tran Minh Duc</td>
+                                                <td>29/10/2023</td>
+                                                <td>người</td>
+                                                <td>1</td>
+                                                <td>LyMT</td>
+                                                <td>hỏng nửa người</td>
+                                                <td>
+                                                    <button class="btn btn-primary">edit</button>
+                                                    <button class="btn btn-secondary">trả</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <button type="button" class="btn btn-primary">Thêm thiết bị</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="cost" role="tabpanel"
+                                     aria-labelledby="cost-tab">
+                                    Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis
+                                    cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis
+                                    accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
+                                    fuga tempore dolor.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Thêm dự án mới</button>
+        </div>
+        </div>
+    </form>
+</section>      
+

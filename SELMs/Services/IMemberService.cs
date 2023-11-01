@@ -10,7 +10,7 @@ namespace SELMs.Services
 {
     public interface IMemberService
     {
-        Task<User> CreateNewMember(UserDTO member);
-        Task UpdateMember(int id, UserDTO member);
+        Task SaveMember(User member);
+        Task UpdateMember(int id, User member);
     }
 }
