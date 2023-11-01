@@ -14,7 +14,6 @@ namespace SELMs.Test.Controllers.Test
 		{
 			this.output = output;
 			ApiControllerSetup.SetupController(apiMemberController);
-			//AppDomain.CurrentDomain.SetupInformation.ConfigurationFile = "G:\\FPT\\Semester_9\\Capstone\\Project\\SELMs.Test\\App.config";
 		}
 
 
@@ -42,6 +41,7 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
+		[InlineData(-1)]
 		[InlineData(0)]
 		[InlineData(1)]
 		[InlineData(2)]
@@ -51,9 +51,9 @@ namespace SELMs.Test.Controllers.Test
 			{
 				var actionResult = await apiMemberController.GetMember(id);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				var content = await response.Content.ReadAsStringAsync();
+				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {((int)response.StatusCode)}\n{content}");
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 
 			}
 			catch (Exception ex)

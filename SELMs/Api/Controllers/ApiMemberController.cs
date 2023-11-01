@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -193,16 +192,5 @@ namespace SELMs.Api.HumanResource
 		}
 		#endregion
 
-
-
-
-		[HttpGet]
-		[Route("memberssssssss")]
-		public async Task<IHttpActionResult> get()
-		{
-
-
-			return Ok(await db.Users.ToListAsync());
-		}
 	}
 }
