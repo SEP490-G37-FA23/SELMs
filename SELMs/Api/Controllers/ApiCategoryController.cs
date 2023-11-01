@@ -29,7 +29,7 @@ namespace SELMs.Api.Controllers
 
         // GET: Api_Category
         #region Get category list
-        [HttpGet]
+        [HttpPost]
         [Route("categories")]
         public async Task<IHttpActionResult> GetCategoryList()
         {

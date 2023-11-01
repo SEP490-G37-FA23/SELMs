@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('AddNewMemberCtrl', function ($scope, $http, $sce) {
+app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();

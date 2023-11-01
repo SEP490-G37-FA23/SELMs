@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,15 @@ namespace SELMs.Repositories
 {
     public interface IEquipmentRepository
     {
-        dynamic GetEquipmentList();
-        dynamic SearchEquipments(Argument arg);
+        dynamic GetEquipmentList(Argument arg);
         dynamic GetEquipment(int id);
-        void SaveEquipment(Equipment equipment);
+        dynamic GetDetailEquipment(string code);
+        void SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
         void SaveEquipments(List<Equipment> equipments);
         void UpdateEquipment(Equipment equipment);
         void DeleteEquipment(int id);
         Equipment GetLastEquipment();
+
+        List<EquipComponentDTO> GetListComponentEquips(string code);
     }
 }
