@@ -31,6 +31,7 @@ namespace SELMs.Models
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
         public virtual DbSet<Equipment_Allocation_Application_Detail> Equipment_Allocation_Application_Detail { get; set; }
+        public virtual DbSet<Equipment_Component> Equipment_Component { get; set; }
         public virtual DbSet<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
         public virtual DbSet<Equipment_Handover_Form_Detail> Equipment_Handover_Form_Detail { get; set; }
         public virtual DbSet<Equipment_Import_Application> Equipment_Import_Application { get; set; }
@@ -41,15 +42,25 @@ namespace SELMs.Models
         public virtual DbSet<Inventory_Request_Application> Inventory_Request_Application { get; set; }
         public virtual DbSet<Inventory_Request_Application_Detail> Inventory_Request_Application_Detail { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<Member_Equipment_Usage> Member_Equipment_Usage { get; set; }
+        public virtual DbSet<Member_Location_Usage> Member_Location_Usage { get; set; }
         public virtual DbSet<Member_Project_History> Member_Project_History { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Project_Investment_Cost_Application> Project_Investment_Cost_Application { get; set; }
         public virtual DbSet<Project_Investment_Cost_Application_Detail> Project_Investment_Cost_Application_Detail { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual ObjectResult<Proc_GetListMember_Result> Proc_GetListMember(Nullable<bool> isadmin, string role, string username, string tukhoa)
+        public virtual ObjectResult<Proc_GetDetailEquipment_Result> Proc_GetDetailEquipment(string system_code)
+        {
+            var system_codeParameter = system_code != null ?
+                new ObjectParameter("system_code", system_code) :
+                new ObjectParameter("system_code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetDetailEquipment_Result>("Proc_GetDetailEquipment", system_codeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_GetEquipmentsList_Result> Proc_GetEquipmentsList(Nullable<bool> isadmin, string role, string username, string text, string text1, string text2, string categoryCode)
         {
             var isadminParameter = isadmin.HasValue ?
                 new ObjectParameter("isadmin", isadmin) :
@@ -63,119 +74,49 @@ namespace SELMs.Models
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     
-            var tukhoaParameter = tukhoa != null ?
-                new ObjectParameter("tukhoa", tukhoa) :
-                new ObjectParameter("tukhoa", typeof(string));
+            var textParameter = text != null ?
+                new ObjectParameter("text", text) :
+                new ObjectParameter("text", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetListMember_Result>("Proc_GetListMember", isadminParameter, roleParameter, usernameParameter, tukhoaParameter);
+            var text1Parameter = text1 != null ?
+                new ObjectParameter("text1", text1) :
+                new ObjectParameter("text1", typeof(string));
+    
+            var text2Parameter = text2 != null ?
+                new ObjectParameter("text2", text2) :
+                new ObjectParameter("text2", typeof(string));
+    
+            var categoryCodeParameter = categoryCode != null ?
+                new ObjectParameter("categoryCode", categoryCode) :
+                new ObjectParameter("categoryCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetEquipmentsList_Result>("Proc_GetEquipmentsList", isadminParameter, roleParameter, usernameParameter, textParameter, text1Parameter, text2Parameter, categoryCodeParameter);
         }
     
-        public virtual ObjectResult<Proc_GetListRole_Result> Proc_GetListRole()
+        public virtual ObjectResult<Proc_GetMembersList_Result> Proc_GetMembersList(Nullable<bool> isadmin, string role, string username, string text)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetListRole_Result>("Proc_GetListRole");
+            var isadminParameter = isadmin.HasValue ?
+                new ObjectParameter("isadmin", isadmin) :
+                new ObjectParameter("isadmin", typeof(bool));
+    
+            var roleParameter = role != null ?
+                new ObjectParameter("role", role) :
+                new ObjectParameter("role", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("text", text) :
+                new ObjectParameter("text", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetMembersList_Result>("Proc_GetMembersList", isadminParameter, roleParameter, usernameParameter, textParameter);
         }
     
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        public virtual ObjectResult<Proc_GetRolesList_Result> Proc_GetRolesList()
         {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetRolesList_Result>("Proc_GetRolesList");
         }
     }
 }

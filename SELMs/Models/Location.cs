@@ -17,8 +17,8 @@ namespace SELMs.Models
         public int location_id { get; set; }
         public string location_code { get; set; }
         public string location_desciption { get; set; }
-        public string classroom { get; set; }
-        public Nullable<int> position_level { get; set; }
+        public Nullable<int> location_id_parent { get; set; }
+        public Nullable<int> location_level { get; set; }
         public bool is_active { get; set; }
     }
 }

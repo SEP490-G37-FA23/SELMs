@@ -15,8 +15,8 @@ namespace SELMs.Models
     public partial class Equipment_Location_History
     {
         public int id { get; set; }
-        public string location_code { get; set; }
-        public string system_equiment_code { get; set; }
+        public int location_id { get; set; }
+        public string system_equipment_code { get; set; }
         public Nullable<System.DateTime> from_date { get; set; }
         public Nullable<System.DateTime> to_date { get; set; }
         public string note { get; set; }

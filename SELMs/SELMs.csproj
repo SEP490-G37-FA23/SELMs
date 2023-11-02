@@ -222,6 +222,9 @@
     <Compile Include="Models\Equipment_Allocation_Application_Detail.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment_Component.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Equipment_Handover_Form.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -252,13 +255,25 @@
     <Compile Include="Models\Location.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Member_Equipment_Usage.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Member_Location_Usage.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Member_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetListMember_Result.cs">
+    <Compile Include="Models\Proc_GetDetailEquipment_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetListRole_Result.cs">
+    <Compile Include="Models\Proc_GetEquipmentsList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetMembersList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetRolesList_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
@@ -287,15 +302,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>

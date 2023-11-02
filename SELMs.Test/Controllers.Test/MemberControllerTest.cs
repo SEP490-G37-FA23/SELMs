@@ -89,9 +89,11 @@ namespace SELMs.Test.Controllers.Test
 		{
 			try
 			{
-				var a = await apiMemberController.UpdateMember(1, null);
+				var actionResult = await apiMemberController.UpdateMember(0, null);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine("Test case passed");
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 			}
 			catch (Exception ex)
 			{
@@ -123,6 +125,20 @@ namespace SELMs.Test.Controllers.Test
 		}
 
 
+		#endregion
+
+
+
+
+
+
+
+		#region Iteration 2
+		#endregion
+
+
+
+		#region Iteration 3
 		#endregion
 	}
 

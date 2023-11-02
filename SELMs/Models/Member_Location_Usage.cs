@@ -12,12 +12,11 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Member_Location_Usage
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int id { get; set; }
+        public string user_code { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string reason { get; set; }
     }
 }

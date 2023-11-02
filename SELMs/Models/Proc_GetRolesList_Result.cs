@@ -11,12 +11,11 @@ namespace SELMs.Models
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class Proc_GetRolesList_Result
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int role_id { get; set; }
+        public string role_code { get; set; }
+        public string role_name { get; set; }
+        public Nullable<bool> is_active { get; set; }
     }
 }
