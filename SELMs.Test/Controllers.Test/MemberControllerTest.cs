@@ -1,4 +1,5 @@
-﻿using SELMs.Api.HumanResource;
+﻿using SELMs.Api.DTOs;
+using SELMs.Api.HumanResource;
 using SELMs.Models.BusinessModel;
 using Xunit.Abstractions;
 
@@ -21,7 +22,7 @@ namespace SELMs.Test.Controllers.Test
 		#region Iteration 1
 
 		[Theory]
-		[MemberData(nameof(ControllerTestData.GetTestData), MemberType = typeof(ControllerTestData))]
+		[MemberData(nameof(ControllerTestData.GetMemberListTestData), MemberType = typeof(ControllerTestData))]
 		public async Task TestGetMemberList_ReturnOk(Argument argument)
 		{
 			try
@@ -65,12 +66,13 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-		[Fact]
-		public async Task TestCreateNewMember_ReturnOk()
+		[Theory]
+		[MemberData(nameof(ControllerTestData.CreateNewMemberTestData), MemberType = typeof(ControllerTestData))]
+		public async Task TestCreateNewMember_ReturnOk(UserDTO userDTO)
 		{
 			try
 			{
-				var actionResult = await apiMemberController.CreateNewMember(null);
+				var actionResult = await apiMemberController.CreateNewMember(userDTO);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 
@@ -84,12 +86,13 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-		[Fact]
-		public async Task TestUpdateMember_ReturnOk()
+		[Theory]
+		[MemberData(nameof(ControllerTestData.UpdateMemberTestData), MemberType = typeof(ControllerTestData))]
+		public async Task TestUpdateMember_ReturnOk(int id, UserDTO userDTO)
 		{
 			try
 			{
-				var actionResult = await apiMemberController.UpdateMember(0, null);
+				var actionResult = await apiMemberController.UpdateMember(id, userDTO);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 
@@ -157,13 +160,31 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-
-	public class ControllerTestData
+	/*Data to test*/
+	public static class ControllerTestData
 	{
-		public static IEnumerable<object[]> GetTestData()
+		public static IEnumerable<object[]> GetMemberListTestData()
 		{
 			yield return new object[] { new Argument() { fullname = "tan" } };
-			yield return new object[] { new Argument() { fullname = "dat" } };
+			yield return new object[] { new Argument() { fullname = "da" } };
+			yield return new object[] { new Argument() { fullname = "Ly" } };
 		}
+
+
+		public static IEnumerable<object[]> UpdateMemberTestData()
+		{
+			yield return new object[] { -1, new UserDTO() { fullname = "" } };
+			yield return new object[] { 0, new UserDTO() { fullname = "Hà" } };
+			yield return new object[] { 1, new UserDTO() { fullname = "Nguyễn Tuấn Anh" } };
+			yield return new object[] { 2, new UserDTO() { fullname = "Lê Văn Luyện" } };
+		}
+
+		public static IEnumerable<object[]> CreateNewMemberTestData()
+		{
+			yield return new object[] { new UserDTO() { fullname = "" } };
+			yield return new object[] { new UserDTO() { fullname = "dada" } };
+			yield return new object[] { new UserDTO() { fullname = "Lê Tuấn Linh" } };
+		}
+
 	}
 }
