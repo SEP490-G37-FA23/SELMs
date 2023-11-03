@@ -1,3 +1,6 @@
+global using SELMs.Api.DTOs;
+global using SELMs.Models;
+global using SELMs.Services;
 global using Xunit;
 using System.Web.Http;
 using System.Web.Http.Controllers;

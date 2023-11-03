@@ -1,5 +1,4 @@
-﻿using SELMs.Api.DTOs;
-using SELMs.Api.HumanResource;
+﻿using SELMs.Api.HumanResource;
 using SELMs.Models.BusinessModel;
 using Xunit.Abstractions;
 
@@ -22,7 +21,7 @@ namespace SELMs.Test.Controllers.Test
 		#region Iteration 1
 
 		[Theory]
-		[MemberData(nameof(ControllerTestData.GetMemberListTestData), MemberType = typeof(ControllerTestData))]
+		[MemberData(nameof(MemberControllerTestData.GetMemberListTestData), MemberType = typeof(MemberControllerTestData))]
 		public async Task TestGetMemberList_ReturnOk(Argument argument)
 		{
 			try
@@ -67,7 +66,7 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[MemberData(nameof(ControllerTestData.CreateNewMemberTestData), MemberType = typeof(ControllerTestData))]
+		[MemberData(nameof(MemberControllerTestData.CreateNewMemberTestData), MemberType = typeof(MemberControllerTestData))]
 		public async Task TestCreateNewMember_ReturnOk(UserDTO userDTO)
 		{
 			try
@@ -87,7 +86,7 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[MemberData(nameof(ControllerTestData.UpdateMemberTestData), MemberType = typeof(ControllerTestData))]
+		[MemberData(nameof(MemberControllerTestData.UpdateMemberTestData), MemberType = typeof(MemberControllerTestData))]
 		public async Task TestUpdateMember_ReturnOk(int id, UserDTO userDTO)
 		{
 			try
@@ -103,6 +102,35 @@ namespace SELMs.Test.Controllers.Test
 				Assert.Fail("Test case failed\n" + ex.Message);
 			}
 		}
+
+
+
+
+
+
+		[Theory]
+		[MemberData(nameof(MemberControllerTestData.ChangePasswordTestData), MemberType = typeof(MemberControllerTestData))]
+		public async Task TestChangePassword_ReturnOk(int id, Argument arg)
+		{
+			try
+			{
+				var actionResult = await apiMemberController.ChangePassword(id, arg);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				string content = await response.Content.ReadAsStringAsync();
+
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
+
+
+
+
 
 
 
@@ -161,11 +189,11 @@ namespace SELMs.Test.Controllers.Test
 
 
 	/*Data to test*/
-	public static class ControllerTestData
+	public static class MemberControllerTestData
 	{
 		public static IEnumerable<object[]> GetMemberListTestData()
 		{
-			yield return new object[] { new Argument() { fullname = "tan" } };
+			yield return new object[] { new Argument() { username = "DatTT", isadmin = false, role = "SM" } };
 			yield return new object[] { new Argument() { fullname = "da" } };
 			yield return new object[] { new Argument() { fullname = "Ly" } };
 		}
@@ -184,6 +212,19 @@ namespace SELMs.Test.Controllers.Test
 			yield return new object[] { new UserDTO() { fullname = "" } };
 			yield return new object[] { new UserDTO() { fullname = "dada" } };
 			yield return new object[] { new UserDTO() { fullname = "Lê Tuấn Linh" } };
+		}
+
+
+
+
+		public static IEnumerable<object[]> ChangePasswordTestData()
+		{
+
+			// text is real pass, text 1 is new pass, text 2 is confirm pass
+			yield return new object[] { 1, new Argument() { text = "1", text1 = "111222", text2 = "111222" } };
+			yield return new object[] { 2, new Argument() { text = "0", text1 = "456", text2 = "456" } };
+			yield return new object[] { 3, new Argument() { text = "123", text1 = "789", text2 = "6789" } };
+			yield return new object[] { 4, null };
 		}
 
 	}
