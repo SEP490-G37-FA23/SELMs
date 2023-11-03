@@ -21,5 +21,7 @@ namespace SELMs.Models
         public string performer { get; set; }
         public int total_equipment { get; set; }
         public bool status { get; set; }
+        public string type_inventory { get; set; }
+        public Nullable<int> location_id { get; set; }
     }
 }
