@@ -17,6 +17,7 @@ using System.Web.Http;
 
 namespace SELMs.Api.Controllers
 {
+    [RoutePrefix("api/v1")]
     public class ApiImageController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiImageController));

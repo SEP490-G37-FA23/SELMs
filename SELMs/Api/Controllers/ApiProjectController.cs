@@ -19,24 +19,24 @@ using System.Web.Http;
 namespace SELMs.Api.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class ApiEquipmentController : ApiController
+    public class ApiProjectController : ApiController
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiEquipmentController));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiProjectController));
 
-        private IEquipmentRepository repository = new EquipmentRepository();
-        private IEquipmentService service = new EquipmentService();
+        private IProjectRepository repository = new ProjectRepository();
+        private IProjectService service = new ProjectService();
         private IMapper mapper = MapperConfig.Initialize();
 
-        // GET: Api_Equipment
-        #region Get equipment list
+        // GET: Api_Project
+        #region Get project list
         [HttpGet]
-        [Route("equipments")]
-        public async Task<IHttpActionResult> GetEquipmentList()
+        [Route("projects")]
+        public async Task<IHttpActionResult> GetProjectList()
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.GetEquipmentList();
+                returnedData = await repository.GetProjectList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -49,15 +49,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Search Equipment
+        #region Search Project
         [HttpPost]
-        [Route("equipments/search")]
-        public async Task<IHttpActionResult> SearchEquipments(Argument args)
+        [Route("projects/search")]
+        public async Task<IHttpActionResult> SearchProjects(Argument args)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = await repository.GetEquipmentList(args);
+                returnedData = await repository.GetProjectList(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -70,15 +70,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Get equipment by id
+        #region Get project by id
         [HttpGet]
-        [Route("equipments/{id}")]
-        public async Task<IHttpActionResult> GetEquipment(int id)
+        [Route("projects/{id}")]
+        public async Task<IHttpActionResult> GetProject(int id)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetEquipment(id);
+                returnedData = repository.GetProject(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -91,15 +91,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Add new equipment
+        #region Add new project
         [HttpPost]
-        [Route("api/equipments/new-equipment")]
-        public async Task<IHttpActionResult> SaveEquipment(EquipmentDTO dto)
+        [Route("api/projects/new-project")]
+        public async Task<IHttpActionResult> SaveProject(ProjectDTO dto)
         {
             try
             {
-                Equipment equipment = mapper.Map<Equipment>(dto);
-                service.SaveEquipment(equipment);
+                Project project = mapper.Map<Project>(dto);
+                service.SaveProject(project);
                 return Ok();
             }
             catch (Exception ex)
@@ -112,36 +112,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Import equipments
-        [HttpPost]
-        [Route("api/equipments/import-equipments")]
-        public async Task<IHttpActionResult> ImportEquipments(List<EquipmentDTO> dtos)
-        {
-            try
-            {
-                List<Equipment> equipments = mapper.Map<List<Equipment>>(dtos);
-                service.ImportEquipments(equipments);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Update equipment
+        #region Update project
         [HttpPut]
-        [Route("equipments/{id}")]
-        public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
+        [Route("projects/{id}")]
+        public async Task<IHttpActionResult> UpdateProject(int id, [FromBody] ProjectDTO project)
         {
             try
             {
-                Equipment mem = mapper.Map<Equipment>(equipment);
-                service.UpdateEquipment(id, mem);
+                Project mem = mapper.Map<Project>(project);
+                service.UpdateProject(id, mem);
                 return Ok();
             }
             catch (Exception ex)
@@ -154,14 +133,14 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Delete Equipment
+        #region Delete Project
         [HttpDelete]
-        [Route("equipments/delete/{id}")]
-        public async Task<IHttpActionResult> DeleteEquipments(int id)
+        [Route("projects/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteProjects(int id)
         {
             try
             {
-                repository.DeleteEquipment(id);
+                repository.DeleteProject(id);
                 return Ok();
             }
             catch (Exception ex)

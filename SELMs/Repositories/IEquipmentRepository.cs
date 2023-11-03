@@ -11,7 +11,7 @@ namespace SELMs.Repositories
     public interface IEquipmentRepository
     {
         dynamic GetEquipmentList();
-        dynamic SearchEquipments(Argument arg);
+        dynamic GetEquipmentList(Argument arg);
         dynamic GetEquipment(int id);
         void SaveEquipment(Equipment equipment);
         void SaveEquipments(List<Equipment> equipments);

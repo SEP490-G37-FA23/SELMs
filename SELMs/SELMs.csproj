@@ -155,10 +155,12 @@
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
+    <Compile Include="Api\Controllers\ApiProjectController.cs" />
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
+    <Compile Include="Api\DTOs\ProjectDTO.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="Api\DTOs\UserRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -324,6 +326,8 @@
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
+    <Compile Include="Repositories\Implements\ProjectRepository.cs" />
+    <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
@@ -332,6 +336,8 @@
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
     <Compile Include="Services\Implements\MemberService.cs" />
+    <Compile Include="Services\Implements\ProjectService.cs" />
+    <Compile Include="Services\IProjectService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

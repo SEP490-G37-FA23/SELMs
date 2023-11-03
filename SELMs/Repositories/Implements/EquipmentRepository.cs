@@ -44,7 +44,7 @@ namespace SELMs.Repositories.Implements
             db.SaveChangesAsync();
         }
 
-        public dynamic SearchEquipments(Argument arg)
+        public dynamic GetEquipmentList(Argument arg)
         {
             dynamic equipments = null;
             equipments = db.Database.Connection.QueryAsync<dynamic>("Proc_GetEquipmentList", new
