@@ -10,12 +10,14 @@
 namespace SELMs.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class Proc_GetListRole_Result
+    public partial class Member_Location_History
     {
-        public int role_id { get; set; }
-        public string role_code { get; set; }
-        public string role_name { get; set; }
-        public Nullable<bool> is_active { get; set; }
+        public int id { get; set; }
+        public string user_code { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string reason { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     }
 }
