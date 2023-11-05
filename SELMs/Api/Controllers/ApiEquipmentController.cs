@@ -57,7 +57,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetEquipment(id);
+                returnedData = await repository.GetEquipment(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)

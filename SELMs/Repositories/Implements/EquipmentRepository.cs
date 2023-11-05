@@ -107,5 +107,11 @@ namespace SELMs.Repositories.Implements
                 , commandType: CommandType.StoredProcedure).ToList();
             return equipments;
         }
+
+        public dynamic GetEquipmentList()
+        {
+            dynamic result = db.Equipments.ToListAsync();
+            return result;
+        }
     }
 }

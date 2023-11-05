@@ -154,11 +154,16 @@
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
+    <Compile Include="Api\Controllers\ApiLocationController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
+    <Compile Include="Api\Controllers\ApiProjectController.cs" />
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
+    <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
+    <Compile Include="Api\DTOs\LocationDTO.cs" />
+    <Compile Include="Api\DTOs\ProjectDTO.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="Api\DTOs\UserRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -222,6 +227,9 @@
     <Compile Include="Models\Equipment_Allocation_Application_Detail.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment_Component.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Equipment_Handover_Form.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -240,6 +248,9 @@
     <Compile Include="Models\Equipment_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment_Usage_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Image.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -252,13 +263,22 @@
     <Compile Include="Models\Location.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Member_Location_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Member_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetListMember_Result.cs">
+    <Compile Include="Models\Proc_GetDetailEquipment_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetListRole_Result.cs">
+    <Compile Include="Models\Proc_GetEquipmentsList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetMembersList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetRolesList_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
@@ -304,19 +324,27 @@
     <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
+    <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
+    <Compile Include="Repositories\Implements\LocationRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
+    <Compile Include="Repositories\Implements\ProjectRepository.cs" />
+    <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
+    <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
+    <Compile Include="Services\Implements\LocationService.cs" />
     <Compile Include="Services\Implements\MemberService.cs" />
+    <Compile Include="Services\Implements\ProjectService.cs" />
+    <Compile Include="Services\IProjectService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

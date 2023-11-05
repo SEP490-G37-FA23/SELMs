@@ -14,6 +14,8 @@
           <Property Name="category_name" Type="nvarchar" MaxLength="256" />
           <Property Name="desciption" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
+          <Property Name="category_level" Type="int" Nullable="false" />
+          <Property Name="category_parent_id" Type="int" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -23,17 +25,17 @@
           <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
           <Property Name="standard_equipment_code" Type="nvarchar" MaxLength="128" />
           <Property Name="equipment_name" Type="nvarchar" MaxLength="256" />
-          <Property Name="equipment_img" Type="int" />
           <Property Name="serial_no" Type="varchar" MaxLength="64" />
           <Property Name="create_date" Type="date" />
           <Property Name="unit" Type="nvarchar" MaxLength="25" />
           <Property Name="specification" Type="nvarchar" MaxLength="100" />
-          <Property Name="img" Type="int" />
           <Property Name="responsibler" Type="varchar" MaxLength="64" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="type_equipment" Type="varchar" MaxLength="64" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
           <Property Name="category_code" Type="varchar" MaxLength="64" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="is_integration" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -44,7 +46,7 @@
           <Property Name="application_date" Type="datetime" Nullable="false" />
           <Property Name="application_processer" Type="varchar" MaxLength="64" />
           <Property Name="creater" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="project_id" Type="int" />
+          <Property Name="for_id" Type="int" />
           <Property Name="total_equipments" Type="int" Nullable="false" />
           <Property Name="notes" Type="nvarchar" MaxLength="500" />
           <Property Name="desciption" Type="nvarchar" MaxLength="512" />
@@ -52,6 +54,7 @@
           <Property Name="approved_date" Type="datetime" />
           <Property Name="approver" Type="varchar" MaxLength="64" />
           <Property Name="status" Type="varchar" MaxLength="64" />
+          <Property Name="allocation_for" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application_Detail">
           <Key>
@@ -68,6 +71,14 @@
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
           <Property Name="is_new_equip" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment_Component">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="system_equipment_code_parent" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="system_equipment_code_component" Type="varchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form">
           <Key>
@@ -143,8 +154,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="location_code" Type="varchar" MaxLength="128" />
-          <Property Name="system_equiment_code" Type="varchar" MaxLength="64" />
+          <Property Name="location_id" Type="int" Nullable="false" />
+          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
           <Property Name="from_date" Type="datetime" />
           <Property Name="to_date" Type="datetime" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
@@ -160,13 +171,25 @@
           <Property Name="to_date" Type="datetime" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="Equipment_Usage_History">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
+          <Property Name="checkin" Type="datetime" />
+          <Property Name="checkout" Type="datetime" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="note_checkout" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="image_id" />
           </Key>
           <Property Name="image_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="image_name" Type="nvarchar" MaxLength="500" />
-          <Property Name="content" Type="varbinary(max)" />
+          <Property Name="content" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
@@ -179,6 +202,8 @@
           <Property Name="performer" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="total_equipment" Type="int" Nullable="false" />
           <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="type_inventory" Type="varchar" MaxLength="64" />
+          <Property Name="location_id" Type="int" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application_Detail">
           <Key>
@@ -199,9 +224,19 @@
           <Property Name="location_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="location_code" Type="varchar" MaxLength="128" />
           <Property Name="location_desciption" Type="nvarchar" MaxLength="256" />
-          <Property Name="classroom" Type="nvarchar" MaxLength="256" />
-          <Property Name="position_level" Type="int" />
+          <Property Name="parent_location_id" Type="int" />
+          <Property Name="location_level" Type="int" />
           <Property Name="is_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Location_History">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_code" Type="varchar" MaxLength="64" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="date" Type="datetime" />
         </EntityType>
         <EntityType Name="Member_Project_History">
           <Key>
@@ -212,6 +247,7 @@
           <Property Name="user_code" Type="varchar" MaxLength="64" />
           <Property Name="status" Type="nvarchar" MaxLength="128" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
+          <Property Name="date" Type="datetime" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -228,6 +264,7 @@
           <Property Name="create_date" Type="date" />
           <Property Name="creater" Type="varchar" MaxLength="64" />
           <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="location_id" Type="int" />
         </EntityType>
         <EntityType Name="Project_Investment_Cost_Application">
           <Key>
@@ -303,13 +340,25 @@
           <Property Name="is_active" Type="bit" />
         </EntityType>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="Proc_GetListMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="Proc_GetDetailEquipment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="system_code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetEquipmentsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="isadmin" Type="bit" Mode="In" />
           <Parameter Name="role" Type="varchar" Mode="In" />
           <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="tukhoa" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+          <Parameter Name="text1" Type="nvarchar" Mode="In" />
+          <Parameter Name="text2" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoryCode" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="Proc_GetListRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Proc_GetMembersList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isadmin" Type="bit" Mode="In" />
+          <Parameter Name="role" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetRolesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -345,16 +394,19 @@
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="Self.Equipment_Allocation_Application_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Import_Application" EntityType="Self.Equipment_Import_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Import_Application_Detail" EntityType="Self.Equipment_Import_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory_Request_Application" EntityType="Self.Inventory_Request_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
@@ -377,6 +429,8 @@
           <Property Name="category_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="desciption" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
+          <Property Name="category_level" Type="Int32" Nullable="false" />
+          <Property Name="category_parent_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -386,17 +440,17 @@
           <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="standard_equipment_code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="equipment_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="equipment_img" Type="Int32" />
           <Property Name="serial_no" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Precision="0" />
           <Property Name="unit" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="img" Type="Int32" />
           <Property Name="responsibler" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="type_equipment" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="is_integration" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -407,7 +461,7 @@
           <Property Name="application_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="application_processer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="project_id" Type="Int32" />
+          <Property Name="for_id" Type="Int32" />
           <Property Name="total_equipments" Type="Int32" Nullable="false" />
           <Property Name="notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="desciption" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -415,6 +469,7 @@
           <Property Name="approved_date" Type="DateTime" Precision="3" />
           <Property Name="approver" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="allocation_for" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application_Detail">
           <Key>
@@ -431,6 +486,14 @@
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="is_new_equip" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment_Component">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="system_equipment_code_parent" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="system_equipment_code_component" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form">
           <Key>
@@ -506,8 +569,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="location_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="system_equiment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="location_id" Type="Int32" Nullable="false" />
+          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="from_date" Type="DateTime" Precision="3" />
           <Property Name="to_date" Type="DateTime" Precision="3" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -523,13 +586,25 @@
           <Property Name="to_date" Type="DateTime" Precision="3" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Equipment_Usage_History">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="checkin" Type="DateTime" Precision="3" />
+          <Property Name="checkout" Type="DateTime" Precision="3" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="note_checkout" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="image_id" />
           </Key>
           <Property Name="image_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="image_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
@@ -542,6 +617,8 @@
           <Property Name="performer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="total_equipment" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="type_inventory" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="location_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application_Detail">
           <Key>
@@ -562,9 +639,19 @@
           <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="location_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="location_desciption" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="classroom" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="position_level" Type="Int32" />
+          <Property Name="parent_location_id" Type="Int32" />
+          <Property Name="location_level" Type="Int32" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Location_History">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Member_Project_History">
           <Key>
@@ -575,6 +662,7 @@
           <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -591,6 +679,7 @@
           <Property Name="create_date" Type="DateTime" Precision="0" />
           <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="location_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Project_Investment_Cost_Application">
           <Key>
@@ -670,16 +759,19 @@
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" />
           <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="Self.Equipment_Allocation_Application_Detail" />
+          <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" />
           <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" />
           <EntitySet Name="Equipment_Import_Application" EntityType="Self.Equipment_Import_Application" />
           <EntitySet Name="Equipment_Import_Application_Detail" EntityType="Self.Equipment_Import_Application_Detail" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" />
+          <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" />
           <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Inventory_Request_Application" EntityType="Self.Inventory_Request_Application" />
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" />
@@ -687,13 +779,25 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <FunctionImport Name="Proc_GetListMember" ReturnType="Collection(SELMsModel.Proc_GetListMember_Result)">
+          <FunctionImport Name="Proc_GetDetailEquipment" ReturnType="Collection(SELMsModel.Proc_GetDetailEquipment_Result)">
+            <Parameter Name="system_code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetEquipmentsList" ReturnType="Collection(SELMsModel.Proc_GetEquipmentsList_Result)">
             <Parameter Name="isadmin" Mode="In" Type="Boolean" />
             <Parameter Name="role" Mode="In" Type="String" />
             <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="tukhoa" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="text1" Mode="In" Type="String" />
+            <Parameter Name="text2" Mode="In" Type="String" />
+            <Parameter Name="categoryCode" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Proc_GetListRole" ReturnType="Collection(SELMsModel.Proc_GetListRole_Result)" />
+          <FunctionImport Name="Proc_GetMembersList" ReturnType="Collection(SELMsModel.Proc_GetMembersList_Result)">
+            <Parameter Name="isadmin" Mode="In" Type="Boolean" />
+            <Parameter Name="role" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetRolesList" ReturnType="Collection(SELMsModel.Proc_GetRolesList_Result)" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -725,7 +829,45 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <ComplexType Name="Proc_GetListMember_Result">
+        <ComplexType Name="Proc_GetDetailEquipment_Result">
+          <Property Type="Int32" Name="equipment_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="serial_no" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="unit" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="specification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="responsibler" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="type_equipment" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="category_name" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="location_id" Nullable="true" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetEquipmentsList_Result">
+          <Property Type="Int32" Name="equipment_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="serial_no" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="unit" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="specification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="responsibler" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="type_equipment" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="category_name" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="location_id" Nullable="true" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetMembersList_Result">
           <Property Type="Int32" Name="user_id" Nullable="false" />
           <Property Type="String" Name="user_code" Nullable="false" MaxLength="64" />
           <Property Type="String" Name="username" Nullable="false" MaxLength="64" />
@@ -745,8 +887,9 @@
           <Property Type="String" Name="skill" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="job_description" Nullable="true" />
           <Property Type="Boolean" Name="is_active" Nullable="true" />
+          <Property Type="String" Name="role_name" Nullable="true" MaxLength="256" />
         </ComplexType>
-        <ComplexType Name="Proc_GetListRole_Result">
+        <ComplexType Name="Proc_GetRolesList_Result">
           <Property Type="Int32" Name="role_id" Nullable="false" />
           <Property Type="String" Name="role_code" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="role_name" Nullable="true" MaxLength="256" />
@@ -777,6 +920,8 @@
                 <ScalarProperty Name="category_name" ColumnName="category_name" />
                 <ScalarProperty Name="desciption" ColumnName="desciption" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="category_level" ColumnName="category_level" />
+                <ScalarProperty Name="category_parent_id" ColumnName="category_parent_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -787,17 +932,17 @@
                 <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
                 <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
                 <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
-                <ScalarProperty Name="equipment_img" ColumnName="equipment_img" />
                 <ScalarProperty Name="serial_no" ColumnName="serial_no" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
                 <ScalarProperty Name="specification" ColumnName="specification" />
-                <ScalarProperty Name="img" ColumnName="img" />
                 <ScalarProperty Name="responsibler" ColumnName="responsibler" />
                 <ScalarProperty Name="usage_status" ColumnName="usage_status" />
                 <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
                 <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -809,7 +954,7 @@
                 <ScalarProperty Name="application_date" ColumnName="application_date" />
                 <ScalarProperty Name="application_processer" ColumnName="application_processer" />
                 <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="for_id" ColumnName="for_id" />
                 <ScalarProperty Name="total_equipments" ColumnName="total_equipments" />
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="desciption" ColumnName="desciption" />
@@ -817,6 +962,7 @@
                 <ScalarProperty Name="approved_date" ColumnName="approved_date" />
                 <ScalarProperty Name="approver" ColumnName="approver" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="allocation_for" ColumnName="allocation_for" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -834,6 +980,15 @@
                 <ScalarProperty Name="usage_status" ColumnName="usage_status" />
                 <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="is_new_equip" ColumnName="is_new_equip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment_Component">
+            <EntityTypeMapping TypeName="SELMsModel.Equipment_Component">
+              <MappingFragment StoreEntitySet="Equipment_Component">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="system_equipment_code_parent" ColumnName="system_equipment_code_parent" />
+                <ScalarProperty Name="system_equipment_code_component" ColumnName="system_equipment_code_component" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -914,8 +1069,8 @@
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Location_History">
               <MappingFragment StoreEntitySet="Equipment_Location_History">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="location_code" ColumnName="location_code" />
-                <ScalarProperty Name="system_equiment_code" ColumnName="system_equiment_code" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
                 <ScalarProperty Name="from_date" ColumnName="from_date" />
                 <ScalarProperty Name="to_date" ColumnName="to_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
@@ -931,6 +1086,19 @@
                 <ScalarProperty Name="from_date" ColumnName="from_date" />
                 <ScalarProperty Name="to_date" ColumnName="to_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment_Usage_History">
+            <EntityTypeMapping TypeName="SELMsModel.Equipment_Usage_History">
+              <MappingFragment StoreEntitySet="Equipment_Usage_History">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="checkin" ColumnName="checkin" />
+                <ScalarProperty Name="checkout" ColumnName="checkout" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="note_checkout" ColumnName="note_checkout" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -953,6 +1121,8 @@
                 <ScalarProperty Name="performer" ColumnName="performer" />
                 <ScalarProperty Name="total_equipment" ColumnName="total_equipment" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="type_inventory" ColumnName="type_inventory" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -975,9 +1145,20 @@
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
                 <ScalarProperty Name="location_code" ColumnName="location_code" />
                 <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
-                <ScalarProperty Name="classroom" ColumnName="classroom" />
-                <ScalarProperty Name="position_level" ColumnName="position_level" />
+                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
+                <ScalarProperty Name="location_level" ColumnName="location_level" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Location_History">
+            <EntityTypeMapping TypeName="SELMsModel.Member_Location_History">
+              <MappingFragment StoreEntitySet="Member_Location_History">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="date" ColumnName="date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -989,6 +1170,7 @@
                 <ScalarProperty Name="user_code" ColumnName="user_code" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="date" ColumnName="date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1006,6 +1188,7 @@
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="creater" ColumnName="creater" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1087,9 +1270,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Proc_GetListMember" FunctionName="SELMsModel.Store.Proc_GetListMember">
+          <FunctionImportMapping FunctionImportName="Proc_GetDetailEquipment" FunctionName="SELMsModel.Store.Proc_GetDetailEquipment">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetListMember_Result">
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetDetailEquipment_Result">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetEquipmentsList" FunctionName="SELMsModel.Store.Proc_GetEquipmentsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetEquipmentsList_Result">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetMembersList" FunctionName="SELMsModel.Store.Proc_GetMembersList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetMembersList_Result">
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_code" ColumnName="user_code" />
                 <ScalarProperty Name="username" ColumnName="username" />
@@ -1109,12 +1338,13 @@
                 <ScalarProperty Name="skill" ColumnName="skill" />
                 <ScalarProperty Name="job_description" ColumnName="job_description" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Proc_GetListRole" FunctionName="SELMsModel.Store.Proc_GetListRole">
+          <FunctionImportMapping FunctionImportName="Proc_GetRolesList" FunctionName="SELMsModel.Store.Proc_GetRolesList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetListRole_Result">
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetRolesList_Result">
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
                 <ScalarProperty Name="role_code" ColumnName="role_code" />
                 <ScalarProperty Name="role_name" ColumnName="role_name" />

@@ -11,7 +11,7 @@ namespace SELMs.Models
 {
     using System;
     
-    public partial class Proc_GetListMember_Result
+    public partial class Proc_GetMembersList_Result
     {
         public int user_id { get; set; }
         public string user_code { get; set; }
@@ -32,5 +32,6 @@ namespace SELMs.Models
         public string skill { get; set; }
         public string job_description { get; set; }
         public Nullable<bool> is_active { get; set; }
+        public string role_name { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SELMs.App_Start
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-                //Configuring Employee and EmployeeDTO
+                //Configuring User and UserDTO
                 cfg.CreateMap<UserDTO, User>()
                 .ForMember(des => des.date_of_birth, act => act.MapFrom(src => DateTime.Parse(src.date_of_birth)))
                 .ForMember(des => des.hire_date, act => act.MapFrom(src => DateTime.Parse(src.hire_date)))
@@ -37,9 +37,26 @@ namespace SELMs.App_Start
                 cfg.CreateMap<Equipment, EquipmentDTO>()
                 .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()));
 
-                //Configuring Equipment and EquipmentDTO
+                //Configuring Image and ImageDTO
                 cfg.CreateMap<ImageDTO, Image>().ReverseMap();
                 cfg.CreateMap<List<ImageDTO>, List<Image>>().ReverseMap();
+
+                //Configuring Project and ProjectDTO
+                cfg.CreateMap<ProjectDTO, Project>()
+                .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)))
+                .ForMember(des => des.start_date, act => act.MapFrom(src => DateTime.Parse(src.start_date)))
+                .ForMember(des => des.end_date, act => act.MapFrom(src => DateTime.Parse(src.end_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Project, ProjectDTO>()
+                .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()))
+                .ForMember(des => des.start_date, act => act.MapFrom(src => src.start_date.ToString()))
+                .ForMember(des => des.end_date, act => act.MapFrom(src => src.end_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring Location and LocationDTO
+                cfg.CreateMap<LocationDTO, Location>().ReverseMap();
+                cfg.CreateMap<List<LocationDTO>, List<Location>>().ReverseMap();
 
                 //Any Other Mapping Configuration ....
             });

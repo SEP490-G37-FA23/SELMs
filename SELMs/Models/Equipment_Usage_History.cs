@@ -12,13 +12,14 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment_Location_History
+    public partial class Equipment_Usage_History
     {
         public int id { get; set; }
-        public int location_id { get; set; }
+        public string user_code { get; set; }
         public string system_equipment_code { get; set; }
-        public Nullable<System.DateTime> from_date { get; set; }
-        public Nullable<System.DateTime> to_date { get; set; }
-        public string note { get; set; }
+        public Nullable<System.DateTime> checkin { get; set; }
+        public Nullable<System.DateTime> checkout { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string note_checkout { get; set; }
     }
 }

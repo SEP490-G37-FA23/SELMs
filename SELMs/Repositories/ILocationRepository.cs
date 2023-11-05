@@ -11,6 +11,10 @@ namespace SELMs.Repositories
     public interface ILocationRepository
     {
         dynamic GetLocationList();
-       
+        dynamic GetLocationList(Argument arg);
+        dynamic GetLocation(int id);
+        dynamic SaveLocation(Location location);
+        void UpdateLocation(Location location);
+        void DeleteLocation(int id);
     }
 }

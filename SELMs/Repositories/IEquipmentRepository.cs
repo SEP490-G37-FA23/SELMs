@@ -11,6 +11,7 @@ namespace SELMs.Repositories
 {
     public interface IEquipmentRepository
     {
+        dynamic GetEquipmentList();
         dynamic GetEquipmentList(Argument arg);
         dynamic GetEquipment(int id);
         dynamic GetDetailEquipment(string code);
