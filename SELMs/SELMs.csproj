@@ -264,6 +264,10 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Location_History.cs">
+    <Compile Include="Models\Member_Equipment_Usage.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Member_Location_Usage.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Project_History.cs">
@@ -307,12 +311,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -627,7 +625,12 @@
     <Content Include="Content\css\assets\vendor\tinymce\tinymce.min.js" />
     <Content Include="Content\css\forms\Readme.txt" />
     <Content Include="Content\Images\default.svg" />
-    <Content Include="Content\js\HumanResouce\MemberCtrl.js" />
+    <Content Include="Content\js\HumanResouce\CreateNewMemberCtrl.js" />
+    <Content Include="Content\js\HumanResouce\MemberListCtrl.js" />
+    <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
     <Content Include="Content\Script\node_modules\angular-web-notification\angular-web-notification.js" />
@@ -854,6 +857,7 @@
     <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectMember.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectEquipments.cshtml" />
+    <Content Include="Views\Equipments\EquipmentDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

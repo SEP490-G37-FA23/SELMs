@@ -12,8 +12,6 @@ namespace SELMs.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class SELMsContext : DbContext
     {
@@ -44,6 +42,8 @@ namespace SELMs.Models
         public virtual DbSet<Inventory_Request_Application_Detail> Inventory_Request_Application_Detail { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Member_Location_History> Member_Location_History { get; set; }
+        public virtual DbSet<Member_Equipment_Usage> Member_Equipment_Usage { get; set; }
+        public virtual DbSet<Member_Location_Usage> Member_Location_Usage { get; set; }
         public virtual DbSet<Member_Project_History> Member_Project_History { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Project_Investment_Cost_Application> Project_Investment_Cost_Application { get; set; }
