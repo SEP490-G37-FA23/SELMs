@@ -28,8 +28,8 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetProjectList()
         {
-            dynamic categories = db.Projects.ToListAsync();
-            return categories;
+            dynamic projects = db.Projects.ToListAsync();
+            return projects;
         }
 
         public dynamic SaveProject(Project project)
@@ -41,13 +41,13 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetProjectList(Argument arg)
         {
-            dynamic categories = null;
-            categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetProjectList", new
+            dynamic projects = null;
+            projects = db.Database.Connection.QueryAsync<dynamic>("Proc_GetProjectList", new
             {
                 username = arg.username,
             }
                 , commandType: CommandType.StoredProcedure);
-            return categories;
+            return projects;
         }
 
         public void UpdateProject(Project project)

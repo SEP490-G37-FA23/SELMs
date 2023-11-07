@@ -58,6 +58,21 @@ namespace SELMs.App_Start
                 cfg.CreateMap<LocationDTO, Location>().ReverseMap();
                 cfg.CreateMap<List<LocationDTO>, List<Location>>().ReverseMap();
 
+                //Configuring EquipmentAllocationApplication and EquipmentAllocationApplicationDTO
+                cfg.CreateMap<EquipmentAllocationApplicationDTO, Equipment_Allocation_Application>()
+                .ForMember(des => des.application_date, act => act.MapFrom(src => DateTime.Parse(src.application_date)))
+                .ForMember(des => des.approved_date, act => act.MapFrom(src => DateTime.Parse(src.approved_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Equipment_Allocation_Application, EquipmentAllocationApplicationDTO>()
+                .ForMember(des => des.application_date, act => act.MapFrom(src => src.application_date.ToString()))
+                .ForMember(des => des.approved_date, act => act.MapFrom(src => src.approved_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring EquipmentAllocationApplicationDetail and EquipmentAllocationApplicationDetailDTO
+                cfg.CreateMap<EquipmentAllocationApplicationDetailDTO, Equipment_Allocation_Application_Detail>().ReverseMap();
+
+
                 //Any Other Mapping Configuration ....
             });
 

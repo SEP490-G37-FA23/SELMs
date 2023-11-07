@@ -160,6 +160,8 @@
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentAllocationApplicationDetailDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
@@ -216,6 +218,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessModel\Argument.cs" />
+    <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -324,11 +327,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
+    <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />
