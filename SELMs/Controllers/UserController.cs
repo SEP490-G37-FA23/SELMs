@@ -25,5 +25,10 @@ namespace SELMs.Controllers.HumanResource
         {
             return PartialView();
         }
+
+        public ActionResult MemberListPV()
+        {
+            return PartialView();
+        }
     }
 }
