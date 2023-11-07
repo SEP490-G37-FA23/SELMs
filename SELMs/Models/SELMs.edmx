@@ -166,7 +166,7 @@
           </Key>
           <Property Name="image_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="image_name" Type="nvarchar" MaxLength="500" />
-          <Property Name="content" Type="varbinary(max)" />
+          <Property Name="content" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
@@ -529,7 +529,7 @@
           </Key>
           <Property Name="image_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="image_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>

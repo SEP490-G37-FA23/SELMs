@@ -21,9 +21,14 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-        public ActionResult AllocationEquipmentsRequestsListPV()
+
+        public ActionResult AllocationEquipmentList()
         {
-            return PartialView();
+            return View();
+        }
+        public ActionResult CreateNewAllocationEquipment()
+        {
+            return View();
         }
     }
 }

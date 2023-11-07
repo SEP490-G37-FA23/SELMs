@@ -3,6 +3,149 @@
     ViewBag.Title = "CreateNewInventoryEquipmentsRequest";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<div>
+    <h4 class="text-center">Đơn yêu cầu kiểm kê</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/InventoryEquipments/">Kiểm kê thiết bị</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/InventoryEquipments/CreateNewInventoryEquipmentsRequest.cshtml">Tạo đơn yêu cầu kiểm kê</a></li>
 
-<h2>CreateNewInventoryEquipmentsRequest</h2>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-6">
+            <label class=" col-form-label">Phòng Lab</label>
+            <div>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="1">AL-102R</option>
+                    <option value="2">DEL-101</option>
+                    <option value="3">DEL-313</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <label class=" col-form-label">Người Yêu Cầu</label>
+            <div>
+                <select class="form-select" aria-label="Default select example">
+                    <option value="1">Nguyễn Văn A</option>
+                    <option value="2">Nguyễn Văn B</option>
+                    <option value="3">Nguyễn Văn C</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="#general_infor" class="nav-link active" role="tab" data-toggle="tab">Danh mục thiết bị</a>
+            </li>
+            <li class="nav-item">
+                <a href="#detail" class="nav-link" role="tab" data-toggle="tab">Thiết bị</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="general_infor">
+                <h4 class="card-title text-center">Danh mục thiết bị</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ô tích</th>
+                                    <th>Mã quản lý</th>
+                                    <th>Tên danh mục</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="detail">
+
+                <h4 class="card-title text-center mb-3">Thiết bị</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã quản lý</th>
+                                    <th>Tên thiết bị</th>
+                                    <th>Tồn kho</th>
+                                    <th>Ô tích</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td><input placeholder="Search..."></td>
+                                    <td><input placeholder="Search..."></td>
+                                    <td></td>
+                                    <td></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
+                                <tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input type="text" style="border: hidden;"></td>
+                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
+                                <tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <label>Tổng số thiết bị đã chọn</label>
+                            <input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; ">
+        <button type="button" class="btn btn-primary ms-2">Tạo đơn</button>
+    </div>
+</div>
 

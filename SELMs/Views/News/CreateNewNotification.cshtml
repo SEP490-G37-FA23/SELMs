@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "CreateNewNotification";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <h4 class="text-center">Đề xuất mới</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/News/NotificationList">Danh sách đề xuất</a></li>
+            <li class="breadcrumb-item"><a href="/News/NotificaionList/CreateNewNotification"></a>Đề xuất mới</li>
+        </ol>
+    </nav>
+    <form class="row mt-5">
+        <div>
+            <h4 class="card-title">Thông tin đề xuất</h4>
+            <div class="row mb-3">
+                <div class="col-sm-8 mt-3">
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class=" col-form-label" for="inputName5">Tiêu đề</label>
+                <div>
+                    <input type="text" class="form-control" id="inputText">
+                </div>
+            </div>
+
+            <label class=" col-form-label">Nội dung</label>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Mô tả danh mục" id="floatingTextarea"></textarea>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-form-label">Người đề xuất</label>
+                <div>
+                    <input type="text" class="form-control" id="inputText">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class=" col-form-label" for="inputName5">Loại phiếu</label>
+                <div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1">Thông báo</option>
+                        <option value="2">Báo cáo</option>
+                        <option value="3">...</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center;" class="mb-3">
+            <button type="button" class="btn btn-success" style="width:10%">Gửi</button>
+        </div>
+
+
+    </form>
+</section>
+
+
+
