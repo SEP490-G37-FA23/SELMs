@@ -33,5 +33,10 @@ namespace SELMs.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewProjectListPV() 
+        { 
+            return PartialView();
+        }
     }
 }
