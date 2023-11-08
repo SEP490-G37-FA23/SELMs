@@ -10,13 +10,16 @@
 namespace SELMs.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class Member_Equipment_Usage
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int id { get; set; }
+        public string user_code { get; set; }
+        public string system_equipment_code { get; set; }
+        public Nullable<System.DateTime> checkin { get; set; }
+        public Nullable<System.DateTime> checkout { get; set; }
+        public Nullable<int> location_id_befor { get; set; }
+        public string note_checkout { get; set; }
     }
 }
