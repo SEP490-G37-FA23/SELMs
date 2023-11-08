@@ -3,6 +3,111 @@
     ViewBag.Title = "EquipmentsList";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="~/Content/js/Stock/Equipments/EquipmentsListCtrl.js"></script>
+<div ng-app="myApp" ng-controller="EquipmentsListCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
 
-<h2>EquipmentsList</h2>
+    <div id="notification" class="col-md-12"></div>
+    <br />
+
+    <section class="section">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Danh Sách Thiết bị</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Thêm thiết bị mới</a>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary">Import danh sách thiết bị mới</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success" type="button" ng-click="tableToExcel('EquipData')"><i class="icon-spinner2 spinner"></i> Xuất excel</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p></p>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table" id="EquipData">
+                            <thead>
+                                <tr>
+                                    <th>Tích</th>
+                                    <th scope="col">Mã hệ thống </th>
+                                    <th scope="col">Mã chuẩn</th>
+                                    <th scope="col">Tên thiết bị</th>
+                                    <th scope="col">Đơn vị tính</th>
+                                    <th scope="col">SerieNo</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Loại thiết bị</th>
+                                    <th scope="col">Nhóm thiết bị</th>
+                                    <th scope="col">Vị trí</th>
+                                    <th scope="col">Người chịu trách nhiệm quản lý</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Tác vụ</th>
+
+                                </tr>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th colspan="3"><input type="text" ng-model="text2" ng-change="LoadEquipmentsList()" class="form-control" ng-model-options="{debounce:700}" /></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"><input type="text" ng-model="text" ng-change="LoadEquipmentsList()" class="form-control" ng-model-options="{debounce:700}" /></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"><input type="text" ng-model="text1" ng-change="LoadEquipmentsList()" class="form-control" ng-model-options="{debounce:700}" /></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ListEquips">
+                                    <td><input type="checkbox" ng-model="item.checkked"/></td>
+                                    <td>{{item.system_equipment_code}}</td>
+                                    <td>{{item.standard_equipment_code}}</td>
+                                    <td>{{item.equipment_name}}</td>
+                                    <td>{{item.unit}}</td>
+                                    <td>{{item.serial_no}}</td>
+                                    <td>{{item.create_date|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{item.type_equipment}}</td>
+                                    <td>{{item.category_name}}</td>
+                                    <td>{{item.location_desciption}}</td>
+                                    <td>{{item.responsibler}}</td>
+                                    <td>{{item.usage_status}}</td>
+                                    <td>
+                                        <a class="btn btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#user-details" ng-click="LoadEquipDetails(item)">Details</a>
+                                        <button class="btn btn-danger" ng-click="DeleteEquip(item)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="12">Tổng số thiết bị</td>
+                                    <td>{{sumEquips}}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    @*@Html.Partial("MemberDetails")*@
+</div>
+
+
 

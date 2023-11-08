@@ -28,31 +28,10 @@ namespace SELMs.Api.Controllers
         private IMapper mapper = MapperConfig.Initialize();
 
         // GET: Api_Equipment
-        #region Get equipment list
-        [HttpGet]
-        [Route("equipments")]
-        public async Task<IHttpActionResult> GetEquipmentList()
-        {
-            try
-            {
-                dynamic returnedData = null;
-                returnedData = await repository.GetEquipmentList();
-                return Ok(returnedData);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Search Equipment
+        #region Get equipment list       
         [HttpPost]
-        [Route("equipments/search")]
-        public async Task<IHttpActionResult> SearchEquipments(Argument args)
+        [Route("equipments")]
+        public async Task<IHttpActionResult> GetEquipmentList(Argument args)
         {
             try
             {
@@ -78,7 +57,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetEquipment(id);
+                returnedData = await repository.GetEquipment(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -91,15 +70,52 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Add new equipment
+        #region Get detail equipment by system code
         [HttpPost]
-        [Route("api/equipments/new-equipment")]
-        public async Task<IHttpActionResult> SaveEquipment(EquipmentDTO dto)
+        [Route("equipments/detail/{code}")]
+        public DetailEquipDTO GetDetailEquipment(string code)
+        {
+            DetailEquipDTO returnedData = new DetailEquipDTO();
+            returnedData.equip = repository.GetDetailEquipment(code);
+            returnedData.ListComponentEquips = (List<EquipComponentDTO>)repository.GetListComponentEquips(code);
+
+            return returnedData;
+            
+            
+        }
+        #endregion
+
+        #region Add new equipment
+       
+        [HttpPost]
+        [Route("equipments/new-equipment")]
+        public async Task<IHttpActionResult> SaveEquipment(EquipmentNew data)
         {
             try
             {
-                Equipment equipment = mapper.Map<Equipment>(dto);
-                service.SaveEquipment(equipment);
+                Equipment equipment = mapper.Map<Equipment>(data.equip);
+                service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete equipment by id
+        [HttpGet]
+        [Route("equipments/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteEquipment(int id)
+        {
+            try
+            {
+                repository.DeleteEquipment(id);
                 return Ok();
             }
             catch (Exception ex)

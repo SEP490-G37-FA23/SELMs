@@ -54,6 +54,10 @@ namespace SELMs.App_Start
                 .ForMember(des => des.end_date, act => act.MapFrom(src => src.end_date.ToString()))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
+                //Configuring Location and LocationDTO
+                cfg.CreateMap<LocationDTO, Location>().ReverseMap();
+                cfg.CreateMap<List<LocationDTO>, List<Location>>().ReverseMap();
+
                 //Any Other Mapping Configuration ....
             });
 

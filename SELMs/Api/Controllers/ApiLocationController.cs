@@ -1,42 +1,39 @@
 ﻿using AutoMapper;
 using log4net;
-using SELMs.Api.DTOs;
 using SELMs.App_Start;
-using SELMs.Models;
-using SELMs.Models.BusinessModel;
-using SELMs.Repositories;
 using SELMs.Repositories.Implements;
-using SELMs.Services;
+using SELMs.Repositories;
 using SELMs.Services.Implements;
+using SELMs.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using SELMs.Api.DTOs;
+using SELMs.Models;
 
 namespace SELMs.Api.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class ApiCategoryController : ApiController
+    public class ApiLocationController: ApiController
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiCategoryController));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiLocationController));
 
-        private ICategoryRepository repository = new CategoryRepository();
-        private ICategoryService service = new CategoryService();
+        private ILocationRepository repository = new LocationRepository();
+        private ILocationService service = new LocationService();
         private IMapper mapper = MapperConfig.Initialize();
 
-        // GET: Api_Category
-        #region Get category list
+        #region Get locations list
         [HttpPost]
-        [Route("categories")]
-        public async Task<IHttpActionResult> GetCategoryList()
+        [Route("locations")]
+        public dynamic GetLocationList()
         {
             try
             {
-                dynamic returnedData = null;                
-                returnedData = await repository.GetCategoryList();
+                dynamic returnedData = null;
+                returnedData =  repository.GetLocationList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -49,36 +46,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Search Category
-        [HttpPost]
-        [Route("categories/search")]
-        public async Task<IHttpActionResult> SearchCategories(Argument args)
-        {
-            try
-            {
-                dynamic returnedData = null;
-                returnedData = await repository.SearchCategories(args);
-                return Ok(returnedData);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Get category by id
+        #region Get location by id
         [HttpGet]
-        [Route("categories/{id}")]
-        public async Task<IHttpActionResult> GetCategory(int id)
+        [Route("locations/{id}")]
+        public async Task<IHttpActionResult> GetLocation(int id)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetCategory(id);
+                returnedData = repository.GetLocation(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -91,16 +67,15 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Add new category
+        #region Add new location
         [HttpPost]
-        [Route("api/categories/new-category")]
-        public async Task<IHttpActionResult> SaveCategory([FromBody]CategoryRequest categoryRequest)
+        [Route("api/locations/new-location")]
+        public async Task<IHttpActionResult> SaveLocation(LocationDTO dto)
         {
             try
             {
-                Category category = mapper.Map<Category>(categoryRequest.category);
-                List<Equipment> equipments = mapper.Map<List<Equipment>>(categoryRequest.equipments);
-                service.SaveCategory(category,equipments);
+                Location location = mapper.Map<Location>(dto);
+                service.SaveLocation(location);
                 return Ok();
             }
             catch (Exception ex)
@@ -113,15 +88,35 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Update category
+        #region Update location
         [HttpPut]
-        [Route("categories/{id}")]
-        public async Task<IHttpActionResult> UpdateCategory(int id, [FromBody] CategoryDTO category)
+        [Route("locations/{id}")]
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO location)
         {
             try
             {
-                Category mem = mapper.Map<Category>(category);
-                service.UpdateCategory(id, mem);
+                Location mem = mapper.Map<Location>(location);
+                service.UpdateLocation(id, mem);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete Location
+        [HttpDelete]
+        [Route("locations/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteLocations(int id)
+        {
+            try
+            {
+                repository.DeleteLocation(id);
                 return Ok();
             }
             catch (Exception ex)
