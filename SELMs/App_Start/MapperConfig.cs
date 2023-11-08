@@ -72,6 +72,22 @@ namespace SELMs.App_Start
                 //Configuring EquipmentAllocationApplicationDetail and EquipmentAllocationApplicationDetailDTO
                 cfg.CreateMap<EquipmentAllocationApplicationDetailDTO, Equipment_Allocation_Application_Detail>().ReverseMap();
 
+                //Configuring EquipmentImportApplication and EquipmentImportApplicationDTO
+                cfg.CreateMap<EquipmentImportApplicationDTO, Equipment_Import_Application>()
+                .ForMember(des => des.application_date, act => act.MapFrom(src => DateTime.Parse(src.application_date)))
+                .ForMember(des => des.approved_date, act => act.MapFrom(src => DateTime.Parse(src.approved_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Equipment_Import_Application, EquipmentImportApplicationDTO>()
+                .ForMember(des => des.application_date, act => act.MapFrom(src => src.application_date.ToString()))
+                .ForMember(des => des.approved_date, act => act.MapFrom(src => src.approved_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring Equipment_Import_Application_Detail and EquipmentImportApplicationDetailDTO
+                cfg.CreateMap<EquipmentImportApplicationDetailDTO, Equipment_Import_Application_Detail>().ReverseMap();
+
+
+
 
                 //Any Other Mapping Configuration ....
             });
