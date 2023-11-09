@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentImportController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
     <Compile Include="Api\Controllers\ApiLocationController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\ProjectDTO.cs" />
@@ -216,6 +218,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessModel\Argument.cs" />
+    <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -324,11 +327,17 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
+    <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
+    <Compile Include="Repositories\IEquipmentHandoverFormRepository.cs" />
+    <Compile Include="Repositories\IEquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentAllocationApplicationRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentHandoverFormRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />
@@ -872,6 +881,7 @@
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="Controllers\Member\" />
     <Folder Include="obj\Debug\" />
+    <Folder Include="Views\ApiEquipmentImport\" />
     <Folder Include="Views\EquipmentManagementReports\" />
   </ItemGroup>
   <ItemGroup>
