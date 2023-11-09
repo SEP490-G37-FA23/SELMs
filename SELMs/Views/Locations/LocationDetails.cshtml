@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "LocationDetails";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="~/Content/js/Stock/Locations/LocationDetailCtrl.js"></script>
+<div ng-app="myApp" ng-controller="LocationDetailCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div class="row">
+        <div class="card col-md-3">
+            <div class="card-body">
+                <h5 class="card-title">{{DetailLocation.location_code}}</h5>
+                <p>{{courseDetail.location_desciption}}</p>
+
+            </div>
+            <div class="card" ng-click="GetOverview()">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin phòng lab</h5>
+                </div>
+            </div>
+            <div class="card" ng-click="GetEquipment()">
+                <div class="card-body">
+                    <h5 class="card-title">Danh sách thiết bị</h5>
+                </div>
+            </div>
+            <!-- Browser Default Validation -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh sách vị trí </h5>
+
+                    <!-- List group with Advanced Contents -->
+                    <div ng-repeat="item in ListSubLocation">
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action" aria-current="true" ng-lick="GetSubLocation(item)">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{item.location_code}}</h5>
+                                    <small>{{item.number_equip}}</small>
+                                </div>
+                                <p class="mb-1">{{item.location_desciption}}</p>
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- End List group Advanced Content -->
+
+                </div>
+            </div>
+
+            <div class="card" ng-click="GetProject()">
+                <div class="card-body">
+                    <h5 class="card-title">Dự án thực hiện trong phòng lab</h5>
+
+                </div>
+            </div>
+            <div class="card" ng-click="GetMember()">
+                <div class="card-body">
+                    <h5 class="card-title">Thành viên tham gia phòng lab</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Browser Default Validation -->
+        <div class="card col-md-9">
+            <form ng-show="showOverview">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin phòng lab</h5>
+
+                        <!-- Vertical Form -->
+                        <div class="row g-3">
+                            <div class="col-8">
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Mã vị trí</label>
+                                    <input type="text" class="form-control" ng-model="DetailLocation.location_code">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Miêu tả</label>
+                                    <input type="email" class="form-control" ng-model="DetailLocation.location_desciption">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="equipId" class="form-label">QR</label>
+                                <div id="id_qrcode" class="qrcode"></div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div><!-- Vertical Form -->
+
+                    </div>
+                </div>
+
+            </form>
+            <form ng-show="showEquip">
+                <h5 class="card-title">Danh sách thiết bị trong phòng lab</h5>
+                <div class="row">
+                    <div class="col-md-3"> Tìm kiếm thiết bị:</div>
+                    <div class="col-md-9">  <input type="text" class="form-control" ng-model="equip_search" placeholder="Tìm tên thiết bị"></div>
+
+                </div>
+                <br />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã hệ thống</th>
+                            <th scope="col">Mã chuẩn</th>
+                            <th scope="col">Tên thiết bị</th>
+                            <th scope="col">Vị trí</th>
+                            <th scope="col">Quản lý</th>
+                            <th scope="col">Từ ngày</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in filtered = (ListEquipmentInLocation |filter: {equipment_name:equip_search})">
+                            <td scope="row">{{$index+1}}</td>
+                            <td scope="row">{{item.system_equipment_code}}</td>
+                            <td scope="row">{{item.standard_equipment_code}}</td>
+                            <td scope="row">{{item.equipment_name}}</td>
+                            <td scope="row">{{item.location_desciption}}</td>
+                            <td scope="row">{{item.fullname}}</td>
+                            <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
+
+                            <td class="text-center">
+                                <button class="btn btn-primary">ĐK sử dụng</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </form>
+            <form ng-show="showProject">
+                <h5 class="card-title">Dự án thực hiện trong phòng lab</h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã dự án</th>
+                            <th scope="col">Tên dự án</th>
+                            <th scope="col">Miêu tả</th>
+                            <th scope="col">Quản lý</th>
+                            <th scope="col">Ngày bắt đầu</th>
+                            <th scope="col">Ngày kết thúc</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in ListProjectInLocation">
+                            <td scope="row">{{$index +1}}</td>
+                            <td scope="row">{{item.project_code}}</td>
+                            <td scope="row">{{item.project_name}}</td>
+                            <td scope="row">{{item.description}}</td>
+                            <td scope="row">{{item.manager}}</td>
+                            <td scope="row">{{item.start_date|date:'dd/MM/yyyy'}}</td>
+                            <td scope="row">{{item.end_date|date:'dd/MM/yyyy'}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>

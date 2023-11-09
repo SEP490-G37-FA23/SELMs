@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "LocationsList";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+<script src="~/Content/js/Stock/Locations/LocationsListCtrl.js"></script>
+<div ng-app="myApp" ng-controller="LocationsListCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+
+    <div style="display: grid;grid-template-columns: repeat(3,1fr);gap: 10px;">
+        <div ng-repeat="item in ListLocations track by $index">
+            <div class="card" ng-click="DetailLocation(item)">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.location_code}}</h5>
+                    <p class="card-text">{{item.location_desciption}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

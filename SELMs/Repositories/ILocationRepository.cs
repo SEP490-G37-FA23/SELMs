@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,9 @@ namespace SELMs.Repositories
         dynamic SaveLocation(Location location);
         void UpdateLocation(Location location);
         void DeleteLocation(int id);
+
+        List<LocationDTO> GetListSubLocation(int id);
+        List<ProjectDTO> GetListProjectInLocation(int id);
+        List<EquipmentDTO> GetListEquipInLocation(int id);
     }
 }

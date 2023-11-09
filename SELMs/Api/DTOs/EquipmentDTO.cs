@@ -29,6 +29,10 @@ namespace SELMs.Api.DTOs
         public string category_code { get; set; }
         public List<int> img { get; set; }
       public bool is_integration { get;set; }
+        public string fullname { get; set; }
+        public string location_desciption { get; set; }
+        public DateTime? from_date { get; set; }
+
 
     }
 
