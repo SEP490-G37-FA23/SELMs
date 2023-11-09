@@ -63,12 +63,6 @@ namespace SELMs.Test.Services.Test
 
 
 
-
-
-
-
-
-
 	/*Data to test*/
 	public static class MemberServiceTestData
 	{
