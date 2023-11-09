@@ -51,8 +51,8 @@ namespace SELMs.Api.Controllers
 
         #region Search Category
         [HttpPost]
-        [Route("categories/search")]
-        public async Task<IHttpActionResult> SearchCategories(Argument args)
+        [Route("categories-list")]
+        public async Task<IHttpActionResult> GetCategories(Argument args)
         {
             try
             {

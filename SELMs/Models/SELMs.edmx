@@ -35,7 +35,7 @@
           <Property Name="note" Type="nvarchar" MaxLength="500" />
           <Property Name="category_code" Type="varchar" MaxLength="64" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="is_integration" Type="bit" Nullable="false" />
+          <Property Name="is_integration" Type="bit" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -229,6 +229,23 @@
           <Property Name="is_active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Member_Location_History">
+          <Property Name="location_id_parent" Type="int" />
+          <Property Name="location_level" Type="int" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member_Equipment_Usage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
+          <Property Name="checkin" Type="datetime" />
+          <Property Name="checkout" Type="datetime" />
+          <Property Name="location_id_befor" Type="int" />
+          <Property Name="note_checkout" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Member_Location_Usage">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -407,6 +424,8 @@
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Equipment_Usage" EntityType="Self.Member_Equipment_Usage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member_Location_Usage" EntityType="Self.Member_Location_Usage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
@@ -450,7 +469,7 @@
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="is_integration" Type="Boolean" Nullable="false" />
+          <Property Name="is_integration" Type="Boolean" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -639,11 +658,23 @@
           <Property Name="location_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="location_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="location_desciption" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="parent_location_id" Type="Int32" />
+          <Property Name="location_id_parent" Type="Int32" />
           <Property Name="location_level" Type="Int32" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="Member_Location_History">
+        <EntityType Name="Member_Equipment_Usage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="checkin" Type="DateTime" Precision="3" />
+          <Property Name="checkout" Type="DateTime" Precision="3" />
+          <Property Name="location_id_befor" Type="Int32" />
+          <Property Name="note_checkout" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Member_Location_Usage">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -651,7 +682,6 @@
           <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="location_id" Type="Int32" />
           <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Member_Project_History">
           <Key>
@@ -772,6 +802,8 @@
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" />
+          <EntitySet Name="Member_Equipment_Usage" EntityType="Self.Member_Equipment_Usage" />
+          <EntitySet Name="Member_Location_Usage" EntityType="Self.Member_Location_Usage" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" />
@@ -906,6 +938,7 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1145,7 +1178,7 @@
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
                 <ScalarProperty Name="location_code" ColumnName="location_code" />
                 <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
-                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
+                <ScalarProperty Name="location_id_parent" ColumnName="location_id_parent" />
                 <ScalarProperty Name="location_level" ColumnName="location_level" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
               </MappingFragment>
@@ -1154,6 +1187,22 @@
           <EntitySetMapping Name="Member_Location_History">
             <EntityTypeMapping TypeName="SELMsModel.Member_Location_History">
               <MappingFragment StoreEntitySet="Member_Location_History">
+          <EntitySetMapping Name="Member_Equipment_Usage">
+            <EntityTypeMapping TypeName="SELMsModel.Member_Equipment_Usage">
+              <MappingFragment StoreEntitySet="Member_Equipment_Usage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="checkin" ColumnName="checkin" />
+                <ScalarProperty Name="checkout" ColumnName="checkout" />
+                <ScalarProperty Name="location_id_befor" ColumnName="location_id_befor" />
+                <ScalarProperty Name="note_checkout" ColumnName="note_checkout" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member_Location_Usage">
+            <EntityTypeMapping TypeName="SELMsModel.Member_Location_Usage">
+              <MappingFragment StoreEntitySet="Member_Location_Usage">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="user_code" ColumnName="user_code" />
                 <ScalarProperty Name="location_id" ColumnName="location_id" />

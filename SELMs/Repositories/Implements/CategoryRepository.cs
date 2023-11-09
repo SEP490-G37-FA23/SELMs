@@ -45,6 +45,9 @@ namespace SELMs.Repositories.Implements
             categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetCategoryList", new
             {
                 username = arg.username,
+                isadmin = arg.isadmin,
+                role = arg.role,
+                text = arg.text
             }
                 , commandType: CommandType.StoredProcedure);
             return categories;
