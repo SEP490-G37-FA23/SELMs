@@ -62,6 +62,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
     $scope.showEquip = false;
     $scope.showOverview = false;
     $scope.showSubLocation = false;
+    $scope.showMembers = false;
 
 
     $scope.GetOverview = function () {
@@ -69,23 +70,69 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
         $scope.showEquip = false;
         $scope.showOverview = true;
         $scope.showSubLocation = false;
+        $scope.showMembers = false;
     }
     $scope.GetEquipment = function () {
         $scope.showProject = false;
         $scope.showEquip = true;
         $scope.showOverview = false;
         $scope.showSubLocation = false;
+        $scope.showMembers = false;
     }
     $scope.GetSubLocation = function () {
         $scope.showProject = false;
         $scope.showEquip = false;
         $scope.showOverview = false;
         $scope.showSubLocation = true;
+        $scope.showMembers = false;
     }
     $scope.GetProject = function () {
         $scope.showProject = true;
         $scope.showEquip = false;
         $scope.showOverview = false;
         $scope.showSubLocation = false;
+        $scope.showMembers = false;
+    }
+    $scope.GetMember = function () {
+        $scope.showProject = false;
+        $scope.showEquip = false;
+        $scope.showOverview = false;
+        $scope.showSubLocation = false;
+        $scope.showMembers = true;
+    }
+
+
+    $scope.CreateNewProject = function () {
+        window.location.href = "https://localhost:44335/ProjectPortfolio/CreateNewProject/" + url;
+    }
+    $scope.text = '';
+    $scope.LoadMembersList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: text
+        }
+        $http.post(origin + '/api/v1/members', data).then(function (response) {
+            $scope.ListMembers = response.data;
+        });
+    }
+    $scope.ListMembersJoinLocation = [];
+    $scope.HandleNewMember = function () {
+        $scope.ListMembersJoinLocation.push({
+            user_code: '',
+            fullname: '',
+            status: 'Đang tham gia',
+            note: ''
+        })
+    }
+    $scope.HandelMemberLocation = function (mb, item) {
+        item.text = mb.user_code;
+        item.user_code = mb.user_code;
+        item.fullname = mb.fullname;
+
+    }
+    $scope.DeleteMemberLocation = function (list, index) {
+        list.splice(index, 1);
     }
 });

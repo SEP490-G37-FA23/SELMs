@@ -130,7 +130,9 @@
                             <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
 
                             <td class="text-center">
-                                <button class="btn btn-primary">ĐK sử dụng</button>
+                                <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
+                                <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
+
                             </td>
                         </tr>
 
@@ -140,6 +142,7 @@
             </form>
             <form ng-show="showProject">
                 <h5 class="card-title">Dự án thực hiện trong phòng lab</h5>
+                <button class="btn btn-primary" ng-click="CreateNewProject()">Thêm mới dự án</button>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -168,7 +171,74 @@
                 </table>
 
             </form>
+            <form ng-show="showMembers">
+                <h5 class="card-title">Thành viên tham gia trong phòng lab</h5>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã nhân viên</th>
+                            <th scope="col">Họ và Tên</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in ListMembersJoinLocation">
+                            <td>
+                                <ng-form>
+                                    <div class="form-member-project">
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                        <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
+                                    </div>
 
+                                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMBPj">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="bg-blue text-white">
+                                                        <tr>
+                                                            <th>Mã thành viên</th>
+                                                            <th>Họ tên</th>
+                                                            <th>Chức vụ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr style="cursor:pointer" ng-mousedown="HandelMemberLocation(mb, item);" ng-repeat="mb in ListMembers">
+                                                            <td>
+                                                                {{mb.user_code}}
+                                                            </td>
+                                                            <td>
+                                                                {{mb.fullname}}
+                                                            </td>
+                                                            <td>{{mb.role_name}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-form>
+                            </td>
+                            <td><input ng-model="item.fullname" class="form-control" disabled /></td>
+                            <td>
+                                <select ng-model="item.status" class="form-control" disabled>
+                                    <option value="Đang tham gia" selected>Đang tham gia</option>
+                                    <option value="Đã rời dự án">Đã rời dự án</option>
+
+                                </select>
+                            </td>
+                            <td><input ng-model="item.note" class="form-control" /></td>
+                            <td><i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteMemberLocation(ListMembersJoinLocation,$index)"></i></td>
+
+                        </tr>
+                    </tbody>
+                    <tr>
+                        <td colspan="5" class="text-center" ng-click="HandleNewMember()">Thêm thành viên</td>
+                    </tr>
+                </table>
+
+            </form>
 
         </div>
 
