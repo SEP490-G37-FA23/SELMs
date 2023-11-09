@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "CreateNewAllocationEquipment";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <h4 class="text-center">Vị trí thiết bị mới</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/AllocationEquipmentList.cshtml">Danh sách vị trí thiết bị</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/CreateNewAllocationEquipment.cshtml"></a>Vị trí thiết bị mới</li>
+        </ol>
+    </nav>
+    <form class="row mt-5">
+        <div>
+
+            <div class="row mb-3">
+                <label class=" col-form-label" for="inputName5">Mã chuẩn</label>
+                <div>
+                    <input type="text" class="form-control" id="inputText">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class=" col-form-label">Cấp độ</label>
+                <div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class=" col-form-label">Vị trí cha</label>
+                <div>
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class=" col-form-label">Mã QR</label>
+                <div>
+                    <div>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                </div>
+            </div>
+            <label class=" col-form-label">Miêu tả</label>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Mô tả danh mục" id="floatingTextarea"></textarea>
+            </div>
+        </div>
+    </form>
+</section>
+

@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "MemberListPV";
+    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+}
+
+<div class="modal fade" id="user-list" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" style="width:1500px; margin-left:-400px;">
+            <div class="modal-header">
+                <h5 class="modal-title">Danh Sách Thành Viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Danh Sách Thành Viên</h5>
+
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <a class="btn btn-primary" href="@Url.Action("AddNewMember", "User")">Thêm thành viên mới</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary">Thêm danh sách thành viên mới</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-success" type="button" ng-click="tableToExcel('MemberData')"><i class="icon-spinner2 spinner"></i> Xuất excel</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p></p>
+                                </div>
+                                <!-- Table with stripped rows -->
+                                <table class="table" id="MemberData">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Mã nhân viên</th>
+                                            <th scope="col">Họ và Tên</th>
+                                            <th scope="col">Giới tính</th>
+                                            <th scope="col">Vị trí</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Số điện thoại</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col"><input type="text" ng-model="text" ng-change="LoadMembersList()" class="form-control" ng-model-options="{debounce:700}" /></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in ListMembers">
+                                            <td>{{item.user_code}}</td>
+                                            <td>{{item.fullname}}</td>
+                                            <td>{{item.gender==1?'Nam':'Nữ'}}</td>
+                                            <td>{{item.role_name}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td>{{item.hotline}}</td>
+                                            <td>
+                                                <a class="btn btn-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#user-details" ng-click="LoadMemberDetails(item)">Details</a>
+                                                <button class="btn btn-danger" ng-click="MarkMemberQuit(item)">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tổng số thành viên</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- End Table with stripped rows -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @Html.Partial("MemberDetails")
+        </div>
+    </div>
+</div>
+

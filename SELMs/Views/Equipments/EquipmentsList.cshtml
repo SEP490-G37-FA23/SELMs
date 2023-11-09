@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "EquipmentsList";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
@@ -25,8 +25,12 @@
                             <div class="col-md-3">
                                 <a class="btn btn-primary" href="@Url.Action("CreateNewEquipment", "Equipments")">Thêm thiết bị mới</a>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <button class="btn btn-primary">Import danh sách thiết bị mới</button>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary" data-bs-toggle="modal"
+                                   data-bs-target="#equipment-list">Test</a>
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-success" type="button" ng-click="tableToExcel('EquipData')"><i class="icon-spinner2 spinner"></i> Xuất excel</button>
@@ -70,7 +74,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="item in ListEquips">
-                                    <td><input type="checkbox" ng-model="item.checkked"/></td>
+                                    <td><input type="checkbox" ng-model="item.checkked" /></td>
                                     <td>{{item.system_equipment_code}}</td>
                                     <td>{{item.standard_equipment_code}}</td>
                                     <td>{{item.equipment_name}}</td>
@@ -106,8 +110,5 @@
             </div>
         </div>
     </section>
-    @*@Html.Partial("MemberDetails")*@
+    @Html.Partial("EquipmentListPV")
 </div>
-
-
-
