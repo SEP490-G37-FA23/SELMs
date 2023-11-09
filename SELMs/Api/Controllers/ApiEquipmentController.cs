@@ -78,10 +78,7 @@ namespace SELMs.Api.Controllers
             DetailEquipDTO returnedData = new DetailEquipDTO();
             returnedData.equip = repository.GetDetailEquipment(code);
             returnedData.ListComponentEquips = (List<EquipComponentDTO>)repository.GetListComponentEquips(code);
-
             return returnedData;
-            
-            
         }
         #endregion
 

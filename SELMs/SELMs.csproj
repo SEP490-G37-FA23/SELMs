@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentImportController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
     <Compile Include="Api\Controllers\ApiLocationController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\ProjectDTO.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
@@ -353,6 +356,7 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
     <Compile Include="Services\Implements\LocationService.cs" />

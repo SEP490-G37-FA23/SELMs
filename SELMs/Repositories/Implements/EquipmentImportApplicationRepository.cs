@@ -26,6 +26,13 @@ namespace SELMs.Repositories.Implements
             return application;
         }
 
+        public dynamic GetLastDailyApplication()
+        {
+            dynamic application = db.Equipment_Import_Application
+                .OrderBy(a => a.application_date).Reverse().FirstOrDefault();
+            return application;
+        }
+
         public dynamic GetApplicationList()
         {
             dynamic applications = db.Equipment_Import_Application.ToListAsync();
@@ -113,6 +120,13 @@ namespace SELMs.Repositories.Implements
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
             if (applicationDetail != null) db.Equipment_Import_Application_Detail.Remove(applicationDetail);
             db.SaveChangesAsync();
+        }
+
+        public dynamic GetApplicationDetailList(string applicationCode)
+        {
+            dynamic applicationDetails = db.Equipment_Import_Application_Detail
+                .Where(a => a.ei_application_code == applicationCode).ToListAsync();
+            return applicationDetails;
         }
     }
 }
