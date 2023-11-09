@@ -17,6 +17,10 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
+        public ActionResult EquipmentDetails()
+        {
+            return View();
+        }
         public ActionResult EquipmentsListPV()
         {
             return PartialView();
