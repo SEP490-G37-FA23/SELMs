@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Http;
 using SELMs.Api.DTOs;
 using SELMs.Models;
+using SELMs.Models.BusinessModel;
 
 namespace SELMs.Api.Controllers
 {
@@ -27,13 +28,34 @@ namespace SELMs.Api.Controllers
 
         #region Get locations list
         [HttpPost]
-        [Route("locations")]
+        [Route("all-locations")]
         public dynamic GetLocationList()
         {
             try
             {
                 dynamic returnedData = null;
                 returnedData =  repository.GetLocationList();
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get locations list by level
+        [HttpPost]
+        [Route("locations")]
+        public dynamic GetLocationList(Argument args )
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetLocationList(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -126,6 +148,24 @@ namespace SELMs.Api.Controllers
                 return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
+        }
+        #endregion
+
+        #region Get detail location by location id
+        [HttpPost]
+        [Route("locations/detail/{id}")]
+        public DetailLocationDTO GetDetailLocation(int id)
+        {
+            DetailLocationDTO returnedData = new DetailLocationDTO();
+            returnedData.location_info = repository.GetLocation(id); 
+            returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
+            returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
+            returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);
+
+
+            return returnedData;
+
+
         }
         #endregion
     }

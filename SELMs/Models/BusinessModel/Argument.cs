@@ -9,6 +9,9 @@ namespace SELMs.Models.BusinessModel
     public class Argument
     {
         public int id { set; get; }
+        public int id1 { set; get; }
+        public int id2 { set; get; }
+        public int level { set; get; }
         public int group_id { set; get; }
 
         public string fullname { set; get; }

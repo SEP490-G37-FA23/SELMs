@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using SELMs.Api.DTOs;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using System;
@@ -44,6 +45,9 @@ namespace SELMs.Repositories.Implements
             categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetLocationList", new
             {
                 username = arg.username,
+                level = arg.level,
+                parent_id = arg.id,
+                location_name = arg.text
             }
                 , commandType: CommandType.StoredProcedure);
             return categories;
@@ -54,6 +58,43 @@ namespace SELMs.Repositories.Implements
             Location orgLocation = db.Locations.Where(l => l.location_id == location.location_id).FirstOrDefault();
             db.Entry(orgLocation).CurrentValues.SetValues(location);
             db.SaveChangesAsync();
+        }
+
+        public List<LocationDTO> GetListSubLocation(int id)
+        {
+            List<LocationDTO> ListSubLocation = new List<LocationDTO>();
+            ListSubLocation = db.Database.Connection.Query<LocationDTO>("Proc_GetLocationList", new
+            {
+
+                username = "",
+                level = 2,
+                parent_id = id,
+                location_name = ""
+            }
+                , commandType: CommandType.StoredProcedure).ToList();
+            return ListSubLocation;
+        }
+
+        public List<ProjectDTO> GetListProjectInLocation(int id)
+        {
+            List<ProjectDTO> ListProjectInLocation = new List<ProjectDTO>();
+            ListProjectInLocation = db.Database.Connection.Query<ProjectDTO>("Proc_GetListProjectInLocation", new
+            {
+                location_id= id,
+                        }
+                , commandType: CommandType.StoredProcedure).ToList();
+            return ListProjectInLocation;
+        }
+
+        public List<EquipmentDTO> GetListEquipInLocation(int id)
+        {
+            List<EquipmentDTO> ListEquipInLocation = new List<EquipmentDTO>();
+            ListEquipInLocation = db.Database.Connection.Query<EquipmentDTO>("Proc_GetListEquipInLocation", new
+            {
+                location_id = id,
+            }
+                , commandType: CommandType.StoredProcedure).ToList();
+            return ListEquipInLocation;
         }
     }
 }
