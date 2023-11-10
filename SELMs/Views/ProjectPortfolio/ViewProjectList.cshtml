@@ -26,7 +26,12 @@
                         <div class="col-md-3">
                             <a class="btn btn-primary" href="@Url.Action("CreateNewProject", "ProjectPortfolio")">Thêm dự án mới</a>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" data-bs-toggle="modal"
+                               data-bs-target="#project-list">Test</a>
+                        </div>
+                        <div class="col-md-4">
+
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-primary">Xuất file Excel</button>
@@ -85,4 +90,5 @@
 
         </div>
     </div>
-
+</section>
+    @Html.Partial("ViewProjectListPV")
