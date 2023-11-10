@@ -94,12 +94,14 @@ namespace SELMs.Api.Controllers
         #region Add new project
         [HttpPost]
         [Route("api/projects/new-project")]
-        public async Task<IHttpActionResult> SaveProject(ProjectDTO dto)
+        public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
         {
             try
             {
-                Project project = mapper.Map<Project>(dto);
-                service.SaveProject(project);
+                Project project = mapper.Map<Project>(projectRequest.Project);
+                List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
+                List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
+                service.SaveProject(project, projectMembers, projectEquipments);
                 return Ok();
             }
             catch (Exception ex)
@@ -115,12 +117,34 @@ namespace SELMs.Api.Controllers
         #region Update project
         [HttpPut]
         [Route("projects/{id}")]
-        public async Task<IHttpActionResult> UpdateProject(int id, [FromBody] ProjectDTO project)
+        public async Task<IHttpActionResult> UpdateProject(int id, [FromBody] ProjectRequest projectRequest)
         {
             try
             {
-                Project mem = mapper.Map<Project>(project);
-                service.UpdateProject(id, mem);
+                Project project = mapper.Map<Project>(projectRequest.Project);
+                List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
+                List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
+                service.UpdateProject(id, project, projectMembers, projectEquipments);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Cancel project
+        [HttpPut]
+        [Route("projects/cancel/{id}")]
+        public async Task<IHttpActionResult>CancelProject(int id)
+        {
+            try
+            {                
+                service.CancelProject(id);
                 return Ok();
             }
             catch (Exception ex)

@@ -50,11 +50,12 @@ namespace SELMs.Repositories.Implements
             return projects;
         }
 
-        public void UpdateProject(Project project)
+        public dynamic UpdateProject(Project project)
         {
             Project orgProject = db.Projects.Where(p => p.project_id == project.project_id).FirstOrDefault();
             db.Entry(orgProject).CurrentValues.SetValues(project);
             db.SaveChangesAsync();
+            return orgProject;
         }
 
         public dynamic GetProjectMembers(int id)
