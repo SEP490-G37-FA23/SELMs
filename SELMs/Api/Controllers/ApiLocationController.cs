@@ -14,6 +14,7 @@ using System.Web.Http;
 using SELMs.Api.DTOs;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
+using System.Data.Entity.Core.Metadata.Edm;
 
 namespace SELMs.Api.Controllers
 {
@@ -68,6 +69,27 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
+        #region Get all sub locations list by id
+        [HttpPost]
+        [Route("locations/all-sub-location")]
+        public dynamic GetAllSubLocationList(Argument args)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetAllSubLocationList(args);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
         #region Get location by id
         [HttpGet]
         [Route("locations/{id}")]
@@ -91,8 +113,8 @@ namespace SELMs.Api.Controllers
 
         #region Add new location
         [HttpPost]
-        [Route("api/locations/new-location")]
-        public async Task<IHttpActionResult> SaveLocation([FromBody] LocationRequest locationRequest)
+        [Route("locations/new-location")]
+        public async Task<IHttpActionResult> SaveLocation(LocationDTO dto)
         {
             try
             {
@@ -112,9 +134,9 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Update location
-        [HttpPut]
-        [Route("locations/{id}")]
-        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationRequest locationRequest)
+        [HttpPost]
+        [Route("locations/update/{id}")]
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO location)
         {
             try
             {
@@ -164,11 +186,33 @@ namespace SELMs.Api.Controllers
             returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
             returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
             returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);
-
-
             return returnedData;
 
 
+        }
+        #endregion
+
+        #region Add equip in  location
+        [HttpPost]
+        [Route("locations/equip-location-history")]
+        public async Task<IHttpActionResult> SaveEquipLocationHistory(EquipLocationHistoryDTO dto)
+        {
+            try
+            {
+                foreach(var item in dto.ListEquipLocationHistory)
+                {
+                    service.SaveEquipLocationHistory(item);
+                }
+               
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
         }
         #endregion
     }

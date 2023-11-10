@@ -74,7 +74,7 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
         }
         $http.post(origin + '/api/v1/equipments', data).then(function (response) {
             $scope.ListEquips = response.data;
-            $scope.sumEquips = $scope.ListEquips.length;
+            $scope.sumEquips = response.data.length;
         });
     }
 

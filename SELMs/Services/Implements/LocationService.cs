@@ -43,5 +43,16 @@ namespace SELMs.Services.Implements
                 }
             }
         }
+        public async Task SaveEquipLocationHistory(Equipment_Location_History item)
+        {
+            if (await repository.GetEquipment_Location_History(item.system_equipment_code, item.location_id) == null)
+            {
+                repository.AddNewEquipLocationHistory(item);
+            }
+            else
+            {
+                repository.UpdateEquipLocationHistory(item);
+            }
+        }
     }
 }
