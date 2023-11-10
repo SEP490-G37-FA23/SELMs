@@ -170,6 +170,7 @@
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\ProjectDTO.cs" />
+    <Compile Include="Api\DTOs\ProjectRequest.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="Api\DTOs\UserRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
+    <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -274,27 +276,9 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Location_History.cs">
-		<DependentUpon>SELMs.tt</DependentUpon>
-	</Compile>
-    <Compile Include="Models\Member_Equipment_Usage.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Member_Location_Usage.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Project_History.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetDetailEquipment_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetEquipmentsList_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetMembersList_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetRolesList_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
@@ -323,12 +307,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -883,7 +861,7 @@
     <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectMember.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectEquipments.cshtml" />
- <Content Include="Views\Equipments\EquipmentDetails.cshtml" />
+    <Content Include="Views\Equipments\EquipmentDetails.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
@@ -894,7 +872,6 @@
     <Content Include="Views\News\NotificationList.cshtml" />
     <Content Include="Views\News\CreateNewNotification.cshtml" />
     <Content Include="Views\News\NotificationDetail.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -56,5 +56,37 @@ namespace SELMs.Repositories.Implements
             db.Entry(orgProject).CurrentValues.SetValues(project);
             db.SaveChangesAsync();
         }
+
+        public dynamic GetProjectMembers(int id)
+        {
+            //List<User> projectMembers = db.Projects
+            //    .Join(db.Member_Project_History, p => p.project_id, pu => pu.project_id, (u,pu) => new { u, pu })
+            //    .Join(db.Users, ppu => ppu.pu.user_code, u => u.user_code, (ppu, u) => new { ppu, u })
+            //    .Select( x => new { 
+            //        user_code = x.user_code,
+
+            //    }
+
+            //    )
+
+            var projectMembers =
+                (from u in db.Users
+                 join pu in db.Member_Project_History on u.user_code equals pu.user_code
+                 join p in db.Projects on pu.project_id equals p.project_id
+                 where p.project_id.Equals(id) && u.resignation_date.Equals(null)
+                 select u).ToListAsync();
+            return projectMembers;
+        }
+
+        public dynamic GetProjectEquipments(int id)
+        {
+            var projectEquipments =
+                (from e in db.Equipments
+                 join pe in db.Equipment_Project_History on e.system_equipment_code equals pe.system_equiment_code
+                 join p in db.Projects on pe.project_id equals p.project_id
+                 where p.project_id.Equals(id) && (pe.to_date == null || pe.to_date >= DateTime.Now)
+                 select e).ToListAsync();
+            return projectEquipments;
+        }
     }
 }

@@ -16,5 +16,7 @@ namespace SELMs.Repositories
         dynamic SaveProject(Project project);
         void UpdateProject(Project project);
         void DeleteProject(int id);
+        dynamic GetProjectMembers(int id);
+        dynamic GetProjectEquipments(int id);
     }
 }

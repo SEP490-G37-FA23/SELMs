@@ -1,4 +1,5 @@
 ﻿using SELMs.Models;
+using SELMs.Models.BusinessModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace SELMs.Services
 {
     public interface IProjectService
     {
+        Task<ProjectModel> GetProject(int id);
         Task SaveProject(Project project);
         Task UpdateProject(int id, Project project);
     }
