@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentAllocationController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentImportController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Api\DTOs\EquipLocationHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentAllocationApplicationRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
@@ -336,12 +338,14 @@
     <Compile Include="Repositories\Implements\ProjectRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
+    <Compile Include="Services\IEquipmentAllocationService.cs" />
     <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentAllocationService.cs" />
     <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
