@@ -161,6 +161,7 @@
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipLocationHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
@@ -208,17 +209,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\Equipment\AllocationEquipmentsController.cs" />
-    <Compile Include="Controllers\Equipment\CategoriesController.cs" />
+    <Compile Include="Controllers\Authorization\HomeController.cs" />
+    <Compile Include="Controllers\Equipment\CategoryController.cs" />
+    <Compile Include="Controllers\Equipment\EquipmentAllocationController.cs" />
+    <Compile Include="Controllers\Equipment\EquipmentImportController.cs" />
     <Compile Include="Controllers\Equipment\EquipmentManagementReportsController.cs" />
     <Compile Include="Controllers\Equipment\EquipmentsController.cs" />
-    <Compile Include="Controllers\Equipment\ImportEquipmentsController.cs" />
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\ProjectPortfolioController.cs" />
+    <Compile Include="Controllers\Location\LocationsController.cs" />
+    <Compile Include="Controllers\News\NewsController.cs" />
     <Compile Include="Controllers\Project\ProjectInvestmentCostController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\Project\ProjectPortfolioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

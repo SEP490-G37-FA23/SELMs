@@ -114,7 +114,7 @@ namespace SELMs.Api.Controllers
         #region Add new location
         [HttpPost]
         [Route("locations/new-location")]
-        public async Task<IHttpActionResult> SaveLocation(LocationDTO dto)
+        public async Task<IHttpActionResult> SaveLocation([FromBody] LocationRequest locationRequest)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace SELMs.Api.Controllers
         #region Update location
         [HttpPost]
         [Route("locations/update/{id}")]
-        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO location)
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationRequest locationRequest)
         {
             try
             {

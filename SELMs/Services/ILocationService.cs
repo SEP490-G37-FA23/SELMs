@@ -11,8 +11,6 @@ namespace SELMs.Services
     {
         Task SaveLocation(Location location, List<Location> subLocations);
         Task UpdateLocation(int id, Location location, List<Location> subLocations);
-        Task SaveLocation(Location location);
-        Task UpdateLocation(int id, Location location);
         Task SaveEquipLocationHistory(Equipment_Location_History item);
 
 
