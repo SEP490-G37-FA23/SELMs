@@ -169,6 +169,7 @@
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
+    <Compile Include="Api\DTOs\LocationRequest.cs" />
     <Compile Include="Api\DTOs\ProjectDTO.cs" />
     <Compile Include="Api\DTOs\ProjectRequest.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />

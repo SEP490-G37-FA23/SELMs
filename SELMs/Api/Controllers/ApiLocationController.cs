@@ -18,7 +18,7 @@ using SELMs.Models.BusinessModel;
 namespace SELMs.Api.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class ApiLocationController: ApiController
+    public class ApiLocationController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiLocationController));
 
@@ -34,7 +34,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData =  repository.GetLocationList();
+                returnedData = repository.GetLocationList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace SELMs.Api.Controllers
         #region Get locations list by level
         [HttpPost]
         [Route("locations")]
-        public dynamic GetLocationList(Argument args )
+        public dynamic GetLocationList(Argument args)
         {
             try
             {
@@ -92,12 +92,13 @@ namespace SELMs.Api.Controllers
         #region Add new location
         [HttpPost]
         [Route("api/locations/new-location")]
-        public async Task<IHttpActionResult> SaveLocation(LocationDTO dto)
+        public async Task<IHttpActionResult> SaveLocation([FromBody] LocationRequest locationRequest)
         {
             try
             {
-                Location location = mapper.Map<Location>(dto);
-                service.SaveLocation(location);
+                Location location = mapper.Map<Location>(locationRequest.Location);
+                List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
+                service.SaveLocation(location, subLocations);
                 return Ok();
             }
             catch (Exception ex)
@@ -113,12 +114,14 @@ namespace SELMs.Api.Controllers
         #region Update location
         [HttpPut]
         [Route("locations/{id}")]
-        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO location)
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationRequest locationRequest)
         {
             try
             {
-                Location mem = mapper.Map<Location>(location);
-                service.UpdateLocation(id, mem);
+                Location location = mapper.Map<Location>(locationRequest.Location);
+                List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
+                service.SaveLocation(location, subLocations);
+                service.UpdateLocation(id, location, subLocations);
                 return Ok();
             }
             catch (Exception ex)
@@ -157,7 +160,7 @@ namespace SELMs.Api.Controllers
         public DetailLocationDTO GetDetailLocation(int id)
         {
             DetailLocationDTO returnedData = new DetailLocationDTO();
-            returnedData.location_info = repository.GetLocation(id); 
+            returnedData.location_info = repository.GetLocation(id);
             returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
             returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
             returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);

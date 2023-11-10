@@ -39,6 +39,13 @@ namespace SELMs.Repositories.Implements
             return location;
         }
 
+        public dynamic SaveLocations(List<Location> locations)
+        {
+            db.Locations.AddRange(locations);
+            db.SaveChanges();
+            return locations;
+        }
+
         public dynamic GetLocationList(Argument arg)
         {
             dynamic categories = null;
@@ -95,6 +102,6 @@ namespace SELMs.Repositories.Implements
             }
                 , commandType: CommandType.StoredProcedure).ToList();
             return ListEquipInLocation;
-        }
+        }        
     }
 }
