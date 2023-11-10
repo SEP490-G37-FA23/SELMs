@@ -65,7 +65,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Equipment_Project_History equipmentProjectHistory = mapper.Map<Equipment_Project_History>(equipmentProjectHistoryDTO);
-				bool addNewSuccessfull = await equipmentProjectHistoryRepository.Add(equipmentProjectHistory);
+				bool addNewSuccessfull = await equipmentProjectHistoryRepository.SaveHistory(equipmentProjectHistory);
 
 				if (addNewSuccessfull)
 					return Ok("Thêm mới thành công");

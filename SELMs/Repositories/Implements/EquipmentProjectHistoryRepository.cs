@@ -10,7 +10,7 @@ namespace SELMs.Repositories.Implements
 
 		private readonly SELMsContext db = new SELMsContext();
 
-		public async Task<bool> Add(Equipment_Project_History equipmentProjectHistory)
+		public async Task<bool> SaveHistory(Equipment_Project_History equipmentProjectHistory)
 		{
 			db.Equipment_Project_History.Add(equipmentProjectHistory);
 			return (await db.SaveChangesAsync() > 0);
