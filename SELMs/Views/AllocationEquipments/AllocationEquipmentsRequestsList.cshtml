@@ -27,6 +27,10 @@
                         <div class="col-md-3">
                             <a class="btn btn-primary" href="@Url.Action("CreateNewAllocationEquipmentsRequest", "AllocationEquipments")">Tạo yêu cầu mới</a>
                         </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" data-bs-toggle="modal"
+                               data-bs-target="#allocation-list">Test</a>
+                        </div>
                     </div>
                     <div>
                         <p></p>
@@ -60,4 +64,5 @@
         </div>
     </div>
 </section>
+@Html.Partial("AllocationEquipmentsRequestsListPV")
 

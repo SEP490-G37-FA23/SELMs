@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "NotificationList";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <h4 class="text-center">Danh sách đề xuất</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/News/NotificationList">Danh sách đề xuất</a></li>
+        </ol>
+    </nav>
+    <form class="mt-5">
+        <div class="card">
+            <div class="mt-3 ms-3 row">
+                <div class="col-2">
+                    <a class="btn btn-primary" href="@Url.Action("CreateNewNotification", "News")">Tạo đề xuất mới</a>
+                </div>
+            </div>
+
+
+            <div class="row mt-4 ms-2">
+
+                <div class="col-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" aria-label="Loại phiếu">
+                            <option selected>Thông báo</option>
+                            <option value="1">Báo cáo</option>
+                            <option value="2">...</option>
+                        </select>
+                        <label for="floatingSelect">Loại đề xuất</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary ms-3">Lọc</button>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <table class="table table-bordered mt-3">
+
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Người thực hiện</th>
+                            <th>Loại phiếu</th>
+                            <th>Ghi chú</th>
+                            <th>Tickbox</th>
+                            <th>Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input class="form-check-input ms-3" type="checkbox" value="" ></td>
+                            <td>
+                                <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+
+                                <a class="btn btn-success" href="@Url.Action("NotificationDetail", "News")"><i class="fas fa-info-circle"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <th>2</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input class="form-check-input ms-3" type="checkbox" value="" ></td>
+                            <td>
+                                <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+
+                                <a class="btn btn-success" href="@Url.Action("NotificationDetail", "News")"><i class="fas fa-info-circle"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                        <tr>
+                            <th>3</th>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input type="text" style="border: hidden; width:90%" /></td>
+                            <td><input class="form-check-input ms-3" type="checkbox" value=""></td>
+                            <td>
+                                <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                
+                                <a class="btn btn-success" href="@Url.Action("NotificationDetail", "News")"><i class="fas fa-info-circle"></i></a>
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </form>
+</section>
+

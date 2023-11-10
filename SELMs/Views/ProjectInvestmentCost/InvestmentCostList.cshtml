@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "InvestmentCostList";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <h4 class="text-center">Danh sách chi phí phát sinh cho dự án</h4>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="~/Views/ProjectInvestmentCost/InvestmentCostList.cshtml">Danh sách chi phí phát sinh cho dự án</a></li>
+        </ol>
+    </nav>
+    <form class="mt-5">
+
+        <div class="card">
+            <div class="mt-4 ms-3">
+                <a class="btn btn-primary" href="@Url.Action("CreateInvestmentCost", "ProjectInvestmentCost")">Thêm dự án</a>
+                <button type="button" class="btn btn-primary ms-2">
+                    Xuất
+                    danh sách
+                </button>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Mã DN</th>
+                            <th>Ngày đề nghị</th>
+                            <th>Người đề nghị</th>
+                            <th>Lý do</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Tác vụ</th>
+                            <th>Người duyệt</th>
+                            <th>Ghi chú</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td></td>
+                            <td></td>
+                            <td><input placeholder="Search..." style="width:70%"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Tiêu đề 1</td>
+                            <td>DN00000001</td>
+                            <td>12/05/2023</td>
+                            <td>LyMT</td>
+                            <td></td>
+                            <td></td>
+                            <td>Đã duyệt</td>
+                            <td class="row">
+                                <a class="btn btn-primary mb-2" href="@Url.Action("InvestmentCostDetail", "ProjectInvestmentCost")">Sửa</a>
+                                <button class="btn btn-danger mb-2">Hủy</button>
+                                <button class="btn btn-success">Chờ duyệt</button>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Tiêu đề 1</td>
+                            <td>DN00000001</td>
+                            <td>12/05/2023</td>
+                            <td>LyMT</td>
+                            <td></td>
+                            <td></td>
+                            <td>Đã duyệt</td>
+                            <td class="row">
+                                <a class="btn btn-primary mb-2" href="@Url.Action("InvestmentCostDetail", "ProjectInvestmentCost")">Sửa</a>
+                                <button class="btn btn-danger mb-2">Hủy</button>
+                                <button class="btn btn-success">Chờ duyệt</button>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </form>
+</section>
+
+
