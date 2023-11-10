@@ -78,7 +78,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetProject(id);
+                returnedData = service.GetProject(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
