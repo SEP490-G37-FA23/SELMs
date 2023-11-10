@@ -60,7 +60,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
     $scope.GetDetailLocation(url);
     $scope.showProject = false;
     $scope.showEquip = false;
-    $scope.showOverview = false;
+    $scope.showOverview = true;
     $scope.showSubLocation = false;
     $scope.showMembers = false;
 
@@ -79,12 +79,25 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
         $scope.showSubLocation = false;
         $scope.showMembers = false;
     }
-    $scope.GetSubLocation = function () {
+    $scope.GetSubLocation = function (item) {
         $scope.showProject = false;
         $scope.showEquip = false;
         $scope.showOverview = false;
         $scope.showSubLocation = true;
         $scope.showMembers = false;
+        document.getElementById('id_qrcode_sub').innerHTML = '';
+        new QRCode(document.getElementById('id_qrcode_sub'), 'https://localhost:44335/Locations/LocationDetails/' + item.location_id);
+        var partialUrl = origin + '/api/v1/locations/detail/' + item.location_id;
+        $http.post(partialUrl)
+            .then(function (response) {
+                console.log(response.data);
+                $scope.DetailSubLocation = response.data.location_info;
+                $scope.ListSubLocation_L3 = response.data.ListSubLocation;
+
+                $scope.ListEquipmentInSubLocation = response.data.ListEquipmentInLocation;
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
     }
     $scope.GetProject = function () {
         $scope.showProject = true;
@@ -135,4 +148,147 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
     $scope.DeleteMemberLocation = function (list, index) {
         list.splice(index, 1);
     }
+
+
+    $scope.CreateNewSubLocation_L2 = function () {
+        $('#NewSubLocation_L2').show();
+    }
+
+    $scope.HandleNewSubLocation_L3 = function (ListSubLocation_L3,Location_L2) {
+        ListSubLocation_L3.push({
+            location_code: '',
+            location_desciption: '',
+            parent_location_id: Location_L2.location_id,
+            location_level: 3,
+            is_active: true
+        })
+    }
+    $scope.DeleteMemberProject = function (ListSubLocation_L3, index) {
+        ListSubLocation_L3.splice(index, 1);
+    }
+
+    $scope.UpdateLocation = function (location) {
+        var data = {
+            location_code: location.location_code,
+            location_desciption: location.location_desciption,
+            parent_location_id: location.parent_location_id,
+            location_level: location.location_level,
+            is_active: true
+            }
+        var partialUrl = origin + '/api/v1/locations/update/' + location.location_id;
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+
+    }
+    var today = new Date();
+    $scope.ListNewEquipmentInLocation = [];
+
+    $scope.LoadEquipmentsList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: '',
+            text1: '',
+            text2: text,
+            text3: ''
+
+        }
+        $http.post(origin + '/api/v1/equipments', data).then(function (response) {
+            $scope.ListEquips = response.data;
+        });
+    }
+    $scope.HandelEquip = function (eq, item) {
+        item.system_equipment_code = eq.system_equipment_code;
+        item.standard_equipment_code = eq.standard_equipment_code;
+        item.equipment_name = eq.equipment_name;
+
+    }
+
+    $scope.LoadAllSubLocationList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: text,
+            id: $scope.DetailLocation.location_id
+
+        }
+        $http.post(origin + '/api/v1/locations/all-sub-location', data).then(function (response) {
+            $scope.ListAllSubLocation = response.data.Result;
+        });
+    }
+
+    $scope.HandelSubLocation = function (lc, item) {
+        item.location_id = lc.location_id;
+        item.location_desciption = lc.location_desciption;
+        item.text = lc.location_code;
+
+    }
+
+    $scope.HandleNewEquipInLocation = function (ListNewEquipmentInLocation) {
+        ListNewEquipmentInLocation.push({
+            system_equipment_code: '',
+            standard_equipment_code: '',
+            equipment_name: '',
+            location_id: $scope.DetailLocation.location_id,
+            location_desciption: $scope.DetailLocation.location_desciption,
+            responsibler: username,
+            from_date: today,
+            note: ''
+        })
+    }
+    $scope.DeleteNewEquipInLocation = function (ListNewEquipmentInLocation, index) {
+        ListNewEquipmentInLocation.splice(index, 1);
+    }
+
+    $scope.SaveEquiInLocation = function () {
+        var ListSave = [];
+        $scope.ListNewEquipmentInLocation.forEach(item => {
+            ListSave.push({
+                system_equipment_code: item.system_equipment_code,
+                location_id: item.location_id,
+                note: item.note
+                })
+        })
+        var data = {
+            ListEquipLocationHistory: ListSave
+        }
+        var partialUrl = origin + '/api/v1/locations/equip-location-history';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thiết bị vào vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.SaveMemberJoinLocation = function () {
+        var ListSave = [];
+        $scope.ListMembersJoinLocation.forEach(item => {
+            ListSave.push({
+                user_code: item.user_code,
+                location_id: $scope.DetailLocation.location_id,
+                note: item.note
+            })
+        })
+        var data = {
+            ListMembersJoinLocation: ListSave
+        }
+        console.log(data);
+        var partialUrl = origin + '/api/v1/locations/member-location-history';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thành viên sử dụng vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+
 });

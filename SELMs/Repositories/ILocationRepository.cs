@@ -13,6 +13,7 @@ namespace SELMs.Repositories
     {
         dynamic GetLocationList();
         dynamic GetLocationList(Argument arg);
+        dynamic GetAllSubLocationList(Argument arg);
         dynamic GetLocation(int id);
         dynamic SaveLocation(Location location);
         void UpdateLocation(Location location);
@@ -21,5 +22,9 @@ namespace SELMs.Repositories
         List<LocationDTO> GetListSubLocation(int id);
         List<ProjectDTO> GetListProjectInLocation(int id);
         List<EquipmentDTO> GetListEquipInLocation(int id);
+
+        dynamic GetEquipment_Location_History(string system_equipment_code, int location_id);
+        dynamic AddNewEquipLocationHistory(Equipment_Location_History item);
+        void UpdateEquipLocationHistory(Equipment_Location_History item);
     }
 }
