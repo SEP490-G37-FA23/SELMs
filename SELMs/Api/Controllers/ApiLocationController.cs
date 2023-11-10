@@ -14,11 +14,12 @@ using System.Web.Http;
 using SELMs.Api.DTOs;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
+using System.Data.Entity.Core.Metadata.Edm;
 
 namespace SELMs.Api.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class ApiLocationController: ApiController
+    public class ApiLocationController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ApiLocationController));
 
@@ -34,7 +35,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData =  repository.GetLocationList();
+                returnedData = repository.GetLocationList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -50,12 +51,33 @@ namespace SELMs.Api.Controllers
         #region Get locations list by level
         [HttpPost]
         [Route("locations")]
-        public dynamic GetLocationList(Argument args )
+        public dynamic GetLocationList(Argument args)
         {
             try
             {
                 dynamic returnedData = null;
                 returnedData = repository.GetLocationList(args);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get all sub locations list by id
+        [HttpPost]
+        [Route("locations/all-sub-location")]
+        public dynamic GetAllSubLocationList(Argument args)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetAllSubLocationList(args);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -91,13 +113,14 @@ namespace SELMs.Api.Controllers
 
         #region Add new location
         [HttpPost]
-        [Route("api/locations/new-location")]
-        public async Task<IHttpActionResult> SaveLocation(LocationDTO dto)
+        [Route("locations/new-location")]
+        public async Task<IHttpActionResult> SaveLocation([FromBody] LocationRequest locationRequest)
         {
             try
             {
-                Location location = mapper.Map<Location>(dto);
-                service.SaveLocation(location);
+                Location location = mapper.Map<Location>(locationRequest.Location);
+                List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
+                service.SaveLocation(location, subLocations);
                 return Ok();
             }
             catch (Exception ex)
@@ -111,14 +134,16 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Update location
-        [HttpPut]
-        [Route("locations/{id}")]
-        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO location)
+        [HttpPost]
+        [Route("locations/update/{id}")]
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationRequest locationRequest)
         {
             try
             {
-                Location mem = mapper.Map<Location>(location);
-                service.UpdateLocation(id, mem);
+                Location location = mapper.Map<Location>(locationRequest.Location);
+                List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
+                service.SaveLocation(location, subLocations);
+                service.UpdateLocation(id, location, subLocations);
                 return Ok();
             }
             catch (Exception ex)
@@ -157,15 +182,37 @@ namespace SELMs.Api.Controllers
         public DetailLocationDTO GetDetailLocation(int id)
         {
             DetailLocationDTO returnedData = new DetailLocationDTO();
-            returnedData.location_info = repository.GetLocation(id); 
+            returnedData.location_info = repository.GetLocation(id);
             returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
             returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
             returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);
-
-
             return returnedData;
 
 
+        }
+        #endregion
+
+        #region Add equip in  location
+        [HttpPost]
+        [Route("locations/equip-location-history")]
+        public async Task<IHttpActionResult> SaveEquipLocationHistory(EquipLocationHistoryDTO dto)
+        {
+            try
+            {
+                foreach(var item in dto.ListEquipLocationHistory)
+                {
+                    service.SaveEquipLocationHistory(item);
+                }
+               
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
         }
         #endregion
     }

@@ -6,22 +6,21 @@ using System.Web.Mvc;
 
 namespace SELMs.Controllers.Equipment
 {
-    public class ImportEquipmentsController : Controller
+    public class CategoryController : Controller
     {
-        // GET: ImportEquipments
-        public ActionResult CreateNewImportEquipmentsProposal()
-        {
-            return View();
-        }
-        public ActionResult ImportEquipmentsProposalsList()
+        // GET: Categories
+        public ActionResult CreateNewCategory()
         {
             return View();
         }
 
-        public ActionResult ImportEquipmentsProposalsDetail()
+        public ActionResult CategoriesList()
         {
             return View();
         }
-
+        public ActionResult CategoryDetail()
+        {
+            return View();
+        }
     }
 }

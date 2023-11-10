@@ -64,7 +64,6 @@ app.controller('LocationsListCtrl', function ($scope, $http, $sce) {
         var data = {
             username: username,
             text: $scope.location_name,
-            level:1,
             id: $scope.parent_id
         }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
