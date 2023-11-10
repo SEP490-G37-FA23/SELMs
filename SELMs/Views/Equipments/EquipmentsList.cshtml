@@ -88,7 +88,7 @@
                                     <td>{{item.usage_status}}</td>
                                     <td>
                                         <a class="btn btn-primary" data-bs-toggle="modal"
-                                           data-bs-target="#user-details" ng-click="LoadEquipDetails(item)">Details</a>
+                                           data-bs-target="#user-details" ng-click="LoadEquipDetails(item)"><i class="far fa-info-square" style="color: #ffffff;"></i></a>
                                         <button class="btn btn-danger" ng-click="DeleteEquip(item)">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
@@ -110,5 +110,5 @@
             </div>
         </div>
     </section>
-    @Html.Partial("EquipmentListPV")
+    @*@Html.Partial("EquipmentListPV")*@
 </div>

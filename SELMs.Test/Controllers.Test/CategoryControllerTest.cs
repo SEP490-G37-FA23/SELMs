@@ -49,7 +49,7 @@ namespace SELMs.Test.Controllers.Test
 		{
 			try
 			{
-				var actionResult = await apiCategoryController.SearchCategories(argument);
+				var actionResult = await apiCategoryController.GetCategories(argument);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 

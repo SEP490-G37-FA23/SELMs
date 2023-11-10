@@ -42,7 +42,7 @@ namespace SELMs.Api.Controllers
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
                 return BadRequest($"{ex.Message} \n {ex.StackTrace}");
                 throw;
             }
@@ -79,11 +79,13 @@ namespace SELMs.Api.Controllers
             returnedData.equip = repository.GetDetailEquipment(code);
             returnedData.ListComponentEquips = (List<EquipComponentDTO>)repository.GetListComponentEquips(code);
             return returnedData;
+
+
         }
         #endregion
 
         #region Add new equipment
-       
+
         [HttpPost]
         [Route("equipments/new-equipment")]
         public async Task<IHttpActionResult> SaveEquipment(EquipmentNew data)
@@ -155,26 +157,6 @@ namespace SELMs.Api.Controllers
             {
                 Equipment mem = mapper.Map<Equipment>(equipment);
                 service.UpdateEquipment(id, mem);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Delete Equipment
-        [HttpDelete]
-        [Route("equipments/delete/{id}")]
-        public async Task<IHttpActionResult> DeleteEquipments(int id)
-        {
-            try
-            {
-                repository.DeleteEquipment(id);
                 return Ok();
             }
             catch (Exception ex)

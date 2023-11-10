@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
+app.controller('CategoriesListCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -58,49 +58,20 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
 
     //===============Danh sách khách hàng=====================
     $scope.text = '';
-    $scope.text1 = '';
-    $scope.text2 = '';
-    $scope.categoryCode = 'C-More';
-    $scope.LoadEquipmentsList = function () {
+    $scope.LoadCategorisList = function () {
         var data = {
             username: username,
             isadmin: isadmin,
             role: role,
-            text: $scope.text,
-            text1: $scope.text1,
-            text2: $scope.text2,
-            text3: $scope.categoryCode
-
+            text: $scope.text
         }
-        $http.post(origin + '/api/v1/equipments', data).then(function (response) {
-            $scope.ListEquips = response.data;
-            $scope.sumEquips = $scope.ListEquips.length;
-        });
-    }
-
-    $scope.LoadEquipmentsList();
-
-    $scope.LoadCategoriesList = function () {
-
-        $http.post(origin + '/api/v1/categories').then(function (response) {
+        $http.post(origin + '/api/v1/categories-list', data).then(function (response) {
             $scope.ListCategories = response.data;
         });
     }
 
-    $scope.LoadCategoriesList();
+    $scope.LoadCategorisList();
 
-    $scope.DeleteEquip = function (equip) {
-        var partialUrl = origin + '/api/v1/equipments/delete/' + equip.equipment_id;
-        $http.post(partialUrl)
-            .then(function (response) {
-                $scope.SuccessSystem('Xóa thiết bị thành công');
-                $scope.LoadEquipmentsList();
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
-    }
+  
 
-    $scope.LoadEquipDetails = function (equip) {
-        window.location.href = "https://localhost:44335/Equipments/EquipmentDetails/" + equip.system_equipment_code;
-    }
 });

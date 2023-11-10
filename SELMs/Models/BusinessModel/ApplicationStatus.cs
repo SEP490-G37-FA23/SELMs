@@ -8,6 +8,7 @@ namespace SELMs.Models.BusinessModel
 {
     public static class ApplicationStatus
     {
+        public const string DRAFT = "DRAFT";
         public const string PENDING = "PENDING";
         public const string APPROVED = "APPROVED";
         public const string REJECTED = "REJECTED";

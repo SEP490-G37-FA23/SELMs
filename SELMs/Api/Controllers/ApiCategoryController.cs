@@ -46,26 +46,26 @@ namespace SELMs.Api.Controllers
 		}
 		#endregion
 
-		#region Search Category
-		[HttpPost]
-		[Route("categories/search")]
-		public async Task<IHttpActionResult> SearchCategories(Argument args)
-		{
-			try
-			{
-				dynamic returnedData = null;
-				returnedData = await repository.SearchCategories(args);
-				return Ok(returnedData);
-			}
-			catch (Exception ex)
-			{
-				Log.Error("Error: ", ex);
-				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-				throw;
-			}
-		}
-		#endregion
+        #region Search Category
+        [HttpPost]
+        [Route("categories-list")]
+        public async Task<IHttpActionResult> GetCategories(Argument args)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await repository.SearchCategories(args);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n { ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
 
 		#region Get category by id
 		[HttpGet]

@@ -174,6 +174,7 @@
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\ProjectDTO.cs" />
+    <Compile Include="Api\DTOs\ProjectRequest.cs" />
     <Compile Include="Api\DTOs\UserDTO.cs" />
     <Compile Include="Api\DTOs\UserRequest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
+    <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -283,18 +285,6 @@
     <Compile Include="Models\Member_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetDetailEquipment_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetEquipmentsList_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetMembersList_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Proc_GetRolesList_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -321,6 +311,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -650,7 +643,12 @@
     <Content Include="Content\css\assets\vendor\tinymce\tinymce.min.js" />
     <Content Include="Content\css\forms\Readme.txt" />
     <Content Include="Content\Images\default.svg" />
-    <Content Include="Content\js\HumanResouce\MemberCtrl.js" />
+    <Content Include="Content\js\HumanResouce\CreateNewMemberCtrl.js" />
+    <Content Include="Content\js\HumanResouce\MemberListCtrl.js" />
+    <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
     <Content Include="Content\Script\node_modules\angular-web-notification\angular-web-notification.js" />
@@ -877,6 +875,7 @@
     <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectMember.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectEquipments.cshtml" />
+    <Content Include="Views\Equipments\EquipmentDetails.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
@@ -893,6 +892,7 @@
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="Controllers\Member\" />
     <Folder Include="obj\Debug\" />
+    <Folder Include="Views\ApiEquipmentImport\" />
     <Folder Include="Views\EquipmentManagementReports\" />
   </ItemGroup>
   <ItemGroup>
