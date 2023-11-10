@@ -52,7 +52,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
 
     $scope.LoadLocationsList();
 
-    $scope.text = fullname;
+    $scope.text = '';
     $scope.LoadMembersList = function (text) {
         var data = {
             username: username,
