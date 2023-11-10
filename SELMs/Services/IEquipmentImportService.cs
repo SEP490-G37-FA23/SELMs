@@ -12,6 +12,6 @@ namespace SELMs.Services
     {
         Task<ApplicationModel> GetApplication(int id); 
         Task SaveApplication(Equipment_Import_Application application, List<Equipment_Import_Application_Detail> applicationDetails);
-        Task UpdateApplication(Equipment_Import_Application application, List<Equipment_Import_Application_Detail> applicationDetails);
+        Task UpdateApplication(int id, Equipment_Import_Application application, List<Equipment_Import_Application_Detail> applicationDetails);
     }
 }

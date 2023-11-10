@@ -39,11 +39,25 @@ namespace SELMs.Services.Implements
             repository.SaveApplicationDetails(applicationDetails);
         }
 
-
-
-        public Task UpdateApplication(Equipment_Import_Application application, List<Equipment_Import_Application_Detail> applicationDetails)
+        public async Task UpdateApplication(int id, Equipment_Import_Application application, List<Equipment_Import_Application_Detail> applicationDetails)
         {
-            throw new NotImplementedException();
+            if (repository.GetApplication(id) != null)
+            {
+                application.application_id = id;
+                repository.UpdateApplication(application);
+            }
+            foreach (Equipment_Import_Application_Detail item in applicationDetails)
+            {
+                if(item.application_detail_id != null && repository.GetApplicationDetail(item.application_detail_id) != null)
+                {
+                    repository.UpdateApplicationDetail(item);
+                }
+                else
+                {
+                    item.ei_application_code = application.ei_application_code;
+                    repository.SaveApplicationDetail(item);
+                }
+            }
         }
 
         string GenerateApplicationCode()

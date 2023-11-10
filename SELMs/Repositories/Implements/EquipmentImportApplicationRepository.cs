@@ -92,18 +92,18 @@ namespace SELMs.Repositories.Implements
             return application;
         }
 
-        public dynamic SaveApplicationDetail(Equipment_Import_Application_Detail application)
+        public dynamic SaveApplicationDetail(Equipment_Import_Application_Detail applicationDetail)
         {
-            db.Equipment_Import_Application_Detail.Add(application);
+            db.Equipment_Import_Application_Detail.Add(applicationDetail);
             db.SaveChanges();
-            return application;
+            return applicationDetail;
         }
 
-        public dynamic SaveApplicationDetails(List<Equipment_Import_Application_Detail> applications)
+        public dynamic SaveApplicationDetails(List<Equipment_Import_Application_Detail> applicationDetails)
         {
-            db.Equipment_Import_Application_Detail.AddRange(applications);
+            db.Equipment_Import_Application_Detail.AddRange(applicationDetails);
             db.SaveChanges();
-            return applications;
+            return applicationDetails;
         }
 
         public void UpdateApplicationDetail(Equipment_Import_Application_Detail applicationDetail)

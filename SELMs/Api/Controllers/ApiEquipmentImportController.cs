@@ -51,7 +51,7 @@ namespace SELMs.Api.Controllers
         #region Add new application
         [HttpPost]
         [Route("equipment-import-application/new-application")]
-        public async Task<IHttpActionResult> SaveCategory([FromBody] EquipmentImportApplicationRequest applicationRequest)
+        public async Task<IHttpActionResult> SaveApplication([FromBody] EquipmentImportApplicationRequest applicationRequest)
         {
             try
             {
@@ -69,5 +69,29 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Update application
+        [HttpPut]
+        [Route("equipment-import-application/new-application")]
+        public async Task<IHttpActionResult> UpdateApplication(int id, [FromBody] EquipmentImportApplicationRequest applicationRequest)
+        {
+            try
+            {
+                Equipment_Import_Application application = mapper.Map<Equipment_Import_Application>(applicationRequest.application);
+                List<Equipment_Import_Application_Detail> details = mapper.Map<List<Equipment_Import_Application_Detail>>(applicationRequest.application_details);
+                service.UpdateApplication(id, application, details);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+
     }
 }
