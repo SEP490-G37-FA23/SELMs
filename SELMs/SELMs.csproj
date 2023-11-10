@@ -151,6 +151,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Controllers\ApiEquipmentProjectHistoryController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentLocationHistoryController.cs" />
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentAllocationController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
@@ -167,6 +169,8 @@
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentLocationHistoryDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentProjectHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
@@ -320,18 +324,24 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
+    <Compile Include="Repositories\IEquipmentProjectHistoryRepository.cs" />
     <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentHandoverFormRepository.cs" />
     <Compile Include="Repositories\IEquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
+    <Compile Include="Repositories\IEquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentLocationHistoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentProjectHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentHandoverFormRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
+    <Compile Include="Repositories\IEquipmentLocationHistoryRepository.cs" />
+    <Compile Include="Repositories\Implements\EquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
@@ -339,12 +349,16 @@
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IEquipmentAllocationService.cs" />
+    <Compile Include="Services\IEquipmentLocationHistoryService.cs" />
+    <Compile Include="Services\IEquipmentProjectHistoryService.cs" />
     <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentLocationHistoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentProjectHistoryService.cs" />
     <Compile Include="Services\Implements\EquipmentAllocationService.cs" />
     <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
