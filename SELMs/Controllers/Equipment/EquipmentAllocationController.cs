@@ -4,25 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SELMs.Controllers.Location
+namespace SELMs.Controllers.Equipment
 {
-    public class LocationsController : Controller
+    public class EquipmentAllocationController : Controller
     {
-        public ActionResult LocationsList()
+        // GET: AllocationEquipments
+        public ActionResult CreateNewEAA()
         {
             return View();
         }
-        public ActionResult LocationDetails()
+        public ActionResult EAAList()
         {
             return View();
         }
-        public ActionResult CreateNewLocation()
+        public ActionResult EAADetails()
         {
             return View();
         }
-        public ActionResult LocationManagement()
+
+        public ActionResult DeliveryEquipmentsList()
         {
             return View();
         }
+
     }
 }

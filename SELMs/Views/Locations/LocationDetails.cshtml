@@ -12,6 +12,7 @@
     <input type="hidden" id="username" name="username" value="@Session["username"]" />
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div id="notification" class="col-md-12"></div>
     <div class="row">
         <div class="card col-md-3">
             <div class="card-body">
@@ -36,8 +37,8 @@
 
                     <!-- List group with Advanced Contents -->
                     <div ng-repeat="item in ListSubLocation">
-                        <div class="list-group">
-                            <a class="list-group-item list-group-item-action" aria-current="true" ng-lick="GetSubLocation(item)">
+                        <div class="list-group" ng-click="GetSubLocation(item)">
+                            <a class="list-group-item list-group-item-action" aria-current="true">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">{{item.location_code}}</h5>
                                     <small>{{item.number_equip}}</small>
@@ -48,7 +49,15 @@
                         </div>
                     </div>
                     <!-- End List group Advanced Content -->
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action" aria-current="true" data-bs-toggle="modal" data-bs-target="#NewSubLocation_L2">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Thêm vị trí mới</h5>
+                                <small><i class="far fa-plus" style="color: #005c0b;"></i></small>
+                            </div>
+                        </a>
 
+                    </div>
                 </div>
             </div>
 
@@ -81,7 +90,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputEmail4" class="form-label">Miêu tả</label>
-                                    <input type="email" class="form-control" ng-model="DetailLocation.location_desciption">
+                                    <input type="text" class="form-control" ng-model="DetailLocation.location_desciption">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -89,7 +98,7 @@
                                 <div id="id_qrcode" class="qrcode"></div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" ng-click="UpdateLocation(DetailLocation)">Cập nhật</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </div><!-- Vertical Form -->
@@ -100,6 +109,7 @@
             </form>
             <form ng-show="showEquip">
                 <h5 class="card-title">Danh sách thiết bị trong phòng lab</h5>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddEquipToLocation">Thêm thiết bị vào phòng lab</button>
                 <div class="row">
                     <div class="col-md-3"> Tìm kiếm thiết bị:</div>
                     <div class="col-md-9">  <input type="text" class="form-control" ng-model="equip_search" placeholder="Tìm tên thiết bị"></div>
@@ -237,11 +247,387 @@
                         <td colspan="5" class="text-center" ng-click="HandleNewMember()">Thêm thành viên</td>
                     </tr>
                 </table>
-
+                <button class="btn btn-primary" ng-click="SaveMemberJoinLocation()">Cập nhật</button>
             </form>
+            <div ng-show="showSubLocation">
+                <h6 class=" card-title">
+                    Thông tin vị trí {{DetailSubLocation.location_code}} - {{DetailSubLocation.location_desciption}}
+                </h6>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab"
+                                data-bs-target="#info" type="button" role="tab" aria-controls="home"
+                                aria-selected="true">
+                            Thông tin chung
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="equipment-tab" data-bs-toggle="tab"
+                                data-bs-target="#equipment" type="button" role="tab"
+                                aria-controls="equipment" aria-selected="false">
+                            Danh sách thiết bị
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-2" id="myTabContent">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel"
+                         aria-labelledby="info-tab">
+                        <div class="row g-3">
+                            <div class="col-8">
+                                <div class="col-12">
+                                    <label for="inputNanme4" class="form-label">Mã vị trí</label>
+                                    <input type="text" class="form-control" ng-model="DetailSubLocation.location_code">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail4" class="form-label">Miêu tả</label>
+                                    <input type="email" class="form-control" ng-model="DetailSubLocation.location_desciption">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="equipId" class="form-label">QR</label>
+                                <div id="id_qrcode_sub" class="qrcode"></div>
+                            </div>
 
+                        </div>
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã vị trí</th>
+                                    <th scope="col">Miêu tả</th>
+                                    <th scope="col">Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ListSubLocation_L3">
+                                    <td>
+                                        <input ng-model="item.location_code" class="form-control" />
+                                    </td>
+                                    <td><input ng-model="item.location_desciption" class="form-control" /></td>
+
+                                    <td>
+                                        <i class="far fa-edit" style="color: #d67a24;" ng-click="UpdateSubLocation_L3(item)"></i>
+                                        <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteMemberProject(ListSubLocation_L3,$index)"></i>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                            <tr>
+                                <td colspan="5" class="text-center" ng-click="HandleNewSubLocation_L3(ListSubLocation_L3,DetailSubLocation)">Thêm vị trí mới</td>
+                            </tr>
+                        </table>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" ng-click="UpdateSubLocation_L2(DetailSubLocation)">Cập nhật</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="equipment" role="tabpanel"
+                         aria-labelledby="equipment-tab">
+                        <div class="row">
+                            <div class="col-md-3"> Tìm kiếm thiết bị:</div>
+                            <div class="col-md-9">  <input type="text" class="form-control" ng-model="equip_search" placeholder="Tìm tên thiết bị"></div>
+
+                        </div>
+                        <br />
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Mã hệ thống</th>
+                                    <th scope="col">Mã chuẩn</th>
+                                    <th scope="col">Tên thiết bị</th>
+                                    <th scope="col">Vị trí</th>
+                                    <th scope="col">Quản lý</th>
+                                    <th scope="col">Từ ngày</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in filtered = (ListEquipmentInSubLocation |filter: {equipment_name:equip_search})">
+                                    <td scope="row">{{$index+1}}</td>
+                                    <td scope="row">{{item.system_equipment_code}}</td>
+                                    <td scope="row">{{item.standard_equipment_code}}</td>
+                                    <td scope="row">{{item.equipment_name}}</td>
+                                    <td scope="row">{{item.location_desciption}}</td>
+                                    <td scope="row">{{item.fullname}}</td>
+                                    <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
+
+                                    <td class="text-center">
+                                        <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
+                                        <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
+    <div class="modal fade" id="project-list" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="width:1500px; margin-left:-400px;">
+                <div class="modal-header">
+                    <h5 class="modal-title">Danh Sách Dự Án</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <section class="section">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Danh Sách Dự Án</h5>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <a class="btn btn-primary" href="@Url.Action("CreateNewProject", "ProjectPortfolio")">Thêm dự án mới</a>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary">Xuất file Excel</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p></p>
+                                    </div>
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã dự án</th>
+                                                <th scope="col">Dự ánán</th>
+                                                <th scope="col">Quản lý</th>
+                                                <th scope="col">Tags</th>
+                                                <th scope="col">Tasks</th>
+                                                <th scope="col">Trạng Thái</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>P202309280001</td>
+                                                <td>Adaptive Cruise Control System</td>
+                                                <td>SonVT2</td>
+                                                <td>Research, Automation</td>
+                                                <td>52/250</td>
+                                                <td>
+                                                    <select id="projectStatus" class="form-select">
+                                                        <option selected>Pending</option>
+                                                        <option>Activate</option>
+                                                        <option>Overdue</option>
+                                                        <option>Finished</option>
+                                                        <option>Canceled</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#suakhachhang" ng-click="GetKH(item)">
+                                                        <i class="far fa-edit"></i>Edit
+                                                    </button>
+                                                    <button class="btn btn-danger" ng-click="DeleteKH(item)">
+                                                        <i class="fas fa-trash-alt"></i>Cancel
+                                                    </button>
+                                                    <a class="btn btn-primary" data-bs-toggle="modal"
+                                                       data-bs-target="#user-details">Finish</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    @*==============================Model new sub location l2===============================*@
+    <div class="modal fade" id="NewSubLocation_L2" tabindex="10000">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Thêm vị trị mới cho {{DetailLocation.location_desciption}}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row mt-5">
+                        <div>
+                            <div class="row mb-3">
+                                <label class=" col-form-label" for="inputName5">Mã chuẩn</label>
+                                <div>
+                                    <input type="text" class="form-control" id="inputText">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class=" col-form-label">Cấp độ</label>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example" disabled>
+                                        <option value="1">1</option>
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class=" col-form-label">Vị trí cha</label>
+                                <div>
+                                    <input type="text" class="form-control" ng-model="DetailLocation.location_code" disabled>
+                                </div>
+                            </div>
+
+                            <label class=" col-form-label">Miêu tả</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Mô tả danh mục" id="floatingTextarea"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*==============================Model new equip to location l1===============================*@
+<div class="modal fade" id="AddEquipToLocation" tabindex="10000">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Thêm danh sách thiết bị vào vị trí {{DetailLocation.location_desciption}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th scope="col">Mã hệ thống</th>
+                            <th scope="col">Mã chuẩn</th>
+                            <th scope="col">Tên thiết bị</th>
+                            <th scope="col" colspan="2">Vị trí</th>
+                            <th scope="col">Quản lý</th>
+                            <th scope="col">Từ ngày</th>
+                            <th scope="col">Ghi chú</th>
+                            <th scope="col">Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in ListNewEquipmentInLocation">
+                            <td scope="row">{{$index+1}}</td>
+                            <td scope="row">
+                                <ng-form>
+                                    <div class="form-equip">
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.system_equipment_code" ng-change="LoadEquipmentsList(item.system_equipment_code)" ng-focus="showtableEquip = true" ng-blur="showtableEquip = false" ng-model-options="{debounce:700}" required>
+                                    </div>
+
+                                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:500%" ng-show="showtableEquip">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="bg-blue text-white">
+                                                        <tr>
+                                                            <th>Mã hệ thống</th>
+                                                            <th>Mã chuẩn</th>
+                                                            <th>Tên thiết bị</th>
+                                                            <th>Tình trạng thiết bị</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr style="cursor:pointer" ng-mousedown="HandelEquip(eq, item);" ng-repeat="eq in ListEquips">
+                                                            <td>{{eq.system_equipment_code}}</td>
+                                                            <td>{{eq.standard_equipment_code}}</td>
+                                                            <td>{{eq.equipment_name}}</td>
+                                                            <td>{{eq.usage_status}}</td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-form>
+                            </td>
+                            <td scope="row">
+                                <input ng-model="item.standard_equipment_code" class="form-control" readonly />
+                            </td>
+                            <td scope="row">
+                                <input ng-model="item.equipment_name" class="form-control" readonly />
+                            </td>
+                            <td>
+                                <ng-form>
+                                    <div class="form-all-sub-location">
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadAllSubLocationList(item.text)" ng-focus="showtableSL = true" ng-blur="showtableSL = false" ng-model-options="{debounce:700}" required>
+                                        <input type="text" class="form-control" ng-model="item.location_id" style="display:none">
+                                    </div>
+
+                                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:500%" ng-show="showtableSL">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="bg-blue text-white">
+                                                        <tr>
+                                                            <th>Mã vị trí</th>
+                                                            <th>Miêu tả</th>
+                                                            <th>Level</th>
+                                                            <th>Mã vị trí cha</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr style="cursor:pointer" ng-mousedown="HandelSubLocation(lc,item);" ng-repeat="lc in ListAllSubLocation">
+                                                            <td>
+                                                                {{lc.location_code}}
+                                                            </td>
+                                                            <td>{{lc.location_desciption}}</td>
+                                                            <td>{{lc.parent_location_id}}</td>
+                                                            <td>{{lc.location_level}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-form>
+                            </td>
+                            <td scope="row">{{item.location_desciption}}</td>
+                            <td scope="row">
+                                <input ng-model="item.responsibler" class="form-control" readonly />
+                            </td>
+                            <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
+                            <td scope="row">
+                                <input ng-model="item.note" class="form-control" />
+                            </td>
+                            <td>  <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteNewEquipInLocation(ListNewEquipmentInLocation,$index)"></i></td>
+                        </tr>
+                        <tr><td colspan="8" ng-click="HandleNewEquipInLocation(ListNewEquipmentInLocation)" class="text-center">Thêm mới thiết bị</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary" ng-click="SaveEquiInLocation()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>

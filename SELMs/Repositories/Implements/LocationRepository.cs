@@ -45,7 +45,19 @@ namespace SELMs.Repositories.Implements
             categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetLocationList", new
             {
                 username = arg.username,
-                level = arg.level,
+                parent_id = arg.id,
+                location_name = arg.text
+            }
+                , commandType: CommandType.StoredProcedure);
+            return categories;
+        }
+
+        public dynamic GetAllSubLocationList(Argument arg)
+        {
+            dynamic categories = null;
+            categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetAllSubLocationList", new
+            {
+                username = arg.username,
                 parent_id = arg.id,
                 location_name = arg.text
             }
@@ -67,7 +79,6 @@ namespace SELMs.Repositories.Implements
             {
 
                 username = "",
-                level = 2,
                 parent_id = id,
                 location_name = ""
             }
@@ -95,6 +106,31 @@ namespace SELMs.Repositories.Implements
             }
                 , commandType: CommandType.StoredProcedure).ToList();
             return ListEquipInLocation;
+        }
+
+        public dynamic GetEquipment_Location_History(string system_equipment_code, int location_id)
+        {
+            dynamic his = db.Equipment_Location_History.Where(l => l.location_id == location_id && l.system_equipment_code == system_equipment_code).FirstOrDefault();
+            return his;
+        }
+
+        public dynamic AddNewEquipLocationHistory(Equipment_Location_History item)
+        {
+            Equipment_Location_History his = db.Equipment_Location_History.Where(l => l.system_equipment_code == item.system_equipment_code).FirstOrDefault();
+            his.to_date = DateTime.Now;
+            item.from_date = DateTime.Now;
+            db.Equipment_Location_History.Add(item);
+            db.SaveChanges();
+            return item;
+        }
+
+        public void UpdateEquipLocationHistory(Equipment_Location_History item)
+        {
+
+            Equipment_Location_History his = db.Equipment_Location_History.Where(l => l.location_id == item.location_id && l.system_equipment_code == item.system_equipment_code).FirstOrDefault();
+            his.from_date = DateTime.Now;
+            db.Entry(his).CurrentValues.SetValues(item);
+            db.SaveChangesAsync();
         }
     }
 }
