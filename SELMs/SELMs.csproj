@@ -161,7 +161,11 @@
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentAllocationApplicationDetailDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
@@ -269,6 +274,8 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Location_History.cs">
+		<DependentUpon>SELMs.tt</DependentUpon>
+	</Compile>
     <Compile Include="Models\Member_Equipment_Usage.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -317,6 +324,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -343,11 +356,13 @@
     <Compile Include="Repositories\Implements\ProjectRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
+    <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
     <Compile Include="Services\Implements\LocationService.cs" />
