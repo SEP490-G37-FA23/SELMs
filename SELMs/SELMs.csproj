@@ -357,9 +357,9 @@
     <Compile Include="Repositories\Implements\ProjectRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Services\ICategoryService.cs" />
+    <Compile Include="Services\IEquipmentAllocationService.cs" />
     <Compile Include="Services\IEquipmentLocationHistoryService.cs" />
     <Compile Include="Services\IEquipmentProjectHistoryService.cs" />
-    <Compile Include="Services\IEquipmentAllocationService.cs" />
     <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
@@ -664,10 +664,13 @@
     <Content Include="Content\Images\default.svg" />
     <Content Include="Content\js\HumanResouce\CreateNewMemberCtrl.js" />
     <Content Include="Content\js\HumanResouce\MemberListCtrl.js" />
+    <Content Include="Content\js\LabDicrector\Project\CreateNewProjectCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
+    <Content Include="Content\js\Stock\Locations\LocationDetailCtrl.js" />
+    <Content Include="Content\js\Stock\Locations\LocationsListCtrl.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
     <Content Include="Content\Script\node_modules\angular-web-notification\angular-web-notification.js" />
