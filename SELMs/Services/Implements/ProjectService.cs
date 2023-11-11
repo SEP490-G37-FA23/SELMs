@@ -14,7 +14,7 @@ namespace SELMs.Services.Implements
 	{
 		private IProjectRepository repository = new ProjectRepository();
 		private IMemberProjectHistoryRepository projectMemberHistoryRepository = new MemberProjectHistoryRepository();
-		private IEquipmentProjectHistoryRepository equipmentProjectHistoryRepository = new EquipmentProjectHistoryRepository();
+		private IEquipmentProjectHistoryRepository projectEquipmentHistoryRepository = new EquipmentProjectHistoryRepository();
 
 		public async Task<ProjectModel> GetProject(int id)
 		{
