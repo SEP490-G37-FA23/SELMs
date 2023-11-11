@@ -10,42 +10,42 @@ using System.Web;
 
 namespace SELMs.Services.Implements
 {
-    public class ProjectService : IProjectService
-    {
-        private IProjectRepository repository = new ProjectRepository();
-        private IMemberProjectHistoryRepository projectMemberHistoryRepository = new MemberProjectHistoryRepository();
-        private IEquipmentProjectHistoryRepository equipmentProjectHistoryRepository = new EquipmentProjectHistoryRepository();
+	public class ProjectService : IProjectService
+	{
+		private IProjectRepository repository = new ProjectRepository();
+		private IMemberProjectHistoryRepository projectMemberHistoryRepository = new MemberProjectHistoryRepository();
+		private IEquipmentProjectHistoryRepository equipmentProjectHistoryRepository = new EquipmentProjectHistoryRepository();
 
-        public async Task<ProjectModel> GetProject(int id)
-        {
-            Project project = repository.GetProject(id);
-            List<User> projectMembers = repository.GetProjectMembers(id);
-            List<Equipment> projectEquipments = repository.GetProjectEquipments(id);
-            ProjectModel projectModel = new ProjectModel()
-            {
-                Project = project,
-                ProjectEquipments = projectEquipments,
-                ProjectMembers = projectMembers
-            };
-            return projectModel;
-        }
+		public async Task<ProjectModel> GetProject(int id)
+		{
+			Project project = repository.GetProject(id);
+			List<User> projectMembers = repository.GetProjectMembers(id);
+			List<Equipment> projectEquipments = repository.GetProjectEquipments(id);
+			ProjectModel projectModel = new ProjectModel()
+			{
+				Project = project,
+				ProjectEquipments = projectEquipments,
+				ProjectMembers = projectMembers
+			};
+			return projectModel;
+		}
 
-        public async Task SaveProject(Project project, List<User> projectMembers, List<Equipment> projectEquipments)
-        {
-            project = repository.SaveProject(project);
+		public async Task SaveProject(Project project, List<User> projectMembers, List<Equipment> projectEquipments)
+		{
+			project = repository.SaveProject(project);
 
-            foreach (User user in projectMembers)
-            {
-                Member_Project_History history = new Member_Project_History()
-                {
-                    user_code = user.user_code,
-                    project_id = project.project_id,
-                    date = DateTime.Now,
-                    status = "ACTIVE",
-                    note = ""
-                };
-                projectMemberHistoryRepository.SaveHistory(history);
-            }
+			foreach (User user in projectMembers)
+			{
+				Member_Project_History history = new Member_Project_History()
+				{
+					user_code = user.user_code,
+					project_id = project.project_id,
+					date = DateTime.Now,
+					status = "ACTIVE",
+					note = ""
+				};
+				await projectMemberHistoryRepository.SaveHistory(history);
+			}
 
 			foreach (Equipment equipment in projectEquipments)
 			{
@@ -104,12 +104,12 @@ namespace SELMs.Services.Implements
             }
 		}
 
-        public async Task CancelProject(int id)
-        {
-            Project project = repository.GetProject(id);
-            project.end_date = DateTime.Now;
-            project.status = false;
-            repository.UpdateProject(project);
-        }
-    }
+		public async Task CancelProject(int id)
+		{
+			Project project = repository.GetProject(id);
+			project.end_date = DateTime.Now;
+			project.status = false;
+			repository.UpdateProject(project);
+		}
+	}
 }
