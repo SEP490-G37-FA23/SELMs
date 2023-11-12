@@ -3,67 +3,66 @@
     ViewBag.Title = "AllocationEquipmentList";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="~/Content/js/Stock/Locations/LocationManagementCtrl.js"></script>
+<div ng-app="myApp" ng-controller="LocationManagementCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div id="notification" class="col-md-12"></div>
+    <section class="section">
+    
+        <form class="mt-5">
+            <div class="card">
+                <h4 class="card-title">Danh sách vị trí</h4>
+                <div class="mt-4 ms-3">
+                    <a class="btn btn-primary" href="@Url.Action("CreateNewLocation", "Locations")">Thêm vị trí mới</a>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered mt-5">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã chuẩn</th>
+                                <th>Miêu tả</th>
+                                <th>Cấp độ</th>
+                                <th>Vị trí cha</th>
+                                <th>Tác vụ</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th>
 
-<section class="section">
-    <h4 class="text-center">Danh sách vị trí thiết bị</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/AllocationEquipment.cshtml">Danh sách vị trí thiết bị</a></li>
-        </ol>
-    </nav>
-    <form class="mt-5">
+                                </th>
+                                <th><input ng-model="text" class="form-control" ng-change="LoadAllLocationList(text)" /></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="lc in ListAllLocation">
+                                <th scope="row">{{$index + 1}}</th>
+                                <td>
+                                    {{lc.location_code}}
+                                </td>
+                                <td>{{lc.location_desciption}}</td>
+                                <td>{{lc.location_level}}</td>
+                                <td>{{lc.parent_location}}</td>
+                                <td>
+                                    <i class="far fa-edit" style="color: #d67a24;" ng-click="UpdateLocation(lc)"></i>
+                                    <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteLocation(lc)"></i>
 
-        <div class="card">
-            <div class="mt-4 ms-3">
-                <a class="btn btn-primary" href="@Url.Action("CreateNewAllocationEquipment", "AllocationEquipments")">Thêm danh mục mới</a>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered mt-5">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Mã chuẩn</th>
-                            <th>Cấp độ</th>
-                            <th>Vị trí cha</th>
-                            <th>Miêu tả</th>
-                            <th>Mã QR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+        </form>
+    </section>
 
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </form>
-</section>
-
-
+</div>
