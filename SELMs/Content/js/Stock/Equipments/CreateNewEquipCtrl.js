@@ -45,7 +45,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
 
     $scope.LoadLocationsList = function () {
 
-        $http.post(origin + '/api/v1/locations').then(function (response) {
+        $http.post(origin + '/api/v1/all-locations').then(function (response) {
             $scope.ListLocations = response.data;
         });
     }

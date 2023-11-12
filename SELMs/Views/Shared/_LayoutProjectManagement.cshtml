@@ -300,70 +300,45 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Danh mục thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/Category/CreateNewCategory">
-                            <i class="bi bi-circle"></i><span>Tạo mới danh mục thiết bị</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Category/CategoriesList">
-                            <i class="bi bi-circle"></i><span>Danh sách danh mục thiết bị</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Báo giá Nav -->
+            @*<li class="nav-item">
+            <a class="nav-link collapsed" href="/Locations/LocationsList">
+                <i class="bi bi-grid"></i>
+                <span>Quản lý phòng lab</span>
+            </a>
+        </li>*@<!-- End Khách hàng Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" data-bs-target="#charts-nav3" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart"></i><span>Dự án</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="charts-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav3">
                     <li>
-                        <a href="/Equipments/EquipmentsList">
-                            <i class="bi bi-circle"></i><span>Danh sách thiết bị</span>
+                        <a href="/ProjectPortfolio/ViewProjectList">
+                            <i class="bi bi-circle"></i><span>Danh sách dự án</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/Equipments/CreateNewEquipment">
-                            <i class="bi bi-circle"></i><span>Tạo mới thiết bị</span>
+                        <a href="/ProjectPortfolio/CreateNewProject">
+                            <i class="bi bi-circle"></i><span>Tạo dự án mới</span>
                         </a>
                     </li>
 
                 </ul>
-            </li><!-- End Sale order Nav -->
+            </li><!-- End Charts Nav -->
 
             <li class="nav-item">
-                <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Nhập thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/ImportEquipments/CreateNewImportEquipmentsProposal">
-                            <i class="bi bi-circle"></i><span>Tạo đề nghị nhập thiết bị </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/ImportEquipments/ImportEquipmentsProposalsList" class="active">
-                            <i class="bi bi-circle"></i><span>Danh sách đề nghị nhập thiết bị</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </li><!-- End Phiếu xuất kho Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Giao nhận thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="charts-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav1">
                     <li>
                         <a href="/AllocationEquipments/CreateNewAllocationEquipmentsRequest">
-                            <i class="bi bi-circle"></i><span>Danh sách thiết bị yêu cầu cấp cho dự án</span>
+                            <i class="bi bi-circle"></i><span>Tạo yêu cầu cấp thiết bị</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/AllocationEquipments/AllocationEquipmentsRequestsList">
+                            <i class="bi bi-circle"></i><span>Danh sách yêu cầu cấp thiết bị</span>
                         </a>
                     </li>
                     <li>
@@ -379,55 +354,25 @@
 
                 </ul>
             </li><!-- End Charts Nav -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Kiểm kê thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav1">
-                    <li>
-                        <a href="/InventoryEquipments/CreateNewInventoryEquipmentsRequest">
-                            <i class="bi bi-circle"></i><span>Tạo yêu cầu kiểm kê thiết bị</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/InventoryEquipments/PerformInventoryEquipmentsRequest">
-                            <i class="bi bi-circle"></i><span>Thực hiện yêu cầu kiểm kê</span>
-                        </a>
-                    </li>
 
-                </ul>
-            </li><!-- End Charts Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav2" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Vị trí</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav2">
-                    <li>
-                        <a href="/Locations/LocationManagement">
-                            <i class="bi bi-circle"></i><span>Danh sách vị trí</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Locations/CreateNewLocation">
-                            <i class="bi bi-circle"></i><span>Tạo vị trí mới</span>
-                        </a>
-                    </li>
 
-                </ul>
-            </li>
-           
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav4" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Báo cáo quản lý thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-bar-chart"></i><span>Chi phí dự án</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="charts-nav4" class="nav-content collapse " data-bs-parent="#sidebar-nav4">
                     <li>
-                        <a href="/EquipmentManagementReports/Index">
-                            <i class="bi bi-circle"></i><span>Báo cáo ...</span>
+                        <a href="/ProjectInvestmentCost/InvestmentCostList">
+                            <i class="bi bi-circle"></i><span>Danh sách chi phí phát sinh cho dự án</span>
                         </a>
                     </li>
-                   
+                    <li>
+                        <a href="/ProjectInvestmentCost/CreateInvestmentCost">
+                            <i class="bi bi-circle"></i><span>Tạo chi phí phát sinh mới</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li><!-- End Charts Nav -->
             <li class="nav-item">

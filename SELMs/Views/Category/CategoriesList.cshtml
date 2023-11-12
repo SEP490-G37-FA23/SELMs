@@ -13,18 +13,17 @@
     <div id="notification" class="col-md-12"></div>
     <br />
 
-    <h4 class="text-center panel-title">Danh sách danh mục thiết bị</h4>
+
     <form class="mt-5">
 
         <div class="card">
-            <div class="mt-4 ms-3">
-                <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Categories")">Thêm danh mục mới</a>
-                <button type="button" class="btn btn-primary ms-2">
-                    Xuất
-                    Excel
-                </button>
-            </div>
+            
             <div class="card-body">
+                <h5 class="card-title">Danh sách danh mục thiết bị</h5>
+                <div class="mt-4 ms-3">
+                    <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Categories")">Thêm danh mục mới</a>
+                    <button type="button" class="btn btn-primary ms-2">Xuất Excel</button>
+                </div>
                 <table class="table table-bordered mt-5">
                     <thead>
                         <tr>
@@ -59,8 +58,7 @@
                             <td>{{item.category_parent}}</td>
                             <td>{{item.number_equip}}</td>
                             <td>
-                                <a class="btn btn-success mx-1" href="@Url.Action("CategoryDetail", "Categories")"><i class="fas fa-info-circle"></i></a>
-                                <button class="btn btn-primary mx-3"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-primary mx-3" ng-click="LoadCategoryDetails(item)"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-danger "><i class="fas fa-trash-alt"></i></button>
                             </td>
 
@@ -70,7 +68,7 @@
                 </table>
 
             </div>
-
+        </div>
     </form>
 
 </div>

@@ -42,8 +42,27 @@ namespace SELMs.Controllers
                 Session["username"] = user.username;
                 Session["fullname"] = user.fullname;
                 Session["role"] = user.role_code;
-
-                return RedirectToAction("MembersList", "User", new { area = "" });
+                switch (user.role_code)
+                {
+                    case "HR":
+                        return RedirectToAction("MembersList", "User", new { area = "" });
+                        break;
+                    case "LD":
+                        return RedirectToAction("LocationList", "Locations", new { area = "" });
+                        break;
+                    case "SM":
+                        return RedirectToAction("EquipmentsList", "Equipments", new { area = "" });
+                        break;
+                    case "PM":
+                        return RedirectToAction("ViewProjectList", "ProjectPortfolio", new { area = "" });
+                        break;
+                    case "MB":
+                        return RedirectToAction("LocationList", "Locations", new { area = "" });
+                        break;
+                }
+                
+                
+               
             }
             ViewBag.error = "Bạn đã đăng nhập sai";
             return View();

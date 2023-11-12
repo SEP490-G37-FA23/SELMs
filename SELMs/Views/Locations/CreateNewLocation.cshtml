@@ -1,59 +1,85 @@
 ﻿
 @{
-    ViewBag.Title = "CreateNewAllocationEquipment";
+    ViewBag.Title = "CreateNewLocation";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="~/Content/js/Stock/Locations/CreateNewLocationCtrl.js"></script>
+<div ng-app="myApp" ng-controller="CreateNewLocationCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div id="notification" class="col-md-12"></div>
+    <section class="section">
+        <h4 class="text-center">Vị trí thiết bị mới</h4>
 
-<section class="section">
-    <h4 class="text-center">Vị trí thiết bị mới</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/AllocationEquipmentList.cshtml">Danh sách vị trí thiết bị</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/AllocationEquipments/CreateNewAllocationEquipment.cshtml"></a>Vị trí thiết bị mới</li>
-        </ol>
-    </nav>
-    <form class="row mt-5">
-        <div>
-            <div class="row mb-3">
-                <label class=" col-form-label" for="inputName5">Mã chuẩn</label>
-                <div>
-                    <input type="text" class="form-control" id="inputText">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class=" col-form-label">Cấp độ</label>
-                <div>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class=" col-form-label">Vị trí cha</label>
-                <div>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class=" col-form-label">Mã QR</label>
-                <div>
+        <form class="row mt-5">
+            <div>
+                <div class="row mb-3">
+                    <label class=" col-form-label" for="inputName5">Mã chuẩn</label>
                     <div>
-                        <input class="form-control" type="file" id="formFile">
+                        <input type="text" class="form-control" ng-model="NewLocation.location_code">
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class=" col-form-label">Cấp độ</label>
+                        <div>
+                            <select class="form-select" aria-label="Default select example" ng-model="NewLocation.location_level">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>                    
+                    <div class="col-md-6 mb-3">
+                        <label class=" col-form-label">Vị trí cha</label>
+                        <div>
+                            <ng-form>
+                                <div class="form-all-sub-location">
+                                    <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadAllLocationList(text)" ng-focus="showtableSL = true" ng-blur="showtableSL = false" ng-model-options="{debounce:700}" required>
+                                    <input type="text" class="form-control" ng-model="NewLocation.parent_location_id" style="display:none">
+                                </div>
+
+                                <div class="input-group-btn" style="position:relative;width:20%;display:inline-block">
+                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:500%" ng-show="showtableSL">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-blue text-white">
+                                                    <tr>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Miêu tả</th>
+                                                        <th>Level</th>
+                                                        <th>Mã vị trí cha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="cursor:pointer" ng-mousedown="HandelLocation(lc,NewLocation);" ng-repeat="lc in ListAllLocation">
+                                                        <td>
+                                                            {{lc.location_code}}
+                                                        </td>
+                                                        <td>{{lc.location_desciption}}</td>
+                                                        <td>{{lc.location_level}}</td>
+                                                        <td>{{lc.parent_location_id}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ng-form>
+                        </div>
+                    </div>
+                </div>
+               
+
+                <label class=" col-form-label">Miêu tả</label>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Mô tả danh mục" ng-model="NewLocation.location_desciption"></textarea>
+                </div>
             </div>
-            <label class=" col-form-label">Miêu tả</label>
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="Mô tả danh mục" id="floatingTextarea"></textarea>
-            </div>
-        </div>
-    </form>
-</section>
+        </form>
+    </section>
+    <button class="btn btn-primary" ng-click="SaveNewLocation(NewLocation)">Tạo mới vị trí</button>
+</div>
 
