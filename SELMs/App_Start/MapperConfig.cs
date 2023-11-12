@@ -82,20 +82,22 @@ namespace SELMs.App_Start
 				.ForAllOtherMembers(act => act.NullSubstitute(null));
 
 				//Configuring Equipment_Import_Application_Detail and EquipmentImportApplicationDetailDTO
-				cfg.CreateMap<EquipmentImportApplicationDetailDTO, Equipment_Import_Application_Detail>().ReverseMap();
-
+				cfg.CreateMap<EquipmentImportApplicationDetailDTO, Equipment_Import_Application_Detail>().ReverseMap()
+				.ForAllOtherMembers(act => act.NullSubstitute(null));
 
 				//Configuring Equipment_Location_History and EquipmentLocationHistoryDTO
-				cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap();
-
+				cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap()
+				.ForAllOtherMembers(act => act.NullSubstitute(null));
 
 				//Configuring Equipment_Project_History and EquipmentLocationHistoryDTO
-				cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Project_History>().ReverseMap();
+				cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Project_History>().ReverseMap()
+				.ForAllOtherMembers(act => act.NullSubstitute(null));
 
+				cfg.CreateMap<MemberLocationHistoryDTO, Member_Location_History>().ReverseMap()
+				.ForAllOtherMembers(act => act.NullSubstitute(null));
 
-				cfg.CreateMap<MemberLocationHistoryDTO, Member_Location_History>().ReverseMap();
-
-				cfg.CreateMap<MemberProjectHistoryDTO, Member_Project_History>().ReverseMap();
+				cfg.CreateMap<MemberProjectHistoryDTO, Member_Project_History>().ReverseMap()
+				.ForAllOtherMembers(act => act.NullSubstitute(null));
 				//Any Other Mapping Configuration ....  MemberProjectHistoryDTO
 			});
 
