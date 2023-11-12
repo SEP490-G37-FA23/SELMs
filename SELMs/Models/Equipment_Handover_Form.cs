@@ -27,5 +27,6 @@ namespace SELMs.Models
         public string receipter { get; set; }
         public bool is_confirmed_recipienter { get; set; }
         public string handover_note { get; set; }
+        public bool is_finish { get; set; }
     }
 }
