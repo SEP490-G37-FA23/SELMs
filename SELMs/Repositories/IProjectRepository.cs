@@ -18,5 +18,8 @@ namespace SELMs.Repositories
         void DeleteProject(int id);
         dynamic GetProjectMembers(int id);
         dynamic GetProjectEquipments(int id);
+
+        dynamic FindActiveMember(int projectId, string memberCode);
+        
     }
 }

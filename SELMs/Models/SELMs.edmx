@@ -35,7 +35,8 @@
           <Property Name="note" Type="nvarchar" MaxLength="500" />
           <Property Name="category_code" Type="varchar" MaxLength="64" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="is_integration" Type="bit" Nullable="false" />
+          <Property Name="is_integration" Type="bit" />
+          <Property Name="is_available" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -97,6 +98,7 @@
           <Property Name="receipter" Type="varchar" MaxLength="64" />
           <Property Name="is_confirmed_recipienter" Type="bit" Nullable="false" />
           <Property Name="handover_note" Type="nvarchar" MaxLength="500" />
+          <Property Name="is_finish" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form_Detail">
           <Key>
@@ -213,9 +215,9 @@
           <Property Name="ir_application_code" Type="varchar" MaxLength="64" />
           <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
           <Property Name="inventory_results" Type="nvarchar" MaxLength="500" />
-          <Property Name="actual_quantity" Type="int" />
           <Property Name="actual_usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="inventory_date" Type="date" />
+          <Property Name="is_perform" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -305,16 +307,6 @@
           <Property Name="role_name" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="user_id" />
@@ -362,7 +354,6 @@
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
@@ -400,7 +391,8 @@
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="is_integration" Type="Boolean" Nullable="false" />
+          <Property Name="is_integration" Type="Boolean" />
+          <Property Name="is_available" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
@@ -462,6 +454,7 @@
           <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="is_confirmed_recipienter" Type="Boolean" Nullable="false" />
           <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="is_finish" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form_Detail">
           <Key>
@@ -578,9 +571,9 @@
           <Property Name="ir_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="inventory_results" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="actual_quantity" Type="Int32" />
           <Property Name="actual_usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="inventory_date" Type="DateTime" Precision="0" />
+          <Property Name="is_perform" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -670,16 +663,6 @@
           <Property Name="role_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="user_id" />
@@ -727,7 +710,6 @@
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" />
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
       </Schema>
@@ -767,6 +749,7 @@
                 <ScalarProperty Name="category_code" ColumnName="category_code" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="is_integration" ColumnName="is_integration" />
+                <ScalarProperty Name="is_available" ColumnName="is_available" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -832,6 +815,7 @@
                 <ScalarProperty Name="receipter" ColumnName="receipter" />
                 <ScalarProperty Name="is_confirmed_recipienter" ColumnName="is_confirmed_recipienter" />
                 <ScalarProperty Name="handover_note" ColumnName="handover_note" />
+                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -957,9 +941,9 @@
                 <ScalarProperty Name="ir_application_code" ColumnName="ir_application_code" />
                 <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
                 <ScalarProperty Name="inventory_results" ColumnName="inventory_results" />
-                <ScalarProperty Name="actual_quantity" ColumnName="actual_quantity" />
                 <ScalarProperty Name="actual_usage_status" ColumnName="actual_usage_status" />
                 <ScalarProperty Name="inventory_date" ColumnName="inventory_date" />
+                <ScalarProperty Name="is_perform" ColumnName="is_perform" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1055,17 +1039,6 @@
                 <ScalarProperty Name="role_code" ColumnName="role_code" />
                 <ScalarProperty Name="role_name" ColumnName="role_name" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SELMsModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

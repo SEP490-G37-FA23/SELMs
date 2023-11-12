@@ -74,8 +74,13 @@ namespace SELMs.Api.Controllers
 		{
 			try
 			{
-				dynamic returnedData = null;
-				returnedData = repository.GetCategory(id);
+				Category category = repository.GetCategory(id);
+				List<Equipment> equipments = repository.getCategoryEquipments(category.category_code);
+				var returnedData = new CategoryModel()
+				{
+					category = category,
+					category_equipments = equipments
+				};
 				return Ok(returnedData);
 			}
 			catch (Exception ex)

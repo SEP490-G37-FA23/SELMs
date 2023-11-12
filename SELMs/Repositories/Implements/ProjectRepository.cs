@@ -89,5 +89,10 @@ namespace SELMs.Repositories.Implements
                  select e).ToListAsync();
             return projectEquipments;
         }
+
+        public dynamic FindActiveMember(int projectId, string memberCode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
