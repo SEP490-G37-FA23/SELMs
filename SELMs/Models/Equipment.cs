@@ -28,6 +28,7 @@ namespace SELMs.Models
         public string note { get; set; }
         public string category_code { get; set; }
         public Nullable<decimal> price { get; set; }
-        public bool is_integration { get; set; }
+        public Nullable<bool> is_integration { get; set; }
+        public bool is_available { get; set; }
     }
 }

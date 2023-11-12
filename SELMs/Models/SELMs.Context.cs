@@ -47,7 +47,6 @@ namespace SELMs.Models
         public virtual DbSet<Project_Investment_Cost_Application> Project_Investment_Cost_Application { get; set; }
         public virtual DbSet<Project_Investment_Cost_Application_Detail> Project_Investment_Cost_Application_Detail { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }
