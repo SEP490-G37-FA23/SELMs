@@ -24,7 +24,7 @@ namespace SELMs.Repositories.Implements
         {
             dynamic category = db.Categories.Where(c => c.category_id == id).FirstOrDefault();
             return category;
-        }
+        }        
 
         public dynamic GetCategoryList()
         {
@@ -58,6 +58,13 @@ namespace SELMs.Repositories.Implements
             Category orgCategory = db.Categories.Where(c => c.category_id == category.category_id).FirstOrDefault();
             db.Entry(orgCategory).CurrentValues.SetValues(category);
             db.SaveChangesAsync();
+        }
+
+
+        public dynamic getCategoryEquipments(string categoryCode)
+        {
+            dynamic equipments = db.Equipments.Where(e => e.category_code == categoryCode).ToListAsync();
+            return equipments;
         }
     }
 }
