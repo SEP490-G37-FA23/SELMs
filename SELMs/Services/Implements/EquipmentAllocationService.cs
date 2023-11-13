@@ -69,12 +69,14 @@ namespace SELMs.Services.Implements
                 string num = lastDailyApplication.ea_application_code.Replace(code, "");
                 if (num.Count() > 0)
                 {
-                    num = (Convert.ToInt32(num) + 1).ToString();
+                    num = num.Count() > 4 
+                        ? (Convert.ToInt32(num) + 1).ToString() 
+                        : (Convert.ToInt32(num) + 1).ToString("D4");
                     code += num;
                 }
                 else
                 {
-                    code += "1";
+                    code += "0001";
                 }
             }
             return code;
