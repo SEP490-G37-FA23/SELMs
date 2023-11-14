@@ -9,8 +9,8 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/ImportEquipmentsProposalsList.cshtml">Danh sách phiếu nhập thiết bị</a></li>
-            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/CreateNewImportEquipmentsProposal.cshtml"></a>Tạo đơn nhập thiết bị</li>
+            <li class="breadcrumb-item"><a href="@Url.Action("ImportEquipmentsProposalsList", "ImportEquipments")">Danh sách phiếu nhập thiết bị</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("CreateNewImportEquipmentsProposal", "ImportEquipments")"></a>Tạo đơn nhập thiết bị</li>
         </ol>
     </nav>
     <form class="row mt-5">

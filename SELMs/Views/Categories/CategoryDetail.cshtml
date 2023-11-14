@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 <div>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("CategoriesList", "Categories")">Danh sách danh mục thiết bị</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("CategoryDetail", "Categories")"></a>Thông tin danh mục</li>
+        </ol>
+    </nav>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="#general_infor" class="nav-link active" role="tab" data-toggle="tab">Thông tin chung</a>
@@ -61,10 +68,10 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th >STT</th>
-                                <th >Mã thiết bị</th>
-                                <th >Tên thiết bị</th>
-                                <th >Trạng thái thiết bị</th>
+                                <th>STT</th>
+                                <th>Mã thiết bị</th>
+                                <th>Tên thiết bị</th>
+                                <th>Trạng thái thiết bị</th>
                             </tr>
                         </thead>
                         <tbody>

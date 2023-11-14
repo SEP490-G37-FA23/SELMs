@@ -10,15 +10,12 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment_Location_History
+    public partial class Proc_GetRolesList_Result
     {
-        public int id { get; set; }
-        public int location_id { get; set; }
-        public string system_equipment_code { get; set; }
-        public Nullable<System.DateTime> from_date { get; set; }
-        public Nullable<System.DateTime> to_date { get; set; }
-        public string note { get; set; }
+        public int role_id { get; set; }
+        public string role_code { get; set; }
+        public string role_name { get; set; }
+        public Nullable<bool> is_active { get; set; }
     }
 }

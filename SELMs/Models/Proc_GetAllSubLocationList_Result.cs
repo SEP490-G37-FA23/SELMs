@@ -11,11 +11,13 @@ namespace SELMs.Models
 {
     using System;
     
-    public partial class Proc_GetListRole_Result
+    public partial class Proc_GetAllSubLocationList_Result
     {
-        public int role_id { get; set; }
-        public string role_code { get; set; }
-        public string role_name { get; set; }
-        public Nullable<bool> is_active { get; set; }
+        public int location_id { get; set; }
+        public string location_code { get; set; }
+        public string location_desciption { get; set; }
+        public Nullable<int> parent_location_id { get; set; }
+        public Nullable<int> location_level { get; set; }
+        public bool is_active { get; set; }
     }
 }

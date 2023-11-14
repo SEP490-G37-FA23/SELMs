@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class Proc_GetListEquipInLocation_Result
     {
         public int equipment_id { get; set; }
         public string system_equipment_code { get; set; }
@@ -30,5 +29,13 @@ namespace SELMs.Models
         public Nullable<decimal> price { get; set; }
         public Nullable<bool> is_integration { get; set; }
         public bool is_available { get; set; }
+        public string location_desciption { get; set; }
+        public string fullname { get; set; }
+        public int id { get; set; }
+        public int location_id { get; set; }
+        public string system_equipment_code1 { get; set; }
+        public Nullable<System.DateTime> from_date { get; set; }
+        public Nullable<System.DateTime> to_date { get; set; }
+        public string note1 { get; set; }
     }
 }

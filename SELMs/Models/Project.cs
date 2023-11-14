@@ -25,5 +25,6 @@ namespace SELMs.Models
         public Nullable<System.DateTime> create_date { get; set; }
         public string creater { get; set; }
         public bool status { get; set; }
+        public Nullable<int> location_id { get; set; }
     }
 }
