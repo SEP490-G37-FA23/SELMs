@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Controllers.Test
+﻿using System.Web.Http.Results;
+
+namespace SELMs.Test.Controllers.Test
 {
 	public class EquipmentControllerTest
 	{
@@ -36,8 +38,10 @@
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 
-				//Assert.IsType<Equipment>(content);
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
+				if (actionResult is OkNegotiatedContentResult<Equipment>)
+					output.WriteLine($"Status code: {(int)response.StatusCode}\nEquipment found:\n{content}");
+				else
+					output.WriteLine($"Equipment not found");
 			}
 			catch (Exception ex)
 			{
