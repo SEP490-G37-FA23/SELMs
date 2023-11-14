@@ -10,16 +10,12 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application_Detail
+    public partial class Proc_GetGetListComponentEquips_Result
     {
-        public int application_detail_id { get; set; }
-        public string ir_application_code { get; set; }
         public string system_equipment_code { get; set; }
-        public string inventory_results { get; set; }
-        public string actual_usage_status { get; set; }
-        public Nullable<System.DateTime> inventory_date { get; set; }
-        public bool is_perform { get; set; }
+        public string standard_equipment_code { get; set; }
+        public string equipment_name { get; set; }
+        public string usage_status { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace SELMs.Models
 {
     using System;
     
-    public partial class Proc_GetListRole_Result
+    public partial class Proc_GetRolesList_Result
     {
         public int role_id { get; set; }
         public string role_code { get; set; }

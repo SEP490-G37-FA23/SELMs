@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class Proc_GetEquipmentsList_Result
     {
         public int equipment_id { get; set; }
         public string system_equipment_code { get; set; }
@@ -26,9 +25,11 @@ namespace SELMs.Models
         public string usage_status { get; set; }
         public string type_equipment { get; set; }
         public string note { get; set; }
-        public string category_code { get; set; }
         public Nullable<decimal> price { get; set; }
+        public string category_code { get; set; }
         public Nullable<bool> is_integration { get; set; }
-        public bool is_available { get; set; }
+        public string category_name { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string location_desciption { get; set; }
     }
 }

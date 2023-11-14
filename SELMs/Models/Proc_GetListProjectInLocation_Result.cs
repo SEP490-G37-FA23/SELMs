@@ -10,18 +10,20 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Inventory_Request_Application
+    public partial class Proc_GetListProjectInLocation_Result
     {
-        public int application_id { get; set; }
-        public string ir_application_code { get; set; }
-        public string requester { get; set; }
-        public string request_date { get; set; }
-        public string performer { get; set; }
-        public int total_equipment { get; set; }
+        public int project_id { get; set; }
+        public string project_code { get; set; }
+        public string project_name { get; set; }
+        public string acronym { get; set; }
+        public string description { get; set; }
+        public string manager { get; set; }
+        public Nullable<System.DateTime> start_date { get; set; }
+        public Nullable<System.DateTime> end_date { get; set; }
+        public Nullable<System.DateTime> create_date { get; set; }
+        public string creater { get; set; }
         public bool status { get; set; }
-        public string type_inventory { get; set; }
         public Nullable<int> location_id { get; set; }
     }
 }

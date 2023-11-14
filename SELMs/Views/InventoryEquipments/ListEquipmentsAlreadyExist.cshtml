@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "ListEquipmentsAlreadyExist";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Danh Sách Thiết Bị Có Sẵn Trong Kho</h5>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã hệ thống</th>
+                                <th scope="col">Mã chuẩn</th>
+                                <th scope="col">Tên thiết bị</th>
+                                <th scope="col">Đơn vị tính</th>
+                                <th scope="col">SerieNo</th>
+                                <th scope="col">Loại thiết bị</th>
+                                <th scope="col">Nhóm thiết bị</th>
+                                <th scope="col">Vị trí</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Dự án yêu cầu</th>
+                                <th scope="col">Ngày yêu cầu</th>
+                                <th scope="col">Người yêu cầu</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> <!--thông tin danh sách cách thiết bị yêu cầu có trong kho ở đây--></td>
+                                <td>
+                                    <input type="checkbox" name="equipmentExist" value="EquipmentId">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                    <a class="btn btn-primary" data-bs-toggle="modal"
+                       data-bs-target="#create-allocation-request">Tạo yêu cầu cấp phát</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_CreateNewInventoryEquipmentsRequest");
+

@@ -19,5 +19,6 @@ namespace SELMs.Models
         public string user_code { get; set; }
         public string status { get; set; }
         public string note { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     }
 }

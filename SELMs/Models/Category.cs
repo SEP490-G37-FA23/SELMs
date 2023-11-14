@@ -19,5 +19,7 @@ namespace SELMs.Models
         public string category_name { get; set; }
         public string desciption { get; set; }
         public Nullable<bool> is_active { get; set; }
+        public int category_level { get; set; }
+        public Nullable<int> category_parent_id { get; set; }
     }
 }

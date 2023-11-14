@@ -10,13 +10,14 @@
 namespace SELMs.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class Member_Location_History
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public int id { get; set; }
+        public string user_code { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string reason { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     }
 }

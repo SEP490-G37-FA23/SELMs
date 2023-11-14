@@ -11,9 +11,15 @@ namespace SELMs.Models
 {
     using System;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Proc_GetLocationList_Result
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int location_id { get; set; }
+        public string location_code { get; set; }
+        public string location_desciption { get; set; }
+        public Nullable<int> parent_location_id { get; set; }
+        public Nullable<int> location_level { get; set; }
+        public bool is_active { get; set; }
+        public Nullable<int> number_equip { get; set; }
+        public string parent_location { get; set; }
     }
 }
