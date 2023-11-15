@@ -320,6 +320,8 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proc_GetMembersList_Result.cs">
+		<DependentUpon>SELMs.tt</DependentUpon>
+	</Compile>
     <Compile Include="Models\Member_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
