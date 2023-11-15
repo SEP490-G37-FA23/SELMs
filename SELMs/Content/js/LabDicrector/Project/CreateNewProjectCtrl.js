@@ -1,4 +1,7 @@
-﻿var app = angular.module("myApp", []);
+﻿/// <reference path="../../../../scripts/angular.min.js" />
+/// <reference path="../../../../scripts/angular-route.min.js" />
+
+var app = angular.module("myApp", []);
 
 app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
 

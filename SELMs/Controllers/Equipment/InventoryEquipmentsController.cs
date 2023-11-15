@@ -17,5 +17,11 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
+
+        public ActionResult InventoryEquipmentsResults()
+        {
+            return View();
+        }
+
     }
 }

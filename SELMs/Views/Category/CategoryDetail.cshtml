@@ -3,13 +3,22 @@
     ViewBag.Title = "CategoryDetail";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
-<div ng-app="myApp" ng-controller="CategoryDetailCtrl" style="display:inline-block;width:100%;">
-    <input type="hidden" id="username" name="username" value="@Session["username"]" />
-    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
-    <input type="hidden" id="role" name="role" value="@Session["role"]" />
-
-    <div id="notification" class="col-md-12"></div>
-
+<div>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("CategoriesList", "Categories")">Danh sách danh mục thiết bị</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("CategoryDetail", "Categories")"></a>Thông tin danh mục</li>
+        </ol>
+    </nav>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="#general_infor" class="nav-link active" role="tab" data-toggle="tab">Thông tin chung</a>
+        </li>
+        <li class="nav-item">
+            <a href="#detail" class="nav-link" role="tab" data-toggle="tab">Danh sách thiết bị danh mục</a>
+        </li>
+    </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="general_infor">
             <h4 class="card-title text-center">Thông tin chung</h4>
