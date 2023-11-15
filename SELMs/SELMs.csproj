@@ -693,6 +693,8 @@
     <Content Include="Content\js\Project\CreateNewEAACtrl.js" />
     <Content Include="Content\js\Project\ListEAACtrl.js" />
     <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
+    <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
+
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
