@@ -1,10 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "AllocationEquipmentsRequestsList";
-    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+    ViewBag.Title = "EquipAllowcationDetails";
+    Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
-<script src="~/Content/js/Project/ListEAACtrl.js"></script>
-<div ng-app="myApp" ng-controller="ListEAACtrl" style="display:inline-block;width:100%;">
+
+<script src="~/Content/js/Project/EquipAllowcationDetailsCtrl.js"></script>
+<div ng-app="myApp" ng-controller="EquipAllowcationDetailsCtrl" style="display:inline-block;width:100%;">
     <input type="hidden" id="username" name="username" value="@Session["username"]" />
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
@@ -24,7 +25,7 @@
                             <div class="col-md-3">
                                 <a class="btn btn-primary" href="@Url.Action("CreateNewEAA", "EquipmentAllocation")">Tạo yêu cầu mới</a>
                             </div>
-                        
+
                         </div>
                         <div>
                             <p></p>
@@ -87,4 +88,5 @@
         </div>
     </section>
 </div>
+
 

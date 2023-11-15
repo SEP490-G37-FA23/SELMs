@@ -21,7 +21,10 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-
+        public ActionResult EquipAllowcationDetails()
+        {
+            return View();
+        }
         public ActionResult DeliveryEquipmentsList()
         {
             return View();
