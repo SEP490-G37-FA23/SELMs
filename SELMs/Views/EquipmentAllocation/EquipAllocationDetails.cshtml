@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "EquipAllowcationDetails";
+    Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+}
+
+<script src="~/Content/js/Project/EquipAllocationDetailsCtrl.js"></script>
+<div ng-app="myApp" ng-controller="EquipAllocationDetailsCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
+
+    <div id="notification" class="col-md-12"></div>
+    <div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="new-equip-tab" data-bs-toggle="tab"
+                        data-bs-target="#new-equip" type="button" role="tab" aria-controls="home"
+                        aria-selected="true">
+                    Danh sách thiết bị mới cần nhập
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="avail-equipment-tab" data-bs-toggle="tab"
+                        data-bs-target="#avail-equipment" type="button" role="tab"
+                        aria-controls="avail-equipment" aria-selected="false">
+                    Danh sách thiết bị có sẵn trong kho
+                </button>
+            </li>
+
+        </ul>
+        <div class="tab-content pt-2" id="myTabContent">
+            <div class="tab-pane fade show active" id="new-equip" role="tabpanel"
+                 aria-labelledby="new-equip-tab">
+                <section class="section">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Danh Sách Thiết Bị Không Có Sẵn Trong Kho</h5>
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã chuẩn</th>
+                                                <th scope="col">Tên thiết bị</th>
+                                                <th scope="col">Đơn vị tính</th>
+                                                <th scope="col">Vị trí</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Dự án yêu cầu</th>
+                                                <th scope="col">Ngày yêu cầu</th>
+                                                <th scope="col">Người yêu cầu</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in ListNeedImportEquipment">
+                                                <td>{{item.standard_equipment_code}}</td>
+                                                <td>{{item.equipment_name}}</td>
+                                                <td>{{item.unit}}</td>
+                                                <td>{{item.location_desciption}}</td>
+                                                <td>{{item.status}}</td>
+                                                <td>{{item.project_name}}</td>
+                                                <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
+                                                <td>{{item.fullname}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+                                    <a class="btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#create-import-request">Tạo yêu cầu nhập thiết bị</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @Html.Partial("_CreateNewImportEquipmentsProposal");
+
+            </div>
+            <div class="tab-pane fade" id="avail-equipment" role="tabpanel"
+                 aria-labelledby="avail-equipment-tab">
+                <section class="section">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Danh Sách Thiết Bị Có Sẵn Trong Kho</h5>
+                                    <!-- Table with stripped rows -->
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Mã hệ thống</th>
+                                                <th scope="col">Mã chuẩn</th>
+                                                <th scope="col">Tên thiết bị</th>
+                                                <th scope="col">Đơn vị tính</th>
+                                                <th scope="col">SerieNo</th>
+                                                <th scope="col">Loại thiết bị</th>
+                                                <th scope="col">Nhóm thiết bị</th>
+                                                <th scope="col">Vị trí</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Dự án yêu cầu</th>
+                                                <th scope="col">Ngày yêu cầu</th>
+                                                <th scope="col">Người yêu cầu</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in ListAvailableEquipment">
+                                                <td>{{item.system_equipment_code}}</td>
+                                                <td>{{item.standard_equipment_code}}</td>
+                                                <td>{{item.equipment_name}}</td>
+                                                <td>{{item.unit}}</td>
+                                                <td>{{item.serial_no}}</td>
+                                                <td>{{item.type_equipment}}</td>
+                                                <td>{{item.category_code}}</td>
+                                                <td>{{item.location_desciption}}</td>
+                                                <td>{{item.status}}</td>
+                                                <td>{{item.project_name}}</td>
+                                                <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
+                                                <td>{{item.fullname}}</td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End Table with stripped rows -->
+                                    <a class="btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#create-allocation-request">Tạo yêu cầu cấp phát</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @Html.Partial("_CreateNewInventoryEquipmentsRequest");
+
+            </div>
+           
+        </div>
+    </div>
+   
+</div>
+
+

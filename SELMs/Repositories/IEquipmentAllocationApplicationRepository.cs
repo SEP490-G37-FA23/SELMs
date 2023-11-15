@@ -25,5 +25,7 @@ namespace SELMs.Repositories
         void UpdateApplicationDetail(Equipment_Allocation_Application_Detail application);
         void DeleteApplicationDetail(int id);
         dynamic GetEAAList(Argument arg);
+        dynamic GetAvailableEquipmentList(Argument arg);
+        dynamic GetNeedImportEquipmentList(Argument arg);
     }
 }

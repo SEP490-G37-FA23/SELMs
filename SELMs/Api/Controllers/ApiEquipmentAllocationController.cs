@@ -112,5 +112,47 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Get aavaiable-equipments
+        [HttpPost]
+        [Route("equipment-allocation-application/avaiable-equipments")]
+        public async Task<IHttpActionResult> GetAvailableEquipmentList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetAvailableEquipmentList(arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get need import equipments
+        [HttpPost]
+        [Route("equipment-allocation-application/need-import-equipments")]
+        public async Task<IHttpActionResult> GetNeedImportEquipmentList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetNeedImportEquipmentList(arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
     }
 }

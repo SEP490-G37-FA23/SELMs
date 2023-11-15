@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('EquipAllowcationDetailsCtrl', function ($scope, $http, $sce) {
+app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -62,7 +62,7 @@ app.controller('EquipAllowcationDetailsCtrl', function ($scope, $http, $sce) {
     $scope.location_name = '';
     $scope.creater_name = '';
     $scope.application_code = '';
-    $scope.LoadEAAsList = function () {
+    $scope.LoadAvailableEquipmentList = function () {
         var data = {
             username: username,
             isadmin: isadmin,
@@ -71,10 +71,26 @@ app.controller('EquipAllowcationDetailsCtrl', function ($scope, $http, $sce) {
             text2: $scope.creater_name,
             text3: $scope.application_code
         }
-        $http.post(origin + '/api/v1/equipment-allocation-application/search', data).then(function (response) {
-            $scope.ListEAA = response.data.Result
-            console.log($scope.ListEAA);
+        $http.post(origin + '/api/v1/equipment-allocation-application/avaiable-equipments', data).then(function (response) {
+            $scope.ListAvailableEquipment = response.data.Result
+            console.log($scope.ListAvailableEquipment);
         });
     }
-    $scope.LoadEAAsList();
+    $scope.LoadAvailableEquipmentList();
+
+    $scope.LoadNeedImportEquipmentList = function () {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            text: $scope.project_name,
+            text1: $scope.location_name,
+            text2: $scope.creater_name,
+            text3: $scope.application_code
+        }
+        $http.post(origin + '/api/v1/equipment-allocation-application/need-import-equipments', data).then(function (response) {
+            $scope.ListNeedImportEquipment = response.data.Result
+            console.log($scope.ListNeedImportEquipment);
+        });
+    }
+    $scope.LoadNeedImportEquipmentList();
 });
