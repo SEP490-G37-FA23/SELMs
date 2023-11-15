@@ -1,4 +1,5 @@
 ﻿using System.Web.Http.Results;
+using Newtonsoft.Json;
 
 namespace SELMs.Test.Controllers.Test
 {
@@ -30,7 +31,7 @@ namespace SELMs.Test.Controllers.Test
 		[InlineData(0)]
 		[InlineData(1)]
 		[InlineData(2)]
-		public async Task TestGetCategoryById_ReturnCategoryFound(int id)
+		public async Task TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
 			try
 			{
@@ -42,6 +43,33 @@ namespace SELMs.Test.Controllers.Test
 					output.WriteLine($"Status code: {(int)response.StatusCode}\nEquipment found:\n{content}");
 				else
 					output.WriteLine($"Equipment not found");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
+
+
+
+
+
+		[Theory]
+		[InlineData("E0000")]
+		[InlineData("E0002")]
+		[InlineData("E0004")]
+		public void TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
+		{
+			try
+			{
+				DetailEquipDTO detailEquipDTO = apiEquipmentController.GetDetailEquipment(code);
+
+				if (detailEquipDTO != null)
+					output.WriteLine($"Equipment detail:\n{JsonConvert.SerializeObject(detailEquipDTO)}");
+				else
+					output.WriteLine($"Equipment code not found");
 			}
 			catch (Exception ex)
 			{
