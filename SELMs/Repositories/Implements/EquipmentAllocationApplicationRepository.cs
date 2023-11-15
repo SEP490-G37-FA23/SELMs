@@ -143,5 +143,35 @@ namespace SELMs.Repositories.Implements
                 , commandType: CommandType.StoredProcedure);
             return list;
         }
+
+        public dynamic GetAvailableEquipmentList(Argument arg)
+        {
+            dynamic list = null;
+            list = db.Database.Connection.QueryAsync<dynamic>("Proc_GetAvailableEAAList", new
+            {
+                username = arg.username,
+                project_name = arg.text,
+                location_name = arg.text1,
+                creater_name = arg.text2,
+                application_code = arg.text3
+            }
+                , commandType: CommandType.StoredProcedure);
+            return list;
+        }
+
+        public dynamic GetNeedImportEquipmentList(Argument arg)
+        {
+            dynamic list = null;
+            list = db.Database.Connection.QueryAsync<dynamic>("Proc_GetNeedImportEAAList", new
+            {
+                username = arg.username,
+                project_name = arg.text,
+                location_name = arg.text1,
+                creater_name = arg.text2,
+                application_code = arg.text3
+            }
+                , commandType: CommandType.StoredProcedure);
+            return list;
+        }
     }
 }

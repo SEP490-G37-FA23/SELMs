@@ -21,7 +21,7 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-        public ActionResult EquipAllowcationDetails()
+        public ActionResult EquipAllocationDetails()
         {
             return View();
         }
@@ -29,6 +29,13 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-
+        public ActionResult _CreateNewInventoryEquipmentsRequest()
+        {
+            return PartialView();
+        }
+        public ActionResult _CreateNewImportEquipmentsProposal()
+        {
+            return PartialView();
+        }
     }
 }
