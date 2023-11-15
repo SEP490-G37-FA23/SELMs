@@ -295,6 +295,37 @@
     <Compile Include="Models\Member_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Proc_GetAllSubLocationList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetCategoryList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetDetailEquipment_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetEquipmentsList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetGetListComponentEquips_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListEquipInLocation_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListProjectInLocation_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetLocationList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetMembersList_Result.cs">
+    <Compile Include="Models\Member_Project_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetRolesList_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
