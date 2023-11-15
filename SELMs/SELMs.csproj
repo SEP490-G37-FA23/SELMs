@@ -916,6 +916,7 @@
     <Content Include="Views\User\MemberListPV.cshtml" />
     <Content Include="Views\Shared\_LayoutLabDirector.cshtml" />
     <Content Include="Views\Shared\_LayoutProjectManagement.cshtml" />
+    <Content Include="Views\EquipmentAllocation\EquipAllowcationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
