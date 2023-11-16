@@ -11,6 +11,7 @@ namespace SELMs.Models
 {
     using System;
     
+<<<<<<<< HEAD:SELMs/Models/Proc_GetAllSubLocationList_Result.cs
     public partial class Proc_GetAllSubLocationList_Result
     {
         public int location_id { get; set; }
@@ -19,5 +20,13 @@ namespace SELMs.Models
         public Nullable<int> parent_location_id { get; set; }
         public Nullable<int> location_level { get; set; }
         public bool is_active { get; set; }
+========
+    public partial class Proc_GetGetListComponentEquips_Result
+    {
+        public string system_equipment_code { get; set; }
+        public string standard_equipment_code { get; set; }
+        public string equipment_name { get; set; }
+        public string usage_status { get; set; }
+>>>>>>>> origin/front-end/DucTM:SELMs/Models/Proc_GetGetListComponentEquips_Result.cs
     }
 }

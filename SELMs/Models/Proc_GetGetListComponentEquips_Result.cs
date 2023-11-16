@@ -10,12 +10,23 @@
 namespace SELMs.Models
 {
     using System;
+    using System.Collections.Generic;
     
+<<<<<<<< HEAD:SELMs/Models/Proc_GetGetListComponentEquips_Result.cs
     public partial class Proc_GetGetListComponentEquips_Result
     {
         public string system_equipment_code { get; set; }
         public string standard_equipment_code { get; set; }
         public string equipment_name { get; set; }
         public string usage_status { get; set; }
+========
+    public partial class Member_Location_History
+    {
+        public int id { get; set; }
+        public string user_code { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string reason { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+>>>>>>>> origin/front-end/DucTM:SELMs/Models/Member_Location_History.cs
     }
 }
