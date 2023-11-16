@@ -672,6 +672,7 @@
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\EquipGenderQRCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
     <Content Include="Content\js\Stock\Locations\CreateNewLocationCtrl.js" />
@@ -919,8 +920,9 @@
     <Content Include="Views\Shared\_LayoutProjectManagement.cshtml" />
     <Content Include="Views\EquipmentAllocation\EquipAllocationDetails.cshtml" />
     <Content Include="Views\InventoryEquipments\InventoryEquipmentsResults.cshtml" />
-    <Content Include="Views\EquipmentAllocation\_CreateNewInventoryEquipmentsRequest.cshtml" />
+    <Content Include="Views\EquipmentAllocation\_CreateNewHandoverEquipmentsRequest.cshtml" />
     <Content Include="Views\EquipmentAllocation\_CreateNewImportEquipmentsProposal.cshtml" />
+    <Content Include="Views\Equipments\EquipmentsGenderQR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

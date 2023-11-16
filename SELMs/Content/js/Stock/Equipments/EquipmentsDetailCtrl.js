@@ -41,7 +41,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     //this removes everything before the last slash in the path
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
-
+    $scope.code = url;
     $scope.ListUnits = ['Cái', 'Chiếc', 'Bộ', 'Cặp', 'Hộp'];
 
 

@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "EquipmentsGenderQR";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+@{
+    ViewBag.Title = "EquipmentsGenderQR";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<div ng-app="myApp" ng-controller="EquipGenderQRCtrl" style="display:inline-block;width:100%;">
+    <div id="qrcodes" ></div>
+    <button ng-click="generateAndDownloadDoc()">Tạo QR Codes và Tệp DOC</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrious"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.42.0/docxtemplater.min.js"></script>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('EquipGenderQRCtrl', function ($scope) {
+            $scope.codes = ["Code1", "Code2", "Code3", "Code1", "Code2", "Code3", "Code1", "Code2", "Code3"];
+            $scope.genders = ["Nam", "Nữ", "Khác", "Nam", "Nữ", "Khác", "Nam", "Nữ", "Khác"];
+
+            $scope.generateQRCode = function (data) {
+                try {
+                    var qr = new QRious({
+                        element: document.createElement('div'),
+                        value: data,
+                        size: 256,
+                        level: 'H' // Higher error correction level
+                    });
+
+                    return qr;
+                } catch (error) {
+                    console.error("Error generating QR code:", error);
+                }
+            };
+
+            $scope.generateAndDownloadDoc = function () {
+                var qrcodesContainer = document.getElementById('qrcodes');
+                qrcodesContainer.innerHTML = ''; // Clear previous content
+
+                // Generate QR codes
+                for (var i = 0; i < $scope.codes.length; i++) {
+                    var qrCode = $scope.generateQRCode(`Mã: ${$scope.codes[i]}`);
+
+                    // Append the QR code element to the container
+                    qrcodesContainer.appendChild(qrCode.canvas);
+
+                    // Add some spacing between QR codes
+                    qrcodesContainer.appendChild(document.createElement('br'));
+                }
+
+                // Generate and download DOC file
+                var doc = new Docxtemplater();
+                doc.loadFile("template.docx");
+
+                var data = {
+                    codes: $scope.codes,
+                    genders: $scope.genders,
+                };
+
+                doc.setData(data);
+
+                try {
+                    doc.render();
+                    var output = doc.getZip().generate({ type: "blob" });
+                    saveAs(output, "output.docx");
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+        });
+    </script>
+
+
+</div>
+

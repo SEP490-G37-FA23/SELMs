@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "EquipAllowcationDetails";
-    Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
 
 <script src="~/Content/js/Project/EquipAllocationDetailsCtrl.js"></script>
@@ -46,7 +46,7 @@
                                                 <th scope="col">Mã chuẩn</th>
                                                 <th scope="col">Tên thiết bị</th>
                                                 <th scope="col">Đơn vị tính</th>
-                                                <th scope="col">Vị trí</th>
+                                                <th scope="col">Phòng lab</th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Dự án yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
@@ -103,7 +103,7 @@
                                                 <th scope="col">Dự án yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
-                                                <th scope="col"></th>
+                                                <th scope="col">Tích</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -120,6 +120,7 @@
                                                 <td>{{item.project_name}}</td>
                                                 <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
                                                 <td>{{item.fullname}}</td>
+                                                <td><input type="checkbox" ng-model="item.check" ng-change="SelectEquip(item)"/></td>
 
                                             </tr>
                                         </tbody>
@@ -132,7 +133,7 @@
                         </div>
                     </div>
                 </section>
-                @Html.Partial("_CreateNewInventoryEquipmentsRequest");
+                @Html.Partial("_CreateNewHandoverEquipmentsRequest");
 
             </div>
            
