@@ -313,6 +313,7 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SELMs.Context.cs" />
     <Compile Include="Models\SELMs.Designer.cs">
       <DependentUpon>SELMs.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
