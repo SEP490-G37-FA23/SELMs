@@ -319,16 +319,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Models\SELMs1.cs">
+    <Compile Include="Models\SELMs.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
+    <Compile Include="Models\SELMs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -703,7 +702,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\SELMs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SELMs1.cs</LastGenOutput>
+      <DependentUpon>SELMs.edmx</DependentUpon>
+      <LastGenOutput>SELMs.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
