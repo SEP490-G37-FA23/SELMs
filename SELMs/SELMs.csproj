@@ -242,91 +242,95 @@
     <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Allocation_Application.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Allocation_Application_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Component.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Handover_Form.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Handover_Form_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Import_Application.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Import_Application_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Location_History.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Project_History.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Usage_History.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory_Request_Application.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory_Request_Application_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Location_History.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Project_History.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListMember_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proc_GetListRole_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project_Investment_Cost_Application.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project_Investment_Cost_Application_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMsDB.Context.cs">
+    <Compile Include="Models\SELMs.Designer.cs">
+      <DependentUpon>SELMs.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMsDB.cs">
+    <Compile Include="Models\SELMs1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMsDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDB.edmx</DependentUpon>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
@@ -669,7 +673,7 @@
     <Content Include="Content\js\Project\CreateNewEAACtrl.js" />
     <Content Include="Content\js\Project\EquipAllocationDetailsCtrl.js" />
     <Content Include="Content\js\Project\ListEAACtrl.js" />
- <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
+    <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
@@ -696,15 +700,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\SELMsDB.Context.tt">
+    <Content Include="Models\SELMs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDB.edmx</DependentUpon>
-      <LastGenOutput>SELMsDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\SELMsDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDB.edmx</DependentUpon>
-      <LastGenOutput>SELMsDB.cs</LastGenOutput>
+      <LastGenOutput>SELMs1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -851,12 +849,12 @@
     <Content Include="Content\css\assets\vendor\tinymce\package.json" />
     <Content Include="Content\css\assets\vendor\tinymce\README.md" />
     <Content Include="Content\css\forms\contact.php" />
-    <EntityDeploy Include="Models\SELMsDB.edmx">
+    <EntityDeploy Include="Models\SELMs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SELMsDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>SELMs.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\SELMsDB.edmx.diagram">
-      <DependentUpon>SELMsDB.edmx</DependentUpon>
+    <Content Include="Models\SELMs.edmx.diagram">
+      <DependentUpon>SELMs.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -889,7 +887,7 @@
     <Content Include="Views\User\AddNewMember.cshtml" />
     <Content Include="Views\User\MemberDetails.cshtml" />
     <Content Include="Views\User\MembersList.cshtml" />
-  <Content Include="Views\Categories\CategoryDetail.cshtml" />
+    <Content Include="Views\Categories\CategoryDetail.cshtml" />
     <Content Include="Views\ImportEquipments\ImportEquipmentsProposalsDetail.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectList.cshtml" />
     <Content Include="Views\ProjectPortfolio\CreateNewProject.cshtml" />
@@ -920,12 +918,11 @@
     <Content Include="Views\User\MemberListPV.cshtml" />
     <Content Include="Views\Shared\_LayoutLabDirector.cshtml" />
     <Content Include="Views\Shared\_LayoutProjectManagement.cshtml" />
-
     <Content Include="Views\EquipmentAllocation\EquipAllocationDetails.cshtml" />
     <Content Include="Views\InventoryEquipments\InventoryEquipmentsResults.cshtml" />
     <Content Include="Views\EquipmentAllocation\_CreateNewInventoryEquipmentsRequest.cshtml" />
     <Content Include="Views\EquipmentAllocation\_CreateNewImportEquipmentsProposal.cshtml" />
- <Content Include="Views\EquipmentAllocation\EquipAllowcationDetails.cshtml" />
+    <Content Include="Views\EquipmentAllocation\EquipAllowcationDetails.cshtml" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
