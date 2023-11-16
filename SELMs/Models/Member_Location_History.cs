@@ -12,11 +12,7 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-<<<<<<<< HEAD:SELMs/Models/Member_Location_History.cs
     public partial class Member_Location_History
-========
-    public partial class Proc_GetRolesList_Result
->>>>>>>> origin/front-end/DucTM:SELMs/Models/Proc_GetRolesList_Result.cs
     {
         public int id { get; set; }
         public string user_code { get; set; }

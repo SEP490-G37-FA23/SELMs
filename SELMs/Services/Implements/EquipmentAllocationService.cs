@@ -64,20 +64,12 @@ namespace SELMs.Services.Implements
         {
             string code = $"EAA{DateTime.Now.ToString("yyyyMMdd")}";
             Equipment_Allocation_Application lastDailyApplication = repository.GetLastDailyApplication();
-            if (lastDailyApplication != null)
-            {
-                string num = lastDailyApplication.ea_application_code.Replace(code, "");
-                if (num.Count() > 0)
-                {
-                    num = (Convert.ToInt32(num) + 1).ToString();
-                    code += num;
-                }
-                else
-                {
-                    code += "1";
-                }
-            }
+
+            int num = lastDailyApplication == null ? 1 : Convert.ToInt32((lastDailyApplication.ea_application_code).Replace(code, "")) + 1;
+            code +=  num < 10000 ? num.ToString("D4") : num.ToString();
             return code;
         }
+
+
     }
 }

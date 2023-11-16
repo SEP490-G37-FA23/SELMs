@@ -24,7 +24,7 @@ namespace SELMs.Models.BusinessModel
         public string text { set; get; }
         public string text1 { set; get; }
         public string text2 { set; get; }
-
+        public string text3 { set; get; }
 
     }
 }

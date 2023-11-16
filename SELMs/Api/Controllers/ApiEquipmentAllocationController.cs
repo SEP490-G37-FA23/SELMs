@@ -28,6 +28,27 @@ namespace SELMs.Api.Controllers
         private IMapper mapper = MapperConfig.Initialize();
 
         #region Get application by id
+        [HttpPost]
+        [Route("equipment-allocation-application/search")]
+        public async Task<IHttpActionResult> GetEAAList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetEAAList(arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get application by id
         [HttpGet]
         [Route("equipment-allocation-application/{id}")]
         public async Task<IHttpActionResult> GetApplication(int id)
@@ -81,6 +102,48 @@ namespace SELMs.Api.Controllers
                 List<Equipment_Allocation_Application_Detail> details = mapper.Map<List<Equipment_Allocation_Application_Detail>>(applicationRequest.application_details);
                 service.UpdateApplication(id, application, details);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get aavaiable-equipments
+        [HttpPost]
+        [Route("equipment-allocation-application/avaiable-equipments")]
+        public async Task<IHttpActionResult> GetAvailableEquipmentList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetAvailableEquipmentList(arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get need import equipments
+        [HttpPost]
+        [Route("equipment-allocation-application/need-import-equipments")]
+        public async Task<IHttpActionResult> GetNeedImportEquipmentList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetNeedImportEquipmentList(arg);
+                return Ok(returnedData);
             }
             catch (Exception ex)
             {
