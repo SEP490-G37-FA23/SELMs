@@ -298,9 +298,6 @@
     <Compile Include="Models\Proc_GetListMember_Result.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proc_GetListRole_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
