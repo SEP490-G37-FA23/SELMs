@@ -1,7 +1,4 @@
-﻿using SELMs.Services.Implements;
-using Xunit.Abstractions;
-
-namespace SELMs.Test.Services.Test
+﻿namespace SELMs.Test.Services.Test
 {
 	public class MemberServiceTest
 	{
@@ -39,11 +36,11 @@ namespace SELMs.Test.Services.Test
 
 		[Theory]
 		[MemberData(nameof(MemberServiceTestData.UpdateMemberTestData), MemberType = typeof(MemberServiceTestData))]
-		public async Task TestUpdateMember_ReturnNothing(int id, User userDTO)
+		public async Task TestUpdateMember_ReturnNothing(int id, User user)
 		{
 			try
 			{
-				await memberService.UpdateMember(id, userDTO);
+				await memberService.UpdateMember(id, user);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)
@@ -68,20 +65,17 @@ namespace SELMs.Test.Services.Test
 	{
 		public static IEnumerable<object[]> SaveMemberTestData()
 		{
-			yield return new object[] { new User() { fullname = "quốc" } };
-			yield return new object[] { new User() { fullname = "Hồ Chí Minh" } };
-			yield return new object[] { new User() { fullname = "Trịnh Văn Quyết" } };
+			yield return new object[] { new User() { fullname = "Phan Văn Giang" } };
 			yield return new object[] { new User() { fullname = "Vương Đình Huệ" } };
-			yield return new object[] { new User() { fullname = "Phạm Minh Chính" } };
-			yield return new object[] { new User() { fullname = "Nguyễn Phú Trọng" } };
+			yield return new object[] { new User() { fullname = "Nguyễn Chí Vịnh" } };
 		}
 
 
 		public static IEnumerable<object[]> UpdateMemberTestData()
 		{
-			yield return new object[] { 1, new User() { fullname = "Hà" } };
-			yield return new object[] { 3, new User() { fullname = "Nguyễn Tuấn Anh" } };
-			yield return new object[] { 4, new User() { fullname = "Lê Văn Luyện" } };
+			yield return new object[] { 0, new User() { user_code = "TanLT", username = "TanLT", fullname = "Lê Trọng Tấn" } };
+			yield return new object[] { 4, new User() { user_code = "QuyenNV", username = "QuyenNV", fullname = "Vũ Văn Quyền" } };
+			yield return new object[] { 5, new User() { user_code = "TuNT", username = "TuNT", fullname = "Nguyễn Tuấn Tú" } };
 		}
 
 
