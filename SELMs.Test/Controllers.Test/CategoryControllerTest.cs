@@ -148,9 +148,9 @@ namespace SELMs.Test.Controllers.Test
 		// Use for search category
 		public static IEnumerable<object[]> SeacrchCategoryTestData()
 		{
-			yield return new object[] { new Argument() { username = "Laptop" } };
-			yield return new object[] { new Argument() { username = "Thiết bị đo" } };
-			yield return new object[] { new Argument() { username = "aaaaaa" } };
+			yield return new object[] { new Argument() { text = "" } };
+			yield return new object[] { new Argument() { text = "GG" } };
+			yield return new object[] { new Argument() { text = "Khác" } };
 		}
 
 
