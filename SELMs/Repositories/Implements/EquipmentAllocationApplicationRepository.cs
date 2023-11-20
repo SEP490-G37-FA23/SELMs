@@ -34,16 +34,22 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetLastDailyApplication()
         {
-            dynamic application = db.Equipment_Import_Application
-                .OrderByDescending(a => a.application_date).FirstOrDefault();
-            return application;
+            Equipment_Allocation_Application result = db.Equipment_Allocation_Application.OrderByDescending(e => e.ea_application_code).FirstOrDefault();
+            return result;
         }
 
         public dynamic SaveApplication(Equipment_Allocation_Application application)
         {
-            db.Equipment_Allocation_Application.Add(application);
-            db.SaveChanges();
-            return application;
+            try
+            {
+                db.Equipment_Allocation_Application.Add(application);
+                db.SaveChanges();
+                return application;
+            } catch(Exception ex)
+            {
+                return ex.Message;
+            }
+           
         }
 
         public dynamic GetApplicationList(Argument arg)
@@ -121,6 +127,51 @@ namespace SELMs.Repositories.Implements
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
             if (applicationDetail != null) db.Equipment_Allocation_Application_Detail.Remove(applicationDetail);
             db.SaveChangesAsync();
+        }
+
+        public dynamic GetEAAList(Argument arg)
+        {
+            dynamic list = null;
+            list = db.Database.Connection.QueryAsync<dynamic>("Proc_GetEAAList", new
+            {
+               username = arg.username,
+               project_name = arg.text,
+               location_name = arg.text1,
+               creater_name = arg.text2,
+               application_code=arg.text3
+            }
+                , commandType: CommandType.StoredProcedure);
+            return list;
+        }
+
+        public dynamic GetAvailableEquipmentList(Argument arg)
+        {
+            dynamic list = null;
+            list = db.Database.Connection.QueryAsync<dynamic>("Proc_GetAvailableEAAList", new
+            {
+                username = arg.username,
+                project_name = arg.text,
+                location_name = arg.text1,
+                creater_name = arg.text2,
+                application_code = arg.text3
+            }
+                , commandType: CommandType.StoredProcedure);
+            return list;
+        }
+
+        public dynamic GetNeedImportEquipmentList(Argument arg)
+        {
+            dynamic list = null;
+            list = db.Database.Connection.QueryAsync<dynamic>("Proc_GetNeedImportEAAList", new
+            {
+                username = arg.username,
+                project_name = arg.text,
+                location_name = arg.text1,
+                creater_name = arg.text2,
+                application_code = arg.text3
+            }
+                , commandType: CommandType.StoredProcedure);
+            return list;
         }
     }
 }

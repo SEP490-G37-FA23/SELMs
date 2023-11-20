@@ -55,8 +55,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategoriesList();
 
     $scope.LoadLocationsList = function () {
-
-        $http.post(origin + '/api/v1/locations').then(function (response) {
+        $http.post(origin + '/api/v1/all-locations').then(function (response) {
             $scope.ListLocations = response.data;
         });
     }

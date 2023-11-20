@@ -21,11 +21,21 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-
+        public ActionResult EquipAllocationDetails()
+        {
+            return View();
+        }
         public ActionResult DeliveryEquipmentsList()
         {
             return View();
         }
-
+        public ActionResult _CreateNewInventoryEquipmentsRequest()
+        {
+            return PartialView();
+        }
+        public ActionResult _CreateNewImportEquipmentsProposal()
+        {
+            return PartialView();
+        }
     }
 }
