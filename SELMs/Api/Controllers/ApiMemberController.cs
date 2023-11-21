@@ -99,8 +99,8 @@ namespace SELMs.Api.HumanResource
 			try
 			{
 				User member = mapper.Map<User>(dto);
-				var result = service.SaveMember(member);
-				return Ok(result);
+				await service.SaveMember(member);
+				return Ok();
 			}
 			catch (Exception ex)
 			{

@@ -92,9 +92,8 @@ namespace SELMs.Test.Controllers.Test
 			{
 				var actionResult = await apiMemberController.UpdateMember(id, userDTO);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
+				output.WriteLine($"Update successfull - Status code: {(int)response.StatusCode}");
 			}
 			catch (Exception ex)
 			{
@@ -157,19 +156,6 @@ namespace SELMs.Test.Controllers.Test
 
 		#endregion
 
-
-
-
-
-
-
-		#region Iteration 2
-		#endregion
-
-
-
-		#region Iteration 3
-		#endregion
 	}
 
 
@@ -198,20 +184,22 @@ namespace SELMs.Test.Controllers.Test
 		}
 
 
-		public static IEnumerable<object[]> UpdateMemberTestData()
-		{
-			yield return new object[] { -1, new UserDTO() { fullname = "" } };
-			yield return new object[] { 0, new UserDTO() { fullname = "Hà" } };
-			yield return new object[] { 1, new UserDTO() { fullname = "Nguyễn Tuấn Anh" } };
-			yield return new object[] { 2, new UserDTO() { fullname = "Lê Văn Luyện" } };
-		}
-
 		public static IEnumerable<object[]> CreateNewMemberTestData()
 		{
-			yield return new object[] { new UserDTO() { fullname = "" } };
-			yield return new object[] { new UserDTO() { fullname = "dada" } };
-			yield return new object[] { new UserDTO() { fullname = "Lê Tuấn Linh" } };
+			yield return new object[] { new UserDTO() { fullname = "Phạm Minh Chính" } };
+			yield return new object[] { new UserDTO() { fullname = "Hồ Chí Minh" } };
+			yield return new object[] { new UserDTO() { fullname = "Nguyễn Phú Trọng" } };
 		}
+
+
+
+		public static IEnumerable<object[]> UpdateMemberTestData()
+		{
+			yield return new object[] { 0, new UserDTO() { user_code = "CuongHA", username = "123", fullname = "Hoàng Anh Cường" } };
+			yield return new object[] { 6, new UserDTO() { user_code = "AnhTN", username = "AnhTN", fullname = "Nguyễn Tuấn Anh" } };
+			yield return new object[] { 7, new UserDTO() { user_code = "LuyenLV", username = "LuyenLV", fullname = "Lê Văn Luyện" } };
+		}
+
 
 
 

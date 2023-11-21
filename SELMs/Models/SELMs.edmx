@@ -5,30 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SELMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SELMs.dbo.Application_Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Application_Attachment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="application_type" Type="nvarchar" MaxLength="50" />
-          <Property Name="application_id" Type="int" />
-          <Property Name="attachment_id" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Attachment">
-          <Key>
-            <PropertyRef Name="attach_id" />
-          </Key>
-          <Property Name="attach_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
-          <Property Name="content" Type="varbinary(max)" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="notes" Type="nvarchar" MaxLength="300" />
-          <Property Name="extension" Type="nvarchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
@@ -355,6 +331,50 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="job_description" Type="nvarchar(max)" />
           <Property Name="is_active" Type="bit" />
         </EntityType>
+        <Function Name="Proc_GetAllSubLocationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="parent_id" Type="int" Mode="In" />
+          <Parameter Name="location_name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetCategoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isadmin" Type="bit" Mode="In" />
+          <Parameter Name="role" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetDetailEquipment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="system_code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetEquipmentsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isadmin" Type="bit" Mode="In" />
+          <Parameter Name="role" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+          <Parameter Name="text1" Type="nvarchar" Mode="In" />
+          <Parameter Name="text2" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoryCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetGetListComponentEquips" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="system_code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetListEquipInLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetListProjectInLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetLocationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="parent_id" Type="int" Mode="In" />
+          <Parameter Name="location_name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetMembersList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isadmin" Type="bit" Mode="In" />
+          <Parameter Name="role" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetRolesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="SELMsModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
@@ -379,24 +399,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Application_Attachment].[id] AS [id], 
-    [Application_Attachment].[application_type] AS [application_type], 
-    [Application_Attachment].[application_id] AS [application_id], 
-    [Application_Attachment].[attachment_id] AS [attachment_id]
-    FROM [dbo].[Application_Attachment] AS [Application_Attachment]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Attachment" EntityType="Self.Attachment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Attachment].[attach_id] AS [attach_id], 
-    [Attachment].[name] AS [name], 
-    [Attachment].[content] AS [content], 
-    [Attachment].[date] AS [date], 
-    [Attachment].[notes] AS [notes], 
-    [Attachment].[extension] AS [extension]
-    FROM [dbo].[Attachment] AS [Attachment]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -729,27 +731,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="job_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Application_Attachment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="application_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="application_id" Type="Int32" />
-          <Property Name="attachment_id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Attachment">
-          <Key>
-            <PropertyRef Name="attach_id" />
-          </Key>
-          <Property Name="attach_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SELMsContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" />
@@ -773,15 +755,198 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
-          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <FunctionImport Name="Proc_GetAllSubLocationList" ReturnType="Collection(SELMsModel.Proc_GetAllSubLocationList_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="parent_id" Mode="In" Type="Int32" />
+            <Parameter Name="location_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetCategoryList" ReturnType="Collection(SELMsModel.Proc_GetCategoryList_Result)">
+            <Parameter Name="isadmin" Mode="In" Type="Boolean" />
+            <Parameter Name="role" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetDetailEquipment" ReturnType="Collection(SELMsModel.Proc_GetDetailEquipment_Result)">
+            <Parameter Name="system_code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetEquipmentsList" ReturnType="Collection(SELMsModel.Proc_GetEquipmentsList_Result)">
+            <Parameter Name="isadmin" Mode="In" Type="Boolean" />
+            <Parameter Name="role" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="text1" Mode="In" Type="String" />
+            <Parameter Name="text2" Mode="In" Type="String" />
+            <Parameter Name="categoryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetGetListComponentEquips" ReturnType="Collection(SELMsModel.Proc_GetGetListComponentEquips_Result)">
+            <Parameter Name="system_code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetListEquipInLocation" ReturnType="Collection(SELMsModel.Proc_GetListEquipInLocation_Result)">
+            <Parameter Name="location_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetListProjectInLocation" ReturnType="Collection(SELMsModel.Proc_GetListProjectInLocation_Result)">
+            <Parameter Name="location_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetLocationList" ReturnType="Collection(SELMsModel.Proc_GetLocationList_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="parent_id" Mode="In" Type="Int32" />
+            <Parameter Name="location_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetMembersList" ReturnType="Collection(SELMsModel.Proc_GetMembersList_Result)">
+            <Parameter Name="isadmin" Mode="In" Type="Boolean" />
+            <Parameter Name="role" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetRolesList" ReturnType="Collection(SELMsModel.Proc_GetRolesList_Result)" />
         </EntityContainer>
+        <ComplexType Name="Proc_GetAllSubLocationList_Result">
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+          <Property Type="String" Name="location_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="parent_location_id" Nullable="true" />
+          <Property Type="Int32" Name="location_level" Nullable="true" />
+          <Property Type="Boolean" Name="is_active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetCategoryList_Result">
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="category_id" Nullable="false" />
+          <Property Type="Int32" Name="category_level" Nullable="false" />
+          <Property Type="String" Name="category_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="category_parent" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="desciption" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="number_equip" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetDetailEquipment_Result">
+          <Property Type="Int32" Name="equipment_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="serial_no" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="unit" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="specification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="responsibler" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="type_equipment" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="64" />
+          <Property Type="Boolean" Name="is_integration" Nullable="true" />
+          <Property Type="String" Name="category_name" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="location_id" Nullable="true" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetEquipmentsList_Result">
+          <Property Type="Int32" Name="equipment_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="serial_no" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="unit" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="specification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="responsibler" Nullable="true" MaxLength="564" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="type_equipment" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="64" />
+          <Property Type="Boolean" Name="is_integration" Nullable="true" />
+          <Property Type="String" Name="category_name" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="location_id" Nullable="true" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetGetListComponentEquips_Result">
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetListEquipInLocation_Result">
+          <Property Type="Int32" Name="equipment_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="standard_equipment_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="equipment_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="serial_no" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="unit" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="specification" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="responsibler" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="usage_status" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="type_equipment" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="category_code" Nullable="true" MaxLength="64" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="is_integration" Nullable="true" />
+          <Property Type="Boolean" Name="is_available" Nullable="false" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="fullname" Nullable="false" MaxLength="564" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+          <Property Type="String" Name="system_equipment_code1" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="from_date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="to_date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="note1" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetListProjectInLocation_Result">
+          <Property Type="Int32" Name="project_id" Nullable="false" />
+          <Property Type="String" Name="project_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="project_name" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="acronym" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="manager" Nullable="true" MaxLength="64" />
+          <Property Type="DateTime" Name="start_date" Nullable="true" />
+          <Property Type="DateTime" Name="end_date" Nullable="true" />
+          <Property Type="DateTime" Name="create_date" Nullable="true" />
+          <Property Type="String" Name="creater" Nullable="true" MaxLength="64" />
+          <Property Type="Boolean" Name="status" Nullable="false" />
+          <Property Type="Int32" Name="location_id" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetLocationList_Result">
+          <Property Type="Int32" Name="location_id" Nullable="false" />
+          <Property Type="String" Name="location_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="location_desciption" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="parent_location_id" Nullable="true" />
+          <Property Type="Int32" Name="location_level" Nullable="true" />
+          <Property Type="Boolean" Name="is_active" Nullable="false" />
+          <Property Type="Int32" Name="number_equip" Nullable="true" />
+          <Property Type="String" Name="parent_location" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetMembersList_Result">
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="String" Name="user_code" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="fullname" Nullable="false" MaxLength="564" />
+          <Property Type="String" Name="role_code" Nullable="true" MaxLength="64" />
+          <Property Type="Boolean" Name="is_admin" Nullable="true" />
+          <Property Type="DateTime" Name="date_of_birth" Nullable="true" />
+          <Property Type="String" Name="hotline" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="gender" Nullable="true" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="avatar_img" Nullable="true" />
+          <Property Type="DateTime" Name="hire_date" Nullable="true" />
+          <Property Type="DateTime" Name="resignation_date" Nullable="true" />
+          <Property Type="String" Name="work_term" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="skill" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="job_description" Nullable="true" />
+          <Property Type="Boolean" Name="is_active" Nullable="true" />
+          <Property Type="String" Name="role_name" Nullable="true" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetRolesList_Result">
+          <Property Type="Int32" Name="role_id" Nullable="false" />
+          <Property Type="String" Name="role_code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="role_name" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="is_active" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SELMsModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="SELMsModelStoreContainer" CdmEntityContainer="SELMsContext">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="SELMsModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -1131,28 +1296,187 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Application_Attachment">
-            <EntityTypeMapping TypeName="SELMsModel.Application_Attachment">
-              <MappingFragment StoreEntitySet="Application_Attachment">
+          <FunctionImportMapping FunctionImportName="Proc_GetAllSubLocationList" FunctionName="SELMsModel.Store.Proc_GetAllSubLocationList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetAllSubLocationList_Result">
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
+                <ScalarProperty Name="location_level" ColumnName="location_level" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetCategoryList" FunctionName="SELMsModel.Store.Proc_GetCategoryList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetCategoryList_Result">
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="category_level" ColumnName="category_level" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_parent" ColumnName="category_parent" />
+                <ScalarProperty Name="desciption" ColumnName="desciption" />
+                <ScalarProperty Name="number_equip" ColumnName="number_equip" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetDetailEquipment" FunctionName="SELMsModel.Store.Proc_GetDetailEquipment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetDetailEquipment_Result">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetEquipmentsList" FunctionName="SELMsModel.Store.Proc_GetEquipmentsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetEquipmentsList_Result">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetGetListComponentEquips" FunctionName="SELMsModel.Store.Proc_GetGetListComponentEquips">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetGetListComponentEquips_Result">
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetListEquipInLocation" FunctionName="SELMsModel.Store.Proc_GetListEquipInLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetListEquipInLocation_Result">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
+                <ScalarProperty Name="is_available" ColumnName="is_available" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="application_type" ColumnName="application_type" />
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-                <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attachments">
-            <EntityTypeMapping TypeName="SELMsModel.Attachment">
-              <MappingFragment StoreEntitySet="Attachment">
-                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="extension" ColumnName="extension" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="system_equipment_code1" ColumnName="system_equipment_code1" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="to_date" ColumnName="to_date" />
+                <ScalarProperty Name="note1" ColumnName="note1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetListProjectInLocation" FunctionName="SELMsModel.Store.Proc_GetListProjectInLocation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetListProjectInLocation_Result">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_code" ColumnName="project_code" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="acronym" ColumnName="acronym" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="creater" ColumnName="creater" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetLocationList" FunctionName="SELMsModel.Store.Proc_GetLocationList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetLocationList_Result">
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
+                <ScalarProperty Name="location_level" ColumnName="location_level" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="number_equip" ColumnName="number_equip" />
+                <ScalarProperty Name="parent_location" ColumnName="parent_location" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetMembersList" FunctionName="SELMsModel.Store.Proc_GetMembersList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetMembersList_Result">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="role_code" ColumnName="role_code" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="hotline" ColumnName="hotline" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="avatar_img" ColumnName="avatar_img" />
+                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
+                <ScalarProperty Name="resignation_date" ColumnName="resignation_date" />
+                <ScalarProperty Name="work_term" ColumnName="work_term" />
+                <ScalarProperty Name="skill" ColumnName="skill" />
+                <ScalarProperty Name="job_description" ColumnName="job_description" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetRolesList" FunctionName="SELMsModel.Store.Proc_GetRolesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SELMsModel.Proc_GetRolesList_Result">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_code" ColumnName="role_code" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
