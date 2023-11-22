@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewBag.Title = "_CreateNewImportEquipmentsProposal";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<div class="modal fade" id="create-import-request" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" style="width:1500px; margin-left:-400px;">
+            <div class="modal-header">
+                <h5 class="modal-title">Phiếu nhập thiết bị</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <section class="section">
+                    <h4 class="text-center">Phiếu nhập thiết bị</h4>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/ImportEquipmentsProposalsList.cshtml">Danh sách phiếu nhập thiết bị</a></li>
+                            <li class="breadcrumb-item"><a href="~/Views/ImportEquipments/CreateNewImportEquipmentsProposal.cshtml"></a>Tạo đơn nhập thiết bị</li>
+                        </ol>
+                    </nav>
+                    <form class="row mt-5">
+                        <div>
+                            <h4 class="card-title">Thông tin chung</h4>
+                            <div class="row mb-3">
+                                <label class=" col-form-label" for="inputName5">Người tạo đơn</label>
+                                <div>
+                                    <input type="text" class="form-control" id="inputText">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-form-label">Ngày tạo đơn</label>
+                                <div>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class=" col-form-label">Ngày nhập</label>
+                                <div>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class=" col-form-label" for="inputName5">Người cung cấp</label>
+                                <div>
+                                    <input type="text" class="form-control" id="inputText">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class=" col-form-label">Dự án yêu cầu</label>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option value="1">Dự án 1</option>
+                                        <option value="2">Dự án 2</option>
+                                        <option value="3">Dự án 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class=" col-form-label">Phân loại</label>
+                                <div>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option value="1">Nhập thiết bị theo dự án</option>
+                                        <option value="2">Nhập thiết bị bổ sung</option>
+                                        <option value="3">Nhập thiết bị khác</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <label class=" col-form-label">Yêu cầu nhập hàng</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Yêu cầu nhập hàng" id="floatingTextarea"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="card-title">Thông tin chi tiết</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8 mt-3">
+                                            <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Mã quản lý</th>
+                                                <th scope="col">Tên thiết bị</th>
+                                                <th scope="col">Thông số kĩ thuật</th>
+                                                <th scope="col">Đơn vị tính</th>
+                                                <th scope="col">Số lượng</th>
+                                                <th scope="col">Đơn giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                            <tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                            <tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                            <tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                                <td><input type="text" style="border: hidden; width: 80%"></td>
+                                            <tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <button type="button" class="btn btn-primary ms-2">Tạo đơn</button>
+
+                                        <label class="ms-5">Tổng số thiết bị</label>
+                                        <input>
+                                        <label class="ms-5">Tổng số tiền</label>
+                                        <input>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

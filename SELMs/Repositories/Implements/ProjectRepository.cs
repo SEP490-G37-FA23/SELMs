@@ -45,6 +45,7 @@ namespace SELMs.Repositories.Implements
             projects = db.Database.Connection.QueryAsync<dynamic>("Proc_GetProjectList", new
             {
                 username = arg.username,
+                project_name = arg.text
             }
                 , commandType: CommandType.StoredProcedure);
             return projects;

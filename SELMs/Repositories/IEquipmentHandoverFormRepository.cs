@@ -13,15 +13,18 @@ namespace SELMs.Repositories
         dynamic GetApplicationList();
         dynamic GetApplicationList(Argument arg);
         dynamic GetApplication(int id);
+        dynamic GetLastDailyApplication();
         dynamic SaveApplication(Equipment_Handover_Form application);
-        void UpdateApplication(Equipment_Handover_Form application);
+        dynamic UpdateApplication(Equipment_Handover_Form application);
         void DeleteApplication(int id);
-        dynamic GetApplicationDetailList();
+        dynamic GetApplicationDetailList(string applicationCode);
         dynamic GetApplicationDetailList(Argument arg);
         dynamic GetApplicationDetail(int id);
-        dynamic SaveApplicationDetail(Equipment_Handover_Form_Detail application);
-        dynamic SaveApplicationDetails(List<Equipment_Handover_Form_Detail> applications);
-        void UpdateApplicationDetail(Equipment_Handover_Form_Detail application);
+        dynamic SaveApplicationDetail(Equipment_Handover_Form_Detail applicationDetail);
+        dynamic SaveApplicationDetails(List<Equipment_Handover_Form_Detail> applicationDetails);
+        void UpdateApplicationDetail(Equipment_Handover_Form_Detail applicationDetail);
         void DeleteApplicationDetail(int id);
+        dynamic GetApplicationAttachment(int applicationId);
+        dynamic AddAttachment(int applicationId, int attachmentId);
     }
 }

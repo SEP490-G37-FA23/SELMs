@@ -72,6 +72,8 @@ app.controller('CategoriesListCtrl', function ($scope, $http, $sce) {
 
     $scope.LoadCategorisList();
 
-  
+    $scope.LoadCategoryDetails = function (item) {
+        window.location.href = "https://localhost:44335/Category/CategoryDetail/" + item.category_id;
+    }
 
 });

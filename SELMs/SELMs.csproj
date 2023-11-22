@@ -151,6 +151,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Controllers\ApiAttachmentController.cs" />
+    <Compile Include="Api\Controllers\ApiEquipmentHandoverController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentProjectHistoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentLocationHistoryController.cs" />
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Api\Controllers\ApiMemberLocationHistoryController.cs" />
     <Compile Include="Api\Controllers\ApiMemberProjectHistoryController.cs" />
     <Compile Include="Api\Controllers\ApiProjectController.cs" />
+    <Compile Include="Api\DTOs\AttachmentDTO.cs" />
     <Compile Include="Api\DTOs\CategoryDTO.cs" />
     <Compile Include="Api\DTOs\CategoryRequest.cs" />
     <Compile Include="Api\DTOs\EquipComponentDTO.cs" />
@@ -171,6 +174,9 @@
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentAllocationApplicationRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentHandoverFormDetailDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentHandoverFormDTO.cs" />
+    <Compile Include="Api\DTOs\EquipmentHandoverRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentLocationHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentProjectHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
@@ -235,7 +241,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Application_Attachment.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Attachment.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
+    <Compile Include="Models\BusinessModel\ApplicationType.cs" />
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\CategoryModel.cs" />
@@ -356,6 +369,7 @@
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAttachmentRepository.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\IEquipmentProjectHistoryRepository.cs" />
     <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
@@ -368,6 +382,7 @@
     <Compile Include="Repositories\IMemberLocationHistoryRepository.cs" />
     <Compile Include="Repositories\IMemberProjectHistoryRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
+    <Compile Include="Repositories\Implements\AttachmentRepository.cs" />
     <Compile Include="Repositories\Implements\CategoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentLocationHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentProjectHistoryRepository.cs" />
@@ -384,8 +399,10 @@
     <Compile Include="Repositories\Implements\MemberRepository.cs" />
     <Compile Include="Repositories\Implements\ProjectRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
+    <Compile Include="Services\IAttachmentService.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IEquipmentAllocationService.cs" />
+    <Compile Include="Services\IEquipmentHandoverService.cs" />
     <Compile Include="Services\IEquipmentLocationHistoryService.cs" />
     <Compile Include="Services\IEquipmentProjectHistoryService.cs" />
     <Compile Include="Services\IEquipmentImportService.cs" />
@@ -395,7 +412,9 @@
     <Compile Include="Services\IMemberLocationHistoryService.cs" />
     <Compile Include="Services\IMemberProjectHistoryService.cs" />
     <Compile Include="Services\IMemberService.cs" />
+    <Compile Include="Services\Implements\AttachmentService.cs" />
     <Compile Include="Services\Implements\CategoryService.cs" />
+    <Compile Include="Services\Implements\EquipmentHandoverService.cs" />
     <Compile Include="Services\Implements\EquipmentLocationHistoryService.cs" />
     <Compile Include="Services\Implements\EquipmentProjectHistoryService.cs" />
     <Compile Include="Services\Implements\EquipmentAllocationService.cs" />
@@ -693,11 +712,18 @@
     <Content Include="Content\js\HumanResouce\CreateNewMemberCtrl.js" />
     <Content Include="Content\js\HumanResouce\MemberListCtrl.js" />
     <Content Include="Content\js\LabDicrector\Project\CreateNewProjectCtrl.js" />
+    <Content Include="Content\js\Project\CreateNewEAACtrl.js" />
+    <Content Include="Content\js\Project\EquipAllocationDetailsCtrl.js" />
+    <Content Include="Content\js\Project\ListEAACtrl.js" />
+    <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
+    <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\CreateNewEquipCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
+    <Content Include="Content\js\Stock\Locations\CreateNewLocationCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationDetailCtrl.js" />
+    <Content Include="Content\js\Stock\Locations\LocationManagementCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationsListCtrl.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
     <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
@@ -899,23 +925,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LayoutStockManagement.cshtml" />
-    <Content Include="Views\Categories\CreateNewCategory.cshtml" />
-    <Content Include="Views\Categories\CategoriesList.cshtml" />
     <Content Include="Views\Equipments\EquipmentsList.cshtml" />
     <Content Include="Views\Equipments\CreateNewEquipment.cshtml" />
-    <Content Include="Views\ImportEquipments\CreateNewImportEquipmentsProposal.cshtml" />
-    <Content Include="Views\ImportEquipments\ImportEquipmentsProposalsList.cshtml" />
-    <Content Include="Views\AllocationEquipments\CreateNewAllocationEquipmentsRequest.cshtml" />
-    <Content Include="Views\AllocationEquipments\AllocationEquipmentsRequestsList.cshtml" />
-    <Content Include="Views\AllocationEquipments\DeliveryEquipmentsList.cshtml" />
     <Content Include="Views\InventoryEquipments\CreateNewInventoryEquipmentsRequest.cshtml" />
     <Content Include="Views\InventoryEquipments\PerformInventoryEquipmentsRequest.cshtml" />
     <Content Include="Views\Shared\_LayoutHumanResourceManagement.cshtml" />
-    <Content Include="Views\HumanResource\MembersList.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Member\Index.cshtml" />
-    <Content Include="Views\Member\_PartialMember.cshtml" />
     <Content Include="Views\User\AddNewMember.cshtml" />
     <Content Include="Views\User\MemberDetails.cshtml" />
     <Content Include="Views\User\MembersList.cshtml" />
@@ -930,10 +946,7 @@
     <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
-    <Content Include="Views\AllocationEquipments\AllocationEquipmentRequestDetails.cshtml" />
     <Content Include="Views\Equipments\ViewEquipmentDetails.cshtml" />
-    <Content Include="Views\AllocationEquipments\AllocationEquipmentList.cshtml" />
-    <Content Include="Views\AllocationEquipments\CreateNewAllocationEquipment.cshtml" />
     <Content Include="Views\News\NotificationList.cshtml" />
     <Content Include="Views\News\CreateNewNotification.cshtml" />
     <Content Include="Views\News\NotificationDetail.cshtml" />
@@ -952,12 +965,22 @@
     <Content Include="Views\Locations\LocationsList.cshtml" />
     <Content Include="Views\User\MemberListPV.cshtml" />
     <Content Include="Views\Shared\_LayoutLabDirector.cshtml" />
+    <Content Include="Views\Shared\_LayoutProjectManagement.cshtml" />
+    <Content Include="Views\EquipmentAllocation\EquipAllocationDetails.cshtml" />
+    <Content Include="Views\InventoryEquipments\InventoryEquipmentsResults.cshtml" />
+    <Content Include="Views\EquipmentAllocation\_CreateNewInventoryEquipmentsRequest.cshtml" />
+    <Content Include="Views\EquipmentAllocation\_CreateNewImportEquipmentsProposal.cshtml" />
+    <Content Include="Views\EquipmentAllocation\EquipAllowcationDetails.cshtml" />
+    <Content Include="Scripts\version.json" />
+    <Content Include="Views\InventoryEquipments\ListEquipmentNotExist.cshtml" />
+    <Content Include="Views\InventoryEquipments\ListEquipmentsAlreadyExist.cshtml" />
+    <Content Include="Views\InventoryEquipments\_CreateNewImportEquipmentsProposal.cshtml" />
+    <Content Include="Views\InventoryEquipments\_CreateNewInventoryEquipmentsRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="obj\Debug\" />
-    <Folder Include="Views\ApiEquipmentImport\" />
     <Folder Include="Views\EquipmentManagementReports\" />
   </ItemGroup>
   <ItemGroup>

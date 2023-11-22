@@ -1,18 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "ViewProjectList";
-    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+    Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
-
-<div class="pagetitle">
-    <h1>Danh Sách Dự Án</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/ProjectPortfolio/ViewProjectList">Projects List</a></li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
-
 <section class="section">
 
     <div class="row">
@@ -25,10 +15,6 @@
                     <div class="row g-3">
                         <div class="col-md-3">
                             <a class="btn btn-primary" href="@Url.Action("CreateNewProject", "ProjectPortfolio")">Thêm dự án mới</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-primary" data-bs-toggle="modal"
-                               data-bs-target="#project-list">Test</a>
                         </div>
                         <div class="col-md-4">
 
@@ -91,4 +77,4 @@
         </div>
     </div>
 </section>
-    @Html.Partial("ViewProjectListPV")
+ 

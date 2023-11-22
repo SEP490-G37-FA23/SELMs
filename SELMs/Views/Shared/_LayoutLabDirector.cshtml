@@ -305,87 +305,38 @@
                     <i class="bi bi-grid"></i>
                     <span>Quản lý phòng lab</span>
                 </a>
-            </li><!-- End Khách hàng Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Nhập thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/ImportEquipments/CreateNewImportEquipmentsProposal">
-                            <i class="bi bi-circle"></i><span>Tạo đề nghị nhập thiết bị </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/ImportEquipments/ImportEquipmentsProposalsList" class="active">
-                            <i class="bi bi-circle"></i><span>Danh sách đề nghị nhập thiết bị</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </li><!-- End Phiếu xuất kho Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav1" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Giao nhận thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="charts-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav1">
                     <li>
-                        <a href="/AllocationEquipments/CreateNewAllocationEquipmentsRequest">
+                        <a href="/EquipmentAllocation/CreateNewEAA">
                             <i class="bi bi-circle"></i><span>Tạo yêu cầu cấp thiết bị</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/AllocationEquipments/AllocationEquipmentsRequestsList">
+                        <a href="/EquipmentAllocation/EAAList">
                             <i class="bi bi-circle"></i><span>Danh sách yêu cầu cấp thiết bị</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/AllocationEquipments/DeliveryEquipmentsList">
-                            <i class="bi bi-circle"></i><span>Danh sách đơn giao nhận thiết bị</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </li><!-- End Charts Nav -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav2" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Kiểm kê thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav2">
-                    <li>
-                        <a href="/InventoryEquipments/CreateNewInventoryEquipmentsRequest">
-                            <i class="bi bi-circle"></i><span>Tạo yêu cầu kiểm kê thiết bị</span>
+                        <a href="/EquipmentAllocation/DeliveryEquipmentsList">
+                            <i class="bi bi-circle"></i><span>Tình trạng thiết bị yêu cầu cấp</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/InventoryEquipments/PerformInventoryEquipmentsRequest">
-                            <i class="bi bi-circle"></i><span>Thực hiện yêu cầu kiểm kê</span>
+                        <a href="/EquipmentAllocation/DeliveryEquipmentsList">
+                            <i class="bi bi-circle"></i><span>Danh sách đơn bàn giao thiết bị</span>
                         </a>
                     </li>
 
                 </ul>
             </li><!-- End Charts Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav3" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Dựa án</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav3" class="nav-content collapse " data-bs-parent="#sidebar-nav3">
-                    <li>
-                        <a href="/ProjectPortfolio/ViewProjectList">
-                            <i class="bi bi-circle"></i><span>Danh sách dự án</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/ProjectPortfolio/CreateNewProject">
-                            <i class="bi bi-circle"></i><span>Tạo dự án mới</span>
-                        </a>
-                    </li>
 
-                </ul>
-            </li><!-- End Charts Nav -->
+
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav4" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Chi phí dự án</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -428,7 +379,7 @@
         @RenderBody()
     </main><!-- End #main -->
     <!-- ======= Footer ======= -->
-   
+
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

@@ -3,12 +3,8 @@
     ViewBag.Title = "CreateNewEquipmentAllocationApplication";
     Layout = "~/Views/Shared/_LayoutLabDirector.cshtml";
 }
-
-<div class="pagetitle">
-
-    <h1>Tạo yêu cầu cấp phát thiết bị</h1>
-</div><!-- End Page Title -->
-<div ng-app="myApp" ng-controller="CreateNewAllocationEquipmentsRequestCtrl" style="display:inline-block;width:100%;">
+<script src="~/Content/js/Project/CreateNewEAACtrl.js"></script>
+<div ng-app="myApp" ng-controller="CreateNewEAACtrl" style="display:inline-block;width:100%;">
     <input type="hidden" id="username" name="username" value="@Session["username"]" />
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
@@ -22,27 +18,66 @@
                 <div>
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">Tạo yêu cầu cấp phát thiết bị cho phòng lab</h5>
                             <h4 class="card-title">Thông tin cơ bản</h4>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="lab" class="form-label">Phòng lab</label>
-                                    <input type="text" class="form-control" id="lab">
+                                    <label for="lab" class="form-label">Dự án</label>
+                                    <ng-form>
+                                        <div class="form-all-sub-location">
+                                            <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="project_name" ng-change="LoadProjectsList()" ng-focus="showtablePj = true" ng-blur="showtablePj = false" ng-model-options="{debounce:700}" required>
+                                            <input type="text" class="form-control" ng-model="NewEAA.project_id" style="display:none">
+                                        </div>
+
+                                        <div class="input-group-btn" style="position:relative;width:20%;display:inline-block">
+                                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:500%" ng-show="showtablePj">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead class="bg-blue text-white">
+                                                            <tr>
+                                                                <th>Mã dự án</th>
+                                                                <th>Tên dự án</th>
+                                                                <th>Người quản lý</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr style="cursor:pointer" ng-mousedown="HandelProject(pj,NewEAA);" ng-repeat="pj in ListProjects">
+                                                                <td>
+                                                                    {{pj.project_code}}
+                                                                </td>
+                                                                <td>{{pj.project_name}}</td>
+                                                                <td>{{pj.name_manager}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </ng-form>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="receiver" class="form-label">Người tiếp nhận</label>
-                                    <input type="text" class="form-control" id="receiver">
+                                    <label for="lab" class="form-label">Phòng lab</label>
+                                    <input type="text" class="form-control" ng-model="NewEAA.location_desciption">
+
                                 </div>
+
                                 <div class="col-md-6">
                                     <label for="dateRequest" class="form-label">Ngày yêu cầu</label>
-                                    <input type="date" class="form-control" id="dateRequest">
+                                    <input type="text" class="form-control" ng-model="NewEAA.application_date" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="requester" class="form-label">Người yêu cầu</label>
-                                    <input type="text" class="form-control" id="requester">
+                                    <input type="text" class="form-control" ng-model="NewEAA.name_creater" readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="description" class="form-label">Mô tả</label>
-                                    <input type="text" class="form-control" id="description">
+                                    <input type="text" class="form-control" ng-model="NewEAA.desciption">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="description" class="form-label">Ghi chú cho kho</label>
+                                    <input type="text" class="form-control" ng-model="NewEAA.notes">
                                 </div>
                             </div>
                         </div>
@@ -54,25 +89,92 @@
                         <div class="card-body">
 
                             <h5 class="card-title">Danh sách thiết bị</h5>
-                            <button type="submit" class="btn btn-secondary">Import list</button>
-                            <button type="submit" class="btn btn-secondary">Import non list</button>
                             <!-- Table with stripped rows -->
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Mã hệ thống</th>
                                         <th scope="col">Mã thiết bị</th>
                                         <th scope="col">Tên thiết bị</th>
+                                        <th scope="col">DVT</th>
                                         <th scope="col">Mô tả/Thông số</th>
-                                        <th scope="col">Số lượng</th>
                                         <th scope="col">Tình trạng</th>
+                                        <th scope="col">Phân loại</th>
                                         <th scope="col">Ghi chú</th>
                                         <th scope="col">Tác vụ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr ng-repeat="item in ListEquipRequest">
+                                        <th scope="row">{{$index + 1}}</th>
+                                        <td>
+                                            <ng-form>
+                                                <div class="form-equip">
+                                                    <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.system_equipment_code" ng-change="LoadEquipmentsList(item.system_equipment_code)" ng-focus="showtableEquip = true" ng-blur="showtableEquip = false" ng-model-options="{debounce:700}" ng-disabled="item.status =='Thiết bị cần nhập mới'">
+                                                </div>
+
+                                                <div class="input-group-btn" style="position:relative;width:300%;display:inline-block">
+                                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableEquip">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead class="bg-blue text-white">
+                                                                    <tr>
+                                                                        <th>Mã hệ thống</th>
+                                                                        <th>Mã chuẩn</th>
+                                                                        <th>Tên thiết bị</th>
+                                                                        <th>Tình trạng thiết bị</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr style="cursor:pointer" ng-mousedown="HandelEquip(eq, item);" ng-repeat="eq in ListEquips">
+                                                                        <td>{{eq.system_equipment_code}}</td>
+                                                                        <td>{{eq.standard_equipment_code}}</td>
+                                                                        <td>{{eq.equipment_name}}</td>
+                                                                        <td>{{eq.usage_status}}</td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </ng-form>
+
+                                        </td>
+                                        <td>
+                                            <input ng-disabled="item.status !='Thiết bị cần nhập mới'" ng-model="item.standard_equipment_code" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input ng-disabled="item.status !='Thiết bị cần nhập mới'" ng-model="item.equipment_name" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input ng-disabled="item.status !='Thiết bị cần nhập mới'" ng-model="item.unit" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input ng-disabled="item.status !='Thiết bị cần nhập mới'" ng-model="item.equipment_specification" class="form-control" />
+                                        </td>
+
+                                        <td>
+                                            <input ng-disabled="item.status !='Thiết bị cần nhập mới'" ng-model="item.usage_status" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <select ng-model="item.status" ng-disabled="select_equip" class="form-control">
+                                                <option value="Có sẵn trong kho">Có sẵn trong kho</option>
+                                                <option value="Thiết bị cần nhập mới">Thiết bị cần nhập mới</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input ng-model="item.note" class="form-control" />
+                                        </td>
+                                        <td><i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteEquipRequest(ListEquipRequest,$index)"></i></td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="9" ng-click="HandelNewEquipRequest(ListEquipRequest)" class="text-center">Thêm thiết bị thành phần mới</td>
+                                    </tr>
+                                  
                                 </tbody>
                             </table>
 
@@ -80,7 +182,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Tạo yêu cầu mới</button>
+                    <button type="submit" class="btn btn-primary" ng-click="SaveNewEAA(NewEAA)">Tạo yêu cầu mới</button>
                 </div>
             </div>
         </form>
