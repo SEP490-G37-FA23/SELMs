@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace SELMs.Repositories.Implements
@@ -65,6 +66,17 @@ namespace SELMs.Repositories.Implements
         {
             dynamic equipments = db.Equipments.Where(e => e.category_code == categoryCode).ToListAsync();
             return equipments;
+        }
+
+        public async Task<dynamic> GetParentCategoriesList(Argument arg)
+        {
+            dynamic parentCategories = null;
+            parentCategories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetParentCategoriesList", new
+            {
+                level = arg.level
+            }
+                , commandType: CommandType.StoredProcedure);
+            return parentCategories;
         }
     }
 }

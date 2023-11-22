@@ -44,10 +44,31 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-		#endregion
+        #endregion
 
-		#region Get equipment by id
-		[HttpGet]
+        #region Get equipment list       
+        [HttpPost]
+        [Route("standard-equipments")]
+        public dynamic GetStandardEquipmentList(Argument args)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData =  repository.GetStandardEquipmentList(args);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get equipment by id
+        [HttpGet]
 		[Route("equipments/{id}")]
 		public async Task<IHttpActionResult> GetEquipment(int id)
 		{
@@ -70,11 +91,11 @@ namespace SELMs.Api.Controllers
 		#region Get detail equipment by system code
 		[HttpPost]
 		[Route("equipments/detail/{code}")]
-		public DetailEquipDTO GetDetailEquipment(string code)
+		public async Task<DetailEquipDTO> GetDetailEquipment(string code)
 		{
 			DetailEquipDTO returnedData = new DetailEquipDTO();
-			returnedData.equip = repository.GetDetailEquipment(code);
-			returnedData.ListComponentEquips = (List<EquipComponentDTO>)repository.GetListComponentEquips(code);
+			returnedData.equip = await repository.GetDetailEquipment(code);
+			returnedData.ListComponentEquips =  repository.GetListComponentEquips(code);
 			return returnedData;
 
 

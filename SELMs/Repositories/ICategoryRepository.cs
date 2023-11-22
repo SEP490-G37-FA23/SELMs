@@ -18,5 +18,6 @@ namespace SELMs.Repositories
         void DeleteCategory(int id);
 
         dynamic getCategoryEquipments(string categoryCode);
+        Task<dynamic> GetParentCategoriesList(Argument arg);
     }
 }

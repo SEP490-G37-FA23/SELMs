@@ -29,7 +29,7 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-        public ActionResult _CreateNewInventoryEquipmentsRequest()
+        public ActionResult _CreateNewHandoverEquipmentsRequest()
         {
             return PartialView();
         }
