@@ -1,12 +1,10 @@
-﻿using SELMs.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using SELMs.Repositories;
 using SELMs.Repositories.Implements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace SELMs.Services.Implements
 {
@@ -63,7 +61,7 @@ namespace SELMs.Services.Implements
 
 		public async Task UpdateProject(int id, Project project, List<User> projectMembers, List<Equipment> projectEquipments)
 		{
-			if (await repository.GetProject(id) != null)
+			if (repository.GetProject(id) != null)
 			{
 				project.project_id = id;
 				project = repository.UpdateProject(project);
@@ -72,36 +70,36 @@ namespace SELMs.Services.Implements
 
 				foreach (User user in projectMembers)
 				{
-				    if (!currentMembers.Contains(user))
-				    {
-				        Member_Project_History history = new Member_Project_History()
-				        {
-				            user_code = user.user_code,
-				            project_id = project.project_id,
-				            date = DateTime.Now,
-				            status = "ACTIVE",
-				            note = ""
-				        };
-				        projectMemberHistoryRepository.SaveHistory(history);
-				    }
+					if (!currentMembers.Contains(user))
+					{
+						Member_Project_History history = new Member_Project_History()
+						{
+							user_code = user.user_code,
+							project_id = project.project_id,
+							date = DateTime.Now,
+							status = "ACTIVE",
+							note = ""
+						};
+						projectMemberHistoryRepository.SaveHistory(history);
+					}
 				}
 
-                foreach (Equipment equipment in projectEquipments)
-                {
-                    if (!currentEquipments.Contains(equipment))
-                    {
-                        Equipment_Project_History history = new Equipment_Project_History()
-                        {
-                            project_id = project.project_id,
-                            system_equiment_code = equipment.system_equipment_code,
-                            from_date = DateTime.Now,
-                            to_date = project.end_date,
-                            note = ""
-                        };
-                        projectEquipmentHistoryRepository.SaveHistory(history);
-                    }
-                }
-            }
+				foreach (Equipment equipment in projectEquipments)
+				{
+					if (!currentEquipments.Contains(equipment))
+					{
+						Equipment_Project_History history = new Equipment_Project_History()
+						{
+							project_id = project.project_id,
+							system_equiment_code = equipment.system_equipment_code,
+							from_date = DateTime.Now,
+							to_date = project.end_date,
+							note = ""
+						};
+						projectEquipmentHistoryRepository.SaveHistory(history);
+					}
+				}
+			}
 		}
 
 		public async Task CancelProject(int id)
