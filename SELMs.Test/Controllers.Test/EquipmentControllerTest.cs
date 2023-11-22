@@ -65,10 +65,10 @@ namespace SELMs.Test.Controllers.Test
 			{
 				DetailEquipDTO detailEquipDTO = apiEquipmentController.GetDetailEquipment(code);
 
-				if (detailEquipDTO != null)
+				if (detailEquipDTO.ListComponentEquips.Count > 0)
 					output.WriteLine($"Equipment detail:\n{JsonConvert.SerializeObject(detailEquipDTO)}");
 				else
-					output.WriteLine($"Equipment code not found");
+					output.WriteLine($"Equipment not found");
 			}
 			catch (Exception ex)
 			{

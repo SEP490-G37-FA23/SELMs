@@ -17,8 +17,8 @@ namespace SELMs.Services.Implements
 		public async Task<ProjectModel> GetProject(int id)
 		{
 			Project project = repository.GetProject(id);
-			List<User> projectMembers = repository.GetProjectMembers(id);
-			List<Equipment> projectEquipments = repository.GetProjectEquipments(id);
+			List<User> projectMembers = await repository.GetProjectMembers(id);
+			List<Equipment> projectEquipments = await repository.GetProjectEquipments(id);
 			ProjectModel projectModel = new ProjectModel()
 			{
 				Project = project,
@@ -65,8 +65,8 @@ namespace SELMs.Services.Implements
 			{
 				project.project_id = id;
 				project = repository.UpdateProject(project);
-				List<User> currentMembers = repository.GetProjectMembers(id);
-				List<Equipment> currentEquipments = repository.GetProjectEquipments(id);
+				List<User> currentMembers = await repository.GetProjectMembers(id);
+				List<Equipment> currentEquipments = await repository.GetProjectEquipments(id);
 
 				foreach (User user in projectMembers)
 				{
@@ -80,7 +80,7 @@ namespace SELMs.Services.Implements
 							status = "ACTIVE",
 							note = ""
 						};
-						projectMemberHistoryRepository.SaveHistory(history);
+						await projectMemberHistoryRepository.SaveHistory(history);
 					}
 				}
 
@@ -96,7 +96,7 @@ namespace SELMs.Services.Implements
 							to_date = project.end_date,
 							note = ""
 						};
-						projectEquipmentHistoryRepository.SaveHistory(history);
+						await projectEquipmentHistoryRepository.SaveHistory(history);
 					}
 				}
 			}
