@@ -158,9 +158,35 @@ namespace SELMs.Test.Controllers.Test
 		// Use for create category
 		public static IEnumerable<object[]> CreateCategoryTestData()
 		{
-			yield return new object[] { };
-			yield return new object[] { };
-			yield return new object[] { };
+
+			var cate1 = new CategoryDTO() { category_code = "S1", category_name = "yes" };
+			var cate2 = new CategoryDTO() { category_code = "S2", category_name = "no" };
+			var cate3 = new CategoryDTO() { category_code = "S3", category_name = "huh" };
+
+			var list1 = new List<EquipmentDTO>()
+			{
+				new EquipmentDTO(){equipment_name="1234"},
+				new EquipmentDTO(){equipment_name="5678"},
+
+			};
+
+			var list2 = new List<EquipmentDTO>()
+			{
+				new EquipmentDTO(){equipment_name="eq1"},
+				new EquipmentDTO(){equipment_name="eq2"},
+
+			};
+
+			var list3 = new List<EquipmentDTO>()
+			{
+				new EquipmentDTO(){equipment_name="hoho"},
+				new EquipmentDTO(){equipment_name="ok"},
+
+			};
+
+			yield return new object[] { new CategoryRequest { category = cate1, equipments = list1 } };
+			yield return new object[] { new CategoryRequest { category = cate2, equipments = list2 } };
+			yield return new object[] { new CategoryRequest { category = cate3, equipments = list3 } };
 		}
 
 

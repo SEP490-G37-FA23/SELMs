@@ -29,7 +29,7 @@ namespace SELMs.Repositories.Implements
         public dynamic GetLastDailyApplication()
         {
             dynamic application = db.Equipment_Import_Application
-                .OrderBy(a => a.application_date).Reverse().FirstOrDefault();
+                .OrderByDescending(a => a.application_date).FirstOrDefault();
             return application;
         }
 

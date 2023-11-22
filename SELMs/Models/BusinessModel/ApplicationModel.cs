@@ -9,5 +9,6 @@ namespace SELMs.Models.BusinessModel
     {
         public dynamic application { get; set; }
         public dynamic applicationDetails { get; set; }
+        public dynamic attachment { get; set; }
     }
 }

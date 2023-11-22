@@ -12,7 +12,7 @@ namespace SELMs.Repositories.Implements
         public void DeleteImage(int id)
         {
             dynamic image = db.Images.Where(i => i.image_id == id).FirstOrDefault();
-            if (image != null) db.Categories.Remove(image);
+            if (image != null) db.Images.Remove(image);
             db.SaveChangesAsync();
         }
 
