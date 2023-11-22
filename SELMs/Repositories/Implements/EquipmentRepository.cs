@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace SELMs.Repositories.Implements
@@ -112,6 +113,17 @@ namespace SELMs.Repositories.Implements
         {
             dynamic result = db.Equipments.ToListAsync();
             return result;
+        }
+
+        public dynamic GetStandardEquipmentList(Argument args)
+        {
+            dynamic equipments =  db.Database.Connection.Query<dynamic>("Proc_GetListStandardEquips", new
+            {
+                standard_code = args.text
+
+            }
+                , commandType: CommandType.StoredProcedure).ToList();
+            return equipments;
         }
     }
 }

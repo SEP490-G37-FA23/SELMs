@@ -95,7 +95,7 @@ namespace SELMs.Api.Controllers
 
 		#region Add new category
 		[HttpPost]
-		[Route("api/categories/new-category")]
+		[Route("categories/new-category")]
 		public async Task<IHttpActionResult> SaveCategory([FromBody] CategoryRequest categoryRequest)
 		{
 			try
@@ -134,6 +134,27 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-		#endregion
-	}
+        #endregion
+
+        #region Get category list
+        [HttpPost]
+        [Route("parent-categories")]
+        public async Task<IHttpActionResult> GetParentCategoriesList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await repository.GetParentCategoriesList(arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+    }
 }

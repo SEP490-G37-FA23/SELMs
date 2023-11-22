@@ -41,7 +41,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     //this removes everything before the last slash in the path
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
-    $scope.code = url;
+
     $scope.ListUnits = ['Cái', 'Chiếc', 'Bộ', 'Cặp', 'Hộp'];
 
 
@@ -55,7 +55,8 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategoriesList();
 
     $scope.LoadLocationsList = function () {
-        $http.post(origin + '/api/v1/all-locations').then(function (response) {
+
+        $http.post(origin + '/api/v1/locations').then(function (response) {
             $scope.ListLocations = response.data;
         });
     }
@@ -120,7 +121,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl)
             .then(function (response) {
                 console.log(response.data);
-                $scope.DetailEquip = response.data.equip.Result[0];
+                $scope.DetailEquip = response.data.equip[0];
                 $scope.ListComponentEquips = response.data.ListComponentEquips;
 
             }, function (error) {
