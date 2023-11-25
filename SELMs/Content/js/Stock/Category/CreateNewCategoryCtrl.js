@@ -43,7 +43,7 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
         }
         $scope.ListEquipInCategory = [];
     }
-   
+    $scope.ResetNewCategory();
 
     $scope.HandelEquip = function (eq,item) {
         item.standard_equipment_code = eq.standard_equipment_code;
@@ -79,7 +79,7 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
             level: category_level
         }
         $http.post(origin + '/api/v1/parent-categories', data).then(function (response) {
-            $scope.ListParentCategories = response.data.Result;
+            $scope.ListParentCategories = response.data;
         });
     }
     $scope.SaveNewCategory = function (category) {
@@ -93,8 +93,8 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
                 number_equipment: $scope.ListEquipInCategory.length,
                 desciption: category.desciption,
                 is_active: true,
-                category_level: category.category_level,
-                category_parent_id: category.category_parent_id
+                category_level: parseInt(category.category_level),
+                category_parent_id: parseInt(category.category_parent_id)
                 },            
             equipments: $scope.ListEquipInCategory
         }

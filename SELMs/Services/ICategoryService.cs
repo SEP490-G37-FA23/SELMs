@@ -1,4 +1,5 @@
-﻿using SELMs.Models;
+﻿using SELMs.Api.DTOs;
+using SELMs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SELMs.Services
 {
     public interface ICategoryService
     {
-        Task SaveCategory(Category category, List<Equipment> equipments);
+        Task SaveCategory(Category category, List<StandardEquipmentDTO> equipments);
         Task UpdateCategory(int id, Category category);
     }
 }
