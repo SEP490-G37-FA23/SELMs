@@ -1,7 +1,10 @@
+global using Newtonsoft.Json;
 global using SELMs.Api.Controllers;
 global using SELMs.Api.DTOs;
 global using SELMs.Models;
 global using SELMs.Models.BusinessModel;
+global using SELMs.Repositories;
+global using SELMs.Repositories.Implements;
 global using SELMs.Services;
 global using SELMs.Services.Implements;
 global using Xunit;
