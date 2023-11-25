@@ -125,5 +125,18 @@ namespace SELMs.Repositories.Implements
                 , commandType: CommandType.StoredProcedure).ToList();
             return equipments;
         }
+
+        public void SaveEquipmentsToCategory(List<StandardEquipmentDTO> equipments)
+        {
+            foreach(var equip in equipments)
+            {
+                List<Equipment> orgEquipment = db.Equipments
+                    .Where(e => e.standard_equipment_code == equip.standard_equipment_code).ToList();
+                foreach(var item in orgEquipment)
+                {
+                    item.category_code = equip.category_code;
+                }
+            }
+        }
     }
 }

@@ -68,26 +68,26 @@ namespace SELMs.Api.Controllers
         #endregion
 
 		#region Get category by id
-		[HttpGet]
+		[HttpPost]
 		[Route("categories/{id}")]
-		public async Task<IHttpActionResult> GetCategory(int id)
+		public async Task<CategoryModel> GetCategory(int id)
 		{
 			try
 			{
-				Category category = repository.GetCategory(id);
+				Category category =  repository.GetCategory(id);
 				List<Equipment> equipments = repository.getCategoryEquipments(category.category_code);
 				var returnedData = new CategoryModel()
 				{
 					category = category,
 					category_equipments = equipments
 				};
-				return Ok(returnedData);
+				return returnedData;
 			}
 			catch (Exception ex)
 			{
 				Log.Error("Error: ", ex);
 				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				return null;
 				throw;
 			}
 		}
@@ -101,8 +101,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Category category = mapper.Map<Category>(categoryRequest.category);
-				List<Equipment> equipments = mapper.Map<List<Equipment>>(categoryRequest.equipments);
-				service.SaveCategory(category, equipments);
+				await service.SaveCategory(category, categoryRequest.equipments);				
 				return Ok();
 			}
 			catch (Exception ex)

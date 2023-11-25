@@ -52,7 +52,7 @@
                         <label class=" col-form-label">Danh mục cha</label>
                         <div>
                             <select ng-disabled="NewCategory.category_level==1" class="form-control" ng-model="NewCategory.category_parent_id">
-                                <option value="{{item.category_id}}" ng-repeat="item in ListParentCategories">{{item.category_code}}: {{item.desciption}}</option>
+                                <option value="{{item.category_id}}" ng-repeat="item in ListParentCategories">{{item.category_code}}: {{item.category_name}}</option>
                             </select>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                                 <tr>
 
                                 <tr>
-                                    <th scope="row" colspan="4" ng-click="HandleNewEquipInCategory(ListEquipInCategory)">Thêm thiết bị mới</th>
+                                    <th scope="row" colspan="4" ng-click="HandleNewEquipInCategory(ListEquipInCategory)" class="text-center">Thêm thiết bị mới</th>
                                 <tr>
                             </tbody>
                         </table>

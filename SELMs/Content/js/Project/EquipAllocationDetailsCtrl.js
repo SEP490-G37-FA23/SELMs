@@ -144,20 +144,6 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
             });
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //=========================Danh sách thiết bị cần nhập mới =================
     $scope.LoadNeedImportEquipmentList = function () {
         var data = {
@@ -174,4 +160,27 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.LoadNeedImportEquipmentList();
+
+    $scope.LoadEquipmentsList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: '',
+            text1: '',
+            text2: text,
+            text3: ''
+
+        }
+        $http.post(origin + '/api/v1/equipments', data).then(function (response) {
+            $scope.ListEquips = response.data;
+        });
+    }
+    $scope.DeleteComponentEquip = function (ListComponentEquips, index) {
+        ListComponentEquips.splice(index, 1);
+    }
+    $scope.HandelEquip = function (eq, item) {
+        item.system_equipment_code_corresponding = eq.system_equipment_code;
+
+    }
 });

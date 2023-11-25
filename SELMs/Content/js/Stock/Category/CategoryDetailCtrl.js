@@ -42,16 +42,54 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
     $scope.GetDetailCategory = function (category_id) {
-        var partialUrl = origin + '/api/v1/categories/detail/' + category_id;
+        var partialUrl = origin + '/api/v1/categories/' + category_id;
         $http.post(partialUrl)
             .then(function (response) {
                 console.log(response.data);
                 $scope.DetailCategory = response.data.category;
-                $scope.ListEquipsInCategory = response.data.equipments;
+                $scope.ListEquipsInCategory = response.data.category_equipments;
 
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
     $scope.GetDetailCategory(url);
+    $scope.HandelEquip = function (eq, item) {
+        item.standard_equipment_code = eq.standard_equipment_code;
+        item.equipment_name = eq.equipment_name;
+        item.number_equip = eq.number_equip
+    }
+    $scope.LoadStandardEquipmentsList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: text
+        }
+        $http.post(origin + '/api/v1/standard-equipments', data).then(function (response) {
+            $scope.ListEquips = response.data;
+        });
+    }
+    $scope.ListEquipsInCategory = [];
+    $scope.DeleteEquip = function (ListEquipInCategory, index) {
+        ListEquipInCategory.splice(index, 1);
+    }
+    $scope.HandleNewEquipInCategory = function (ListEquipInCategory) {
+        ListEquipInCategory.push({
+            standard_equipment_code: '',
+            equipment_name: '',
+            number_equip: 0
+        });
+    }
+    $scope.LoadListParentCategories = function (category_level) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            level: category_level
+        }
+        $http.post(origin + '/api/v1/parent-categories', data).then(function (response) {
+            $scope.ListParentCategories = response.data;
+        });
+    }
 });
