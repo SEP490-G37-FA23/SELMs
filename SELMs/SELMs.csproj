@@ -689,6 +689,7 @@
     <Content Include="Content\js\Project\EquipAllocationDetailsCtrl.js" />
     <Content Include="Content\js\Project\ListEAACtrl.js" />
     <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
+    <Content Include="Content\js\Project\ListHEFCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Category\CreateNewCategoryCtrl.js" />
@@ -945,15 +946,17 @@
     <Content Include="Views\EquipmentAllocation\_CreateNewHandoverEquipmentsRequest.cshtml" />
     <Content Include="Views\EquipmentAllocation\_CreateNewImportEquipmentsProposal.cshtml" />
     <Content Include="Views\Equipments\EquipmentsGenderQR.cshtml" />
-    <Content Include="Views\EquipmentAllocation\EquipAllowcationDetails.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\InventoryEquipments\ListEquipmentNotExist.cshtml" />
     <Content Include="Views\InventoryEquipments\ListEquipmentsAlreadyExist.cshtml" />
     <Content Include="Views\InventoryEquipments\_CreateNewImportEquipmentsProposal.cshtml" />
     <Content Include="Views\InventoryEquipments\_CreateNewInventoryEquipmentsRequest.cshtml" />
+    <Content Include="Views\EquipmentAllocation\DeliveryEquipmentsList.cshtml" />
+    <Content Include="Views\EquipmentAllocation\HEFList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\js\Stock\DeliveryEquipment\" />
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="obj\Debug\" />
     <Folder Include="Views\Categories\" />

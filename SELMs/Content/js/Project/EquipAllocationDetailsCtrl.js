@@ -90,7 +90,7 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
             project_name: '',
             project_id: '',
             receipter: '',
-            receipter_name:''
+            receipter_name: ''
             }
     }
     $scope.ResetHandoverForm();
@@ -107,7 +107,8 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
             equipment_name: item.equipment_name,
             unit: item.unit,
             equipment_specification: item.specification,
-            usage_status: item.usage_status
+            usage_status: item.usage_status,
+            application_detail_id: item.application_detail_id
             })
     }
     $scope.LoadMembersList = function (text) {
@@ -128,13 +129,22 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
     }
     $scope.SaveNewHandover = function (NewHandover) {
         var data = {
-            location_code: NewHandover.location_code,
-            location_desciption: NewHandover.location_desciption,
-            parent_location_id: NewHandover.parent_location_id,
-            location_level: NewHandover.location_level,
-            is_active: true
+            application_details: $scope.ListDetailHandover,
+            application: {
+                creater: username,
+                handover_date: NewHandover.handover_date,
+                handover_name: NewHandover.handover_name,
+                handover: NewHandover.handover,
+                description: NewHandover.description,
+                location_name: NewHandover.location_name,
+                location_id: NewHandover.location_id,
+                project_name: NewHandover.project_name,
+                project_id: NewHandover.project_id,
+                receipter: NewHandover.receipter,
+                receipter_name: NewHandover.receipter_name
+            }
         }
-        var partialUrl = origin + '/api/v1/locations/update/' + location.location_id;
+        var partialUrl = origin + '/api/v1/equipment-handover-form/new-form';
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
