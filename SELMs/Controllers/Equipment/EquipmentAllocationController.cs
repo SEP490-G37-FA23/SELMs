@@ -37,5 +37,9 @@ namespace SELMs.Controllers.Equipment
         {
             return PartialView();
         }
+        public ActionResult HEFList()
+        {
+            return View();
+        }
     }
 }

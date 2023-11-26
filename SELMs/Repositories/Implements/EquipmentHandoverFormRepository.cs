@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 
 namespace SELMs.Repositories.Implements
@@ -27,9 +28,9 @@ namespace SELMs.Repositories.Implements
         }
 
         public dynamic GetLastDailyApplication()
-        {
+         {
             Equipment_Handover_Form result =
-                db.Equipment_Handover_Form.OrderByDescending(e => e.ea_application_code).FirstOrDefault();
+                db.Equipment_Handover_Form.OrderByDescending(e => e.form_code).FirstOrDefault();
             return result;
         }
 
@@ -51,7 +52,7 @@ namespace SELMs.Repositories.Implements
             dynamic applications = null;
             applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetEquipmentHandoverFormList", new
             {
-                //Add arguments here
+               username = arg.username
 
             }
                 , commandType: CommandType.StoredProcedure);
