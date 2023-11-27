@@ -77,4 +77,6 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.LoadEAAsList();
+
+   
 });

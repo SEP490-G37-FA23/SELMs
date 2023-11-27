@@ -70,4 +70,45 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.LoadHEFList();
+
+    $scope.SaveAttachFileHandover = function (item) {
+        var data = {
+            form_id: item.form_id,
+            form_code: item.form_code,
+            file_attach: document.getElementById('attach_file' + item.form_code).files[0]
+        }
+        console.log(data);
+        var partialUrl = origin + '/api/v1/equipment-handover/new-attach_file';
+        //Api lưu attach file
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhập biên bản bàn giao thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.SaveFinishHandover = function (item) {
+        var partialUrl = origin + '/api/v1/equipment-handover/finish-file/' + item.form_id;
+        //Api updatetrangj thái trong bảng handover cột is_finish = 1
+        $http.post(partialUrl)
+            .then(function (response) {
+                $scope.SuccessSystem('Kết thúc bàn giao thiết bị thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.CancelHandover = function (item) {
+        var partialUrl = origin + '/api/v1/equipment-handover/cancel/' + item.form_id;
+        //Api này sẽ xóa đơn trong handover_form, xóa chi tiết handover_form, lấy ra các allocation_detail
+        //, update về trạng thái 'Có sẵn trong kho'
+        $http.post(partialUrl)
+            .then(function (response) {
+                $scope.SuccessSystem('Hủy đơn bàn giao thiết bị thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
 });

@@ -80,10 +80,24 @@ namespace SELMs.Services.Implements
         string GenerateApplicationCode()
         {
             string code = $"EHF{DateTime.Now.ToString("yyyyMMdd")}";
+
             Equipment_Handover_Form lastDailyApplication = repository.GetLastDailyApplication();
 
-             int num = lastDailyApplication == null ? 1 : Convert.ToInt32((lastDailyApplication.form_code).Replace(code, "")) + 1;
+            int num = 1;
+
+            if (lastDailyApplication != null)
+            {
+                string formCode = lastDailyApplication.form_code;
+
+                if (formCode.StartsWith(code))
+                {
+                    string numericPart = formCode.Substring(code.Length);
+                    num = int.TryParse(numericPart, out int parsedNum) ? parsedNum + 1 : 1;
+                }
+            }
+
             code += num < 10000 ? num.ToString("D4") : num.ToString();
+
             return code;
         }
 
