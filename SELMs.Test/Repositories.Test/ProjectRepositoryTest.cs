@@ -179,6 +179,26 @@ namespace SELMs.Test.Repositories.Test
 				Assert.Fail("Test case failed\n" + ex.Message);
 			}
 		}
+
+
+
+		// not implement
+		[Theory]
+		[InlineData(0)]
+		[InlineData(2)]
+		[InlineData(4)]
+		public void TestDeleteProject_ReturnNoException(int projectId)
+		{
+			try
+			{
+				projectRepository.DeleteProject(projectId);
+				output.WriteLine("Test case passed");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
 	}
 
 

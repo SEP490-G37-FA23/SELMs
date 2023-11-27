@@ -19,7 +19,7 @@ namespace SELMs.Api.Controllers
 		private static readonly ILog Log = LogManager.GetLogger(typeof(ApiMemberProjectHistoryController));
 
 		private readonly IMapper mapper = MapperConfig.Initialize();
-		private IMemberProjectHistoryService memberProjectHistoryService = new MemberProjectHistoryService();
+		private readonly IMemberProjectHistoryService memberProjectHistoryService = new MemberProjectHistoryService();
 		private readonly IMemberProjectHistoryRepository memberProjectHistoryRepository = new MemberProjectHistoryRepository();
 
 
@@ -67,7 +67,7 @@ namespace SELMs.Api.Controllers
 		#region Add new
 		[HttpPost]
 		[Route("member-project-histories/create")]
-		public async Task<IHttpActionResult> SaveCategory([FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
+		public async Task<IHttpActionResult> SaveHistory([FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
 		{
 			try
 			{
@@ -88,7 +88,7 @@ namespace SELMs.Api.Controllers
 		#region Update category
 		[HttpPut]
 		[Route("categories/{id}")]
-		public async Task<IHttpActionResult> UpdateCategory(int id, [FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
+		public async Task<IHttpActionResult> UpdateHistory(int id, [FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
 		{
 			try
 			{

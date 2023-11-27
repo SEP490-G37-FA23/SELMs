@@ -19,11 +19,28 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-
-
-
-
 		#region Iteration 2
+
+
+		[Theory]
+		[MemberData(nameof(EquipmentControllerTestData.GetEquipmentListTestData), MemberType = typeof(EquipmentControllerTestData))]
+		public async Task TestGetEquipmentList_ReturnEquipmentList(Argument argument)
+		{
+			try
+			{
+				var actionResult = await apiEquipmentController.GetEquipmentList(argument);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				string content = await response.Content.ReadAsStringAsync();
+
+				output.WriteLine($"Status code: {(int)response.StatusCode}\n{content}");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
 
 
 		[Theory]
@@ -143,6 +160,29 @@ namespace SELMs.Test.Controllers.Test
 				Assert.Fail("Test case failed\n" + ex.Message);
 			}
 		}
+
+
+
+
+		[Theory]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(10)]
+		public async Task TestDeleteEquipment_ReturnEquipmentFound(int id)
+		{
+			try
+			{
+				var actionResult = await apiEquipmentController.DeleteEquipment(id);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				Thread.Sleep(2000);
+				Assert.Equal(200, (int)response.StatusCode);
+				output.WriteLine($"Status code: {(int)response.StatusCode}");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
 		#endregion
 	}
 
@@ -151,6 +191,30 @@ namespace SELMs.Test.Controllers.Test
 
 	public static class EquipmentControllerTestData
 	{
+
+		public static IEnumerable<object[]> GetEquipmentListTestData()
+		{
+			//text = Equipment.serial_no , text1 = user fullname, text2 = std_code, sys_code, name
+			var a = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "E0003" };
+			var b = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "BHR4975EU" };
+			var c = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+
+
+			var d = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = string.Empty };
+			var e = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
+			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "levan" };
+
+			yield return new object[] { a };
+			yield return new object[] { b };
+			yield return new object[] { c };
+			yield return new object[] { d };
+			yield return new object[] { e };
+			yield return new object[] { f };
+
+		}
+
+
+
 		public static IEnumerable<object[]> CreateEquipmentTestData()
 		{
 			EquipmentDTO e1 = new() { system_equipment_code = "E0123", equipment_name = "hoho" };

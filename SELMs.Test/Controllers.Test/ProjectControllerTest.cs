@@ -132,6 +132,29 @@
 				Assert.Fail("Test case failed\n" + ex.Message);
 			}
 		}
+
+
+
+
+
+		[Theory]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(2)]
+		public async Task TestDeleteProject_ReturnStatusCode200(int id)
+		{
+			try
+			{
+				var actionResult = await apiProjectController.DeleteProjects(id);
+				Thread.Sleep(2000);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
 		#endregion
 	}
 

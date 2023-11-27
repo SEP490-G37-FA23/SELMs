@@ -27,8 +27,15 @@
 		}
 
 
+		[Theory]
+		[MemberData(nameof(EquipmentRepositoryTestData.GetEquipmentListTestData), MemberType = typeof(EquipmentRepositoryTestData))]
+		public async Task TestGetEquipmentListByMultiCondition_ReturnEquipmentList(Argument argument)
+		{
+			var list = await equipmentRepository.GetEquipmentList(argument);
 
-
+			foreach (var item in list)
+				output.WriteLine(JsonConvert.SerializeObject(item));
+		}
 
 
 
@@ -45,6 +52,8 @@
 			else
 				output.WriteLine($"Equipment found\n{JsonConvert.SerializeObject(equipment)}");
 		}
+
+
 
 
 
@@ -151,6 +160,31 @@
 
 
 
+
+
+
+		[Theory]
+		[InlineData(0)]
+		[InlineData(32)]
+		public void TestDeleteEquipment_ReturnNoException(int id)
+		{
+			try
+			{
+				equipmentRepository.DeleteEquipment(id);
+				Thread.Sleep(2000);
+				output.WriteLine("Delete successfull");
+			}
+			catch (Exception e)
+			{
+				Assert.Fail(e.ToString());
+			}
+		}
+
+
+
+
+
+
 		[Theory]
 		[MemberData(nameof(EquipmentRepositoryTestData.SaveEquipmentWithComponentTestData), MemberType = typeof(EquipmentRepositoryTestData))]
 		public void TestSaveEquipmentWithComponent_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
@@ -184,6 +218,31 @@
 
 	public static class EquipmentRepositoryTestData
 	{
+
+
+		public static IEnumerable<object[]> GetEquipmentListTestData()
+		{
+			//text = Equipment.serial_no , text1 = user fullname, text2 = std_code, sys_code, name
+			var a = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "E0003" };
+			var b = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "BHR4975EU" };
+			var c = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+
+
+			var d = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = string.Empty };
+			var e = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
+			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "levan" };
+
+			yield return new object[] { a };
+			yield return new object[] { b };
+			yield return new object[] { c };
+			yield return new object[] { d };
+			yield return new object[] { e };
+			yield return new object[] { f };
+
+		}
+
+
+
 
 		public static IEnumerable<object[]> SaveEquipmentWithComponentTestData()
 		{
