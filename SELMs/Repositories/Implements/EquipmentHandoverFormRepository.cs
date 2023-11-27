@@ -104,7 +104,14 @@ namespace SELMs.Repositories.Implements
 
         public dynamic SaveApplicationDetails(List<Equipment_Handover_Form_Detail> applicationDetails)
         {
+            foreach(var detail in applicationDetails)
+            {
+                Equipment_Allocation_Application_Detail allocation = db.Equipment_Allocation_Application_Detail
+                                .Where(p => p.application_detail_id == detail.application_detail_id).FirstOrDefault();
+                allocation.status = "Đã bàn giao";
+            }
             db.Equipment_Handover_Form_Detail.AddRange(applicationDetails);
+
             db.SaveChanges();
             return applicationDetails;
         }

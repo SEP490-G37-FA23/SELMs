@@ -5,7 +5,7 @@
 }
 
 <script src="~/Content/js/Project/ListHEFCtrl.js"></script>
-<div ng-app="myApp" ng-controller="ListHEFCtrl" style="display:inline-block;width:100%;">
+<div ng-app="myApp" ng-controller="ListEAACtrl" style="display:inline-block;width:100%;">
     <input type="hidden" id="username" name="username" value="@Session["username"]" />
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
@@ -37,23 +37,29 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Mã Đơn</th>
                                     <th scope="col">Mô tả</th>
-                                    <th scope="col">Người yêu cầu</th>
-                                    <th scope="col">Ngày yêu cầu</th>
+                                    <th scope="col">Người tạo</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Người bàn giao</th>
+                                    <th scope="col">Người nhận</th>
+                                    <th scope="col">Ngày bàn giao</th>
                                     <th scope="col">Dự án</th>
                                     <th scope="col">Phòng lab</th>
                                     <th scope="col">Tổng số thiết bị</th>
-                                    <th scope="col">Ghi chú</th>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col">Tác vụ</th>
+                                    <th scope="col">Biên bản xác nhận</th>
+                                    <th scope="col" style="min-width:160px;">Tác vụ</th>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td><input ng-model="application_code" class="form-control" ng-change="LoadEAAsList()" /></td>
+                                    <td><input ng-model="application_code" class="form-control" /></td>
                                     <td></td>
-                                    <td><input ng-model="creater_name" class="form-control" ng-change="LoadEAAsList()" /></td>
+                                    <td><input ng-model="creater_name" class="form-control" /></td>
                                     <td></td>
-                                    <td><input ng-model="project_name" class="form-control" ng-change="LoadEAAsList()" /></td>
-                                    <td><input ng-model="location_name" class="form-control" ng-change="LoadEAAsList()" /></td>
+                                    <td><input ng-model="project_name" class="form-control" /></td>
+                                    <td><input ng-model="location_name" class="form-control" /></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -64,17 +70,25 @@
                             <tbody>
                                 <tr ng-repeat="item in ListHEF">
                                     <td>{{$index+1}}</td>
-                                    <td>{{item.ea_application_code}}</td>
-                                    <td>{{item.desciption}}</td>
+                                    <td>{{item.form_code}}</td>
+                                    <td>{{item.description}}</td>
                                     <td>{{item.name_creater}}</td>
-                                    <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{item.create_date|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{item.name_handover}}</td>
+                                    <td>{{item.name_receipter}}</td>
+                                    <td>{{item.handover_date|date:'dd/MM/yyyy'}}</td>
                                     <td>{{item.project_name}}</td>
-                                    <td>{{item.location_desciption}}</td>
-                                    <td>{{item.total_equipments}}</td>
-                                    <td>{{item.notes}}</td>
-                                    <td>{{item.status}}</td>
+                                    <td>{{item.location_code}} - {{item.location_desciption}}</td>
+                                    <td>{{item.number_equips}}</td>
+                                    <td>{{item.is_finish == 1?'Đã hoàn thành':'Chưa hoàn thành'}}</td>
                                     <td>
-                                        <button class="btn btn-warning" ng-click="" ng-show="role=='LD'|| isadmin">Duyệt</button>
+                                        <input ng-model="item.attach_file" type="file" id="attach_file{{item.form_code}}" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success" ng-click="SaveAttachFileHandover(item)" title="Cập nhật đơn"><i class="far fa-save" style="color: #ffffff;"></i></button>
+                                        <button class="btn btn-primary" ng-click="SaveFinishHandover(item)" title="Xác nhận hoàn thành"><i class="fas fa-check-double" style="color: #ffffff;"></i></button>
+                                        <button class="btn btn-danger" ng-click="CancelHandover(item)" title="Hủy đơn"><i class="fas fa-times" style="color: #ffffff;"></i></button>
+
                                     </td>
                                 </tr>
                             </tbody>

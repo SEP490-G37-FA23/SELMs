@@ -148,7 +148,7 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
-
+                $scope.ResetHandoverForm();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
