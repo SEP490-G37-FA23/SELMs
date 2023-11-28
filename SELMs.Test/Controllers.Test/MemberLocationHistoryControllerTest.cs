@@ -16,7 +16,6 @@
 
 		#region Iteration 3
 
-
 		[Fact]
 		public async Task TestGetMemberLocationHistoryList_ReturnList()
 		{
