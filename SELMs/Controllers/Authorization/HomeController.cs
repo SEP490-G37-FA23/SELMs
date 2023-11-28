@@ -57,7 +57,7 @@ namespace SELMs.Controllers
                         return RedirectToAction("ViewProjectList", "ProjectPortfolio", new { area = "" });
                         break;
                     case "MB":
-                        return RedirectToAction("LocationList", "Locations", new { area = "" });
+                        return RedirectToAction("LocationsList", "Locations", new { area = "" });
                         break;
                 }
                 
