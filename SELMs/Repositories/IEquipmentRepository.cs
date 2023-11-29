@@ -22,5 +22,7 @@ namespace SELMs.Repositories
         Equipment GetLastEquipment();
 
         List<EquipComponentDTO> GetListComponentEquips(string code);
+        dynamic GetStandardEquipmentList(Argument args);
+        void SaveEquipmentsToCategory(List<StandardEquipmentDTO> equipments);
     }
 }

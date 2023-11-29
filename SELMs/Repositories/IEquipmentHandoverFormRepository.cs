@@ -26,5 +26,6 @@ namespace SELMs.Repositories
         void DeleteApplicationDetail(int id);
         dynamic GetApplicationAttachment(int applicationId);
         dynamic AddAttachment(int applicationId, int attachmentId);
+        void DeleteAttachment(int applicationId, int attachmentId);
     }
 }

@@ -77,13 +77,78 @@ namespace SELMs.Services.Implements
 
         }
 
+        public async Task<dynamic> AddAttachment(int id, HttpPostedFileBase file)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if (application != null)
+            {
+                Attachment attachment = CreateAttachment(file);
+                attachment.name = application.form_code;
+                attachment.date = DateTime.Now;
+                attachment = attachmentRepository.SaveAttachment(attachment);
+                repository.AddAttachment(application.form_id, attachment.attach_id);
+                return attachment;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task DeleteAttachment(int applicationId, int attachmentId)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(applicationId);
+            Attachment attachment = attachmentRepository.GetAttachment(attachmentId);
+            if (application != null && attachment != null)
+            {
+                repository.DeleteAttachment(applicationId, attachmentId);
+            }
+        }
+
+        public async Task<dynamic> ConfirmApplication(int id, User member)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if (application != null)
+            {
+                application.is_finish = true;
+                application.receipter = member.user_code;
+                application.receipt_date = DateTime.Now;
+                repository.UpdateApplication(application);
+                return application;
+            }
+            return null;
+        }
+
+        public async Task CancelApplication(int id)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if(application != null)
+            {
+                repository.DeleteApplication(id);
+            }
+        }
+
         string GenerateApplicationCode()
         {
             string code = $"EHF{DateTime.Now.ToString("yyyyMMdd")}";
+
             Equipment_Handover_Form lastDailyApplication = repository.GetLastDailyApplication();
 
-            int num = lastDailyApplication == null ? 1 : Convert.ToInt32((lastDailyApplication.ea_application_code).Replace(code, "")) + 1;
+            int num = 1;
+
+            if (lastDailyApplication != null)
+            {
+                string formCode = lastDailyApplication.form_code;
+
+                if (formCode.StartsWith(code))
+                {
+                    string numericPart = formCode.Substring(code.Length);
+                    num = int.TryParse(numericPart, out int parsedNum) ? parsedNum + 1 : 1;
+                }
+            }
+
             code += num < 10000 ? num.ToString("D4") : num.ToString();
+
             return code;
         }
 

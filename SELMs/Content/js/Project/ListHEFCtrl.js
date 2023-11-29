@@ -56,27 +56,59 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
         // You can customize the notification style and appearance here.
     }
 
-
-    //===============Danh sách khách hàng=====================
     $scope.project_name = '';
     $scope.location_name = '';
     $scope.creater_name = '';
     $scope.application_code = '';
-    $scope.LoadEAAsList = function () {
+    $scope.LoadHEFList = function () {
         var data = {
-            username: username,
-            isadmin: isadmin,
-            text: $scope.project_name,
-            text1: $scope.location_name,
-            text2: $scope.creater_name,
-            text3: $scope.application_code
+            username: username
         }
-        $http.post(origin + '/api/v1/equipment-allocation-application/search', data).then(function (response) {
-            $scope.ListEAA = response.data.Result
-            console.log($scope.ListEAA);
+        $http.post(origin + '/api/v1/equipment-handover/forms', data).then(function (response) {
+            $scope.ListHEF = response.data.Result
+            console.log($scope.ListHEF);
         });
     }
-    $scope.LoadEAAsList();
+    $scope.LoadHEFList();
 
-   
+    $scope.SaveAttachFileHandover = function (item) {
+        var data = {
+            form_id: item.form_id,
+            form_code: item.form_code,
+            file_attach: document.getElementById('attach_file' + item.form_code).files[0]
+        }
+        console.log(data);
+        var partialUrl = origin + '/api/v1/equipment-handover/new-attach_file';
+        //Api lưu attach file
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhập biên bản bàn giao thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.SaveFinishHandover = function (item) {
+        var partialUrl = origin + '/api/v1/equipment-handover/finish-file/' + item.form_id;
+        //Api updatetrangj thái trong bảng handover cột is_finish = 1
+        $http.post(partialUrl)
+            .then(function (response) {
+                $scope.SuccessSystem('Kết thúc bàn giao thiết bị thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.CancelHandover = function (item) {
+        var partialUrl = origin + '/api/v1/equipment-handover/cancel/' + item.form_id;
+        //Api này sẽ xóa đơn trong handover_form, xóa chi tiết handover_form, lấy ra các allocation_detail
+        //, update về trạng thái 'Có sẵn trong kho'
+        $http.post(partialUrl)
+            .then(function (response) {
+                $scope.SuccessSystem('Hủy đơn bàn giao thiết bị thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
 });

@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
+app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var fullname = $('#fullname').val();
@@ -31,30 +31,21 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
     };
-
-    //this gets the full url
-    var url = document.location.href;
-    //this removes the anchor at the end, if there is one
-    url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-    //this removes the query after the file name, if there is one
-    url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-    //this removes everything before the last slash in the path
-    url = url.substring(url.lastIndexOf("/") + 1, url.length);
-    //return
-    $scope.GetDetailCategory = function (category_id) {
-        var partialUrl = origin + '/api/v1/categories/' + category_id;
-        $http.post(partialUrl)
-            .then(function (response) {
-                console.log(response.data);
-                $scope.DetailCategory = response.data.category;
-                $scope.ListEquipsInCategory = response.data.category_equipments;
-
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+    $scope.ResetNewCategory = function () {
+        $scope.NewCategory = {
+            category_code: '',
+            category_name: '',
+            number_equipment: 0,
+            desciption: '',
+            is_active: true,
+            category_level: 1,
+            category_parent_id: 0
+        }
+        $scope.ListEquipInCategory = [];
     }
-    $scope.GetDetailCategory(url);
-    $scope.HandelEquip = function (eq, item) {
+    $scope.ResetNewCategory();
+
+    $scope.HandelEquip = function (eq,item) {
         item.standard_equipment_code = eq.standard_equipment_code;
         item.equipment_name = eq.equipment_name;
         item.number_equip = eq.number_equip
@@ -70,7 +61,6 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             $scope.ListEquips = response.data;
         });
     }
-    $scope.ListEquipsInCategory = [];
     $scope.DeleteEquip = function (ListEquipInCategory, index) {
         ListEquipInCategory.splice(index, 1);
     }
@@ -91,5 +81,30 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
         $http.post(origin + '/api/v1/parent-categories', data).then(function (response) {
             $scope.ListParentCategories = response.data;
         });
+    }
+    $scope.SaveNewCategory = function (category) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            category: {
+                category_code: category.category_code,
+                category_name: category.category_name,
+                number_equipment: $scope.ListEquipInCategory.length,
+                desciption: category.desciption,
+                is_active: true,
+                category_level: parseInt(category.category_level),
+                category_parent_id: parseInt(category.category_parent_id)
+                },            
+            equipments: $scope.ListEquipInCategory
+        }
+        var partialUrl = origin + '/api/v1/categories/new-category';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Thêm mới danh mục thiết bị thành công!');
+                $scope.ResetNewCategory();
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
     }
 });
