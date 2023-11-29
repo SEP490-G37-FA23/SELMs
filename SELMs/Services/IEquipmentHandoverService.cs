@@ -16,5 +16,7 @@ namespace SELMs.Services
         Task UpdateApplication(int id, Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails, HttpPostedFileBase attachments);
         Task<dynamic> AddAttachment(int id, HttpPostedFileBase file);
         Task DeleteAttachment(int applicationId, int attachmentId);
+        Task<dynamic> ConfirmApplication(int id, User member);
+        Task CancelApplication(int id);
     }
 }

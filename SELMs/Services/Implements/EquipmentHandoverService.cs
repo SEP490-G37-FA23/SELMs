@@ -105,6 +105,29 @@ namespace SELMs.Services.Implements
             }
         }
 
+        public async Task<dynamic> ConfirmApplication(int id, User member)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if (application != null)
+            {
+                application.is_finish = true;
+                application.receipter = member.user_code;
+                application.receipt_date = DateTime.Now;
+                repository.UpdateApplication(application);
+                return application;
+            }
+            return null;
+        }
+
+        public async Task CancelApplication(int id)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if(application != null)
+            {
+                repository.DeleteApplication(id);
+            }
+        }
+
         string GenerateApplicationCode()
         {
             string code = $"EHF{DateTime.Now.ToString("yyyyMMdd")}";
