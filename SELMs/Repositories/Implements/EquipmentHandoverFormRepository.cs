@@ -28,7 +28,7 @@ namespace SELMs.Repositories.Implements
         }
 
         public dynamic GetLastDailyApplication()
-         {
+        {
             Equipment_Handover_Form result =
                 db.Equipment_Handover_Form.OrderByDescending(e => e.form_code).FirstOrDefault();
             return result;
@@ -52,7 +52,7 @@ namespace SELMs.Repositories.Implements
             dynamic applications = null;
             applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetEquipmentHandoverFormList", new
             {
-               username = arg.username
+                username = arg.username
 
             }
                 , commandType: CommandType.StoredProcedure);
@@ -104,7 +104,7 @@ namespace SELMs.Repositories.Implements
 
         public dynamic SaveApplicationDetails(List<Equipment_Handover_Form_Detail> applicationDetails)
         {
-            foreach(var detail in applicationDetails)
+            foreach (var detail in applicationDetails)
             {
                 Equipment_Allocation_Application_Detail allocation = db.Equipment_Allocation_Application_Detail
                                 .Where(p => p.application_detail_id == detail.application_detail_id).FirstOrDefault();
@@ -134,12 +134,12 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetApplicationAttachment(int applicationId)
         {
-            var attachment = 
-                (from a in db.Equipment_Handover_Form 
-                join aa in db.Application_Attachment on a.form_id equals aa.application_id
-                join at in db.Attachments on aa.attachment_id equals at.attach_id
-                where aa.application_type.Equals(ApplicationType.EFH) && aa.application_id.Equals(applicationId)
-                select at).FirstOrDefaultAsync();
+            var attachment =
+                (from a in db.Equipment_Handover_Form
+                 join aa in db.Application_Attachment on a.form_id equals aa.application_id
+                 join at in db.Attachments on aa.attachment_id equals at.attach_id
+                 where aa.application_type.Equals(ApplicationType.EHF) && aa.application_id.Equals(applicationId)
+                 select at).FirstOrDefaultAsync();
             return attachment;
         }
 
@@ -148,12 +148,22 @@ namespace SELMs.Repositories.Implements
             var applicationAttachment = new Application_Attachment()
             {
                 application_id = applicationId,
-                application_type = ApplicationType.EFH,
+                application_type = ApplicationType.EHF,
                 attachment_id = attachmentId
             };
             db.Application_Attachment.Add(applicationAttachment);
             db.SaveChanges();
             return applicationAttachment;
+        }
+
+        public void DeleteAttachment(int applicationId, int attachmentId)
+        {
+            Application_Attachment appAttach = db.Application_Attachment
+                .Where(aa => aa.application_id == applicationId && aa.attachment_id == attachmentId && aa.application_type == ApplicationType.EHF)
+                .FirstOrDefault();
+            Attachment attachment = db.Attachments.Where(a => a.attach_id == attachmentId).FirstOrDefault();
+            db.Application_Attachment.Remove(appAttach);
+            db.Attachments.Remove(attachment);
         }
     }
 }
