@@ -118,7 +118,7 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Attach file to application
-        [HttpPut]
+        [HttpPost]
         [Route("equipment-handover/finish-file/{id}")]
         public async Task<IHttpActionResult> AttachFile(int id, [FromBody] HttpPostedFileBase file_attach)
         {
@@ -138,7 +138,7 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Remove Attachment
-        [HttpPut]
+        [HttpPost]
         [Route("equipment-handover/remove-attachment")]
         public async Task<IHttpActionResult> AttachFile(int application_id, int attach_id)
         {
@@ -156,6 +156,8 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+
 
     }
 }
