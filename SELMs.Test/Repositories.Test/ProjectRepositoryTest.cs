@@ -40,6 +40,30 @@ namespace SELMs.Test.Repositories.Test
 
 
 		[Theory]
+		[MemberData(nameof(ProjectRepositoryTestData.GetProjectListByMultiConditionTestData), MemberType = typeof(ProjectRepositoryTestData))]
+		public async Task TestGetProjectListByMultiCondition_ReturnListProject(Argument argument)
+		{
+			try
+			{
+				var list = await projectRepository.GetProjectList(argument);
+				Thread.Sleep(1000);
+
+				if (list is IList { Count: > 0 })
+					foreach (var item in list)
+						output.WriteLine(JsonConvert.SerializeObject(item));
+				else
+					output.WriteLine("Project not found");
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
+
+
+		[Theory]
 		[InlineData(0)]
 		[InlineData(3)]
 		public void TestProjectById_ReturnProject(int id)
@@ -182,7 +206,6 @@ namespace SELMs.Test.Repositories.Test
 
 
 
-		// not implement
 		[Theory]
 		[InlineData(0)]
 		[InlineData(2)]
@@ -214,6 +237,14 @@ namespace SELMs.Test.Repositories.Test
 		{
 			yield return new object[] { new Project() { project_name = "Ứng dụng lập trình" } };
 			yield return new object[] { new Project() { project_name = "Nâng cao tính thực tế của AI" } };
+		}
+
+
+		public static IEnumerable<object[]> GetProjectListByMultiConditionTestData()
+		{
+			yield return new object[] { new Argument() { username = "", text = "" } };
+			yield return new object[] { new Argument() { username = "LyMT", text = "IOT" } };
+			yield return new object[] { new Argument() { username = "AnhNV", text = "d" } };
 		}
 
 

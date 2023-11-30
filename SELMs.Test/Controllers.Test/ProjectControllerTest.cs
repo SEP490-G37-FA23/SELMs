@@ -43,7 +43,9 @@
 				var actionResult = await apiProjectController.SearchProjects(argument);
 				Thread.Sleep(2000);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
+				string content = await response.Content.ReadAsStringAsync();
+
+				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 			}
 			catch (Exception ex)
 			{
@@ -202,9 +204,9 @@
 
 		public static IEnumerable<object[]> SearchProjectTestData()
 		{
-			yield return new object[] { new Argument() { username = "" } };
-			yield return new object[] { new Argument() { username = "new" } };
-			yield return new object[] { new Argument() { username = "b" } };
+			yield return new object[] { new Argument() { username = "", text = "" } };
+			yield return new object[] { new Argument() { username = "LyMT", text = "IOT" } };
+			yield return new object[] { new Argument() { username = "AnhNV", text = "d" } };
 		}
 
 
