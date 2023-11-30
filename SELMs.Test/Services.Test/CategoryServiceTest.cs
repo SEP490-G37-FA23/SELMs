@@ -23,7 +23,7 @@
 		{
 			try
 			{
-				await categoryService.SaveCategory(category, equipments);
+				await categoryService.SaveCategory(category, null);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)

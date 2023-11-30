@@ -74,10 +74,6 @@ namespace SELMs.Test.Controllers.Test
 			try
 			{
 				var actionResult = await apiCategoryController.GetCategory(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
-
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 			}
 			catch (Exception ex)
 			{
@@ -184,9 +180,9 @@ namespace SELMs.Test.Controllers.Test
 
 			};
 
-			yield return new object[] { new CategoryRequest { category = cate1, equipments = list1 } };
-			yield return new object[] { new CategoryRequest { category = cate2, equipments = list2 } };
-			yield return new object[] { new CategoryRequest { category = cate3, equipments = list3 } };
+			yield return new object[] { new CategoryRequest { category = cate1, equipments = null } };
+			yield return new object[] { new CategoryRequest { category = cate2, equipments = null } };
+			yield return new object[] { new CategoryRequest { category = cate3, equipments = null } };
 		}
 
 

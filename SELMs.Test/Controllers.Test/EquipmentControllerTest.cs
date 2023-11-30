@@ -76,11 +76,11 @@ namespace SELMs.Test.Controllers.Test
 		[InlineData("E0000")]
 		[InlineData("E0002")]
 		[InlineData("E0004")]
-		public void TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
+		public async Task TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
 		{
 			try
 			{
-				DetailEquipDTO detailEquipDTO = apiEquipmentController.GetDetailEquipment(code);
+				DetailEquipDTO detailEquipDTO = await apiEquipmentController.GetDetailEquipment(code);
 
 				if (detailEquipDTO.ListComponentEquips.Count > 0)
 					output.WriteLine($"Equipment detail:\n{JsonConvert.SerializeObject(detailEquipDTO)}");
