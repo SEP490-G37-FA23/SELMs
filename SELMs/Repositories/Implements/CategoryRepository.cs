@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace SELMs.Repositories.Implements
@@ -16,7 +17,7 @@ namespace SELMs.Repositories.Implements
         public void DeleteCategory(int id)
         {
             dynamic category = db.Categories.Where(c => c.category_id == id).FirstOrDefault();
-            if(category != null) db.Categories.Remove(category);
+            if (category != null) db.Categories.Remove(category);
             db.SaveChangesAsync();
         }
 
@@ -24,7 +25,7 @@ namespace SELMs.Repositories.Implements
         {
             dynamic category = db.Categories.Where(c => c.category_id == id).FirstOrDefault();
             return category;
-        }        
+        }
 
         public dynamic GetCategoryList()
         {
@@ -61,10 +62,25 @@ namespace SELMs.Repositories.Implements
         }
 
 
-        public dynamic getCategoryEquipments(string categoryCode)
+        public List<Equipment> getCategoryEquipments(string categoryCode)
         {
-            dynamic equipments = db.Equipments.Where(e => e.category_code == categoryCode).ToListAsync();
+            List<Equipment> equipments =  db.Equipments.Where(e => e.category_code == categoryCode).ToList();
             return equipments;
+        }
+
+        public async Task<dynamic> GetParentCategoriesList(Argument arg)
+        {
+            dynamic parentCategories = null;
+            parentCategories = await db.Database.Connection.QueryAsync<dynamic>("Proc_GetParentCategoriesList", new
+            {
+                level = arg.level
+            }
+                , commandType: CommandType.StoredProcedure);
+            return parentCategories;
+        }
+        public async Task<List<Equipment>> GetListSystemCodeFromStandCode(string standard_equipment_code)
+        {
+            return await db.Equipments.Where(c => c.standard_equipment_code == standard_equipment_code).ToListAsync();
         }
     }
 }

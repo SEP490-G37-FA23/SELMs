@@ -29,13 +29,17 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
-        public ActionResult _CreateNewInventoryEquipmentsRequest()
+        public ActionResult _CreateNewHandoverEquipmentsRequest()
         {
             return PartialView();
         }
         public ActionResult _CreateNewImportEquipmentsProposal()
         {
             return PartialView();
+        }
+        public ActionResult HEFList()
+        {
+            return View();
         }
     }
 }

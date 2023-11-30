@@ -16,6 +16,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web;
+using System.Web.ModelBinding;
 
 namespace SELMs.Api.Controllers
 {
@@ -28,7 +29,7 @@ namespace SELMs.Api.Controllers
         private IEquipmentHandoverService service = new EquipmentHandoverService();
         private IMapper mapper = MapperConfig.Initialize();
 
-        #region Get application by id
+        #region Get application
         [HttpPost]
         [Route("equipment-handover/forms")]
         public async Task<IHttpActionResult> GetEHFList(Argument arg)
@@ -115,5 +116,87 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Attach file to application
+        [HttpPost]
+        [Route("equipment-handover/finish-file/{id}")]
+        public async Task<IHttpActionResult> AttachFile(int id, [FromBody] HttpPostedFileBase file_attach)
+        {
+            try
+            {
+                dynamic result = service.AddAttachment(id, file_attach);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Remove Attachment
+        [HttpPost]
+        [Route("equipment-handover/remove-attachment")]
+        public async Task<IHttpActionResult> AttachFile(int application_id, int attach_id)
+        {
+            try
+            {
+                service.DeleteAttachment(application_id, attach_id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Confirm application
+        [HttpPost]
+        [Route("equipment-handover/confirm/{id}")]
+        public async Task<IHttpActionResult> ConfirmApplication(int id, [FromBody] UserDTO member)
+        {
+            try
+            {
+                User user = mapper.Map<User>(member);
+                dynamic result = service.ConfirmApplication(id, user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Cancel application
+        [HttpPost]
+        [Route("equipment-handover/cancel/{id}")]
+        public async Task<IHttpActionResult> CancelApplication(int id)
+        {
+            try
+            {
+                service.CancelApplication(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

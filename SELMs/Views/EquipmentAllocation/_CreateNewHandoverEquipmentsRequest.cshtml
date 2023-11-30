@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "_CreateNewHandoverEquipmentsRequest";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+
+<div class="modal fade" id="create-allocation-request" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" style="width:1500px; margin-left:-400px;">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin bàn giao thiết bị</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <section class="section">
+                    <form class="row g-3">
+                        <div class="row">
+                            <div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Thông tin cơ bản</h4>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="lab" class="form-label">Phòng lab</label>
+                                                <input type="text" class="form-control" ng-model="NewHandover.location_name" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="lab" class="form-label">Dự án</label>
+                                                <input type="text" class="form-control" ng-model="NewHandover.project_name" readonly>
+                                            </div>
+                                           
+                                            <div class="col-md-6">
+                                                <label for="receiver" class="form-label">Người tiếp nhận</label>
+                                                <ng-form>
+                                                    <div class="form-member-project">
+                                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="NewHandover.receipter_name" ng-change="LoadMembersList(NewHandover.receipter_name)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                                        <input type="text" class="form-control" ng-model="NewHandover.receipter" style="display:none">
+                                                    </div>
+
+                                                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMBPj">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead class="bg-blue text-white">
+                                                                        <tr>
+                                                                            <th>Mã thành viên</th>
+                                                                            <th>Họ tên</th>
+                                                                            <th>Chức vụ</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr style="cursor:pointer" ng-mousedown="HandelMemberLocation(mb, NewHandover);" ng-repeat="mb in ListMembers">
+                                                                            <td>
+                                                                                {{mb.user_code}}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{mb.fullname}}
+                                                                            </td>
+                                                                            <td>{{mb.role_name}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </ng-form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="dateRequest" class="form-label">Ngày bàn giao</label>
+                                                <input type="text" class="form-control" ng-model="NewHandover.handover_date|date:'dd/MM/yyyy'" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="requester" class="form-label">Người bàn giao</label>
+                                                <input type="text" class="form-control" ng-model="NewHandover.handover_name" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="description" class="form-label">Mô tả</label>
+                                                <input type="text" class="form-control" ng-model="NewHandover.description">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h5 class="card-title">Danh sách thiết bị</h5>
+                                        
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Mã thiết bị</th>
+                                                    <th scope="col">Tên thiết bị</th>
+                                                    <th scope="col">Mô tả/Thông số</th>
+                                                    <th scope="col">Tình trạng</th>
+                                                    <th scope="col">Ghi chú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in ListDetailHandover">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{item.system_equipment_code}}</td>
+                                                    <td>{{item.equipment_name}}</td>
+                                                    <td>{{item.equipment_specification}}</td>
+                                                    <td>{{item.usage_status}}</td>
+                                                    <td><input type="text" ng-model="item.note" class="form-control"/></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" ng-click="SaveNewHandover(NewHandover)">Tạo đơn bàn giao mới</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

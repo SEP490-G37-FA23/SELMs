@@ -21,8 +21,6 @@ namespace SELMs.Models
         public string equipment_name { get; set; }
         public string equipment_specification { get; set; }
         public string unit { get; set; }
-        public string category_code { get; set; }
-        public Nullable<int> quantity { get; set; }
         public string usage_status { get; set; }
         public string note { get; set; }
     }
