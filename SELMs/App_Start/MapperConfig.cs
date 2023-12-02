@@ -127,6 +127,19 @@ namespace SELMs.App_Start
                 .ForMember(des => des.date, act => act.MapFrom(src => src.date.ToString()))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
+                //Configuring InverntoryRequestApplicationDTO and Inverntory_Request_Application
+                cfg.CreateMap<InventoryRequestApplicationDTO, Inventory_Request_Application>().ReverseMap()
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring InverntoryRequestApplicationDetailDTO and Inverntory_Request_Application_Detail
+                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>().ReverseMap()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>().ReverseMap()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => DateTime.Parse(src.inventory_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
 
 
                 //Any Other Mapping Configuration ....  

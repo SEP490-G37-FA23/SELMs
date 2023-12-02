@@ -160,6 +160,7 @@
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentImportController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
+    <Compile Include="Api\Controllers\ApiInventoryRequestController.cs" />
     <Compile Include="Api\Controllers\ApiLocationController.cs" />
     <Compile Include="Api\Controllers\ApiMemberController.cs" />
     <Compile Include="Api\Controllers\ApiMemberLocationHistoryController.cs" />
@@ -183,6 +184,9 @@
     <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
+    <Compile Include="Api\DTOs\InventoryRequestApplicationDetailDTO.cs" />
+    <Compile Include="Api\DTOs\InventoryRequestApplicationDTO.cs" />
+    <Compile Include="Api\DTOs\InventoryRequestRequest.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\LocationRequest.cs" />
     <Compile Include="Api\DTOs\MemberLocationHistoryDTO.cs" />
@@ -348,6 +352,7 @@
     <Compile Include="Repositories\IEquipmentRepository.cs" />
     <Compile Include="Repositories\IEquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
+    <Compile Include="Repositories\IInventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IMemberLocationHistoryRepository.cs" />
     <Compile Include="Repositories\IMemberProjectHistoryRepository.cs" />
@@ -363,6 +368,7 @@
     <Compile Include="Repositories\IEquipmentLocationHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
+    <Compile Include="Repositories\Implements\InventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />
     <Compile Include="Repositories\Implements\MemberLocationHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\MemberProjectHistoryRepository.cs" />
@@ -378,6 +384,7 @@
     <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
+    <Compile Include="Services\IInventoryRequestService.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMemberLocationHistoryService.cs" />
     <Compile Include="Services\IMemberProjectHistoryService.cs" />
@@ -391,6 +398,7 @@
     <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
+    <Compile Include="Services\Implements\InventoryRequestService.cs" />
     <Compile Include="Services\Implements\LocationService.cs" />
     <Compile Include="Services\Implements\MemberLocationHistoryService.cs" />
     <Compile Include="Services\Implements\MemberProjectHistoryService.cs" />
