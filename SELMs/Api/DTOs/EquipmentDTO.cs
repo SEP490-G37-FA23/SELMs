@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace SELMs.Api.DTOs
@@ -43,8 +44,7 @@ namespace SELMs.Api.DTOs
         public List<EquipComponentDTO> ListComponentEquips { get; set; }
         public int location_id { get; set; }
         public List<string> img { get; set; }
-
-
+        public List<HttpPostedFileBase> images { get; set; }
     }
 
     public class DetailEquipDTO

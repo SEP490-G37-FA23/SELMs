@@ -28,10 +28,11 @@ namespace SELMs.Repositories.Implements
             db.SaveChangesAsync();
         }
 
-        public void SaveImages(List<Image> images)
+        public dynamic SaveImages(List<Image> images)
         {
             db.Images.AddRange(images);
             db.SaveChangesAsync();
+            return images;
         }
 
         public void UpdateImage(Image image)

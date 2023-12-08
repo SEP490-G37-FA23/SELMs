@@ -183,6 +183,7 @@
     <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
+    <Compile Include="Api\DTOs\EquipmentRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
     <Compile Include="Api\DTOs\InventoryRequestApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\InventoryRequestApplicationDTO.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\CategoryModel.cs" />
+    <Compile Include="Models\BusinessModel\EquipmentModel.cs" />
     <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
@@ -338,15 +340,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
