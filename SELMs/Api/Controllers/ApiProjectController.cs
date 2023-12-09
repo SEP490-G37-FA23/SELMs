@@ -93,11 +93,12 @@ namespace SELMs.Api.Controllers
 
         #region Add new project
         [HttpPost]
-        [Route("api/projects/new-project")]
+        [Route("projects/new-project")]
         public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
         {
             try
             {
+                projectRequest.Project.create_date = DateTime.Now;
                 Project project = mapper.Map<Project>(projectRequest.Project);
                 List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
                 List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);

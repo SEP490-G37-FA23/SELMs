@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using SELMs.Api.DTOs;
 using SELMs.Models;
+using SELMs.Models.BusinessModel;
 
 namespace SELMs.App_Start
 {
@@ -41,13 +42,12 @@ namespace SELMs.App_Start
 
                 //Configuring Project and ProjectDTO
                 cfg.CreateMap<ProjectDTO, Project>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)))
-                .ForMember(des => des.start_date, act => act.MapFrom(src => DateTime.Parse(src.start_date)))
-                .ForMember(des => des.end_date, act => act.MapFrom(src => DateTime.Parse(src.end_date)))
+              
+                .ForMember(des => des.start_date, act => act.MapFrom(src => HandleDateTime.formatDate(src.start_date)))
+                .ForMember(des => des.end_date, act => act.MapFrom(src => HandleDateTime.formatDate(src.end_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 cfg.CreateMap<Project, ProjectDTO>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()))
                 .ForMember(des => des.start_date, act => act.MapFrom(src => src.start_date.ToString()))
                 .ForMember(des => des.end_date, act => act.MapFrom(src => src.end_date.ToString()))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));

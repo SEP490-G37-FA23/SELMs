@@ -10,14 +10,14 @@
 namespace SELMs.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class Proc_GetAllSubLocationList_Result
+    public partial class sysdiagram
     {
-        public int location_id { get; set; }
-        public string location_code { get; set; }
-        public string location_desciption { get; set; }
-        public Nullable<int> parent_location_id { get; set; }
-        public Nullable<int> location_level { get; set; }
-        public bool is_active { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
