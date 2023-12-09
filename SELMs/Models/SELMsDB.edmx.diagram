@@ -4,6 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+      <Diagram DiagramId="83059b507f234d58bf9dc3299fe15bc6" Name="Diagram1">
       <Diagram DiagramId="52dd80bd57624a41818acf00aea29f71" Name="Diagram1">
         <EntityTypeShape EntityType="SELMsModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SELMsModel.Equipment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />

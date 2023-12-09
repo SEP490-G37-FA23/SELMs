@@ -30,7 +30,8 @@ namespace SELMs.Services.Implements
 
 		public async Task SaveProject(Project project, List<User> projectMembers, List<Equipment> projectEquipments)
 		{
-			project = repository.SaveProject(project);
+
+            project = repository.SaveProject(project);
 
 			foreach (User user in projectMembers)
 			{

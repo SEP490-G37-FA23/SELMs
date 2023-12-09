@@ -1,148 +1,92 @@
 ﻿
 @{
-    ViewBag.Title = "CreateNewInventoryEquipmentsRequest";
+    ViewBag.Title = "Tạo mới yêu cầu kiểm kê";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
-<div>
-    <h4 class="text-center">Đơn yêu cầu kiểm kê</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a >Kiểm kê thiết bị</a></li>
-            <li class="breadcrumb-item"><a href="@Url.Action("CreateNewInventoryEquipmentsRequest", "InventoryEquipments")">Tạo đơn yêu cầu kiểm kê</a></li>
+<script src="~/Content/js/Stock/Inventory/CreateNewInventoryRequestCtrl.js"></script>
+<div ng-app="myApp" ng-controller="CreateNewInventoryRequestCtrl">
+    <h4 class="text-center">Đơn yêu cầu kiểm kê mới</h4>
 
-        </ol>
-    </nav>
     <div class="row">
         <div class="col-6">
             <label class=" col-form-label">Phòng Lab</label>
             <div>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="1">AL-102R</option>
-                    <option value="2">DEL-101</option>
-                    <option value="3">DEL-313</option>
+                <select ng-model="NewInventory.location_id" class="form-control" ng-change="GetDetailLocation(item.location_id);">
+                    <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
                 </select>
             </div>
         </div>
         <div class="col-6">
             <label class=" col-form-label">Người Yêu Cầu</label>
             <div>
-                <select class="form-select" aria-label="Default select example">
-                    <option value="1">Nguyễn Văn A</option>
-                    <option value="2">Nguyễn Văn B</option>
-                    <option value="3">Nguyễn Văn C</option>
-                </select>
+                <ng-form>
+                    <div class="form-member">
+                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="requesterSearch" ng-change="LoadMembersList(requesterSearch)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                        <input type="text" class="form-control" ng-model="NewInventory.requester" style="display:none">
+                    </div>
+
+                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMB">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-blue text-white">
+                                        <tr>
+                                            <th>Họ tên</th>
+                                            <th>Chức vụ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="cursor:pointer" ng-mousedown="HandelMemberRequest(mb, NewInventory);" ng-repeat="mb in ListMembers">
+                                            <td>
+                                                {{mb.fullname }}
+                                            </td>
+                                            <td>{{mb.role_name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-form>
+
             </div>
         </div>
     </div>
     <div class="mt-5">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a href="#general_infor" class="nav-link active" role="tab" data-toggle="tab">Danh mục thiết bị</a>
-            </li>
-            <li class="nav-item">
-                <a href="#detail" class="nav-link" role="tab" data-toggle="tab">Thiết bị</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="general_infor">
-                <h4 class="card-title text-center">Danh mục thiết bị</h4>
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ô tích</th>
-                                    <th>Mã quản lý</th>
-                                    <th>Tên danh mục</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td><input class="form-check-input ms-5" type="checkbox" value="" id="flexCheckDefault"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                <tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="detail">
+        <h4 class="card-title text-center mb-3">Thiết bị kiểm kê</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã hệ thống</th>
+                    <th scope="col">Mã chuẩn</th>
+                    <th scope="col">Tên thiết bị</th>
+                    <th scope="col">Vị trí</th>
+                    <th scope="col">Quản lý</th>
+                    <th scope="col">Từ ngày</th>
 
-                <h4 class="card-title text-center mb-3">Thiết bị</h4>
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã quản lý</th>
-                                    <th>Tên thiết bị</th>
-                                    <th>Tồn kho</th>
-                                    <th>Ô tích</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td><input placeholder="Search..."></td>
-                                    <td><input placeholder="Search..."></td>
-                                    <td></td>
-                                    <td></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
-                                <tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input type="text" style="border: hidden;"></td>
-                                    <td><input class="form-check-input ms-4" type="checkbox" value="" id="flexCheckDefault"></td>
-                                <tr>
-                            </tbody>
-                        </table>
-                        <div>
-                            <label>Tổng số thiết bị đã chọn</label>
-                            <input>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in filtered = (ListEquipmentInLocation |filter: {equipment_name:equip_search})">
+                    <td scope="row">{{$index+1}}</td>
+                    <td scope="row">{{item.system_equipment_code}}</td>
+                    <td scope="row">{{item.standard_equipment_code}}</td>
+                    <td scope="row">{{item.equipment_name}}</td>
+                    <td scope="row">{{item.location_desciption}}</td>
+                    <td scope="row">{{item.fullname}}</td>
+                    <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
 
+                    <td class="text-center">
+                        <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
+                        <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
     </div>
     <div style="display: flex; justify-content: center; align-items: center; ">
         <button type="button" class="btn btn-primary ms-2">Tạo đơn</button>
