@@ -5,6 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SELMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SELMs.dbo.Application_Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Application_Attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="application_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="application_id" Type="int" />
+          <Property Name="attachment_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="attach_id" />
+          </Key>
+          <Property Name="attach_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="content" Type="varbinary(max)" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="notes" Type="nvarchar" MaxLength="300" />
+          <Property Name="extension" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
@@ -87,16 +111,15 @@
           <Property Name="form_code" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="creater" Type="varchar" MaxLength="64" />
-          <Property Name="ea_application_code" Type="varchar" MaxLength="64" />
           <Property Name="description" Type="nvarchar" MaxLength="512" />
           <Property Name="handover_date" Type="date" />
           <Property Name="handover" Type="varchar" MaxLength="64" />
-          <Property Name="is_confirmed_handover" Type="bit" Nullable="false" />
           <Property Name="receipt_date" Type="date" />
           <Property Name="receipter" Type="varchar" MaxLength="64" />
-          <Property Name="is_confirmed_recipienter" Type="bit" Nullable="false" />
           <Property Name="handover_note" Type="nvarchar" MaxLength="500" />
           <Property Name="is_finish" Type="bit" Nullable="false" />
+          <Property Name="location_id" Type="int" />
+          <Property Name="project_id" Type="int" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form_Detail">
           <Key>
@@ -109,8 +132,6 @@
           <Property Name="equipment_name" Type="nvarchar" MaxLength="128" />
           <Property Name="equipment_specification" Type="nvarchar" MaxLength="500" />
           <Property Name="unit" Type="nvarchar" MaxLength="20" />
-          <Property Name="category_code" Type="varchar" MaxLength="64" />
-          <Property Name="quantity" Type="int" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
@@ -189,7 +210,9 @@
           </Key>
           <Property Name="image_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="image_name" Type="nvarchar" MaxLength="500" />
-          <Property Name="content" Type="nvarchar(max)" />
+          <Property Name="equipment_id" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="content" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
@@ -364,6 +387,24 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Application_Attachment].[id] AS [id], 
+    [Application_Attachment].[application_type] AS [application_type], 
+    [Application_Attachment].[application_id] AS [application_id], 
+    [Application_Attachment].[attachment_id] AS [attachment_id]
+    FROM [dbo].[Application_Attachment] AS [Application_Attachment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Attachment].[attach_id] AS [attach_id], 
+    [Attachment].[name] AS [name], 
+    [Attachment].[content] AS [content], 
+    [Attachment].[date] AS [date], 
+    [Attachment].[notes] AS [notes], 
+    [Attachment].[extension] AS [extension]
+    FROM [dbo].[Attachment] AS [Attachment]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -452,16 +493,15 @@
           <Property Name="form_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="ea_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="handover_date" Type="DateTime" Precision="0" />
           <Property Name="handover" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="is_confirmed_handover" Type="Boolean" Nullable="false" />
           <Property Name="receipt_date" Type="DateTime" Precision="0" />
           <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="is_confirmed_recipienter" Type="Boolean" Nullable="false" />
           <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="is_finish" Type="Boolean" Nullable="false" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="project_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form_Detail">
           <Key>
@@ -474,8 +514,6 @@
           <Property Name="equipment_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="equipment_specification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="quantity" Type="Int32" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -554,7 +592,9 @@
           </Key>
           <Property Name="image_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="image_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="equipment_id" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
@@ -704,7 +744,27 @@
           <Property Name="job_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
         </EntityType>
-        <EntityContainer Name="SELMsContext" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="Application_Attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="application_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="application_id" Type="Int32" />
+          <Property Name="attachment_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="attach_id" />
+          </Key>
+          <Property Name="attach_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" />
@@ -729,13 +789,15 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SELMsModelStoreContainer" CdmEntityContainer="SELMsContext">
+        <EntityContainerMapping StorageEntityContainer="SELMsModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="SELMsModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -822,16 +884,15 @@
                 <ScalarProperty Name="form_code" ColumnName="form_code" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="ea_application_code" ColumnName="ea_application_code" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="handover_date" ColumnName="handover_date" />
                 <ScalarProperty Name="handover" ColumnName="handover" />
-                <ScalarProperty Name="is_confirmed_handover" ColumnName="is_confirmed_handover" />
                 <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
                 <ScalarProperty Name="receipter" ColumnName="receipter" />
-                <ScalarProperty Name="is_confirmed_recipienter" ColumnName="is_confirmed_recipienter" />
                 <ScalarProperty Name="handover_note" ColumnName="handover_note" />
                 <ScalarProperty Name="is_finish" ColumnName="is_finish" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -845,8 +906,6 @@
                 <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
                 <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="category_code" ColumnName="category_code" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="usage_status" ColumnName="usage_status" />
                 <ScalarProperty Name="note" ColumnName="note" />
               </MappingFragment>
@@ -931,6 +990,8 @@
               <MappingFragment StoreEntitySet="Image">
                 <ScalarProperty Name="image_id" ColumnName="image_id" />
                 <ScalarProperty Name="image_name" ColumnName="image_name" />
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="content" ColumnName="content" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1091,6 +1152,28 @@
                 <ScalarProperty Name="skill" ColumnName="skill" />
                 <ScalarProperty Name="job_description" ColumnName="job_description" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application_Attachment">
+            <EntityTypeMapping TypeName="SELMsModel.Application_Attachment">
+              <MappingFragment StoreEntitySet="Application_Attachment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="application_type" ColumnName="application_type" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
+                <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="SELMsModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

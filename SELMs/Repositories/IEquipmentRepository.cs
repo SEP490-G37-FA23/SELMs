@@ -15,8 +15,8 @@ namespace SELMs.Repositories
         dynamic GetEquipmentList(Argument arg);
         dynamic GetEquipment(int id);
         dynamic GetDetailEquipment(string code);
-        void SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
-        void SaveEquipments(List<Equipment> equipments);
+        dynamic SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
+        dynamic SaveEquipments(List<Equipment> equipments);
         void UpdateEquipment(Equipment equipment);
         void DeleteEquipment(int id);
         Equipment GetLastEquipment();
@@ -24,5 +24,6 @@ namespace SELMs.Repositories
         List<EquipComponentDTO> GetListComponentEquips(string code);
         dynamic GetStandardEquipmentList(Argument args);
         void SaveEquipmentsToCategory(List<StandardEquipmentDTO> equipments);
+        dynamic GetEquipmentImages(int id);
     }
 }

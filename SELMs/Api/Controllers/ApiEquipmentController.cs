@@ -75,7 +75,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				dynamic returnedData = null;
-				returnedData = repository.GetEquipment(id);
+				returnedData = service.GetEquipment(id);
 				return Ok(returnedData);
 			}
 			catch (Exception ex)
@@ -111,8 +111,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Equipment equipment = mapper.Map<Equipment>(data.equip);
-				service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips);
-
+				service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips, data.images);
 				return Ok();
 			}
 			catch (Exception ex)

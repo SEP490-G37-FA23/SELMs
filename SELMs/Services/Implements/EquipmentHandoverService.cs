@@ -77,6 +77,57 @@ namespace SELMs.Services.Implements
 
         }
 
+        public async Task<dynamic> AddAttachment(int id, HttpPostedFileBase file)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if (application != null)
+            {
+                Attachment attachment = CreateAttachment(file);
+                attachment.name = application.form_code;
+                attachment.date = DateTime.Now;
+                attachment = attachmentRepository.SaveAttachment(attachment);
+                repository.AddAttachment(application.form_id, attachment.attach_id);
+                return attachment;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task DeleteAttachment(int applicationId, int attachmentId)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(applicationId);
+            Attachment attachment = attachmentRepository.GetAttachment(attachmentId);
+            if (application != null && attachment != null)
+            {
+                repository.DeleteAttachment(applicationId, attachmentId);
+            }
+        }
+
+        public async Task<dynamic> ConfirmApplication(int id, User member)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if (application != null)
+            {
+                application.is_finish = true;
+                application.receipter = member.user_code;
+                application.receipt_date = DateTime.Now;
+                repository.UpdateApplication(application);
+                return application;
+            }
+            return null;
+        }
+
+        public async Task CancelApplication(int id)
+        {
+            Equipment_Handover_Form application = repository.GetApplication(id);
+            if(application != null)
+            {
+                repository.DeleteApplication(id);
+            }
+        }
+
         string GenerateApplicationCode()
         {
             string code = $"EHF{DateTime.Now.ToString("yyyyMMdd")}";

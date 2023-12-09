@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using SELMs.Repositories;
-using SELMs.Repositories.Implements;
-
-namespace SELMs.Test.Repositories.Test
+﻿namespace SELMs.Test.Repositories.Test
 {
 	public class CategoryRepositoryTest
 	{
@@ -39,11 +35,16 @@ namespace SELMs.Test.Repositories.Test
 		{
 			var categoryListFound = await categoryRepository.SearchCategories(argument);
 
-			Assert.IsType<List<Category>>(categoryListFound);
+
 			Assert.NotNull(categoryListFound);
 
-			foreach (var item in categoryListFound)
-				output.WriteLine(JsonConvert.SerializeObject(item));
+
+			if (categoryListFound is List<dynamic> { Count: > 0 })
+				foreach (var item in categoryListFound)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+
+			else
+				output.WriteLine("Categories not found");
 		}
 
 
@@ -114,9 +115,9 @@ namespace SELMs.Test.Repositories.Test
 		// not test
 		public static IEnumerable<object[]> SearchCategoryListTestData()
 		{
-			yield return new object[] { new Argument() { username = "DatTT" } };
-			yield return new object[] { new Argument() { fullname = "da" } };
-			yield return new object[] { new Argument() { fullname = "Ly" } };
+			yield return new object[] { new Argument() { text = "Laptop" } };
+			yield return new object[] { new Argument() { text = "" } };
+			yield return new object[] { new Argument() { text = "kaka" } };
 		}
 
 

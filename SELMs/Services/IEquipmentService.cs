@@ -5,14 +5,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SELMs.Services
 {
     public interface IEquipmentService
     {
-        Task SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
+        Task<dynamic> GetEquipment(int id);
+        Task SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips, List<HttpPostedFileBase> images);
         Task ImportEquipments(List<Equipment> equipments);
         Task UpdateEquipment(int id, Equipment equipment);
+        Task<dynamic> AddImages(Equipment equipment, List<HttpPostedFileBase> images);
 
     }
 }

@@ -37,8 +37,13 @@ namespace SELMs.App_Start
                 .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()));
 
                 //Configuring Image and ImageDTO
-                cfg.CreateMap<ImageDTO, Image>().ReverseMap();
-                cfg.CreateMap<List<ImageDTO>, List<Image>>().ReverseMap();
+                cfg.CreateMap<ImageDTO, Image>()
+                .ForMember(des => des.date, act => act.MapFrom(src => DateTime.Parse(src.date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Image, ImageDTO>()
+                .ForMember(des => des.date, act => act.MapFrom(src => src.date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Project and ProjectDTO
                 cfg.CreateMap<ProjectDTO, Project>()
@@ -125,6 +130,19 @@ namespace SELMs.App_Start
 
                 cfg.CreateMap<Attachment, AttachmentDTO>()
                 .ForMember(des => des.date, act => act.MapFrom(src => src.date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring InverntoryRequestApplicationDTO and Inverntory_Request_Application
+                cfg.CreateMap<InventoryRequestApplicationDTO, Inventory_Request_Application>().ReverseMap()
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //Configuring InverntoryRequestApplicationDetailDTO and Inverntory_Request_Application_Detail
+                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>().ReverseMap()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>().ReverseMap()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => DateTime.Parse(src.inventory_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
 

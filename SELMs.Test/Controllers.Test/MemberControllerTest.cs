@@ -178,9 +178,9 @@ namespace SELMs.Test.Controllers.Test
 	{
 		public static IEnumerable<object[]> GetMemberListTestData()
 		{
-			yield return new object[] { new Argument() { username = "DatTT", isadmin = false, role = "SM" } };
-			yield return new object[] { new Argument() { fullname = "da" } };
-			yield return new object[] { new Argument() { fullname = "Ly" } };
+			yield return new object[] { new Argument() { text = "" } };
+			yield return new object[] { new Argument() { text = "Anh" } };
+			yield return new object[] { new Argument() { text = "Ly" } };
 		}
 
 

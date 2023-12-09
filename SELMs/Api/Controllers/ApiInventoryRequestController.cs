@@ -14,25 +14,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Http;
 using System.Web;
-using System.Web.ModelBinding;
+using System.Web.Http;
 
 namespace SELMs.Api.Controllers
 {
     [RoutePrefix("api/v1")]
-    public class ApiEquipmentHandoverController : ApiController
+    public class ApiInventoryRequestController : ApiController
     {
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiEquipmentHandoverController));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ApiInventoryRequestController));
 
-        private IEquipmentHandoverFormRepository repository = new EquipmentHandoverFormRepository();
-        private IEquipmentHandoverService service = new EquipmentHandoverService();
+        private IInventoryRequestApplicationRepository repository = new InventoryRequestApplicationRepository();
+        private IInventoryRequestService service = new InventoryRequestService();
         private IMapper mapper = MapperConfig.Initialize();
 
         #region Get application
         [HttpPost]
-        [Route("equipment-handover/forms")]
-        public async Task<IHttpActionResult> GetEHFList(Argument arg)
+        [Route("inventory-request/")]
+        public async Task<IHttpActionResult> GetIRAList(Argument arg)
         {
             try
             {
@@ -52,7 +51,7 @@ namespace SELMs.Api.Controllers
 
         #region Get application by id
         [HttpGet]
-        [Route("equipment-handover-form/{id}")]
+        [Route("inventory-request/{id}")]
         public async Task<IHttpActionResult> GetApplication(int id)
         {
             try
@@ -73,15 +72,14 @@ namespace SELMs.Api.Controllers
 
         #region Add new application
         [HttpPost]
-        [Route("equipment-handover-form/new-form")]
-        public async Task<IHttpActionResult> SaveApplication([FromBody] EquipmentHandoverRequest applicationRequest)
+        [Route("inventory-request/new-application")]
+        public async Task<IHttpActionResult> SaveApplication([FromBody] InventoryRequestRequest applicationRequest)
         {
             try
             {
-                Equipment_Handover_Form application = mapper.Map<Equipment_Handover_Form>(applicationRequest.application);
-                List<Equipment_Handover_Form_Detail> details = mapper.Map<List<Equipment_Handover_Form_Detail>>(applicationRequest.application_details);
-                HttpPostedFileBase attachment = applicationRequest.attachment;
-                service.SaveApplication(application, details, attachment);
+                Inventory_Request_Application application = mapper.Map<Inventory_Request_Application>(applicationRequest.application);
+                List<Inventory_Request_Application_Detail> details = mapper.Map<List<Inventory_Request_Application_Detail>>(applicationRequest.application_details);
+                service.SaveApplication(application, details);
                 return Ok();
             }
             catch (Exception ex)
@@ -96,55 +94,14 @@ namespace SELMs.Api.Controllers
 
         #region Update application
         [HttpPut]
-        [Route("equipment-handover_form/update/{id}")]
-        public async Task<IHttpActionResult> UpdateApplication(int id, [FromBody] EquipmentHandoverRequest applicationRequest)
+        [Route("inventory-request/update/{id}")]
+        public async Task<IHttpActionResult> UpdateApplication(int id, [FromBody] InventoryRequestRequest applicationRequest)
         {
             try
             {
-                Equipment_Handover_Form application = mapper.Map<Equipment_Handover_Form>(applicationRequest.application);
-                List<Equipment_Handover_Form_Detail> details = mapper.Map<List<Equipment_Handover_Form_Detail>>(applicationRequest.application_details);
-                HttpPostedFileBase attachment = applicationRequest.attachment;
-                service.UpdateApplication(id, application, details, attachment);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Attach file to application
-        [HttpPost]
-        [Route("equipment-handover/finish-file/{id}")]
-        public async Task<IHttpActionResult> AttachFile(int id, [FromBody] HttpPostedFileBase file_attach)
-        {
-            try
-            {
-                dynamic result = service.AddAttachment(id, file_attach);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
-
-        #region Remove Attachment
-        [HttpPost]
-        [Route("equipment-handover/remove-attachment")]
-        public async Task<IHttpActionResult> AttachFile(int application_id, int attach_id)
-        {
-            try
-            {
-                service.DeleteAttachment(application_id, attach_id);
+                Inventory_Request_Application application = mapper.Map<Inventory_Request_Application>(applicationRequest.application);
+                List<Inventory_Request_Application_Detail> details = mapper.Map<List<Inventory_Request_Application_Detail>>(applicationRequest.application_details);
+                service.UpdateApplication(id, application, details);
                 return Ok();
             }
             catch (Exception ex)
@@ -159,7 +116,7 @@ namespace SELMs.Api.Controllers
 
         #region Confirm application
         [HttpPost]
-        [Route("equipment-handover/confirm/{id}")]
+        [Route("inventory-request/confirm/{id}")]
         public async Task<IHttpActionResult> ConfirmApplication(int id, [FromBody] UserDTO member)
         {
             try
@@ -180,7 +137,7 @@ namespace SELMs.Api.Controllers
 
         #region Cancel application
         [HttpPost]
-        [Route("equipment-handover/cancel/{id}")]
+        [Route("inventory-request/cancel/{id}")]
         public async Task<IHttpActionResult> CancelApplication(int id)
         {
             try
@@ -197,6 +154,5 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
-
     }
 }
