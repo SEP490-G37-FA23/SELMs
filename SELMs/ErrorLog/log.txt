@@ -275,3 +275,141 @@ System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure
    at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in D:\FULearning\Fall2023\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 45
 ClientConnectionId:50bd8f72-1587-4c71-9d9a-7e9dc41b93d8
 Error Number:2812,State:62,Class:16
+2023-12-10 17:02:12,305 [8] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiImageController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 39
+2023-12-10 17:38:48,234 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_460bd5ac-639a-4a51-9709-56457391292c'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:40:55,128 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\AppData\BodyPart_117c5c0c-cbe7-4ac8-abe5-0441d33c48ec'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:43:50,571 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_f45a0ca4-86de-4a4e-82e2-d861a338615d'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:44:00,362 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Web.Http.HttpResponseException: Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 64
+2023-12-10 17:44:13,334 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_0a8fd0e9-f59e-44fc-a1ce-5f7d4dbd1c7f'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:52:39,634 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_d150cb77-d987-4d69-be51-5327e3351da3'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:55:37,585 [11] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Net.Http.HttpRequestException: Error while copying content to a stream. ---> System.ObjectDisposedException: Cannot access a closed file.
+   at System.IO.__Error.FileNotOpen()
+   at System.IO.FileStream.BeginRead(Byte[] array, Int32 offset, Int32 numBytes, AsyncCallback userCallback, Object stateObject)
+   at System.Net.Http.StreamToStreamCopy.StartRead()
+   --- End of inner exception stack trace ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 71

@@ -185,6 +185,7 @@
     <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
+    <Compile Include="Api\DTOs\ImageRequest.cs" />
     <Compile Include="Api\DTOs\InventoryRequestApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\InventoryRequestApplicationDTO.cs" />
     <Compile Include="Api\DTOs\InventoryRequestRequest.cs" />
