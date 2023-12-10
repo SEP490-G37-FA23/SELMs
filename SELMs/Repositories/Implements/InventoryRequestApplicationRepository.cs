@@ -121,13 +121,23 @@ namespace SELMs.Repositories.Implements
             return applicationDetails;
         }
 
-        public void UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
+        public async Task UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
         {
-            Inventory_Request_Application_Detail orgApplicationDetail = db.Inventory_Request_Application_Detail
-                .Where(p => p.application_detail_id == applicationDetail.application_detail_id).FirstOrDefault();
-            db.Entry(orgApplicationDetail).CurrentValues.SetValues(applicationDetail);
-            db.SaveChangesAsync();
+            // Retrieve the original application detail asynchronously
+            Inventory_Request_Application_Detail orgApplicationDetail = await db.Inventory_Request_Application_Detail
+                .Where(p => p.application_detail_id == applicationDetail.application_detail_id)
+                .FirstOrDefaultAsync();
+
+            // Update the values of the original application detail with the new values
+            if (orgApplicationDetail != null)
+            {
+                db.Entry(orgApplicationDetail).CurrentValues.SetValues(applicationDetail);
+
+                // Save changes asynchronously
+                await db.SaveChangesAsync();
+            }
         }
+
 
         public void DeleteApplicationDetail(int id)
         {
@@ -144,6 +154,17 @@ namespace SELMs.Repositories.Implements
             {
                 location_id = location_id,
                 username= arg.username
+            }
+                , commandType: CommandType.StoredProcedure);
+            return applications;
+        }
+
+        public dynamic GetResultIRAList(Argument arg)
+        {
+            dynamic applications = null;
+            applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetResultIRAList", new
+            {
+                username = arg.username
             }
                 , commandType: CommandType.StoredProcedure);
             return applications;

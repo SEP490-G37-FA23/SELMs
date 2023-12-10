@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('PerformInventoryRequestCtrl', function ($scope, $http, $sce) {
+app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var fullname = $('#fullname').val();
@@ -31,42 +31,53 @@ app.controller('PerformInventoryRequestCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
     };
-
-    $scope.LoadLocationsList = function () {
-        var data = {
-            username: username,
-            text: '',
-            level: 1,
-            id: 0
-        }
-        $http.post(origin + '/api/v1/locations', data).then(function (response) {
-            $scope.ListLocations = response.data.Result;
-        });
-    }
-    $scope.LoadLocationsList();
     $scope.itemSearch = '';
-    $scope.GetListIERInLocation = function (location_id) {
+    $scope.GetResultIER = function () {
         var data = {
             username: username
-            }
-        $http.post(origin + '/api/v1/inventory/detail-in-location/' + parseInt(location_id),data).then(function (response) {
-            $scope.ListInventoryDetail = response.data.Result;
+        }
+        $http.post(origin + '/api/v1/inventory/result', data).then(function (response) {
+            $scope.ListResultInventory = response.data.Result;
         });
     }
-    $scope.location_id = 0;
-    $scope.SavePerformInventory = function () {
+    $scope.GetResultIER();
+    $scope.UpdateUsageEquip = function () {
         var data = {
             username: username,
-            listPerform: $scope.ListInventoryDetail
+            listUpdate: $scope.ListEquipUpdate
         }
         console.log(data)
-        var partialUrl = origin + '/api/v1/inventory-request/perform';
+        var partialUrl = origin + '/api/v1/inventory-request/update-equipment-result';
         $http.post(partialUrl, data)
             .then(function (response) {
-                $scope.SuccessSystem('Lưu kết quả thực hiện kiểm kê thành công!');
-                $scope.GetListIERInLocation($scope.location_id);
+                $scope.SuccessSystem('Cập nhật tình trạng thiết bị theo kiểm kê thành công!');
+                $scope.GetResultIER();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
+    $scope.ListEquipUpdate = [];
+    $scope.SelectEquip = function (item) {
+        const existingItemIndex = $scope.ListEquipUpdate.findIndex(e => e.system_equipment_code === item.system_equipment_code);
+
+        if (item.selected) {
+            // Check if an item with the same system_equipment_code exists in $scope.ListEquipUpdate
+            if (existingItemIndex == -1) {
+                $scope.ListEquipUpdate.push({
+                    application_detail_id: item.application_detail_id,
+                    actual_usage_status: item.actual_usage_status,
+                    equipment_id: item.equipment_id,
+                    inventory_results: 'Đã cập nhật thiết bị'
+                });
+            }
+            // Add the new item to $scope.ListEquipUpdate
+          
+        } else {
+            if (existingItemIndex !== -1) {
+                // If exists, remove the existing item
+                $scope.ListEquipUpdate.splice(existingItemIndex, 1);
+            }
+        }
+    }
+
 })

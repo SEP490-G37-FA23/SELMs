@@ -185,6 +185,7 @@
     <Compile Include="Api\DTOs\Inventory\InventoryRequestApplicationDTO.cs" />
     <Compile Include="Api\DTOs\Inventory\InventoryRequestRequest.cs" />
     <Compile Include="Api\DTOs\Inventory\PerformInventoryDTO.cs" />
+    <Compile Include="Api\DTOs\Inventory\UpdateEquipmentResultDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\LocationRequest.cs" />
     <Compile Include="Api\DTOs\MemberLocationHistoryDTO.cs" />
@@ -670,6 +671,7 @@
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
     <Content Include="Content\js\Stock\Inventory\CreateNewInventoryRequestCtrl.js" />
     <Content Include="Content\js\Stock\Inventory\PerformInventoryRequestCtrl.js" />
+    <Content Include="Content\js\Stock\Inventory\ResultInventoryRequestCtrl.js" />
     <Content Include="Content\js\Stock\Locations\CreateNewLocationCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationDetailCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationManagementCtrl.js" />

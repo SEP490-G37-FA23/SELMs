@@ -53,6 +53,7 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
             requesterSearch: fullname
 
         }
+        $scope.ListNewEquipmentInInventory = [];
     }
 
     $scope.ResetNewInventory();
@@ -88,7 +89,7 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
             });
 
     }
-    $scope.ListNewEquipmentInInventory = [];
+   
     $scope.LoadEquipmentsList = function (text) {
         var data = {
             username: username,
