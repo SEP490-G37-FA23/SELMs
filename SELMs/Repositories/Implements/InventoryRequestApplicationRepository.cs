@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace SELMs.Repositories.Implements
 {
@@ -18,7 +19,8 @@ namespace SELMs.Repositories.Implements
             dynamic application = db.Inventory_Request_Application.Where(a => a.application_id == id).FirstOrDefault();
             if (application != null)
             {
-                List<Inventory_Request_Application_Detail> applicationDetails = GetApplicationDetail(id);
+                List<Inventory_Request_Application_Detail> applicationDetails = db.Inventory_Request_Application_Detail
+                .Where(a => a.application_detail_id == id).ToList();
                 db.Inventory_Request_Application_Detail.RemoveRange(applicationDetails);
                 db.Inventory_Request_Application.Remove(application);
             }
@@ -92,11 +94,10 @@ namespace SELMs.Repositories.Implements
             return applicationDetails;
         }
 
-        public dynamic GetApplicationDetail(int id)
+        public async Task<Inventory_Request_Application_Detail> GetApplicationDetail(int id)
         {
-            dynamic applicationDetail = db.Inventory_Request_Application_Detail
+            return  db.Inventory_Request_Application_Detail
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
-            return applicationDetail;
         }
 
         public dynamic SaveApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
@@ -134,6 +135,18 @@ namespace SELMs.Repositories.Implements
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
             if (applicationDetail != null) db.Inventory_Request_Application_Detail.Remove(applicationDetail);
             db.SaveChangesAsync();
+        }
+
+        public dynamic GetDetailIRAListInLocation(int location_id,Argument arg)
+        {
+            dynamic applications = null;
+            applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetDetailIRAListInLocation", new
+            {
+                location_id = location_id,
+                username= arg.username
+            }
+                , commandType: CommandType.StoredProcedure);
+            return applications;
         }
     }
 }
