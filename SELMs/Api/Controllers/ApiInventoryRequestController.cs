@@ -176,6 +176,26 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
+        #region Perform application
+        [HttpPost]
+        [Route("inventory-request/update-equipment-result")]
+        public async Task<dynamic> UpdateEquipmentResult([FromBody] UpdateEquipmentResultDTO updateEquip)
+        {
+            try
+            {
+                return await service.UpdateEquipmentResult(updateEquip);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+
         #region Cancel application
         [HttpPost]
         [Route("inventory-request/cancel/{id}")]
@@ -185,6 +205,27 @@ namespace SELMs.Api.Controllers
             {
                 service.CancelApplication(id);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get application result
+        [HttpPost]
+        [Route("inventory/result")]
+        public async Task<IHttpActionResult> GetResultIRAList(Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetResultIRAList(arg);
+                return Ok(returnedData);
             }
             catch (Exception ex)
             {

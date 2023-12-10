@@ -17,6 +17,8 @@ namespace SELMs.Services.Implements
     {
         private IInventoryRequestApplicationRepository repository = new InventoryRequestApplicationRepository();
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
+        private IEquipmentRepository equipmentRepository = new EquipmentRepository();
+
         public async Task<ApplicationModel> GetApplication(int id)
         {
             Inventory_Request_Application application = await repository.GetApplication(id);
@@ -140,7 +142,22 @@ namespace SELMs.Services.Implements
                 detail.inventory_date = DateTime.Now;
                 detail.actual_usage_status = item.actual_usage_status;
                 detail.is_perform = item.is_perform;
-                 repository.UpdateApplicationDetail(detail);
+                await repository.UpdateApplicationDetail(detail);
+            }
+            return "Thành công";
+        }
+
+        public async Task<dynamic> UpdateEquipmentResult(UpdateEquipmentResultDTO updateEquip)
+        {
+            foreach (UpdateDetailDTO item in updateEquip.listUpdate)
+            {
+                Inventory_Request_Application_Detail detail = await repository.GetApplicationDetail(item.application_detail_id);
+                detail.inventory_results = item.inventory_results;
+                await repository.UpdateApplicationDetail(detail);
+
+                Equipment equip = await equipmentRepository.GetEquipment(item.equipment_id);
+                equip.usage_status = item.actual_usage_status;
+                await equipmentRepository.UpdateEquipment(equip);
             }
             return "Thành công";
         }

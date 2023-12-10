@@ -20,5 +20,6 @@ namespace SELMs.Services
         Task<dynamic> ConfirmApplication(int id, User member);
         Task CancelApplication(int id);
         Task<dynamic> PerformInventoryRequest(PerformInventoryDTO perform);
+        Task<dynamic> UpdateEquipmentResult(UpdateEquipmentResultDTO updateEquip);
     }
 }

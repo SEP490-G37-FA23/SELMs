@@ -693,3 +693,86 @@ System.NotSupportedException: A second operation started on this context before 
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at SELMs.Api.Controllers.ApiInventoryRequestController.<PerformInventoryRequest>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 167
+2023-12-10 22:35:00,938 [11] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+System.NotSupportedException: A second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at SELMs.Repositories.Implements.InventoryRequestApplicationRepository.<GetApplicationDetail>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\InventoryRequestApplicationRepository.cs:line 99
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Services.Implements.InventoryRequestService.<PerformInventoryRequest>d__9.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 139
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<PerformInventoryRequest>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 167
+2023-12-10 22:37:12,891 [6] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+System.NotSupportedException: A second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at SELMs.Repositories.Implements.InventoryRequestApplicationRepository.<GetApplicationDetail>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\InventoryRequestApplicationRepository.cs:line 99
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Services.Implements.InventoryRequestService.<PerformInventoryRequest>d__9.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 139
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<PerformInventoryRequest>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 167
+2023-12-10 22:39:57,360 [9] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+System.NotSupportedException: A second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at SELMs.Repositories.Implements.InventoryRequestApplicationRepository.<GetApplicationDetail>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\InventoryRequestApplicationRepository.cs:line 99
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Services.Implements.InventoryRequestService.<PerformInventoryRequest>d__9.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 139
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<PerformInventoryRequest>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 167
+2023-12-10 22:41:48,017 [9] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+System.NotSupportedException: A second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at SELMs.Repositories.Implements.InventoryRequestApplicationRepository.<GetApplicationDetail>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\InventoryRequestApplicationRepository.cs:line 99
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Services.Implements.InventoryRequestService.<PerformInventoryRequest>d__9.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 139
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<PerformInventoryRequest>d__10.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 167
+2023-12-11 00:10:14,800 [11] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.InventoryRequestService.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 158
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 186
+2023-12-11 00:10:21,893 [13] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at SELMs.Services.Implements.InventoryRequestService.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 158
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 186
