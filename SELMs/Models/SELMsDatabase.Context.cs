@@ -32,8 +32,6 @@ namespace SELMs.Models
         public virtual DbSet<Equipment_Component> Equipment_Component { get; set; }
         public virtual DbSet<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
         public virtual DbSet<Equipment_Handover_Form_Detail> Equipment_Handover_Form_Detail { get; set; }
-        public virtual DbSet<Equipment_Import_Application> Equipment_Import_Application { get; set; }
-        public virtual DbSet<Equipment_Import_Application_Detail> Equipment_Import_Application_Detail { get; set; }
         public virtual DbSet<Equipment_Location_History> Equipment_Location_History { get; set; }
         public virtual DbSet<Equipment_Project_History> Equipment_Project_History { get; set; }
         public virtual DbSet<Equipment_Usage_History> Equipment_Usage_History { get; set; }
@@ -44,8 +42,6 @@ namespace SELMs.Models
         public virtual DbSet<Member_Location_History> Member_Location_History { get; set; }
         public virtual DbSet<Member_Project_History> Member_Project_History { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<Project_Investment_Cost_Application> Project_Investment_Cost_Application { get; set; }
-        public virtual DbSet<Project_Investment_Cost_Application_Detail> Project_Investment_Cost_Application_Detail { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }

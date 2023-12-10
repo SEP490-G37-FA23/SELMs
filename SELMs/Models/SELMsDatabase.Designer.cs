@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Models\SELMsDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Models\SELMsDatabase.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

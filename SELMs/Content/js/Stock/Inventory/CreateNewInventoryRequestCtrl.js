@@ -45,12 +45,14 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
     }
     $scope.LoadLocationsList();
     $scope.ResetNewInventory = function () {
-        $scope.requesterSearch = '';
+        $scope.performerSearch = '';
         $scope.NewInventory = {
-            requester: '',
-            location_id: 0
+            requester: username,
+            location_id: 0,
+            performer: '',
+            requesterSearch: fullname
 
-            }
+        }
     }
 
     $scope.ResetNewInventory();
@@ -66,13 +68,13 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
-    $scope.HandelMemberRequest = function (mb, NewInventory) {
-        NewInventory.requester = mb.user_code;
-        $scope.requesterSearch = mb.fullname;
+    $scope.HandelMemberPerformer = function (mb, NewInventory) {
+        NewInventory.performer = mb.user_code;
+        $scope.performerSearch = mb.fullname;
     }
     $scope.GetDetailLocation = function (location_id) {
-        new QRCode(document.getElementById('id_qrcode'), 'https://localhost:44335/Locations/LocationDetails/' + location_id);
-        var partialUrl = origin + '/api/v1/locations/detail/' + location_id;
+        console.log(location_id)
+        var partialUrl = origin + '/api/v1/locations/detail/' + parseInt(location_id);
         $http.post(partialUrl)
             .then(function (response) {
                 console.log(response.data);
@@ -80,9 +82,84 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
                 $scope.ListSubLocation = response.data.ListSubLocation;
                 $scope.ListProjectInLocation = response.data.ListProjectInLocation;
                 $scope.ListEquipmentInLocation = response.data.ListEquipmentInLocation;
+                console.log($scope.ListEquipmentInLocation);
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+
+    }
+    $scope.ListNewEquipmentInInventory = [];
+    $scope.LoadEquipmentsList = function (text) {
+        var data = {
+            username: username,
+            isadmin: isadmin,
+            role: role,
+            text: '',
+            text1: '',
+            text2: text,
+            text3: ''
+
+        }
+        $http.post(origin + '/api/v1/equipments', data).then(function (response) {
+            $scope.ListEquips = response.data;
+        });
+    }
+    $scope.HandelEquip = function (eq, item) {
+        item.system_equipment_code = eq.system_equipment_code;
+        item.standard_equipment_code = eq.standard_equipment_code;
+        item.equipment_name = eq.equipment_name;
+
+    }
+
+    $scope.HandleNewEquipInInventory = function (ListNewEquipmentInInventory) {
+        ListNewEquipmentInInventory.push({
+            system_equipment_code: '',
+            standard_equipment_code: '',
+            equipment_name: ''
+
+        })
+    }
+    $scope.DeleteNewEquipInInventory = function (ListNewEquipmentInInventory, index) {
+        ListNewEquipmentInInventory.splice(index, 1);
+    }
+
+    $scope.AddAllEquipmentLocation = function () {
+        $scope.ListNewEquipmentInInventory = [];
+        for (var i = 0; i < $scope.ListEquipmentInLocation.length; i++) {
+            var equipment = $scope.ListEquipmentInLocation[i];
+
+            // Extract properties from the current item in ListEquipmentInLocation
+            var newEquipment = {
+                system_equipment_code: equipment.system_equipment_code,
+                standard_equipment_code: equipment.standard_equipment_code,
+                equipment_name: equipment.equipment_name
+            };
+            $scope.ListNewEquipmentInInventory.push(newEquipment);
+        }
+        console.log($scope.ListNewEquipmentInInventory);
+    }
+
+    $scope.SaveNewInventoryRequest = function (NewInventory) {
+        var data = {
+            application: {
+                requester: NewInventory.requester,
+                performer: NewInventory.performer,
+                total_equipment: $scope.ListNewEquipmentInInventory.length,
+                status: false,
+                location_id: parseInt(NewInventory.location_id)
+            },
+            application_details:  $scope.ListNewEquipmentInInventory.map(function (item) {
+                    return item.system_equipment_code;
+                })
+        }
+        var partialUrl = origin + '/api/v1/inventory-request/new-application';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Thêm mới đơn kiểm kê thành công!');
+                $scope.ResetNewInventory();
+
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
-   
 });

@@ -5,91 +5,150 @@
 }
 <script src="~/Content/js/Stock/Inventory/CreateNewInventoryRequestCtrl.js"></script>
 <div ng-app="myApp" ng-controller="CreateNewInventoryRequestCtrl">
-    <h4 class="text-center">Đơn yêu cầu kiểm kê mới</h4>
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
+    <div id="notification" class="col-md-12"></div>
+    <div class="card">
 
-    <div class="row">
-        <div class="col-6">
-            <label class=" col-form-label">Phòng Lab</label>
-            <div>
-                <select ng-model="NewInventory.location_id" class="form-control" ng-change="GetDetailLocation(item.location_id);">
-                    <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
-                </select>
+        <h5 class="card-title">Đơn yêu cầu kiểm kê mới</h5>
+
+        <div class="row">
+            <div class="col-6">
+                <label class=" col-form-label">Người yêu cầu</label>
+                <div>
+                    <input type="text" class="form-control" ng-model="NewInventory.requesterSearch" readonly>
+                </div>
             </div>
-        </div>
-        <div class="col-6">
-            <label class=" col-form-label">Người Yêu Cầu</label>
-            <div>
-                <ng-form>
-                    <div class="form-member">
-                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="requesterSearch" ng-change="LoadMembersList(requesterSearch)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
-                        <input type="text" class="form-control" ng-model="NewInventory.requester" style="display:none">
-                    </div>
 
-                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
-                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMB">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class="bg-blue text-white">
-                                        <tr>
-                                            <th>Họ tên</th>
-                                            <th>Chức vụ</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr style="cursor:pointer" ng-mousedown="HandelMemberRequest(mb, NewInventory);" ng-repeat="mb in ListMembers">
-                                            <td>
-                                                {{mb.fullname }}
-                                            </td>
-                                            <td>{{mb.role_name }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <div class="col-6">
+                <label class=" col-form-label">Người thực hiện</label>
+                <div>
+                    <ng-form>
+                        <div class="form-member">
+                            <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="performerSearch" ng-change="LoadMembersList(performerSearch)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                            <input type="text" class="form-control" ng-model="NewInventory.performer" style="display:none">
+                        </div>
+
+                        <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                            <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMB">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-blue text-white">
+                                            <tr>
+                                                <th>Họ tên</th>
+                                                <th>Chức vụ</th>
+                                                <th>Chức vụ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="cursor:pointer" ng-mousedown="HandelMemberPerformer(mb, NewInventory);" ng-repeat="mb in ListMembers">
+                                                <td>
+                                                    {{mb.fullname }}
+                                                </td>
+                                                <td>{{mb.role_name }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </ng-form>
+                    </ng-form>
 
+                </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                <label class=" col-form-label">Phòng Lab</label>
+                <div>
+                    <select ng-model="NewInventory.location_id" class="form-control" ng-change="GetDetailLocation(NewInventory.location_id);">
+                        <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <label class=" col-form-label"></label>
+                <div>
+                    <button style="margin-top: 13px;" class="btn btn-primary" ng-click="AddAllEquipmentLocation()">Kiểm kê tất cả các thiết bị trong phòng LAB</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4 class="card-title text-center mb-3">Thiết bị kiểm kê</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            # {{ListEquipmentInLocation.length}}
+                        </th>
+                        <th scope="col">Mã hệ thống</th>
+                        <th scope="col">Mã chuẩn</th>
+                        <th scope="col">Tên thiết bị</th>
+                        <th scope="col">Tác vụ</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ListNewEquipmentInInventory">
+                        <td scope="row">{{$index+1}}  </td>
+                        <td scope="row">
+                            <ng-form>
+                                <div class="form-equip">
+                                    <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.system_equipment_code" ng-focus="showtableEquip = true" ng-blur="showtableEquip = false" required>
+                                </div>
+
+                                <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                    <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableEquip">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-blue text-white">
+                                                    <tr>
+                                                        <th>Mã hệ thống</th>
+                                                        <th>Mã chuẩn</th>
+                                                        <th>Tên thiết bị</th>
+                                                        <th>
+                                                            Tình trạng thiết bị
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="cursor:pointer" ng-mousedown="HandelEquip(eq, item);" ng-repeat="eq in ListEquipmentInLocation| filter:item.system_equipment_code">
+                                                        <td>
+                                                            {{eq.system_equipment_code}}
+                                                        </td>
+                                                        <td>{{eq.standard_equipment_code}}</td>
+                                                        <td>{{eq.equipment_name}}</td>
+                                                        <td>{{eq.usage_status}}</td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </ng-form>
+                        </td>
+                        <td scope="row">
+                            <input ng-model="item.standard_equipment_code" class="form-control" readonly />
+                        </td>
+                        <td scope="row">
+                            <input ng-model="item.equipment_name" class="form-control" readonly />
+                        </td>
+                        <td>  <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteNewEquipInInventory(ListNewEquipmentInInventory,$index)"></i></td>
+                    </tr>
+                    <tr><td colspan="5" ng-click="HandleNewEquipInInventory(ListNewEquipmentInInventory)" class="text-center">Thêm mới thiết bị</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; ">
+            <button type="button" class="btn btn-primary ms-2" ng-click="SaveNewInventoryRequest(NewInventory)">Tạo yêu cầu</button>
+        </div>
     </div>
-    <div class="mt-5">
-        <h4 class="card-title text-center mb-3">Thiết bị kiểm kê</h4>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Mã hệ thống</th>
-                    <th scope="col">Mã chuẩn</th>
-                    <th scope="col">Tên thiết bị</th>
-                    <th scope="col">Vị trí</th>
-                    <th scope="col">Quản lý</th>
-                    <th scope="col">Từ ngày</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item in filtered = (ListEquipmentInLocation |filter: {equipment_name:equip_search})">
-                    <td scope="row">{{$index+1}}</td>
-                    <td scope="row">{{item.system_equipment_code}}</td>
-                    <td scope="row">{{item.standard_equipment_code}}</td>
-                    <td scope="row">{{item.equipment_name}}</td>
-                    <td scope="row">{{item.location_desciption}}</td>
-                    <td scope="row">{{item.fullname}}</td>
-                    <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
-
-                    <td class="text-center">
-                        <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
-                        <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
-
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-    <div style="display: flex; justify-content: center; align-items: center; ">
-        <button type="button" class="btn btn-primary ms-2">Tạo đơn</button>
-    </div>
 </div>
-

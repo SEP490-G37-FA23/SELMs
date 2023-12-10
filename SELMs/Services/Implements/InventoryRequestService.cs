@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using SELMs.Api.DTOs.Inventory;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SELMs.Services.Implements
 {
@@ -29,20 +31,23 @@ namespace SELMs.Services.Implements
             return result;
         }
 
-        public async Task<dynamic> SaveApplication(Inventory_Request_Application application, List<Inventory_Request_Application_Detail> applicationDetails)
+        public async Task<dynamic> SaveApplication(Inventory_Request_Application application, List<string> applicationDetails)
         {
             string applicationCode = GenerateApplicationCode();
             application.ir_application_code = applicationCode;
             application.request_date = DateTime.Now.ToString();
             application.status = false;
-            Attachment attachment = new Attachment();
-            foreach (Inventory_Request_Application_Detail item in applicationDetails)
-            {
-                item.ir_application_code = applicationCode;
-            }
-
             application = repository.SaveApplication(application);
-            repository.SaveApplicationDetails(applicationDetails);
+            Attachment attachment = new Attachment();
+            foreach (string item in applicationDetails)
+            {
+                Inventory_Request_Application_Detail detail = new Inventory_Request_Application_Detail();
+                detail.ir_application_code = applicationCode;
+                detail.system_equipment_code = item;
+                detail.is_perform = false;
+                repository.SaveApplicationDetail(detail);
+            }            
+            
             return application;
         }
 
@@ -125,6 +130,19 @@ namespace SELMs.Services.Implements
                 extension = Path.GetExtension(file.FileName)
             };
             return result;
+        }
+
+        public async  Task<dynamic> PerformInventoryRequest(PerformInventoryDTO perform)
+        {
+            foreach (PerformInventoryDetailDTO item in perform.listPerform)
+            {
+                Inventory_Request_Application_Detail detail = await repository.GetApplicationDetail(item.application_detail_id);
+                detail.inventory_date = DateTime.Now;
+                detail.actual_usage_status = item.actual_usage_status;
+                detail.is_perform = item.is_perform;
+                 repository.UpdateApplicationDetail(detail);
+            }
+            return "Thành công";
         }
     }
 }

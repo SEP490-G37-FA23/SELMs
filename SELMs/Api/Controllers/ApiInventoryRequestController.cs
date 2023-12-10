@@ -16,6 +16,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using SELMs.Api.DTOs.Inventory;
 
 namespace SELMs.Api.Controllers
 {
@@ -30,7 +31,7 @@ namespace SELMs.Api.Controllers
 
         #region Get application
         [HttpPost]
-        [Route("inventory-request/")]
+        [Route("inventory-request")]
         public async Task<IHttpActionResult> GetIRAList(Argument arg)
         {
             try
@@ -48,6 +49,28 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Get application detail-in-location
+        [HttpPost]
+        [Route("inventory/detail-in-location/{location_id}")]
+        public async Task<IHttpActionResult> GetDetailIRAListInLocation(int location_id,Argument arg)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = repository.GetDetailIRAListInLocation(location_id,arg);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
 
         #region Get application by id
         [HttpGet]
@@ -78,8 +101,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 Inventory_Request_Application application = mapper.Map<Inventory_Request_Application>(applicationRequest.application);
-                List<Inventory_Request_Application_Detail> details = mapper.Map<List<Inventory_Request_Application_Detail>>(applicationRequest.application_details);
-                service.SaveApplication(application, details);
+                service.SaveApplication(application, applicationRequest.application_details);
                 return Ok();
             }
             catch (Exception ex)
@@ -124,6 +146,25 @@ namespace SELMs.Api.Controllers
                 User user = mapper.Map<User>(member);
                 dynamic result = service.ConfirmApplication(id, user);
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Perform application
+        [HttpPost]
+        [Route("inventory-request/perform")]
+        public async Task<dynamic> PerformInventoryRequest([FromBody] PerformInventoryDTO perform)
+        {
+            try
+            {
+                return await service.PerformInventoryRequest(perform);
             }
             catch (Exception ex)
             {
