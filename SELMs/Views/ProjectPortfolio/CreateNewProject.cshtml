@@ -119,7 +119,7 @@
                                                     <td>
                                                         <ng-form>
                                                             <div class="form-member-project">
-                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(item.text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
                                                                 <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
                                                             </div>
 
@@ -191,11 +191,11 @@
                                                     <td>
                                                         <ng-form>
                                                             <div class="form-member-project">
-                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.textEquip" ng-change="LoadEquipmentsList(textEquip)" ng-focus="showtableEquipPj = true" ng-blur="showtableEquipPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.textEquip" ng-change="LoadEquipmentsList(item.textEquip)" ng-focus="showtableEquipPj = true" ng-blur="showtableEquipPj = false" ng-model-options="{debounce:700}" required>
                                                                 <input type="text" class="form-control" ng-model="item.system_equipment_code" style="display:none">
                                                             </div>
 
-                                                            <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                                            <div class="input-group-btn" style="position:relative;width:200%;display:inline-block">
                                                                 <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableEquipPj">
                                                                     <div class="table-responsive">
                                                                         <table class="table">

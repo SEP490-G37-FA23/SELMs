@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using SELMs.Api.DTOs;
 using SELMs.Models;
+using SELMs.Models.BusinessModel;
 
 namespace SELMs.App_Start
 {
@@ -46,13 +47,12 @@ namespace SELMs.App_Start
 
                 //Configuring Project and ProjectDTO
                 cfg.CreateMap<ProjectDTO, Project>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)))
-                .ForMember(des => des.start_date, act => act.MapFrom(src => DateTime.Parse(src.start_date)))
-                .ForMember(des => des.end_date, act => act.MapFrom(src => DateTime.Parse(src.end_date)))
+              
+                .ForMember(des => des.start_date, act => act.MapFrom(src => HandleDateTime.formatDate(src.start_date)))
+                .ForMember(des => des.end_date, act => act.MapFrom(src => HandleDateTime.formatDate(src.end_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 cfg.CreateMap<Project, ProjectDTO>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()))
                 .ForMember(des => des.start_date, act => act.MapFrom(src => src.start_date.ToString()))
                 .ForMember(des => des.end_date, act => act.MapFrom(src => src.end_date.ToString()))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
@@ -75,16 +75,7 @@ namespace SELMs.App_Start
                 //Configuring EquipmentAllocationApplicationDetail and EquipmentAllocationApplicationDetailDTO
                 cfg.CreateMap<EquipmentAllocationApplicationDetailDTO, Equipment_Allocation_Application_Detail>().ReverseMap();
 
-                //Configuring EquipmentImportApplication and EquipmentImportApplicationDTO
-                cfg.CreateMap<EquipmentImportApplicationDTO, Equipment_Import_Application>()
-                .ForMember(des => des.application_date, act => act.MapFrom(src => DateTime.Parse(src.application_date)))
-                .ForMember(des => des.approved_date, act => act.MapFrom(src => DateTime.Parse(src.approved_date)))
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
-
-                cfg.CreateMap<Equipment_Import_Application, EquipmentImportApplicationDTO>()
-                .ForMember(des => des.application_date, act => act.MapFrom(src => src.application_date.ToString()))
-                .ForMember(des => des.approved_date, act => act.MapFrom(src => src.approved_date.ToString()))
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+               
 
                 //Configuring Equipment_Handover_Form and EquipmentHandoverFormDTO
                 cfg.CreateMap<EquipmentHandoverFormDTO, Equipment_Handover_Form>()
@@ -104,8 +95,7 @@ namespace SELMs.App_Start
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Equipment_Import_Application_Detail and EquipmentImportApplicationDetailDTO
-                cfg.CreateMap<EquipmentImportApplicationDetailDTO, Equipment_Import_Application_Detail>().ReverseMap()
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+             
 
                 //Configuring Equipment_Location_History and EquipmentLocationHistoryDTO
                 cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap()

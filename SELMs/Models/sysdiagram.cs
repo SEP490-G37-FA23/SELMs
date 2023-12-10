@@ -12,12 +12,12 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Project_Investment_Cost_Application_Detail
+    public partial class sysdiagram
     {
-        public int application_detail_id { get; set; }
-        public string pic_application_code { get; set; }
-        public string explaination { get; set; }
-        public Nullable<decimal> amount { get; set; }
-        public string notes { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -42,10 +42,12 @@ namespace SELMs.Repositories.Implements
         public dynamic GetProjectList(Argument arg)
         {
             dynamic projects = null;
-            projects = db.Database.Connection.QueryAsync<dynamic>("Proc_GetProjectList", new
+            projects = db.Database.Connection.QueryAsync<dynamic>("Proc_GetAllProjectList", new
             {
                 username = arg.username,
-                project_name = arg.text
+                project_name = arg.project_name,
+                manager_name = arg.manager_name,
+                location_name = arg.location_name
             }
                 , commandType: CommandType.StoredProcedure);
             return projects;
