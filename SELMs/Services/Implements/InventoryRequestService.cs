@@ -17,8 +17,8 @@ namespace SELMs.Services.Implements
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
         public async Task<ApplicationModel> GetApplication(int id)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
-            List<Inventory_Request_Application> applicationDetails = repository.GetApplicationDetailList(application.ir_application_code);
+            Inventory_Request_Application application = await repository.GetApplication(id);
+            List<Inventory_Request_Application> applicationDetails = await repository.GetApplicationDetailList(application.ir_application_code);
             //Attachment attachment = repository.GetApplicationAttachment(application.application_id);
             ApplicationModel result = new ApplicationModel()
             {
@@ -71,7 +71,7 @@ namespace SELMs.Services.Implements
 
         public async Task<dynamic> ConfirmApplication(int id, User member)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
+            Inventory_Request_Application application = await repository.GetApplication(id);
             if (application != null)
             {
                 application.status = true;
@@ -84,7 +84,7 @@ namespace SELMs.Services.Implements
 
         public async Task CancelApplication(int id)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
+            Inventory_Request_Application application = await repository.GetApplication(id);
             if (application != null)
             {
                 repository.DeleteApplication(id);
