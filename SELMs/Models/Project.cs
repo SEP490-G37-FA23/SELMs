@@ -15,6 +15,7 @@ namespace SELMs.Models
     public partial class Project
     {
         public int project_id { get; set; }
+        public string project_code { get; set; }
         public string project_name { get; set; }
         public string acronym { get; set; }
         public string description { get; set; }

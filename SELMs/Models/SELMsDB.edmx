@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SELMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SELMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SELMs.dbo.Application_Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Application_Attachment">
@@ -52,7 +52,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="serial_no" Type="varchar" MaxLength="64" />
           <Property Name="create_date" Type="date" />
           <Property Name="unit" Type="nvarchar" MaxLength="25" />
-          <Property Name="specification" Type="nvarchar(max)" />
+          <Property Name="specification" Type="nvarchar" MaxLength="100" />
           <Property Name="responsibler" Type="varchar" MaxLength="64" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="type_equipment" Type="varchar" MaxLength="64" />
@@ -133,6 +133,41 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="equipment_specification" Type="nvarchar" MaxLength="500" />
           <Property Name="unit" Type="nvarchar" MaxLength="20" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
+          <Property Name="note" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Equipment_Import_Application">
+          <Key>
+            <PropertyRef Name="application_id" />
+          </Key>
+          <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ei_application_code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="application_date" Type="datetime" />
+          <Property Name="created_by" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="supplier" Type="nvarchar" MaxLength="500" />
+          <Property Name="total_equipments" Type="int" />
+          <Property Name="total_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="desciption" Type="nvarchar" MaxLength="500" />
+          <Property Name="note" Type="nvarchar" MaxLength="500" />
+          <Property Name="status" Type="varchar" MaxLength="64" />
+          <Property Name="approved_date" Type="datetime" />
+          <Property Name="approver" Type="varchar" MaxLength="64" />
+          <Property Name="approver_notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Equipment_Import_Application_Detail">
+          <Key>
+            <PropertyRef Name="application_detail_id" />
+          </Key>
+          <Property Name="application_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ei_application_code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="standard_equipment_code" Type="varchar" MaxLength="64" />
+          <Property Name="equipment_name" Type="nvarchar" MaxLength="500" />
+          <Property Name="equipment_specification" Type="nvarchar" MaxLength="500" />
+          <Property Name="unit" Type="nvarchar" MaxLength="20" />
+          <Property Name="category_code" Type="varchar" MaxLength="64" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Equipment_Location_History">
@@ -242,6 +277,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="project_id" />
           </Key>
           <Property Name="project_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_code" Type="varchar" MaxLength="128" />
           <Property Name="project_name" Type="nvarchar" MaxLength="256" />
           <Property Name="acronym" Type="varchar" MaxLength="64" />
           <Property Name="description" Type="nvarchar" MaxLength="500" />
@@ -253,6 +289,36 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="bit" Nullable="false" />
           <Property Name="location_id" Type="int" />
         </EntityType>
+        <EntityType Name="Project_Investment_Cost_Application">
+          <Key>
+            <PropertyRef Name="application_id" />
+          </Key>
+          <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pic_application_code" Type="varchar" MaxLength="64" />
+          <Property Name="application_date" Type="date" />
+          <Property Name="project_id" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="64" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="notes" Type="nvarchar" MaxLength="564" />
+          <Property Name="creater" Type="varchar" MaxLength="64" />
+          <Property Name="create_date" Type="date" />
+          <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="attachment_path" Type="nvarchar" MaxLength="500" />
+          <Property Name="status" Type="varchar" MaxLength="64" />
+          <Property Name="approve_date" Type="date" />
+          <Property Name="approver" Type="varchar" MaxLength="64" />
+          <Property Name="approver_notes" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Project_Investment_Cost_Application_Detail">
+          <Key>
+            <PropertyRef Name="application_detail_id" />
+          </Key>
+          <Property Name="application_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pic_application_code" Type="varchar" MaxLength="64" />
+          <Property Name="explaination" Type="nvarchar" MaxLength="256" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="notes" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="role_id" />
@@ -261,16 +327,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="role_code" Type="varchar" MaxLength="128" />
           <Property Name="role_name" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -281,7 +337,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="username" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="fullname" Type="nvarchar" MaxLength="564" Nullable="false" />
-          <Property Name="role_code" Type="varchar" MaxLength="128" />
+          <Property Name="role_code" Type="varchar" MaxLength="64" />
           <Property Name="is_admin" Type="bit" />
           <Property Name="date_of_birth" Type="date" />
           <Property Name="hotline" Type="varchar" MaxLength="20" />
@@ -304,6 +360,8 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment_Import_Application" EntityType="Self.Equipment_Import_Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment_Import_Application_Detail" EntityType="Self.Equipment_Import_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" Schema="dbo" store:Type="Tables" />
@@ -314,8 +372,9 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -336,11 +395,37 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
     FROM [dbo].[Attachment] AS [Attachment]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SELMsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SELMsContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="SELMsModel.Category" />
+          <EntitySet Name="Equipments" EntityType="SELMsModel.Equipment" />
+          <EntitySet Name="Equipment_Allocation_Application" EntityType="SELMsModel.Equipment_Allocation_Application" />
+          <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="SELMsModel.Equipment_Allocation_Application_Detail" />
+          <EntitySet Name="Equipment_Component" EntityType="SELMsModel.Equipment_Component" />
+          <EntitySet Name="Equipment_Handover_Form" EntityType="SELMsModel.Equipment_Handover_Form" />
+          <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="SELMsModel.Equipment_Handover_Form_Detail" />
+          <EntitySet Name="Equipment_Import_Application" EntityType="SELMsModel.Equipment_Import_Application" />
+          <EntitySet Name="Equipment_Import_Application_Detail" EntityType="SELMsModel.Equipment_Import_Application_Detail" />
+          <EntitySet Name="Equipment_Location_History" EntityType="SELMsModel.Equipment_Location_History" />
+          <EntitySet Name="Equipment_Project_History" EntityType="SELMsModel.Equipment_Project_History" />
+          <EntitySet Name="Equipment_Usage_History" EntityType="SELMsModel.Equipment_Usage_History" />
+          <EntitySet Name="Images" EntityType="SELMsModel.Image" />
+          <EntitySet Name="Inventory_Request_Application" EntityType="SELMsModel.Inventory_Request_Application" />
+          <EntitySet Name="Inventory_Request_Application_Detail" EntityType="SELMsModel.Inventory_Request_Application_Detail" />
+          <EntitySet Name="Locations" EntityType="SELMsModel.Location" />
+          <EntitySet Name="Member_Location_History" EntityType="SELMsModel.Member_Location_History" />
+          <EntitySet Name="Member_Project_History" EntityType="SELMsModel.Member_Project_History" />
+          <EntitySet Name="Projects" EntityType="SELMsModel.Project" />
+          <EntitySet Name="Project_Investment_Cost_Application" EntityType="SELMsModel.Project_Investment_Cost_Application" />
+          <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="SELMsModel.Project_Investment_Cost_Application_Detail" />
+          <EntitySet Name="Roles" EntityType="SELMsModel.Role" />
+          <EntitySet Name="Users" EntityType="SELMsModel.User" />
+          <EntitySet Name="Application_Attachment" EntityType="SELMsModel.Application_Attachment" />
+          <EntitySet Name="Attachments" EntityType="SELMsModel.Attachment" />
+        </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
@@ -364,7 +449,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="serial_no" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Precision="0" />
           <Property Name="unit" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="specification" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="responsibler" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="type_equipment" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
@@ -379,9 +464,9 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="application_id" />
           </Key>
           <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ea_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ea_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="application_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="creater" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="total_equipments" Type="Int32" Nullable="false" />
           <Property Name="notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="desciption" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -412,7 +497,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="system_equipment_code_parent" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="system_equipment_code_parent" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="system_equipment_code_component" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form">
@@ -420,7 +505,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="form_id" />
           </Key>
           <Property Name="form_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="form_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="form_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -445,6 +530,41 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="equipment_specification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Equipment_Import_Application">
+          <Key>
+            <PropertyRef Name="application_id" />
+          </Key>
+          <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ei_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="application_date" Type="DateTime" Precision="3" />
+          <Property Name="created_by" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="supplier" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="total_equipments" Type="Int32" />
+          <Property Name="total_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="desciption" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="approved_date" Type="DateTime" Precision="3" />
+          <Property Name="approver" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="approver_notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Equipment_Import_Application_Detail">
+          <Key>
+            <PropertyRef Name="application_detail_id" />
+          </Key>
+          <Property Name="application_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ei_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="system_equipment_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="standard_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="equipment_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="equipment_specification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Equipment_Location_History">
@@ -474,7 +594,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="checkin" Type="DateTime" Precision="3" />
           <Property Name="checkout" Type="DateTime" Precision="3" />
@@ -496,10 +616,10 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="application_id" />
           </Key>
           <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ir_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="requester" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="request_date" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="performer" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ir_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="requester" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="request_date" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="performer" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="total_equipment" Type="Int32" Nullable="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="type_inventory" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
@@ -554,6 +674,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="project_id" />
           </Key>
           <Property Name="project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="acronym" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -565,6 +686,36 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="location_id" Type="Int32" />
         </EntityType>
+        <EntityType Name="Project_Investment_Cost_Application">
+          <Key>
+            <PropertyRef Name="application_id" />
+          </Key>
+          <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pic_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="application_date" Type="DateTime" Precision="0" />
+          <Property Name="project_id" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="564" FixedLength="false" Unicode="true" />
+          <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="0" />
+          <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="attachment_path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="approve_date" Type="DateTime" Precision="0" />
+          <Property Name="approver" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="approver_notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Project_Investment_Cost_Application_Detail">
+          <Key>
+            <PropertyRef Name="application_detail_id" />
+          </Key>
+          <Property Name="application_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pic_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="explaination" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="notes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="role_id" />
@@ -574,26 +725,16 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="role_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="user_id" />
           </Key>
           <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fullname" Type="String" MaxLength="564" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="user_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" Nullable="false" MaxLength="564" FixedLength="false" Unicode="true" />
+          <Property Name="role_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="is_admin" Type="Boolean" />
           <Property Name="date_of_birth" Type="DateTime" Precision="0" />
           <Property Name="hotline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -628,30 +769,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="SELMsContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Equipments" EntityType="Self.Equipment" />
-          <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" />
-          <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="Self.Equipment_Allocation_Application_Detail" />
-          <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" />
-          <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" />
-          <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" />
-          <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" />
-          <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" />
-          <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" />
-          <EntitySet Name="Images" EntityType="Self.Image" />
-          <EntitySet Name="Inventory_Request_Application" EntityType="Self.Inventory_Request_Application" />
-          <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" />
-          <EntitySet Name="Locations" EntityType="Self.Location" />
-          <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" />
-          <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" />
-          <EntitySet Name="Projects" EntityType="Self.Project" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
-          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -661,309 +778,368 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="SELMsModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="category_id" ColumnName="category_id" />
-                <ScalarProperty Name="category_code" ColumnName="category_code" />
-                <ScalarProperty Name="category_name" ColumnName="category_name" />
-                <ScalarProperty Name="desciption" ColumnName="desciption" />
-                <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="category_level" ColumnName="category_level" />
                 <ScalarProperty Name="category_parent_id" ColumnName="category_parent_id" />
+                <ScalarProperty Name="category_level" ColumnName="category_level" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="desciption" ColumnName="desciption" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipments">
             <EntityTypeMapping TypeName="SELMsModel.Equipment">
               <MappingFragment StoreEntitySet="Equipment">
-                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
-                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
-                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="specification" ColumnName="specification" />
-                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
-                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
-                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="category_code" ColumnName="category_code" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
                 <ScalarProperty Name="is_available" ColumnName="is_available" />
+                <ScalarProperty Name="is_integration" ColumnName="is_integration" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="type_equipment" ColumnName="type_equipment" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="responsibler" ColumnName="responsibler" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="serial_no" ColumnName="serial_no" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Allocation_Application">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Allocation_Application">
               <MappingFragment StoreEntitySet="Equipment_Allocation_Application">
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-                <ScalarProperty Name="ea_application_code" ColumnName="ea_application_code" />
-                <ScalarProperty Name="application_date" ColumnName="application_date" />
-                <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="total_equipments" ColumnName="total_equipments" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="desciption" ColumnName="desciption" />
-                <ScalarProperty Name="approver_note" ColumnName="approver_note" />
-                <ScalarProperty Name="approved_date" ColumnName="approved_date" />
-                <ScalarProperty Name="approver" ColumnName="approver" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="approver" ColumnName="approver" />
+                <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+                <ScalarProperty Name="approver_note" ColumnName="approver_note" />
+                <ScalarProperty Name="desciption" ColumnName="desciption" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="total_equipments" ColumnName="total_equipments" />
+                <ScalarProperty Name="creater" ColumnName="creater" />
+                <ScalarProperty Name="application_date" ColumnName="application_date" />
+                <ScalarProperty Name="ea_application_code" ColumnName="ea_application_code" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Allocation_Application_Detail">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Allocation_Application_Detail">
               <MappingFragment StoreEntitySet="Equipment_Allocation_Application_Detail">
-                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
-                <ScalarProperty Name="ea_application_code" ColumnName="ea_application_code" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
-                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
-                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
-                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="ea_application_code" ColumnName="ea_application_code" />
+                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Component">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Component">
               <MappingFragment StoreEntitySet="Equipment_Component">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="system_equipment_code_parent" ColumnName="system_equipment_code_parent" />
                 <ScalarProperty Name="system_equipment_code_component" ColumnName="system_equipment_code_component" />
+                <ScalarProperty Name="system_equipment_code_parent" ColumnName="system_equipment_code_parent" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Handover_Form">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Handover_Form">
               <MappingFragment StoreEntitySet="Equipment_Handover_Form">
-                <ScalarProperty Name="form_id" ColumnName="form_id" />
-                <ScalarProperty Name="form_code" ColumnName="form_code" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="handover_date" ColumnName="handover_date" />
-                <ScalarProperty Name="handover" ColumnName="handover" />
-                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
-                <ScalarProperty Name="receipter" ColumnName="receipter" />
-                <ScalarProperty Name="handover_note" ColumnName="handover_note" />
-                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
+                <ScalarProperty Name="handover_note" ColumnName="handover_note" />
+                <ScalarProperty Name="receipter" ColumnName="receipter" />
+                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+                <ScalarProperty Name="handover" ColumnName="handover" />
+                <ScalarProperty Name="handover_date" ColumnName="handover_date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="creater" ColumnName="creater" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="form_code" ColumnName="form_code" />
+                <ScalarProperty Name="form_id" ColumnName="form_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Handover_Form_Detail">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Handover_Form_Detail">
               <MappingFragment StoreEntitySet="Equipment_Handover_Form_Detail">
-                <ScalarProperty Name="form_detail_id" ColumnName="form_detail_id" />
-                <ScalarProperty Name="form_code" ColumnName="form_code" />
-                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
-                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
                 <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="usage_status" ColumnName="usage_status" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
+                <ScalarProperty Name="form_code" ColumnName="form_code" />
+                <ScalarProperty Name="form_detail_id" ColumnName="form_detail_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment_Import_Application">
+            <EntityTypeMapping TypeName="SELMsModel.Equipment_Import_Application">
+              <MappingFragment StoreEntitySet="Equipment_Import_Application">
+                <ScalarProperty Name="approver_notes" ColumnName="approver_notes" />
+                <ScalarProperty Name="approver" ColumnName="approver" />
+                <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="desciption" ColumnName="desciption" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="total_equipments" ColumnName="total_equipments" />
+                <ScalarProperty Name="supplier" ColumnName="supplier" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="application_date" ColumnName="application_date" />
+                <ScalarProperty Name="ei_application_code" ColumnName="ei_application_code" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment_Import_Application_Detail">
+            <EntityTypeMapping TypeName="SELMsModel.Equipment_Import_Application_Detail">
+              <MappingFragment StoreEntitySet="Equipment_Import_Application_Detail">
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="category_code" ColumnName="category_code" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="ei_application_code" ColumnName="ei_application_code" />
+                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Location_History">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Location_History">
               <MappingFragment StoreEntitySet="Equipment_Location_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="from_date" ColumnName="from_date" />
-                <ScalarProperty Name="to_date" ColumnName="to_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="to_date" ColumnName="to_date" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Project_History">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Project_History">
               <MappingFragment StoreEntitySet="Equipment_Project_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="system_equiment_code" ColumnName="system_equiment_code" />
-                <ScalarProperty Name="from_date" ColumnName="from_date" />
-                <ScalarProperty Name="to_date" ColumnName="to_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="to_date" ColumnName="to_date" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="system_equiment_code" ColumnName="system_equiment_code" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Usage_History">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Usage_History">
               <MappingFragment StoreEntitySet="Equipment_Usage_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="checkin" ColumnName="checkin" />
-                <ScalarProperty Name="checkout" ColumnName="checkout" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
                 <ScalarProperty Name="note_checkout" ColumnName="note_checkout" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="checkout" ColumnName="checkout" />
+                <ScalarProperty Name="checkin" ColumnName="checkin" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="SELMsModel.Image">
               <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="image_id" ColumnName="image_id" />
-                <ScalarProperty Name="image_name" ColumnName="image_name" />
-                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="image_name" ColumnName="image_name" />
+                <ScalarProperty Name="image_id" ColumnName="image_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_Request_Application">
             <EntityTypeMapping TypeName="SELMsModel.Inventory_Request_Application">
               <MappingFragment StoreEntitySet="Inventory_Request_Application">
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-                <ScalarProperty Name="ir_application_code" ColumnName="ir_application_code" />
-                <ScalarProperty Name="requester" ColumnName="requester" />
-                <ScalarProperty Name="request_date" ColumnName="request_date" />
-                <ScalarProperty Name="performer" ColumnName="performer" />
-                <ScalarProperty Name="total_equipment" ColumnName="total_equipment" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="type_inventory" ColumnName="type_inventory" />
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="type_inventory" ColumnName="type_inventory" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="total_equipment" ColumnName="total_equipment" />
+                <ScalarProperty Name="performer" ColumnName="performer" />
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+                <ScalarProperty Name="requester" ColumnName="requester" />
+                <ScalarProperty Name="ir_application_code" ColumnName="ir_application_code" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventory_Request_Application_Detail">
             <EntityTypeMapping TypeName="SELMsModel.Inventory_Request_Application_Detail">
               <MappingFragment StoreEntitySet="Inventory_Request_Application_Detail">
-                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
-                <ScalarProperty Name="ir_application_code" ColumnName="ir_application_code" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="inventory_results" ColumnName="inventory_results" />
-                <ScalarProperty Name="actual_usage_status" ColumnName="actual_usage_status" />
-                <ScalarProperty Name="inventory_date" ColumnName="inventory_date" />
                 <ScalarProperty Name="is_perform" ColumnName="is_perform" />
+                <ScalarProperty Name="inventory_date" ColumnName="inventory_date" />
+                <ScalarProperty Name="actual_usage_status" ColumnName="actual_usage_status" />
+                <ScalarProperty Name="inventory_results" ColumnName="inventory_results" />
+                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
+                <ScalarProperty Name="ir_application_code" ColumnName="ir_application_code" />
+                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="SELMsModel.Location">
               <MappingFragment StoreEntitySet="Location">
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="location_code" ColumnName="location_code" />
-                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
-                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
-                <ScalarProperty Name="location_level" ColumnName="location_level" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="location_level" ColumnName="location_level" />
+                <ScalarProperty Name="parent_location_id" ColumnName="parent_location_id" />
+                <ScalarProperty Name="location_desciption" ColumnName="location_desciption" />
+                <ScalarProperty Name="location_code" ColumnName="location_code" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Member_Location_History">
             <EntityTypeMapping TypeName="SELMsModel.Member_Location_History">
               <MappingFragment StoreEntitySet="Member_Location_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Member_Project_History">
             <EntityTypeMapping TypeName="SELMsModel.Member_Project_History">
               <MappingFragment StoreEntitySet="Member_Project_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="SELMsModel.Project">
               <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="project_name" ColumnName="project_name" />
-                <ScalarProperty Name="acronym" ColumnName="acronym" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="manager" ColumnName="manager" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="creater" ColumnName="creater" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="acronym" ColumnName="acronym" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="project_code" ColumnName="project_code" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Investment_Cost_Application">
+            <EntityTypeMapping TypeName="SELMsModel.Project_Investment_Cost_Application">
+              <MappingFragment StoreEntitySet="Project_Investment_Cost_Application">
+                <ScalarProperty Name="approver_notes" ColumnName="approver_notes" />
+                <ScalarProperty Name="approver" ColumnName="approver" />
+                <ScalarProperty Name="approve_date" ColumnName="approve_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="attachment_path" ColumnName="attachment_path" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="application_date" ColumnName="application_date" />
+                <ScalarProperty Name="pic_application_code" ColumnName="pic_application_code" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Investment_Cost_Application_Detail">
+            <EntityTypeMapping TypeName="SELMsModel.Project_Investment_Cost_Application_Detail">
+              <MappingFragment StoreEntitySet="Project_Investment_Cost_Application_Detail">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="explaination" ColumnName="explaination" />
+                <ScalarProperty Name="pic_application_code" ColumnName="pic_application_code" />
+                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="SELMsModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="role_id" ColumnName="role_id" />
-                <ScalarProperty Name="role_code" ColumnName="role_code" />
-                <ScalarProperty Name="role_name" ColumnName="role_name" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SELMsModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+                <ScalarProperty Name="role_code" ColumnName="role_code" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SELMsModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="role_code" ColumnName="role_code" />
-                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="hotline" ColumnName="hotline" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="avatar_img" ColumnName="avatar_img" />
-                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
-                <ScalarProperty Name="resignation_date" ColumnName="resignation_date" />
-                <ScalarProperty Name="work_term" ColumnName="work_term" />
-                <ScalarProperty Name="skill" ColumnName="skill" />
-                <ScalarProperty Name="job_description" ColumnName="job_description" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="job_description" ColumnName="job_description" />
+                <ScalarProperty Name="skill" ColumnName="skill" />
+                <ScalarProperty Name="work_term" ColumnName="work_term" />
+                <ScalarProperty Name="resignation_date" ColumnName="resignation_date" />
+                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
+                <ScalarProperty Name="avatar_img" ColumnName="avatar_img" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="hotline" ColumnName="hotline" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="role_code" ColumnName="role_code" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Application_Attachment">
             <EntityTypeMapping TypeName="SELMsModel.Application_Attachment">
               <MappingFragment StoreEntitySet="Application_Attachment">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="application_type" ColumnName="application_type" />
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
                 <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
+                <ScalarProperty Name="application_type" ColumnName="application_type" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attachments">
             <EntityTypeMapping TypeName="SELMsModel.Attachment">
               <MappingFragment StoreEntitySet="Attachment">
-                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
