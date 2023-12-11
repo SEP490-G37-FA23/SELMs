@@ -3,107 +3,77 @@
     ViewBag.Title = "PerformInventoryEquipmentsRequest";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="~/Content/js/Stock/Inventory/ResultInventoryRequestCtrl.js"></script>
+<div ng-app="myApp" ng-controller="ResultInventoryRequestCtrl">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
+    <div id="notification" class="col-md-12"></div>
+    <div class="card">
+        <section class="section">
+            <h4 class="card-title">Kết quả kiểm kê</h4>
+          
+            <form class="mt-5">
+
+                <div class="card-body">
+                    <table class="table table-bordered mt-3">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã hệ thống</th>
+                                <th>Mã chuẩn</th>
+                                <th>Tên thiết bị</th>
+                                <th>Vị trí</th>
+                                <th>Trạng thái</th>
+                                <th>Người thực hiện</th>
+                                <th>Ngày thực hiện</th>
+                                <th>Tình trạng thực tế</th>
+                              
+                                <th class="text-center">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input placeholder="Search..." ng-model="itemSearch" style="width:90%" class="form-control">
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="max-width:250px"><button class="btn btn-warning" ng-click="UpdateUsageEquip()">Cập nhật trạng thái thiết bị đã chọn</button></td>
+
+                            </tr>
+
+                            <tr ng-repeat="item in ListResultInventory|filter: itemSearch">
+                                <th>{{$index + 1}}</th>
+                                <td>{{item.system_equipment_code}}</td>
+                                <td>{{item.standard_equipment_code}}</td>
+                                <td>{{item.equipment_name}}</td>
+                                <td>{{item.location_code}}</td>
+                                <td>{{item.usage_status}}</td>
+                                <td>{{item.performer_name}}</td>
+                                <td>{{item.inventory_date|date:'dd/MM/yyyy'}}</td>
+                                <td>
+                                    {{item.actual_usage_status}}
+                                </td>
+                                <td class="text-center"><input type="checkbox" ng-model="item.selected" ng-change="SelectEquip(item)"/></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </form>
+        </section>
 
 
-<section class="section">
-    <h4 class="text-center">Kết quả kiểm kê</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a>Kết quả kiểm kê</a></li>
-        </ol>
-    </nav>
-    <form class="mt-5">
-
-        <div class="card-body">
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Mã hệ thống</th>
-                        <th>Mã chuẩn</th>
-                        <th>Tên thiết bị</th>
-                        <th>Đơn vị tính</th>
-                        <th>SerieNo</th>
-                        <th>Loại thiết bị</th>
-                        <th>Nhóm thiết bị</th>
-                        <th>Vị trí</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày yêu cầu</th>
-                        <th>Tình trạng thực tế</th>
-                        <th>Tác vụ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <td>
-                            <input placeholder="Search..." style="width:90%">
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><textarea></textarea></td>
-                        <td><button class="btn btn-primary"><i class="far fa-edit"></i></button></td>                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><textarea></textarea></td>
-                        <td><button class="btn btn-primary"><i class="far fa-edit"></i></button></td>                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><textarea></textarea></td>
-                        <td><button class="btn btn-primary"><i class="far fa-edit"></i></button></td>
-                    </tr>
-
-
-                </tbody>
-            </table>
 
         </div>
-
-    </form>
-</section>
-
-
-
+</div>

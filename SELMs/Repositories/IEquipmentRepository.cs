@@ -13,11 +13,11 @@ namespace SELMs.Repositories
     {
         dynamic GetEquipmentList();
         dynamic GetEquipmentList(Argument arg);
-        dynamic GetEquipment(int id);
+        Task<dynamic> GetEquipment(int id);
         dynamic GetDetailEquipment(string code);
         dynamic SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
         dynamic SaveEquipments(List<Equipment> equipments);
-        void UpdateEquipment(Equipment equipment);
+        Task UpdateEquipment(Equipment equipment);
         void DeleteEquipment(int id);
         Equipment GetLastEquipment();
 

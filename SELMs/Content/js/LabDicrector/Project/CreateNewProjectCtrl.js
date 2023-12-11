@@ -60,6 +60,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
 
     $scope.HandelMember = function (mb, NewProject) {
         $scope.NewProject.manager = mb.user_code;
+        $scope.text = mb.fullname;
     }
     $scope.text = '';
     $scope.LoadMembersList = function (text) {
@@ -116,7 +117,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             role: role,
             text: '',
             text1: '',
-            text2: $scope.textEquip,
+            text2: text,
             text3: ''
 
         }
@@ -157,13 +158,31 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             end_date: $('#endDate').val(),
             project_name: newProject.project_name,
             location_id: newProject.location_id,
-            status: 'Pending'
+            status: true,
+            creater:username
         }
         var data = {
             Project: $scope.Project,
-            ListMemberJoin: $scope.ListMembersJoinProject,
-            ListEquipmentUse: $scope.ListEquipmentProject
+            ProjectMembers: $scope.ListMembersJoinProject,
+            ProjectEquipments: $scope.ListEquipmentProject
         }
-        console.log(data);
+        var partialUrl = origin + '/api/v1/projects/new-project';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Thêm mới dự án thành công!');
+                $scope.NewProject = {
+                    project_name: '',
+                    acronym: '',
+                    description: '',
+                    manager: '',
+                    location_id: 0,
+                    status: 'Pending'
+                }
+                $scope.ListMembersJoinProject = [];
+                $scope.ListEquipmentProject = [];
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
     }
 });

@@ -23,7 +23,7 @@ namespace SELMs.Repositories.Implements
 
         }
 
-        public dynamic GetEquipment(int id)
+        public async Task<dynamic> GetEquipment(int id)
         {
             dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
             return equipment;
@@ -72,7 +72,7 @@ namespace SELMs.Repositories.Implements
             return equipments;
         }
 
-        public void UpdateEquipment(Equipment equipment)
+        public async Task UpdateEquipment(Equipment equipment)
         {
             Equipment orgEquipment = db.Equipments.Where(e => e.equipment_id == equipment.equipment_id).FirstOrDefault();
             db.Entry(orgEquipment).CurrentValues.SetValues(equipment);
