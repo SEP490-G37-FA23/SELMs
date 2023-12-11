@@ -50,23 +50,17 @@
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(3)]
-		[InlineData(66)]
+		[InlineData(2)]
 		public async Task TestGetMember_ReturnMemberById(int id)
 		{
-			try
-			{
-				User? member = await memberRepository.GetMember(id);
 
-				if (member == null)
-					output.WriteLine("Member not found");
-				else
-					output.WriteLine("Member found:\n" + JsonConvert.SerializeObject(member));
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			User? member = await memberRepository.GetMember(id);
+
+			if (member == null)
+				output.WriteLine("Member not found");
+			else
+				output.WriteLine("Member found:\n" + JsonConvert.SerializeObject(member));
+
 		}
 
 

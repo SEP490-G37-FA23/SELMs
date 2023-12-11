@@ -17,45 +17,31 @@ namespace SELMs.Test.Repositories.Test
 		[Fact]
 		public async Task TestGetListHistory_ReturnHistoryList()
 		{
-			try
-			{
-				var list = await memberProjectHistoryRepository.GetMemberProjectHistoryList();
+			var list = await memberProjectHistoryRepository.GetMemberProjectHistoryList();
 
-				if ((list as IList).Count > 0)
-				{
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				}
-				else
-					output.WriteLine("History not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if ((list as IList).Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("History not found");
 		}
 
 
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(2)]
-		[InlineData(3)]
 		public async Task TestGetHistoryById_ReturnHistory(int id)
 		{
-			try
-			{
-				var history = await memberProjectHistoryRepository.GetMemberProjectHistoryById(id);
 
-				if (history != null)
-					output.WriteLine(JsonConvert.SerializeObject(history));
-				else
-					output.WriteLine("History not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var history = await memberProjectHistoryRepository.GetMemberProjectHistoryById(id);
+
+			if (history != null)
+				output.WriteLine(JsonConvert.SerializeObject(history));
+			else
+				output.WriteLine("History not found");
+
 		}
 
 

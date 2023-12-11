@@ -24,20 +24,29 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentControllerTestData.GetEquipmentListTestData), MemberType = typeof(EquipmentControllerTestData))]
-		public async Task TestGetEquipmentList_ReturnEquipmentList(Argument argument)
+		public async Task TestGetEquipmentList_ReturnEquipmentList(bool expectedException, Argument argument)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentController.GetEquipmentList(argument);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiEquipmentController.GetEquipmentList(argument);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+
+			if (expectedException)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+				output.WriteLine(content);
 			}
+			else
+			{
+				var list = JsonConvert.DeserializeObject<List<dynamic>>(content);
+
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			}
+
+
+
 		}
 
 
@@ -49,21 +58,15 @@ namespace SELMs.Test.Controllers.Test
 		[InlineData(2)]
 		public async Task TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentController.GetEquipment(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentController.GetEquipment(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				if (actionResult is OkNegotiatedContentResult<Equipment>)
-					output.WriteLine($"Status code: {(int)response.StatusCode}\nEquipment found:\n{content}");
-				else
-					output.WriteLine($"Equipment not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			if (actionResult is OkNegotiatedContentResult<EquipmentModel>)
+				output.WriteLine(JsonConvert.SerializeObject(content));
+			else
+				output.WriteLine($"Equipment not found");
 		}
 
 
@@ -73,24 +76,17 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData("E0000")]
+		[InlineData("")]
 		[InlineData("E0002")]
-		[InlineData("E0004")]
+		[InlineData("E0008")]
 		public async Task TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
 		{
-			try
-			{
-				DetailEquipDTO detailEquipDTO = await apiEquipmentController.GetDetailEquipment(code);
+			DetailEquipDTO detailEquipDTO = await apiEquipmentController.GetDetailEquipment(code);
 
-				if (detailEquipDTO.ListComponentEquips.Count > 0)
-					output.WriteLine($"Equipment detail:\n{JsonConvert.SerializeObject(detailEquipDTO)}");
-				else
-					output.WriteLine($"Equipment not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if (detailEquipDTO.ListComponentEquips.Count > 0)
+				output.WriteLine(JsonConvert.SerializeObject(detailEquipDTO));
+			else
+				output.WriteLine($"Equipment not found");
 		}
 
 
@@ -195,22 +191,48 @@ namespace SELMs.Test.Controllers.Test
 		public static IEnumerable<object[]> GetEquipmentListTestData()
 		{
 			//text = Equipment.serial_no , text1 = user fullname, text2 = std_code, sys_code, name
+
 			var a = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "E0003" };
 			var b = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "BHR4975EU" };
 			var c = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+			var d = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "" };
+			var e = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "abc" };
 
 
-			var d = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = string.Empty };
-			var e = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
-			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "levan" };
+			const string text = "Màn hình máy tính Xiaomi Mi Curved Gaming Monitor 34″ BHR5133GL";
+			var i = new Argument() { text = "FKH8857823-349056", text1 = "A", text2 = text };
+			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "BHR5133GL" };
+			var g = new Argument() { text = "FKH8857823-349056", text1 = "Đạt", text2 = "E0004" };
+			var j = new Argument() { text = "FKH8857823-349056", text1 = "", text2 = "" };
 
-			yield return new object[] { a };
-			yield return new object[] { b };
-			yield return new object[] { c };
-			yield return new object[] { d };
-			yield return new object[] { e };
-			yield return new object[] { f };
 
+
+			var k = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
+			var l = new Argument() { text = "FKH", text1 = "A", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+			var m = new Argument() { text = "", text1 = "Lê Tất Đạt", text2 = "" };
+			var n = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "" };
+
+			var o = new Argument() { text = "", text1 = "", text2 = "" };
+			var p = new Argument() { text = "a", text1 = "a", text2 = "a" };
+
+
+
+			yield return new object[] { true, null! };
+			yield return new object[] { false, a };
+			yield return new object[] { false, b };
+			yield return new object[] { false, c };
+			yield return new object[] { false, d };
+			yield return new object[] { false, e };
+			yield return new object[] { false, f };
+			yield return new object[] { false, g };
+			yield return new object[] { false, i };
+			yield return new object[] { false, j };
+			yield return new object[] { false, k };
+			yield return new object[] { false, l };
+			yield return new object[] { false, m };
+			yield return new object[] { false, n };
+			yield return new object[] { false, o };
+			yield return new object[] { false, p };
 		}
 
 

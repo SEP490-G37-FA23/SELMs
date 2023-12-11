@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Controllers.Test
+﻿using System.Web.Http.Results;
+
+namespace SELMs.Test.Controllers.Test
 {
 	public class ProjectControllerTest
 	{
@@ -17,18 +19,13 @@
 		[Fact]
 		public async Task TestGetListProject_ReturnProjectList()
 		{
-			try
-			{
-				var actionResult = await apiProjectController.GetProjectList();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiProjectController.GetProjectList();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+			Assert.Equal(200, (int)response.StatusCode);
+			output.WriteLine(content);
 		}
 
 
@@ -36,21 +33,19 @@
 
 		[Theory]
 		[MemberData(nameof(ProjectControllerTestData.SearchProjectTestData), MemberType = typeof(ProjectControllerTestData))]
-		public async Task TestSearchProject_ReturnProjectFound(Argument argument)
+		public async Task TestSearchProject_ReturnProjectFound(bool expectedException, Argument argument)
 		{
-			try
-			{
-				var actionResult = await apiProjectController.SearchProjects(argument);
-				Thread.Sleep(2000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiProjectController.SearchProjects(argument);
+			Thread.Sleep(2000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+			if (expectedException)
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+			else
+				Assert.Equal(200, (int)response.StatusCode);
+			output.WriteLine(content);
 		}
 
 
@@ -60,21 +55,21 @@
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(5)]
+		[InlineData(2)]
 		public async Task TestGetProjectById_ReturnProject(int id)
 		{
-			try
-			{
-				var actionResult = await apiProjectController.GetProject(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiProjectController.GetProject(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var projectModel = JsonConvert.DeserializeObject<ProjectModel>(content);
+
+
+			if (projectModel.Project == null)
+				output.WriteLine("No project found");
+			else
+				output.WriteLine(content);
+
 		}
 
 
@@ -145,17 +140,13 @@
 		[InlineData(2)]
 		public async Task TestDeleteProject_ReturnStatusCode200(int id)
 		{
-			try
-			{
-				var actionResult = await apiProjectController.DeleteProjects(id);
-				Thread.Sleep(2000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			var actionResult = await apiProjectController.DeleteProjects(id);
+			Thread.Sleep(2000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+
+			Assert.Equal(200, (int)response.StatusCode);
+			output.WriteLine("Test case passed");
 		}
 		#endregion
 	}
@@ -204,9 +195,13 @@
 
 		public static IEnumerable<object[]> SearchProjectTestData()
 		{
-			yield return new object[] { new Argument() { username = "", text = "" } };
-			yield return new object[] { new Argument() { username = "LyMT", text = "IOT" } };
-			yield return new object[] { new Argument() { username = "AnhNV", text = "d" } };
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new Argument() { username = "", text = "" } };
+			yield return new object[] { false, new Argument() { username = "LyMT", text = "" } };
+			yield return new object[] { false, new Argument() { username = "LyMT", text = "IOT" } };
+			yield return new object[] { false, new Argument() { username = "Anh", text = "" } };
+			yield return new object[] { false, new Argument() { username = "NV", text = "AI" } };
+			yield return new object[] { false, new Argument() { username = "AnhNV", text = "bom" } };
 		}
 
 

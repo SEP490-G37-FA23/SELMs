@@ -14,23 +14,18 @@
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(2)]
 		public async Task TestGetProjectById_ReturnProject(int id)
 		{
-			try
-			{
-				ProjectModel project = await projectService.GetProject(id);
 
-				if (project.Project != null)
-					output.WriteLine(JsonConvert.SerializeObject(project));
+			ProjectModel project = await projectService.GetProject(id);
 
-				else
-					output.WriteLine("Project not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if (project.Project != null)
+				output.WriteLine(JsonConvert.SerializeObject(project));
+
+			else
+				output.WriteLine("Project not found");
 		}
 
 

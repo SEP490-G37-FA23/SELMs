@@ -14,8 +14,9 @@
 
 
 		[Theory]
+		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(5)]
+		[InlineData(2)]
 		public async Task TestGetApplicationById_ReturnApplication(int id)
 		{
 			var app = await equipmentImportService.GetApplication(id);

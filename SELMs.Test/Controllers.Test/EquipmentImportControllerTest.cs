@@ -16,23 +16,22 @@
 
 
 		[Theory]
-		[InlineData(0)]
-		[InlineData(1)]
-		[InlineData(3)]
-		public async Task TestGetApplicationById_ReturnApplication(int id)
+		[InlineData(true, 0)]
+		[InlineData(false, 1)]
+		[InlineData(false, 2)]
+		public async Task TestGetApplicationById_ReturnApplication(bool expectedException, int id)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentImportController.GetApplication(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiEquipmentImportController.GetApplication(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+			if (expectedException)
+				Assert.Equal(400, (int)response.StatusCode);
+			else
+				Assert.Equal(200, (int)response.StatusCode);
+
+			output.WriteLine(content);
 		}
 
 

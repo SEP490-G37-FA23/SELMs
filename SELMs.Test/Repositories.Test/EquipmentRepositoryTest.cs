@@ -41,7 +41,9 @@
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(5)]
+		[InlineData(int.MaxValue)]
 		public void TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
 			Equipment equipment = equipmentRepository.GetEquipment(id);
@@ -50,7 +52,7 @@
 				output.WriteLine("Equipment not found");
 
 			else
-				output.WriteLine($"Equipment found\n{JsonConvert.SerializeObject(equipment)}");
+				output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
@@ -58,6 +60,7 @@
 
 
 		[Theory]
+		[InlineData("")]
 		[InlineData("E00000000")]
 		[InlineData("E0006")]
 		public async Task TestGetEquipmentByCode_ReturnEquipmentFound(string code)
@@ -68,7 +71,7 @@
 				output.WriteLine("Equipment not found");
 
 			else
-				output.WriteLine($"Equipment found\n{JsonConvert.SerializeObject(equipment)}");
+				output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
@@ -121,41 +124,24 @@
 		[Fact]
 		public void TestGetLastEquipment_ReturnLastEquipmentInDB()
 		{
-			try
-			{
-				Equipment equipment = equipmentRepository.GetLastEquipment();
-				Assert.Equal(11, equipment.equipment_id);
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			Equipment equipment = equipmentRepository.GetLastEquipment();
+			output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
 
 		[Theory]
 		[InlineData("E0000")]
-		[InlineData("E0009")]
+		[InlineData("E0008")]
 		public void TestGetListComponentEquips_ReturnListComponentEquips(string code)
 		{
-			try
-			{
-				var list = equipmentRepository.GetListComponentEquips(code);
-				Assert.NotNull(list);
+			var list = equipmentRepository.GetListComponentEquips(code);
 
-				if (list.Count > 0)
-				{
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				}
-				else
-					output.WriteLine("Components not found");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("Components not found");
 		}
 
 

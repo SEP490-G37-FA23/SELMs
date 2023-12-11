@@ -30,7 +30,7 @@ namespace SELMs.Test.Repositories.Test
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(6)]
+		[InlineData(2)]
 		public async Task TestGetEquipmentById_ReturnEquipment(int id)
 		{
 			var e = await equipmentProjectHistoryRepository.GetEquipmentProjectHistoryById(id);

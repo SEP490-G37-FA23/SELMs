@@ -29,4 +29,8 @@
     <ProjectReference Include="..\SELMs\SELMs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
 </Project>

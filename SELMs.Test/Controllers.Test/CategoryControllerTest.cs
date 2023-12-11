@@ -1,5 +1,7 @@
 ﻿
 
+using System.Web.Http.Results;
+
 namespace SELMs.Test.Controllers.Test
 {
 	public class CategoryControllerTest
@@ -24,18 +26,15 @@ namespace SELMs.Test.Controllers.Test
 		[Fact]
 		public async Task TestGetCategoryList_ReturnCategoryList()
 		{
-			try
-			{
-				var actionResult = await apiCategoryController.GetCategoryList();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiCategoryController.GetCategoryList();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			var list = JsonConvert.DeserializeObject<List<CategoryDTO>>(content);
+
+			foreach (var item in list)
+				output.WriteLine(JsonConvert.SerializeObject(item));
 		}
 
 
@@ -45,39 +44,39 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(CategoryControllerTestData.SeacrchCategoryTestData), MemberType = typeof(CategoryControllerTestData))]
-		public async Task TestSearchCategory_ReturnCategoryFound(Argument argument)
+		public async Task TestSearchCategory_ReturnCategoryFound(bool expectedException, Argument argument)
 		{
-			try
-			{
-				var actionResult = await apiCategoryController.GetCategories(argument);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiCategoryController.GetCategories(argument);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			if (expectedException)
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+
+
+			output.WriteLine(content);
 		}
 
 
 
 
 		[Theory]
-		[InlineData(-1)]
-		[InlineData(0)]
-		[InlineData(1)]
-		[InlineData(2)]
-		public async Task TestGetCategoryById_ReturnCategoryFound(int id)
+		[InlineData(true, 0)]
+		[InlineData(false, 1)]
+		[InlineData(false, 2)]
+		public async Task TestGetCategoryById_ReturnCategoryFound(bool expectedException, int id)
 		{
-			try
+			var actionResult = await apiCategoryController.GetCategory(id);
+
+			if (expectedException)
 			{
-				var actionResult = await apiCategoryController.GetCategory(id);
+				Assert.Null(actionResult);
+				output.WriteLine("Category not found");
 			}
-			catch (Exception ex)
+			else
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				output.WriteLine(JsonConvert.SerializeObject(actionResult));
 			}
 		}
 
@@ -144,9 +143,11 @@ namespace SELMs.Test.Controllers.Test
 		// Use for search category
 		public static IEnumerable<object[]> SeacrchCategoryTestData()
 		{
-			yield return new object[] { new Argument() { text = "" } };
-			yield return new object[] { new Argument() { text = "GG" } };
-			yield return new object[] { new Argument() { text = "Khác" } };
+			yield return new object[] { true, null! };
+			yield return new object[] { true, new Argument() { } };
+			yield return new object[] { false, new Argument() { text = "" } };
+			yield return new object[] { false, new Argument() { text = "GG" } };
+			yield return new object[] { false, new Argument() { text = "Khác" } };
 		}
 
 

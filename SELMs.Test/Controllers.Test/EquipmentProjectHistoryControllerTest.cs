@@ -18,18 +18,21 @@
 		[Fact]
 		public async Task TestGetListHistory_ReturnHistoryList()
 		{
-			try
-			{
-				var actionResult = await apiEquipmentProjectHistoryController.GetListEquipmentProjectHistory();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentProjectHistoryController.GetListEquipmentProjectHistory();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			var list = JsonConvert.DeserializeObject<List<Equipment_Project_History>>(content);
+
+			Assert.Equal(200, (int)response.StatusCode);
+
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+
+			else
+				output.WriteLine("No history found");
 		}
 
 
@@ -66,22 +69,14 @@
 		[InlineData(2)]
 		public async Task TestGetHistoryById_ReturnHistory(int id)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentProjectHistoryController.GetEquipmentProjectHistoryById(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentProjectHistoryController.GetEquipmentProjectHistoryById(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-
-				if (content.Equals("null"))
-					output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\nEquipment not found");
-				else
-					output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if (content.Equals("null"))
+				output.WriteLine("Equipment not found");
+			else
+				output.WriteLine(content);
 		}
 
 

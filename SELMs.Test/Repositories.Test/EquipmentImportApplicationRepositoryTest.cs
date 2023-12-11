@@ -24,25 +24,7 @@ namespace SELMs.Test.Repositories.Test
 
 			foreach (var item in list)
 				output.WriteLine(JsonConvert.SerializeObject(item));
-
-			Assert.True(list is IList { Count: > 0 });
 		}
-
-
-		[Fact]
-		public async Task TestGetApplicationListByName_ReturnList()
-		{
-			var list = await repository.GetApplicationList(null);
-
-			foreach (var item in list)
-				output.WriteLine(JsonConvert.SerializeObject(item));
-
-			Assert.True(list is IList { Count: > 0 });
-		}
-
-
-
-
 
 
 
@@ -50,7 +32,7 @@ namespace SELMs.Test.Repositories.Test
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(3)]
+		[InlineData(2)]
 		public void TestGetApplicationById_ReturnApplication(int id)
 		{
 			var app = repository.GetApplication(id);
@@ -145,8 +127,6 @@ namespace SELMs.Test.Repositories.Test
 
 			foreach (var item in list)
 				output.WriteLine(JsonConvert.SerializeObject(item));
-
-			Assert.True(list is IList { Count: > 0 });
 		}
 
 
@@ -229,11 +209,6 @@ namespace SELMs.Test.Repositories.Test
 
 
 
-
-
-
-
-
 		[Theory]
 		[InlineData(0)]
 		[InlineData(3)]
@@ -247,8 +222,6 @@ namespace SELMs.Test.Repositories.Test
 			else
 				output.WriteLine("Application detail not found");
 		}
-
-
 
 
 

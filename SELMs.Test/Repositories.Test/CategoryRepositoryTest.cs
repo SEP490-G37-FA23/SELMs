@@ -53,11 +53,12 @@
 
 		[Theory]
 		[InlineData(0)]
-		[InlineData(3)]
+		[InlineData(1)]
+		[InlineData(6)]
+		[InlineData(int.MaxValue)]
 		public void TestGetCategoryById_ReturnCategoryFound(int id)
 		{
 			var category = categoryRepository.GetCategory(id);
-
 
 			if (category == null)
 				output.WriteLine("Category not found");

@@ -18,22 +18,15 @@ namespace SELMs.Test.Repositories.Test
 		[Fact]
 		public async Task TestGetProjectList_ReturnProjectList()
 		{
-			try
-			{
-				var list = await projectRepository.GetProjectList();
+			var list = await projectRepository.GetProjectList();
 
-				if (list is IList { Count: > 0 })
-				{
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				}
-				else
-					output.WriteLine("No project found");
-			}
-			catch (Exception ex)
+			if (list is IList { Count: > 0 })
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
 			}
+			else
+				output.WriteLine("No projects found");
 		}
 
 
@@ -65,22 +58,16 @@ namespace SELMs.Test.Repositories.Test
 
 		[Theory]
 		[InlineData(0)]
-		[InlineData(3)]
+		[InlineData(1)]
+		[InlineData(2)]
 		public void TestProjectById_ReturnProject(int id)
 		{
-			try
-			{
-				var project = projectRepository.GetProject(id);
+			var project = projectRepository.GetProject(id);
 
-				if (project != null)
-					output.WriteLine(JsonConvert.SerializeObject(project));
-				else
-					output.WriteLine("Project not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if (project != null)
+				output.WriteLine(JsonConvert.SerializeObject(project));
+			else
+				output.WriteLine("Project not found");
 		}
 
 
@@ -135,23 +122,19 @@ namespace SELMs.Test.Repositories.Test
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(2)]
-		public async Task TestProjectMember_ReturnMemberInProject(int projectId)
+		public async Task TestProjectMember_ReturnMembersInProject(int projectId)
 		{
-			try
-			{
-				var list = await projectRepository.GetProjectMembers(projectId);
 
-				if (list is IList { Count: > 0 })
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				else
-					output.WriteLine("No project found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var list = await projectRepository.GetProjectMembers(projectId);
+
+			if (list is IList { Count: > 0 })
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("No member found");
+
 		}
 
 
@@ -175,28 +158,6 @@ namespace SELMs.Test.Repositories.Test
 						output.WriteLine(JsonConvert.SerializeObject(item));
 				else
 					output.WriteLine("No equipment found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
-		}
-
-
-
-
-
-		// not implement
-		[Theory]
-		[InlineData(0, "ChinhPM")]
-		[InlineData(2, "ChinhPM1")]
-		[InlineData(4, "DongPV")]
-		public async Task TestFindActiveMember_ReturnActiveMember(int projectId, string memberCode)
-		{
-			try
-			{
-				var list = await projectRepository.FindActiveMember(projectId, memberCode);
-				//Active member not found
 			}
 			catch (Exception ex)
 			{

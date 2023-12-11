@@ -19,45 +19,36 @@ namespace SELMs.Test.Controllers.Test
 		[Fact]
 		public async Task TestGetListHistory_ReturnHistoryList()
 		{
-			try
-			{
-				var actionResult = await apiMemberProjectHistoryController.GetList();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiMemberProjectHistoryController.GetList();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var list = JsonConvert.DeserializeObject<List<Member_Project_History>>(content);
+
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("No project found");
 		}
 
 
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(2)]
-		[InlineData(3)]
 		public async Task TestGetHistoryById_ReturnHistory(int id)
 		{
-			try
-			{
-				var actionResult = await apiMemberProjectHistoryController.GetHistoryById(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiMemberProjectHistoryController.GetHistoryById(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
+			if (content.Equals("null"))
+				output.WriteLine("History not found");
 
-				if (content.Equals("null"))
-					output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\nHistory not found");
-
-				else
-					output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			else
+				output.WriteLine(content);
 		}
 
 

@@ -41,24 +41,18 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData(-1)]
 		[InlineData(0)]
 		[InlineData(1)]
 		[InlineData(2)]
 		public async Task TestGetMemberById_ReturnMemberFound(int id)
 		{
-			try
-			{
-				var actionResult = await apiMemberController.GetMember(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiMemberController.GetMember(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+
+			Assert.Equal(200, (int)response.StatusCode);
+			output.WriteLine(content);
 		}
 
 
@@ -110,18 +104,14 @@ namespace SELMs.Test.Controllers.Test
 		[MemberData(nameof(MemberControllerTestData.ChangePasswordTestData), MemberType = typeof(MemberControllerTestData))]
 		public async Task TestChangePassword_ReturnOk(int id, Argument arg)
 		{
-			try
-			{
-				var actionResult = await apiMemberController.ChangePassword(id, arg);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiMemberController.ChangePassword(id, arg);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+
+			output.WriteLine(content);
+
 		}
 
 
@@ -133,23 +123,25 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData(-1)]
-		[InlineData(0)]
-		[InlineData(1)]
-		[InlineData(2)]
-		public async Task TestResignMember_ReturnOk(int id)
+		[InlineData(true, 0)]
+		[InlineData(false, 1)]
+		[InlineData(true, int.MaxValue)]
+		public async Task TestResignMember_ReturnOk(bool expectedNull, int id)
 		{
-			try
+			var actionResult = await apiMemberController.ResignMember(id);
+
+			if (!expectedNull)
 			{
-				var actionResult = await apiMemberController.ResignMember(id);
+				var ar = await apiMemberController.GetMember(id);
+				var res = await ar.ExecuteAsync(CancellationToken.None);
+				string cont = await res.Content.ReadAsStringAsync();
+				Assert.Equal(false, JsonConvert.DeserializeObject<User>(cont).is_active);
+			}
+			else
+			{
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
-
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				output.WriteLine(content);
 			}
 		}
 
@@ -206,12 +198,16 @@ namespace SELMs.Test.Controllers.Test
 
 		public static IEnumerable<object[]> ChangePasswordTestData()
 		{
-
 			// text is real pass, text 1 is new pass, text 2 is confirm pass
-			yield return new object[] { 1, new Argument() { text = "1", text1 = "111222", text2 = "111222" } };
-			yield return new object[] { 2, new Argument() { text = "0", text1 = "456", text2 = "456" } };
-			yield return new object[] { 3, new Argument() { text = "123", text1 = "789", text2 = "6789" } };
-			yield return new object[] { 4, null };
+			yield return new object[] { 0, null! };
+			yield return new object[] { 1, new Argument() { text = "123", text1 = "hello", text2 = "hello" } };
+			yield return new object[] { 1, new Argument() { text = "", text1 = "hello", text2 = "hello" } };
+
+			yield return new object[] { 1, new Argument() { text = "1", text1 = "lo", text2 = "hello" } };
+			yield return new object[] { 1, new Argument() { text = "1", text1 = "", text2 = "hello" } };
+
+			yield return new object[] { 1, new Argument() { text = "1", text1 = "hello", text2 = "" } };
+			yield return new object[] { 1, new Argument() { text = "1", text1 = "hello", text2 = "hello" } };
 		}
 
 	}

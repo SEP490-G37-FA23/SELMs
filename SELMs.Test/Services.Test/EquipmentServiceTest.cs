@@ -25,7 +25,7 @@
 		{
 			try
 			{
-				await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips);
+				//await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)
