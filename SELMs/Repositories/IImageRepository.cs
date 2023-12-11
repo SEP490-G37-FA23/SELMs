@@ -11,7 +11,7 @@ namespace SELMs.Repositories
     {
         dynamic GetImage(int id);
         void SaveImage(Image image);
-        void SaveImages(List<Image> images);
+        dynamic SaveImages(List<Image> images);
         void UpdateImage(Image image);
         void DeleteImage(int id);
     }

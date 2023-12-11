@@ -29,7 +29,7 @@ namespace SELMs.Repositories.Implements
             return equipment;
         }
 
-        public void SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
+        public dynamic SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             db.Equipments.Add(equipment);
             Equipment_Location_History his = new Equipment_Location_History();
@@ -43,15 +43,16 @@ namespace SELMs.Repositories.Implements
                 component.system_equipment_code_parent = equipment.system_equipment_code;
                 component.system_equipment_code_component = item.system_equipment_code;
                 db.Equipment_Component.Add(component);
-            }
-           
+            }           
             db.SaveChangesAsync();
+            return equipment;
         }
 
-        public void SaveEquipments(List<Equipment> equipments)
+        public dynamic SaveEquipments(List<Equipment> equipments)
         {
             db.Equipments.AddRange(equipments);
             db.SaveChangesAsync();
+            return equipments;
         }
 
         public dynamic GetEquipmentList(Argument arg)
@@ -66,7 +67,6 @@ namespace SELMs.Repositories.Implements
                 text2 = arg.text2,
                 text = arg.text,
                 categoryCode = arg.categoryCode,
-
             }
                 , commandType: CommandType.StoredProcedure);
             return equipments;
@@ -137,6 +137,12 @@ namespace SELMs.Repositories.Implements
                     item.category_code = equip.category_code;
                 }
             }
+        }
+
+        public dynamic GetEquipmentImages(int id)
+        {
+            List<Image> images = db.Images.Where(i => i.equipment_id == id).ToList();
+            return images;
         }
     }
 }
