@@ -33,49 +33,41 @@ namespace SELMs.Api.Controllers
         #region Get image by id
         [HttpGet]
         [Route("images/{id}")]
-        public async Task<IHttpActionResult> GetImage(int id)
+        public async Task<HttpResponseMessage> GetImage(int id)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = repository.GetImage(id);
-                return Ok(returnedData);
+                Image image = repository.GetImage(id);
+                HttpResponseMessage result = Request.CreateResponse(HttpStatusCode.OK);
+                result.Content = new StreamContent(new MemoryStream(image.content));
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentDisposition.FileName = $"{image.image_name}.png";
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+                return result;
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
                 throw;
             }
         }
         #endregion
 
-        #region Add new image
+        #region Upload images
         [HttpPost]
-        [Route("api/images/new-image")]
-        public async Task<IHttpActionResult> SaveImage(HttpPostedFileBase image)
+        [Route("api/images/upload")]
+        public async Task<IHttpActionResult> UploadImages()
         {
             try
             {
-                //if (!Request.Content.IsMimeMultipartContent())
-                //{
-                //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-                //}
-
-                //var provider = new MultipartMemoryStreamProvider();
-
-                //await Request.Content.ReadAsMultipartAsync(provider);
-
-                //if (provider.Contents.Count == 0) throw new Exception("Upload failed");
-
-                //var file = provider.Contents[0]; // if you handle more then 1 file you can loop provider.Contents
-
-
-                //var extension = Path.GetExtension(file.)
-
-                // .. do whatever needed here
-
+                var name = HttpContext.Current.Request.Params["name"];
+                var files = HttpContext.Current.Request.Files.GetMultiple("files");
+                foreach (var file in files)
+                {
+                    service.SaveImage(file, name);
+                }
                 return Ok();
             }
             catch (Exception ex)

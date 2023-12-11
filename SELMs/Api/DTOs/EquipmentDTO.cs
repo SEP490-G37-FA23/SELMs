@@ -44,7 +44,6 @@ namespace SELMs.Api.DTOs
         public List<EquipComponentDTO> ListComponentEquips { get; set; }
         public int location_id { get; set; }
         public List<string> img { get; set; }
-        public List<HttpPostedFileBase> images { get; set; }
     }
 
     public class DetailEquipDTO

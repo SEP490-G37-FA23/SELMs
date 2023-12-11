@@ -11,8 +11,8 @@ namespace SELMs.Services
 {
     public interface IImageService
     {
-        Task<dynamic> GetImage(int id);
-        Task<dynamic> SaveImage(StreamContent file, string name);
+        System.Drawing.Image GetImage(int id);
+        Task<dynamic> SaveImage(HttpPostedFile file, string name);
         Task UpdateImage(int id, Image image);
     }
 }

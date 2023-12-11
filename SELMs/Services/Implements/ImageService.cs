@@ -18,21 +18,21 @@ namespace SELMs.Services.Implements
     {
         private IImageRepository repository = new ImageRepository();
 
-        public async Task<dynamic> GetImage(int id)
+        public System.Drawing.Image GetImage(int id)
         {
-            Image image = await repository.GetImage(id);
+            Image image = repository.GetImage(id);
             var file = System.Drawing.Image.FromStream(new MemoryStream(image.content));
             file.Save($"{image.image_name}.png", ImageFormat.Png);
             return file;
         }
 
-        public async Task<dynamic> SaveImage(StreamContent file, string name)
+        public async Task<dynamic> SaveImage(HttpPostedFile file, string name)
         {
             Image image = new Image()
             {
-                image_name = file.Headers.ContentDisposition.FileName.Replace(MimeMapping.GetMimeMapping(file.Headers.ContentDisposition.FileName),""),
+                image_name = file.FileName.Replace(Path.GetExtension(file.FileName),""),
                 date = DateTime.Now,
-                content = await file.ReadAsByteArrayAsync()
+                content = new BinaryReader(file.InputStream).ReadBytes(file.ContentLength)
             };
             image = repository.SaveImage(image);
             return image;

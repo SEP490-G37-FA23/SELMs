@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using log4net;
@@ -111,7 +113,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Equipment equipment = mapper.Map<Equipment>(data.equip);
-				service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips, data.images);
+				service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips);
 				return Ok();
 			}
 			catch (Exception ex)
@@ -184,6 +186,28 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-		#endregion
-	}
+        #endregion
+
+        #region Add Images
+        [HttpPost]
+        [Route("equipments/images/add")]
+        public async Task<IHttpActionResult> AddImages()
+        {
+            try
+            {
+                var equipmentId = HttpContext.Current.Request.Params["equipment_id"];
+                var files = HttpContext.Current.Request.Files.GetMultiple("images").ToList();
+				service.AddImages(Convert.ToInt32(equipmentId), files);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+    }
 }
