@@ -63,7 +63,7 @@ namespace SELMs.Api.Controllers
             try
             {
                 var name = HttpContext.Current.Request.Params["name"];
-                var files = HttpContext.Current.Request.Files.GetMultiple("files");
+                var files = HttpContext.Current.Request.Files.GetMultiple("files").ToList();
                 foreach (var file in files)
                 {
                     service.SaveImage(file, name);

@@ -80,9 +80,9 @@ namespace SELMs.Services.Implements
                     };
                     imgs.Add(img);
                 }
-
+                order++;
             }
-            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : imgs;
+            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : new List<Image>();
             return imgs;
         }
 

@@ -197,8 +197,8 @@ namespace SELMs.Api.Controllers
             {
                 var equipmentId = HttpContext.Current.Request.Params["equipment_id"];
                 var files = HttpContext.Current.Request.Files.GetMultiple("images").ToList();
-				service.AddImages(Convert.ToInt32(equipmentId), files);
-                return Ok();
+				var result = service.AddImages(Convert.ToInt32(equipmentId), files);
+                return Ok(result);
             }
             catch (Exception ex)
             {

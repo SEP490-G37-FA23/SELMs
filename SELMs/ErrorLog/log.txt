@@ -790,3 +790,18 @@ System.Threading.ThreadAbortException: Thread was being aborted.
    at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
    at SELMs.Services.Implements.EquipmentHandoverService.GetApplication(Int32 id)
    at SELMs.Api.Controllers.ApiEquipmentHandoverController.<GetApplication>d__5.MoveNext()
+2023-12-13 00:35:17,620 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Api.Controllers.ApiEquipmentController.<AddImages>d__12.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 200
+2023-12-13 00:36:06,150 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Api.Controllers.ApiEquipmentController.<AddImages>d__12.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 200
+2023-12-13 01:19:07,652 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 42
