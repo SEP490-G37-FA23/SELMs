@@ -48,7 +48,7 @@ namespace SELMs.Api.Controllers
 		}
         #endregion
 
-        #region Get equipment list       
+        #region GetStandardEquipmentList    
         [HttpPost]
         [Route("standard-equipments")]
         public dynamic GetStandardEquipmentList(Argument args)
@@ -169,7 +169,7 @@ namespace SELMs.Api.Controllers
 
 		#region Update equipment
 		[HttpPut]
-		[Route("equipments/{id}")]
+		[Route("equipments/update/{id}")]
 		public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
 		{
 			try
@@ -189,25 +189,61 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Add Images
+    //    [HttpPost]
+    //    [Route("equipments/images/add")]
+    //    public async Task<IHttpActionResult> AddImages()
+    //    {
+    //        try
+    //        {
+    //            var equipmentId = HttpContext.Current.Request.Params["equipment_id"];
+    //            var files = HttpContext.Current.Request.Files.GetMultiple("images").ToList();
+				//service.AddImages(Convert.ToInt32(equipmentId), files);
+    //            return Ok();
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Log.Error("Error: ", ex);
+    //            Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+    //            return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+    //            throw;
+    //        }
+    //    }
+        #endregion
+
         [HttpPost]
         [Route("equipments/images/add")]
-        public async Task<IHttpActionResult> AddImages()
+        public IHttpActionResult AddImages()
         {
             try
             {
-                var equipmentId = HttpContext.Current.Request.Params["equipment_id"];
-                var files = HttpContext.Current.Request.Files.GetMultiple("images").ToList();
-				service.AddImages(Convert.ToInt32(equipmentId), files);
-                return Ok();
+                // Retrieve equipment_id from the request
+                var equipmentId = HttpContext.Current.Request.Form["equipment_id"];
+
+                // Convert equipment_id to an integer (you might want to add error handling here)
+                int equipmentIdInt = Convert.ToInt32(equipmentId);
+
+                // Retrieve the images from the request
+                var files = HttpContext.Current.Request.Files.GetMultiple("images[]");
+
+                // Assuming there's a service class with the AddImages method
+                // AddImages method should handle the logic to save/process images
+                var fileList = files.ToList();
+
+                // Assuming there's a service class with the AddImages method
+                // AddImages method should handle the logic to save/process images
+                service.AddImages(equipmentIdInt, fileList);
+
+                // Return a successful response
+                return Ok("Images added successfully");
             }
             catch (Exception ex)
             {
+                // Log the exception
                 Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+
+                // Return a bad request response with the error message
                 return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
             }
         }
-        #endregion
     }
 }

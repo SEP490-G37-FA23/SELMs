@@ -116,7 +116,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     }
 
     $scope.GetDetailEquip = function (system_equip_code) {
-        new QRCode(document.getElementById('id_qrcode'), 'https://localhost:44335/Equipments/EquipmentDetails/' + system_equip_code);
+        new QRCode(document.getElementById('id_qrcode'), origin + '/Equipments/EquipmentDetails/' + system_equip_code);
         var partialUrl = origin + '/api/v1/equipments/detail/' + system_equip_code;
         $http.post(partialUrl)
             .then(function (response) {
@@ -129,4 +129,62 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             });
     }
     $scope.GetDetailEquip(url);
+
+    $scope.UpdateEquip = function (equip) {
+        console.log(equip);
+        var data = {
+            equip: {
+                standard_equipment_code: equip.standard_equipment_code,
+                equipment_name: equip.equipment_name,
+                unit: equip.unit,
+                serial_no: equip.serial_no,
+                type_equipment: equip.type_equipment,
+                category_code: equip.category_code,
+                price: equip.price,
+                create_date: new Date(),
+                note: equip.note,
+                responsibler: equip.responsibler,
+                usage_status: equip.usage_status,
+                specification: equip.specification,
+                is_integration: equip.is_integration
+            },
+            location_id: equip.location_id,
+            ListComponentEquips: $scope.ListComponentEquips
+        }
+      
+
+        var partialUrl = origin + '/api/v1/equipments/update/' + equip.equipment_id;
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thiết bị thành công!');
+                $scope.GetDetailEquip(url);
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.UpdateImageEquip = function (equip) {
+        var ListFileAttach = document.getElementById('formFile').files;
+        let formData = new FormData();
+
+        for (let i = 0; i < ListFileAttach.length; i++) {
+            formData.append('images[]', ListFileAttach[i]);
+        }
+
+        formData.append('equipment_id', equip.equipment_id);
+
+        var partialUrl = origin + '/api/v1/equipments/images/add';
+
+        $http.post(partialUrl, formData, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }  // Let AngularJS set the content type
+        })
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật ảnh thiết bị thành công!');
+                $scope.GetDetailEquip(url);
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    };
+
+
 });
