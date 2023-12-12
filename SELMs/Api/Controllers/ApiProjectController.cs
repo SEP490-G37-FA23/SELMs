@@ -88,28 +88,29 @@ namespace SELMs.Api.Controllers
 		}
 		#endregion
 
-		#region Add new project
-		[HttpPost]
-		[Route("api/projects/new-project")]
-		public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
-		{
-			try
-			{
-				Project project = mapper.Map<Project>(projectRequest.Project);
-				List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
-				List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
-				service.SaveProject(project, projectMembers, projectEquipments);
-				return Ok();
-			}
-			catch (Exception ex)
-			{
-				Log.Error("Error: ", ex);
-				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-				throw;
-			}
-		}
-		#endregion
+        #region Add new project
+        [HttpPost]
+        [Route("projects/new-project")]
+        public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
+        {
+            try
+            {
+                projectRequest.Project.create_date = DateTime.Now;
+                Project project = mapper.Map<Project>(projectRequest.Project);
+                List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
+                List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
+                service.SaveProject(project, projectMembers, projectEquipments);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
 
 		#region Update project
 		[HttpPut]

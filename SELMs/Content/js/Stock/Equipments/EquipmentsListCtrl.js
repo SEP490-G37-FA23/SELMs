@@ -103,4 +103,33 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
     $scope.LoadEquipDetails = function (equip) {
         window.location.href = "https://localhost:44335/Equipments/EquipmentDetails/" + equip.system_equipment_code;
     }
+
+    $scope.readExcelFile = function () {
+        var input = document.getElementById('input_file');
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, { type: 'binary' });
+
+                // Assuming there is only one sheet in the Excel file
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+
+                // Parse sheet data as needed
+                var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+                // Output the parsed data
+
+                console.log(jsonData);
+            };
+
+            reader.readAsBinaryString(file);
+        } else {
+            console.error("No file selected");
+        }
+    }
 });

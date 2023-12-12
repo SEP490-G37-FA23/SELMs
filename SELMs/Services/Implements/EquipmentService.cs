@@ -18,7 +18,7 @@ namespace SELMs.Services.Implements
 
         public async Task<dynamic> GetEquipment(int id)
         {
-            Equipment equipment = repository.GetEquipment(id);
+            Equipment equipment = await repository.GetEquipment(id);
             List<Image> images = repository.GetEquipmentImages(id);
             List<EquipComponentDTO> components = repository.GetListComponentEquips(equipment.system_equipment_code);
             EquipmentModel equipmentModel = new EquipmentModel()

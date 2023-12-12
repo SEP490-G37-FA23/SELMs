@@ -19,10 +19,12 @@ namespace SELMs.Repositories
         void DeleteApplication(int id);
         dynamic GetApplicationDetailList(string applicationCode);
         dynamic GetApplicationDetailList(Argument arg);
-        dynamic GetApplicationDetail(int id);
+        Task<Inventory_Request_Application_Detail> GetApplicationDetail(int id);
         dynamic SaveApplicationDetail(Inventory_Request_Application_Detail applicationDetail);
         dynamic SaveApplicationDetails(List<Inventory_Request_Application_Detail> applicationDetails);
-        void UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail);
+        Task UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail);
         void DeleteApplicationDetail(int id);
+        dynamic GetDetailIRAListInLocation(int location_id, Argument arg);
+        dynamic GetResultIRAList(Argument arg);
     }
 }

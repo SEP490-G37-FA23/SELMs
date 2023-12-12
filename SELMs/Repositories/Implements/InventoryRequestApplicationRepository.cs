@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace SELMs.Repositories.Implements
 {
@@ -18,7 +19,8 @@ namespace SELMs.Repositories.Implements
             dynamic application = db.Inventory_Request_Application.Where(a => a.application_id == id).FirstOrDefault();
             if (application != null)
             {
-                List<Inventory_Request_Application_Detail> applicationDetails = GetApplicationDetail(id);
+                List<Inventory_Request_Application_Detail> applicationDetails = db.Inventory_Request_Application_Detail
+                .Where(a => a.application_detail_id == id).ToList();
                 db.Inventory_Request_Application_Detail.RemoveRange(applicationDetails);
                 db.Inventory_Request_Application.Remove(application);
             }
@@ -92,11 +94,10 @@ namespace SELMs.Repositories.Implements
             return applicationDetails;
         }
 
-        public dynamic GetApplicationDetail(int id)
+        public async Task<Inventory_Request_Application_Detail> GetApplicationDetail(int id)
         {
-            dynamic applicationDetail = db.Inventory_Request_Application_Detail
+            return  db.Inventory_Request_Application_Detail
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
-            return applicationDetail;
         }
 
         public dynamic SaveApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
@@ -120,13 +121,23 @@ namespace SELMs.Repositories.Implements
             return applicationDetails;
         }
 
-        public void UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
+        public async Task UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
         {
-            Inventory_Request_Application_Detail orgApplicationDetail = db.Inventory_Request_Application_Detail
-                .Where(p => p.application_detail_id == applicationDetail.application_detail_id).FirstOrDefault();
-            db.Entry(orgApplicationDetail).CurrentValues.SetValues(applicationDetail);
-            db.SaveChangesAsync();
+            // Retrieve the original application detail asynchronously
+            Inventory_Request_Application_Detail orgApplicationDetail = await db.Inventory_Request_Application_Detail
+                .Where(p => p.application_detail_id == applicationDetail.application_detail_id)
+                .FirstOrDefaultAsync();
+
+            // Update the values of the original application detail with the new values
+            if (orgApplicationDetail != null)
+            {
+                db.Entry(orgApplicationDetail).CurrentValues.SetValues(applicationDetail);
+
+                // Save changes asynchronously
+                await db.SaveChangesAsync();
+            }
         }
+
 
         public void DeleteApplicationDetail(int id)
         {
@@ -134,6 +145,29 @@ namespace SELMs.Repositories.Implements
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
             if (applicationDetail != null) db.Inventory_Request_Application_Detail.Remove(applicationDetail);
             db.SaveChangesAsync();
+        }
+
+        public dynamic GetDetailIRAListInLocation(int location_id,Argument arg)
+        {
+            dynamic applications = null;
+            applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetDetailIRAListInLocation", new
+            {
+                location_id = location_id,
+                username= arg.username
+            }
+                , commandType: CommandType.StoredProcedure);
+            return applications;
+        }
+
+        public dynamic GetResultIRAList(Argument arg)
+        {
+            dynamic applications = null;
+            applications = db.Database.Connection.QueryAsync<dynamic>("Proc_GetResultIRAList", new
+            {
+                username = arg.username
+            }
+                , commandType: CommandType.StoredProcedure);
+            return applications;
         }
     }
 }
