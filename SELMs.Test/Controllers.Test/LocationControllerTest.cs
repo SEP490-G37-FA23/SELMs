@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Controllers.Test
+﻿using System.Collections;
+
+namespace SELMs.Test.Controllers.Test
 {
 	public class LocationControllerTest
 	{
@@ -20,18 +22,15 @@
 		[Fact]
 		public async Task TestGetLocationList_ReturnList()
 		{
-			try
-			{
-				var actionResult = await apiLocationController.GetLocationList();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiLocationController.GetLocationList();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+			IList list = JsonConvert.DeserializeObject<List<dynamic>>(content);
+
+			foreach (var item in list)
+				output.WriteLine(JsonConvert.SerializeObject(item));
 		}
 
 

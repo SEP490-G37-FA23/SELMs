@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Repositories.Test
+﻿using System.Collections;
+
+namespace SELMs.Test.Repositories.Test
 {
 	public class LocationRepositoryTest
 	{
@@ -29,8 +31,14 @@
 		public async Task TestGetLocationListByMultiCondition_ReturnList(Argument argument)
 		{
 			var location = await locationRepository.GetLocationList(argument);
-			output.WriteLine(JsonConvert.SerializeObject(location));
 
+			IList list = JsonConvert.DeserializeObject<List<dynamic>>(JsonConvert.SerializeObject(location));
+
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("Location not found");
 		}
 
 
@@ -42,7 +50,14 @@
 		public async Task TestGetAllSubLocationList_ReturnList(Argument argument)
 		{
 			var location = await locationRepository.GetAllSubLocationList(argument);
-			output.WriteLine(JsonConvert.SerializeObject(location));
+
+			IList list = JsonConvert.DeserializeObject<List<dynamic>>(JsonConvert.SerializeObject(location));
+
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("Location not found");
 		}
 
 
@@ -51,6 +66,7 @@
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
+		[InlineData(2)]
 		public void TestGetLocationById_ReturnLocation(int id)
 		{
 			var location = locationRepository.GetLocation(id);
@@ -208,6 +224,7 @@
 		public static IEnumerable<object[]> GetLocationListByMultiConditionTestData()
 		{
 			// id is parent_id , text is location description, username is
+			yield return new object[] { new Argument() { id = 0, text = "" } };
 			yield return new object[] { new Argument() { id = 1, text = "" } };
 			yield return new object[] { new Argument() { id = 2, text = "Phòng học AL-104R" } };
 			yield return new object[] { new Argument() { id = 4, text = "AL-104R" } };

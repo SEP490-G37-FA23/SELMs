@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Controllers.Test
+﻿using System.Collections;
+
+namespace SELMs.Test.Controllers.Test
 {
 	public class EquipmentLocationHistoryControllerTest
 	{
@@ -18,18 +20,14 @@
 		[Fact]
 		public async Task TestGetEquipmentLocationHistoryList_ReturnList()
 		{
-			try
-			{
-				var actionResult = await apiEquipmentLocationHistoryController.GetListEquipmentLocationHistory();
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentLocationHistoryController.GetListEquipmentLocationHistory();
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine(content);
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			IList list = JsonConvert.DeserializeObject<IList>(content);
+
+			foreach (var item in list)
+				output.WriteLine(JsonConvert.SerializeObject(item));
 		}
 
 
@@ -63,24 +61,20 @@
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(2)]
 		public async Task TestGetEquipmentLocationHistoryById_ReturnHistory(int id)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentLocationHistoryController.GetEquipmentLocationHistoryById(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				if (content.Equals("null"))
-					output.WriteLine("History not found");
-				else
-					output.WriteLine(content);
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var actionResult = await apiEquipmentLocationHistoryController.GetEquipmentLocationHistoryById(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+			if (content.Equals("null"))
+				output.WriteLine("History not found");
+			else
+				output.WriteLine(content);
+
 		}
 
 
