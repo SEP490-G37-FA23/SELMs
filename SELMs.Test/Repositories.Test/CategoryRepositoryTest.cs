@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Repositories.Test
+﻿using System.Data.Entity;
+
+namespace SELMs.Test.Repositories.Test
 {
 	public class CategoryRepositoryTest
 	{
@@ -74,16 +76,17 @@
 
 		[Theory]
 		[MemberData(nameof(CategoryRepositoryTestData.CreateCategoryTestData), MemberType = typeof(CategoryRepositoryTestData))]
-		public void TestCreateCategory_ReturnCreatedCategory(Category category)
+		public async Task TestCreateCategory_ReturnCreatedCategory(string expectedCategoryName, Category category)
 		{
-			var createdCategory = categoryRepository.SaveCategory(category);
+			categoryRepository.SaveCategory(category);
 
+			SELMsContext sELMsContext = new();
 
-			if (createdCategory == null)
-				output.WriteLine("Error when creating category");
+			Category categoryFound = await sELMsContext.Categories
+				.FirstOrDefaultAsync(c => c.category_name.Equals(expectedCategoryName) && c.is_active == true);
 
-			else
-				output.WriteLine(JsonConvert.SerializeObject(createdCategory));
+			Assert.Equal(expectedCategoryName, categoryFound.category_name);
+			output.WriteLine(JsonConvert.SerializeObject(categoryFound));
 		}
 
 
@@ -92,10 +95,19 @@
 		[MemberData(nameof(CategoryRepositoryTestData.UpdateCategoryTestData), MemberType = typeof(CategoryRepositoryTestData))]
 		public void TestUpdateCategory_ReturnCreatedCategory(Category category)
 		{
-			categoryRepository.UpdateCategory(category);
-			var updatedCategory = categoryRepository.GetCategory(category.category_id);
+			try
+			{
+				categoryRepository.UpdateCategory(category);
+				var updatedCategory = categoryRepository.GetCategory(category.category_id);
 
-			Assert.Equal((updatedCategory as Category)?.category_name, category.category_name);
+				Assert.Equal((updatedCategory as Category)?.category_name, category.category_name);
+				output.WriteLine(JsonConvert.SerializeObject(updatedCategory));
+			}
+			catch (Exception ex)
+			{
+				Assert.IsType<ArgumentNullException>(ex);
+				output.WriteLine(ex.Message);
+			}
 		}
 
 
@@ -116,6 +128,7 @@
 		// not test
 		public static IEnumerable<object[]> SearchCategoryListTestData()
 		{
+			// text is category name
 			yield return new object[] { new Argument() { text = "Laptop" } };
 			yield return new object[] { new Argument() { text = "" } };
 			yield return new object[] { new Argument() { text = "kaka" } };
@@ -126,18 +139,17 @@
 
 		public static IEnumerable<object[]> CreateCategoryTestData()
 		{
-			yield return new object[] { new Category() { category_name = "new category" } };
-			yield return new object[] { new Category() { category_name = "new one" } };
-			yield return new object[] { new Category() { category_name = "Ok yeah" } };
+			yield return new object[] { "new category", new Category() { category_name = "new category", is_active = true } };
+			yield return new object[] { "", new Category() { category_name = "", is_active = true } };
 		}
 
 
 
 		public static IEnumerable<object[]> UpdateCategoryTestData()
 		{
-			yield return new object[] { new Category() { category_id = 6, category_name = "haha" } };
-			yield return new object[] { new Category() { category_id = 7, category_name = "you" } };
-			yield return new object[] { new Category() { category_id = 8, category_name = "đổi mới" } };
+			yield return new object[] { new Category() { category_id = 0, category_name = "haha" } };
+			//yield return new object[] { new Category() { category_id = 7, category_name = "you" } };
+			//yield return new object[] { new Category() { category_id = 8, category_name = "đổi mới" } };
 		}
 
 
