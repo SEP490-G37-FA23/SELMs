@@ -25,8 +25,6 @@ namespace SELMs.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Application_Attachment> Application_Attachment { get; set; }
-        public virtual DbSet<Attachment> Attachments { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
@@ -49,5 +47,7 @@ namespace SELMs.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Application_Attachment> Application_Attachment { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
     }
 }
