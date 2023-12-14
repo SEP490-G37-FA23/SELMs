@@ -10,7 +10,7 @@ namespace SELMs.Repositories
     public interface IImageRepository
     {
         dynamic GetImage(int id);
-        void SaveImage(Image image);
+        dynamic SaveImage(Image image);
         dynamic SaveImages(List<Image> images);
         void UpdateImage(Image image);
         void DeleteImage(int id);

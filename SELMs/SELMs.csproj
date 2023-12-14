@@ -181,6 +181,7 @@
     <Compile Include="Api\DTOs\EquipmentProjectHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
+    <Compile Include="Api\DTOs\ImageRequest.cs" />
     <Compile Include="Api\DTOs\Inventory\InventoryRequestApplicationDetailDTO.cs" />
     <Compile Include="Api\DTOs\Inventory\InventoryRequestApplicationDTO.cs" />
     <Compile Include="Api\DTOs\Inventory\InventoryRequestRequest.cs" />
@@ -904,6 +905,7 @@
     <Content Include="Models\SELMsDB.edmx.diagram">
       <DependentUpon>SELMsDB.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Data\BodyPart_3b7003d3-a65b-4796-86dc-ba090052e8be" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -978,7 +980,6 @@
     <Content Include="Views\EquipmentAllocation\HEFList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\js\Stock\DeliveryEquipment\" />
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="obj\Debug\" />

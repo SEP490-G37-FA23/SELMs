@@ -12,9 +12,9 @@ namespace SELMs.Services
     public interface IEquipmentHandoverService
     {
         Task<ApplicationModel> GetApplication(int id);
-        Task SaveApplication(Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails, HttpPostedFileBase attachment);
-        Task UpdateApplication(int id, Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails, HttpPostedFileBase attachments);
-        Task<dynamic> AddAttachment(int id, HttpPostedFileBase file);
+        Task<dynamic> SaveApplication(Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails);
+        Task<dynamic> UpdateApplication(int id, Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails);
+        Task<dynamic> AddAttachment(int id, HttpPostedFile file);
         Task DeleteAttachment(int applicationId, int attachmentId);
         Task<dynamic> ConfirmApplication(int id, User member);
         Task CancelApplication(int id);

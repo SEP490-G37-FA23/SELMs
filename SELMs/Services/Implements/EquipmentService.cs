@@ -44,16 +44,13 @@ namespace SELMs.Services.Implements
         }
 
 
-        public async Task SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips, List<HttpPostedFileBase> images)
+        public async Task<dynamic> SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             Equipment eq = equipment;
             string code = GenerateEquipmentCode();
             eq.system_equipment_code = code;
             eq = repository.SaveEquipment(eq, location_id, ListComponentEquips);
-            if (images != null && images.Count > 0)
-            {
-                AddImages(eq, images);
-            }
+            return eq;
         }
 
         public async Task UpdateEquipment(int id, Equipment equipment)
@@ -65,11 +62,12 @@ namespace SELMs.Services.Implements
             }
         }
 
-        public async Task<dynamic> AddImages(Equipment equipment, List<HttpPostedFileBase> files)
+        public async Task<dynamic> AddImages(int id, List<HttpPostedFile> files)
         {
+            Equipment equipment = await repository.GetEquipment(id);
             int order = 1;
             List<Image> imgs = new List<Image>();
-            foreach (HttpPostedFileBase item in files)
+            foreach (HttpPostedFile item in files)
             {
                 if (item.ContentType.StartsWith("image"))
                 {
@@ -82,9 +80,9 @@ namespace SELMs.Services.Implements
                     };
                     imgs.Add(img);
                 }
-
+                order++;
             }
-            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : imgs;
+            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : new List<Image>();
             return imgs;
         }
 

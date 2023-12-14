@@ -3,6 +3,7 @@ using SELMs.Repositories;
 using SELMs.Repositories.Implements;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,17 +14,17 @@ namespace SELMs.Services.Implements
     {
         private IAttachmentRepository repository = new AttachmentRepository();
 
-        public async Task DownloadAttachment(int id)
+        public async Task<dynamic> SaveAttachment(HttpPostedFile file)
         {
-            throw new NotImplementedException();
-        }
-        public async Task UpdateAttachment(int id, Attachment attachment)
-        {
-            if (await repository.GetAttachment(id) != null)
+            Attachment attachment = new Attachment()
             {
-                attachment.attach_id = id;
-                repository.UpdateAttachment(attachment);
-            }
+                name = file.FileName.Replace(Path.GetExtension(file.FileName), ""),
+                date = DateTime.Now,
+                content = new BinaryReader(file.InputStream).ReadBytes(file.ContentLength),
+                extension = Path.GetExtension(file.FileName)
+            };
+            attachment = repository.SaveAttachment(attachment);
+            return attachment;
         }
     }
 }
