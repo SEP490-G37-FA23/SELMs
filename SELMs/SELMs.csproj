@@ -279,12 +279,6 @@
     <Compile Include="Models\Equipment_Handover_Form_Detail.cs">
       <DependentUpon>SELMsDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Equipment_Import_Application.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Equipment_Import_Application_Detail.cs">
-      <DependentUpon>SELMsDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Equipment_Location_History.cs">
       <DependentUpon>SELMsDB.tt</DependentUpon>
     </Compile>
@@ -338,6 +332,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMsDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SELMsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMsDB.tt</DependentUpon>

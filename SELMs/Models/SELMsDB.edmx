@@ -57,7 +57,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="type_equipment" Type="varchar" MaxLength="64" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
-          <Property Name="category_code" Type="varchar" MaxLength="64" />
+          <Property Name="category_code" Type="varchar" MaxLength="128" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="is_integration" Type="bit" />
           <Property Name="is_available" Type="bit" Nullable="false" />
@@ -133,41 +133,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="equipment_specification" Type="nvarchar" MaxLength="500" />
           <Property Name="unit" Type="nvarchar" MaxLength="20" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
-          <Property Name="note" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="Equipment_Import_Application">
-          <Key>
-            <PropertyRef Name="application_id" />
-          </Key>
-          <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ei_application_code" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="application_date" Type="datetime" />
-          <Property Name="created_by" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="supplier" Type="nvarchar" MaxLength="500" />
-          <Property Name="total_equipments" Type="int" />
-          <Property Name="total_price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="desciption" Type="nvarchar" MaxLength="500" />
-          <Property Name="note" Type="nvarchar" MaxLength="500" />
-          <Property Name="status" Type="varchar" MaxLength="64" />
-          <Property Name="approved_date" Type="datetime" />
-          <Property Name="approver" Type="varchar" MaxLength="64" />
-          <Property Name="approver_notes" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="Equipment_Import_Application_Detail">
-          <Key>
-            <PropertyRef Name="application_detail_id" />
-          </Key>
-          <Property Name="application_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ei_application_code" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="standard_equipment_code" Type="varchar" MaxLength="64" />
-          <Property Name="equipment_name" Type="nvarchar" MaxLength="500" />
-          <Property Name="equipment_specification" Type="nvarchar" MaxLength="500" />
-          <Property Name="unit" Type="nvarchar" MaxLength="20" />
-          <Property Name="category_code" Type="varchar" MaxLength="64" />
-          <Property Name="quantity" Type="int" />
-          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Equipment_Location_History">
@@ -328,6 +293,16 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="role_name" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="user_id" />
@@ -360,8 +335,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipment_Import_Application" EntityType="Self.Equipment_Import_Application" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipment_Import_Application_Detail" EntityType="Self.Equipment_Import_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" Schema="dbo" store:Type="Tables" />
@@ -375,6 +348,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -407,8 +381,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Equipment_Component" EntityType="SELMsModel.Equipment_Component" />
           <EntitySet Name="Equipment_Handover_Form" EntityType="SELMsModel.Equipment_Handover_Form" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="SELMsModel.Equipment_Handover_Form_Detail" />
-          <EntitySet Name="Equipment_Import_Application" EntityType="SELMsModel.Equipment_Import_Application" />
-          <EntitySet Name="Equipment_Import_Application_Detail" EntityType="SELMsModel.Equipment_Import_Application_Detail" />
           <EntitySet Name="Equipment_Location_History" EntityType="SELMsModel.Equipment_Location_History" />
           <EntitySet Name="Equipment_Project_History" EntityType="SELMsModel.Equipment_Project_History" />
           <EntitySet Name="Equipment_Usage_History" EntityType="SELMsModel.Equipment_Usage_History" />
@@ -422,6 +394,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Project_Investment_Cost_Application" EntityType="SELMsModel.Project_Investment_Cost_Application" />
           <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="SELMsModel.Project_Investment_Cost_Application_Detail" />
           <EntitySet Name="Roles" EntityType="SELMsModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="SELMsModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SELMsModel.User" />
           <EntitySet Name="Application_Attachment" EntityType="SELMsModel.Application_Attachment" />
           <EntitySet Name="Attachments" EntityType="SELMsModel.Attachment" />
@@ -454,7 +427,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="type_equipment" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="category_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="is_integration" Type="Boolean" />
           <Property Name="is_available" Type="Boolean" Nullable="false" />
@@ -530,41 +503,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="equipment_specification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Equipment_Import_Application">
-          <Key>
-            <PropertyRef Name="application_id" />
-          </Key>
-          <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ei_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="application_date" Type="DateTime" Precision="3" />
-          <Property Name="created_by" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="supplier" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="total_equipments" Type="Int32" />
-          <Property Name="total_price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="desciption" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="approved_date" Type="DateTime" Precision="3" />
-          <Property Name="approver" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="approver_notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Equipment_Import_Application_Detail">
-          <Key>
-            <PropertyRef Name="application_detail_id" />
-          </Key>
-          <Property Name="application_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ei_application_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="system_equipment_code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="standard_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="equipment_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="equipment_specification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="category_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Equipment_Location_History">
@@ -724,6 +662,16 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="role_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="role_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -885,43 +833,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
                 <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
                 <ScalarProperty Name="form_code" ColumnName="form_code" />
                 <ScalarProperty Name="form_detail_id" ColumnName="form_detail_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Equipment_Import_Application">
-            <EntityTypeMapping TypeName="SELMsModel.Equipment_Import_Application">
-              <MappingFragment StoreEntitySet="Equipment_Import_Application">
-                <ScalarProperty Name="approver_notes" ColumnName="approver_notes" />
-                <ScalarProperty Name="approver" ColumnName="approver" />
-                <ScalarProperty Name="approved_date" ColumnName="approved_date" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="desciption" ColumnName="desciption" />
-                <ScalarProperty Name="total_price" ColumnName="total_price" />
-                <ScalarProperty Name="total_equipments" ColumnName="total_equipments" />
-                <ScalarProperty Name="supplier" ColumnName="supplier" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
-                <ScalarProperty Name="application_date" ColumnName="application_date" />
-                <ScalarProperty Name="ei_application_code" ColumnName="ei_application_code" />
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Equipment_Import_Application_Detail">
-            <EntityTypeMapping TypeName="SELMsModel.Equipment_Import_Application_Detail">
-              <MappingFragment StoreEntitySet="Equipment_Import_Application_Detail">
-                <ScalarProperty Name="note" ColumnName="note" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="category_code" ColumnName="category_code" />
-                <ScalarProperty Name="unit" ColumnName="unit" />
-                <ScalarProperty Name="equipment_specification" ColumnName="equipment_specification" />
-                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
-                <ScalarProperty Name="standard_equipment_code" ColumnName="standard_equipment_code" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="ei_application_code" ColumnName="ei_application_code" />
-                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1093,6 +1004,17 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
                 <ScalarProperty Name="role_name" ColumnName="role_name" />
                 <ScalarProperty Name="role_code" ColumnName="role_code" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SELMsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

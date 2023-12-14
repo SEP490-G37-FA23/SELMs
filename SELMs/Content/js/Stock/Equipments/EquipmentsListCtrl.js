@@ -101,7 +101,7 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
     }
 
     $scope.LoadEquipDetails = function (equip) {
-        window.location.href = "https://localhost:44335/Equipments/EquipmentDetails/" + equip.system_equipment_code;
+        window.location.href = "/Equipments/EquipmentDetails/" + equip.system_equipment_code;
     }
 
     $scope.readExcelFile = function () {
