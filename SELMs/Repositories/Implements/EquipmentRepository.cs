@@ -137,6 +137,7 @@ namespace SELMs.Repositories.Implements
                     item.category_code = equip.category_code;
                 }
             }
+            db.SaveChanges();
         }
 
         public dynamic GetEquipmentImages(int id)

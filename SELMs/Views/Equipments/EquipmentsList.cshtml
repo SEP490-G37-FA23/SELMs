@@ -113,7 +113,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Danh sách thiết bị mới</h5>
+                    <h5 class="modal-title">
+                        Danh sách thiết bị mới {{ListEquipImport.length}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -134,52 +135,51 @@
                                     <th style="min-width:60px" class="text-center">Ghi chú</th>
                                     <th style="min-width:60px" class="text-center">Mã nhóm thiết bị</th>
                                     <th style="min-width:60px" class="text-center">Giá tiền</th>
-                                    <th style="min-width:60px" class="text-center">Số lượng thiết bị</th>
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr ng-repeat="(index,item) in ListEquipImport">
+                                <tr ng-repeat="item in ListEquipImport">
                                     <td class="text-center">{{$index +1}}</td>
-                                    <td class="text-left">
-                                        <input ng-model="item.standard_equipment_code" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-left">
-                                        <input ng-model="item.equipment_name" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-left">
-                                        <input ng-model="item.serial_no" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-center">
-                                        <input ng-model="item.unit" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-left">
-                                        <input ng-model="item.specification" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-left">
-                                        <input ng-model="item.specification" class="form-control" type="text" />
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.MA_QT}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.SO_LUONG}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_TRI_QT| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_TRI_TOI_DA| currency: '':0}}
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <td class="text-left">
+                            <input ng-model="item.standard_equipment_code" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.equipment_name" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.serial_no" class="form-control" type="text" />
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="item.unit" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.specification" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.specification" class="form-control" type="text" />
+                        </td>
+                        <td class="text-center">
+                            {{item.MA_QT}}
+                        </td>
+                        <td class="text-center">
+                            {{item.SO_LUONG}}
+                        </td>
+                        <td class="text-center">
+                            {{item.GIA_TRI_QT| currency: '':0}}
+                        </td>
+                        <td class="text-center">
+                            {{item.GIA_TRI_TOI_DA| currency: '':0}}
+                        </td>
+                        </tr>
+                        </tbody>
                         </table>
-                    </div>
+</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="SaveImportListEquip()">Save changes</button>
                 </div>
             </div>
         </div>
