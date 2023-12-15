@@ -120,7 +120,7 @@ app.controller('MemberListCtrl', function ($scope, $http, $sce) {
             });
     }
     $scope.MarkMemberQuit = function (item) {
-        var partialUrl = origin + '/api/v1/members/mark-quit/' + item.user_id;
+        var partialUrl = origin + '/api/v1/members/resign/' + item.user_id;
         $http.post(partialUrl)
             .then(function (response) {
                 $scope.SuccessSystem('Thành viên ' + item.fullname + ' đã dừng hoạt động');

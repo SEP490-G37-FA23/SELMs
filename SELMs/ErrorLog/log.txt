@@ -790,3 +790,138 @@ System.Threading.ThreadAbortException: Thread was being aborted.
    at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
    at SELMs.Services.Implements.EquipmentHandoverService.GetApplication(Int32 id)
    at SELMs.Api.Controllers.ApiEquipmentHandoverController.<GetApplication>d__5.MoveNext()
+2023-12-12 23:07:08,870 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:08:46,462 [6] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:12:07,865 [22] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:12:38,323 [27] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:19:05,679 [30] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:20:03,407 [28] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:20:48,348 [26] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:24:49,246 [26] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:31:51,807 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:34:56,968 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:36:06,570 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:37:00,864 [27] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:37:15,819 [13] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:48:28,414 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:03:34,407 [8] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:05:00,063 [9] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:05:34,237 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 230
+2023-12-13 00:06:54,323 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 230
+2023-12-13 00:09:38,595 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:12:05,714 [8] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:12:13,380 [8] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:13:49,771 [6] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:14:46,967 [9] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:20:58,465 [8] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-15 11:42:24,059 [9] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<CreateNewMember>d__8.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 101
+2023-12-15 11:45:01,223 [52] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<CreateNewMember>d__8.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 101

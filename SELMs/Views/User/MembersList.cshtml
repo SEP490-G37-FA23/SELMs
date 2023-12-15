@@ -31,10 +31,7 @@
                             <div class="col-md-3">
                                 <button class="btn btn-success" type="button" ng-click="tableToExcel('MemberData')"><i class="icon-spinner2 spinner"></i> Xuất excel</button>
                             </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-primary" data-bs-toggle="modal"
-                                   data-bs-target="#user-list">Test</a>
-                            </div>
+                        
                         </div>
                         <div>
                             <p></p>
@@ -79,8 +76,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Tổng số thành viên</td>
-                                    <td></td>
+                                    <th colspan="6">Tổng số thành viên</th>
+                                    <th>{{ListMembers.length}}</th>
                                 </tr>
                             </tbody>
                         </table>
