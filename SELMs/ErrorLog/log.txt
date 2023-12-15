@@ -790,6 +790,7 @@ System.Threading.ThreadAbortException: Thread was being aborted.
    at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
    at SELMs.Services.Implements.EquipmentHandoverService.GetApplication(Int32 id)
    at SELMs.Api.Controllers.ApiEquipmentHandoverController.<GetApplication>d__5.MoveNext()
+
 2023-12-12 23:07:08,870 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
 System.NullReferenceException: Object reference not set to an instance of an object.
    at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52

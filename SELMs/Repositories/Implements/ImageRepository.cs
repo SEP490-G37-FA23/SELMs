@@ -32,7 +32,7 @@ namespace SELMs.Repositories.Implements
         public dynamic SaveImages(List<Image> images)
         {
             db.Images.AddRange(images);
-            db.SaveChangesAsync();
+            db.SaveChanges();
             return images;
         }
 

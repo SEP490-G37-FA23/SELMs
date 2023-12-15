@@ -216,6 +216,7 @@ namespace SELMs.Api.Controllers
         {
             try
             {
+
                 // Retrieve equipment_id from the request
                 var equipmentId = HttpContext.Current.Request.Form["equipment_id"];
 
@@ -235,6 +236,7 @@ namespace SELMs.Api.Controllers
 
                 // Return a successful response
                 return Ok("Images added successfully");
+
             }
             catch (Exception ex)
             {

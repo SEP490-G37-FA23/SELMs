@@ -71,8 +71,6 @@ namespace SELMs.Services.Implements
                     memCode += "1";
                 }
             }
-            memCode = memCode.Replace("Đ", "D");
-            memCode = memCode.Replace("đ", "d");
             return memCode;
         }
 
@@ -88,7 +86,8 @@ namespace SELMs.Services.Implements
                     stringBuilder.Append(c);
                 }
             }
-
+            stringBuilder.Replace("Đ", "D");
+            stringBuilder.Replace("đ", "d");
             return stringBuilder.ToString();
         }
 
