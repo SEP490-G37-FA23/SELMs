@@ -103,7 +103,7 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
     $scope.LoadEquipDetails = function (equip) {
         window.location.href = "/Equipments/EquipmentDetails/" + equip.system_equipment_code;
     }
-
+    $scope.ListEquipImport =[]
     $scope.readExcelFile = function () {
         var input = document.getElementById('input_file');
         var file = input.files[0];
@@ -123,13 +123,38 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
                 var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
                 // Output the parsed data
-
                 console.log(jsonData);
+
+               
+                var extractedColumns = extractColumns(jsonData)
+                $scope.ListEquipImport = extractedColumns;
+                console.log($scope.ListEquipImport);
             };
 
             reader.readAsBinaryString(file);
         } else {
             console.error("No file selected");
         }
+    };
+
+    function extractColumns(jsonData) {
+        // Get the header row from jsonData
+        var headerRow = jsonData[0];
+
+        // Define the indices of the columns you want to extract
+        var indicesToExtract = [0, 1, 2, 3, 4, 5, 6, 7,8]; // Adjust these indices based on your needs
+
+        // Extract columns based on indices and create an array of objects
+        var extractedColumns = jsonData.slice(1).map(function (row) {
+            var extractedObject = {};
+            indicesToExtract.forEach(function (index, i) {
+                extractedObject[headerRow[index]] = row[i];
+            });
+            return extractedObject;
+        });
+
+        return extractedColumns;
     }
+
+
 });

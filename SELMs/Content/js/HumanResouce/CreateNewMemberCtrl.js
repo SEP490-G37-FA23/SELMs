@@ -104,7 +104,7 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         var partialUrl = origin + '/api/v1/members/new-member';
         $http.post(partialUrl, data)
             .then(function (response) {
-                $scope.SuccessSystem('Thêm mới thành viên có username là ' + response.Result.username + ' thành công!');
+                $scope.SuccessSystem('Thêm mới thành viên có  thành công!');
                 $scope.LoadMembersList();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);

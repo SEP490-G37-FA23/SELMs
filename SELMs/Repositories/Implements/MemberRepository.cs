@@ -2,11 +2,14 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web.Security;
 using Dapper;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using static System.Net.Mime.MediaTypeNames;
+using System.Threading.Tasks;
 
 namespace SELMs.Repositories.Implements
 {
@@ -72,5 +75,43 @@ namespace SELMs.Repositories.Implements
                 , commandType: CommandType.StoredProcedure);
             return members;
         }
+
+        public async Task SendGmailAllocationAccountAsync(User mem)
+        {
+            try
+            {
+                string senderEmail = "lymthe153498@fpt.edu.vn";
+                string senderPassword = "vhfg myqq lxec uakt";
+                string recipientEmail = mem.email;
+                string subject = "Email allocation account from SELMS";
+                string body = "Hello, this is account SELMS for you: Account: " + mem.username + "; Password: " + mem.password ;
+
+
+                using (var client = new SmtpClient("smtp.gmail.com"))
+                {
+                    client.Port = 587;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                    client.EnableSsl = true;
+
+                    var message = new MailMessage(senderEmail, recipientEmail);
+                    message.Subject = subject;
+                    message.Body = body;
+
+                    await client.SendMailAsync(message);
+
+                    Console.WriteLine("Email has been sent successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw; // Re-throw the exception after logging or handling
+            }
+        }
+
     }
+
+  
+
 }
