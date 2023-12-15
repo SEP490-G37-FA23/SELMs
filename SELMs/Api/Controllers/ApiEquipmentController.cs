@@ -149,11 +149,11 @@ namespace SELMs.Api.Controllers
 		#region Import equipments
 		[HttpPost]
 		[Route("api/equipments/import-equipments")]
-		public async Task<IHttpActionResult> ImportEquipments(List<EquipmentDTO> dtos)
+		public async Task<IHttpActionResult> ImportEquipments(EquipmentImportDTO dto)
 		{
 			try
 			{
-				List<Equipment> equipments = mapper.Map<List<Equipment>>(dtos);
+				List<Equipment> equipments = mapper.Map<List<Equipment>>(dto.ListEquipImport);
 				service.ImportEquipments(equipments);
 				return Ok();
 			}

@@ -291,6 +291,7 @@
     <Compile Include="Api\DTOs\EquipmentHandoverFormDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentHandoverFormDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentHandoverRequest.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentLocationHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentProjectHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentRequest.cs" />
