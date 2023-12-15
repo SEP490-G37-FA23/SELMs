@@ -30,10 +30,12 @@ namespace SELMs.App_Start
 
                 //Configuring Equipment and EquipmentDTO
                 cfg.CreateMap<EquipmentDTO, Equipment>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)));
+                .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 cfg.CreateMap<Equipment, EquipmentDTO>()
-                .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()));
+                .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Image and ImageDTO
                 cfg.CreateMap<ImageDTO, Image>()
