@@ -156,5 +156,21 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
         return extractedColumns;
     }
 
+    $scope.SaveImportListEquip = function () { 
+        var data = {
+            username: username,
+            ListEquipImport:$scope.ListEquipImport
+        }
+        console.log(data);
+        var partialUrl = origin + '/api/v1/equipments/import' ,data;
+        $http.post(partialUrl)
+            .then(function (response) {
+                $scope.SuccessSystem('Nhập danh sách thiết bị thành công');
+                $scope.LoadEquipmentsList();
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+
 
 });
