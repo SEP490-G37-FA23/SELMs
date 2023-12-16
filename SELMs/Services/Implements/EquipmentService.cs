@@ -39,6 +39,7 @@ namespace SELMs.Services.Implements
                 string code = "E";
                 code += num < 10000 ? num.ToString("D4") : num.ToString();
                 equip.system_equipment_code = code;
+                equip.create_date = DateTime.Now;
             }
             repository.SaveEquipments(equipments);
         }
