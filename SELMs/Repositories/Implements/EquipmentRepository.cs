@@ -50,9 +50,22 @@ namespace SELMs.Repositories.Implements
 
         public dynamic SaveEquipments(List<Equipment> equipments)
         {
-            db.Equipments.AddRange(equipments);
-            db.SaveChangesAsync();
-            return equipments;
+            try
+            {
+                foreach (var equipment in equipments)
+                {
+                    db.Entry(equipment).State = EntityState.Added;
+                }
+
+                db.SaveChanges();
+
+                return equipments;
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                return $"Error: {ex.Message}";
+            }
         }
 
         public dynamic GetEquipmentList(Argument arg)

@@ -30,18 +30,28 @@ namespace SELMs.Services.Implements
             return equipmentModel;
         }
 
-        public async Task ImportEquipments(List<Equipment> equipments)
+        public async Task ImportEquipments(List<Equipment> equipments, string username)
         {
-            Equipment obj = repository.GetLastEquipment();
-            int num = obj == null ? 1 : obj.equipment_id;
-            foreach (Equipment equip in equipments)
+            try
             {
-                string code = "E";
-                code += num < 10000 ? num.ToString("D4") : num.ToString();
-                equip.system_equipment_code = code;
-                equip.create_date = DateTime.Now;
+                Equipment obj = repository.GetLastEquipment();
+                int num = obj == null ? 1 : obj.equipment_id;
+                foreach (Equipment equip in equipments)
+                {
+                    string code = "E";
+                    code += num < 10000 ? num.ToString("D4") : num.ToString();
+                    equip.system_equipment_code = code;
+                    equip.create_date = DateTime.Now;
+                    equip.responsibler = username;
+                    equip.is_available = true;
+                }
+                await repository.SaveEquipments(equipments);
             }
-            repository.SaveEquipments(equipments);
+            catch (Exception ex)
+            {
+               Console.WriteLine(ex.Message);   
+            }
+
         }
 
 

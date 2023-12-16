@@ -401,9 +401,6 @@
     <Compile Include="Models\Equipment_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Equipment_Usage_History.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Image.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -425,8 +422,6 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Project_Investment_Cost_Application.cs" />
-    <Compile Include="Models\Project_Investment_Cost_Application_Detail.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -445,7 +440,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -456,7 +453,6 @@
     <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentHandoverFormRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
-    <Compile Include="Repositories\IEquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\IInventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
@@ -471,7 +467,6 @@
     <Compile Include="Repositories\Implements\EquipmentHandoverFormRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\IEquipmentLocationHistoryRepository.cs" />
-    <Compile Include="Repositories\Implements\EquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\InventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />

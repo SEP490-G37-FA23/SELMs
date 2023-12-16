@@ -162,8 +162,8 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
             ListEquipImport:$scope.ListEquipImport
         }
         console.log(data);
-        var partialUrl = origin + '/api/v1/equipments/import' ,data;
-        $http.post(partialUrl)
+        var partialUrl = origin + '/api/v1/equipments/import-equipments';
+        $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Nhập danh sách thiết bị thành công');
                 $scope.LoadEquipmentsList();
