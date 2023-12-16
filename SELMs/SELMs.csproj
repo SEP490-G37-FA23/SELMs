@@ -425,6 +425,8 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Project_Investment_Cost_Application.cs" />
+    <Compile Include="Models\Project_Investment_Cost_Application_Detail.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -443,6 +445,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -508,48 +511,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
-    <Content Include="bin\AutoMapper.dll" />
-    <Content Include="bin\AutoMapper.xml" />
-    <Content Include="bin\Dapper.dll" />
-    <Content Include="bin\Dapper.xml" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.dll" />
-    <Content Include="bin\EntityFramework.SqlServer.xml" />
-    <Content Include="bin\EntityFramework.xml" />
-    <Content Include="bin\log4net.dll" />
-    <Content Include="bin\log4net.xml" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\SELMs.dll" />
-    <Content Include="bin\SELMs.pdb" />
-    <Content Include="bin\Swashbuckle.Core.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
-    <Content Include="bin\System.Web.Http.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Optimization.xml" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
-    <Content Include="bin\WebActivatorEx.dll" />
-    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -831,18 +792,6 @@
     <Content Include="Content\js\Stock\Locations\LocationDetailCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationManagementCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationsListCtrl.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\angular-web-notification.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\index.html" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.eslintrc.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.gitattributes" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\index.html" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\karma.conf.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\stylelint.config.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\web-notification.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\karma.conf.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\stylelint.config.js" />
     <Content Include="Content\service\AjaxServices.js" />
     <Content Include="ErrorLog\log.txt" />
     <Content Include="favicon.ico" />
@@ -879,41 +828,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.atom-build.yml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.bithoundrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.editorconfig" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jsbeautifyrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jscs.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jshintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jslintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\bower.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\api.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\CHANGELOG.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\inch.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\LICENSE" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.atom-build.yml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.bithoundrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.editorconfig" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jsbeautifyrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jscs.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jshintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jslintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.npmignore" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\bower.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\api.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\CHANGELOG.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\inch.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\LICENSE" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\package.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\jshintrc-common.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\README-footer-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\README-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\README.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\package.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\jshintrc-common.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\README-footer-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\README-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\README.md" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\ar.json" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\ca.json" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\cs.json" />
@@ -1003,7 +917,6 @@
     <Content Include="Content\css\assets\vendor\tinymce\package.json" />
     <Content Include="Content\css\assets\vendor\tinymce\README.md" />
     <Content Include="Content\css\forms\contact.php" />
-    <Content Include="bin\SELMs.dll.config" />
     <Content Include="App_Data\BodyPart_3b7003d3-a65b-4796-86dc-ba090052e8be" />
     <EntityDeploy Include="Models\SELMs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -1052,7 +965,6 @@
     <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
-    <Content Include="Views\Equipments\ViewEquipmentDetails.cshtml" />
     <Content Include="Views\News\NotificationList.cshtml" />
     <Content Include="Views\News\CreateNewNotification.cshtml" />
     <Content Include="Views\News\NotificationDetail.cshtml" />
@@ -1087,6 +999,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\Stock\DeliveryEquipment\" />
+    <Folder Include="Content\Script\" />
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="obj\Debug\" />
     <Folder Include="Views\Categories\" />
