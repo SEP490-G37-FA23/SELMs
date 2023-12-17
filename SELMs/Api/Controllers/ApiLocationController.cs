@@ -142,9 +142,8 @@ namespace SELMs.Api.Controllers
             {
                 Location location = mapper.Map<Location>(locationRequest.Location);
                 List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
-                service.SaveLocation(location, subLocations);
-                service.UpdateLocation(id, location, subLocations);
-                return Ok();
+                dynamic result = service.UpdateLocation(id, location, subLocations);
+                return Ok(result);
             }
             catch (Exception ex)
             {

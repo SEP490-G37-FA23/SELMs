@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SELMs", "SELMs\SELMs.csproj", "{9CA3705A-4C6A-4D3C-B245-0C7D60F3D536}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SELMs.Test", "SELMs.Test\SELMs.Test.csproj", "{C308FC64-B4C4-4351-9345-0FD765DA22C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SELMs.Test", "SELMs.Test\SELMs.Test.csproj", "{C308FC64-B4C4-4351-9345-0FD765DA22C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

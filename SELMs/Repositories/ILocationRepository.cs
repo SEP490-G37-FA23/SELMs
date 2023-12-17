@@ -17,7 +17,7 @@ namespace SELMs.Repositories
         dynamic GetLocation(int id);
         dynamic SaveLocation(Location location);
         dynamic SaveLocations(List<Location> locations);
-        void UpdateLocation(Location location);
+        dynamic UpdateLocation(Location location);
         void DeleteLocation(int id);
 
         List<LocationDTO> GetListSubLocation(int id);
