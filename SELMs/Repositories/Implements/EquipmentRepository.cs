@@ -85,11 +85,12 @@ namespace SELMs.Repositories.Implements
             return equipments;
         }
 
-        public async Task UpdateEquipment(Equipment equipment)
+        public dynamic UpdateEquipment(Equipment equipment)
         {
             Equipment orgEquipment = db.Equipments.Where(e => e.equipment_id == equipment.equipment_id).FirstOrDefault();
             db.Entry(orgEquipment).CurrentValues.SetValues(equipment);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+            return orgEquipment;
         }
 
         public Equipment GetLastEquipment()

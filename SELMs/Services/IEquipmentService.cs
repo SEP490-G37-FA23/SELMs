@@ -14,7 +14,7 @@ namespace SELMs.Services
         Task<dynamic> GetEquipment(int id);
         Task<dynamic> SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
         Task ImportEquipments(List<Equipment> equipments, string username);
-        Task UpdateEquipment(int id, Equipment equipment);
+        Task<dynamic> UpdateEquipment(int id, Equipment equipment);
         Task<dynamic> AddImages(int id, List<HttpPostedFile> images);
 
     }

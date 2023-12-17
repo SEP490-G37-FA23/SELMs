@@ -168,15 +168,15 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Update equipment
-		[HttpPut]
+		[HttpPost]
 		[Route("equipments/update/{id}")]
 		public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
 		{
 			try
 			{
 				Equipment mem = mapper.Map<Equipment>(equipment);
-				service.UpdateEquipment(id, mem);
-				return Ok();
+				dynamic result = service.UpdateEquipment(id, mem);
+				return Ok(result);
 			}
 			catch (Exception ex)
 			{

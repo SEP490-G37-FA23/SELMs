@@ -17,7 +17,7 @@ namespace SELMs.Repositories
         dynamic GetDetailEquipment(string code);
         dynamic SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips);
         dynamic SaveEquipments(List<Equipment> equipments);
-        Task UpdateEquipment(Equipment equipment);
+        dynamic UpdateEquipment(Equipment equipment);
         void DeleteEquipment(int id);
         Equipment GetLastEquipment();
 
