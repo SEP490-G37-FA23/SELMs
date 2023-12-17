@@ -173,6 +173,21 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-		#endregion
-	}
+        #endregion
+
+        //#region Get detail project
+        //[HttpPost]
+        //[Route("projects/detail/{id}")]
+        //public async Task<DetailProjectDTO> GetDetailProject(int id)
+        //{
+        //    DetailProjectDTO returnedData = new DetailProjectDTO();
+        //    returnedData.project = await repository.GetDetailProject(id);
+        //    returnedData.ListMemberInProject = repository.GetListMemberInProject(id);
+        //    returnedData.ListEquipmentInProject = repository.GetListEquipmentInProject(id);
+        //    return returnedData;
+
+
+        //}
+        //#endregion
+    }
 }

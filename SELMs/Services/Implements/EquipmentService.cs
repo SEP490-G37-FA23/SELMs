@@ -15,6 +15,7 @@ namespace SELMs.Services.Implements
     {
         private IEquipmentRepository repository = new EquipmentRepository();
         private IImageRepository imageRepository = new ImageRepository();
+        private readonly IEquipmentLocationHistoryRepository equipmentLocationHistoryRepository = new EquipmentLocationHistoryRepository();
 
         public async Task<dynamic> GetEquipment(int id)
         {
@@ -32,16 +33,13 @@ namespace SELMs.Services.Implements
 
         public async Task ImportEquipments(List<Equipment> equipments, string username)
         {
-            Equipment obj = repository.GetLastEquipment();
-            int num = obj == null ? 1 : Convert.ToInt32(obj.system_equipment_code.Replace("E", "")) + 1;
+            List<EquipComponentDTO> ListComponentEquips = new List<EquipComponentDTO>();
             foreach (Equipment equip in equipments)
             {
-                string code = "E";
-                code += num < 10000 ? num.ToString("D4") : num.ToString();
-                equip.system_equipment_code = code;
-                num++;
+                equip.create_date = DateTime.Now;
+                equip.responsibler = username;
+                await SaveEquipment(equip, 2, ListComponentEquips);
             }
-            repository.SaveEquipments(equipments);
         }
 
 
@@ -54,13 +52,14 @@ namespace SELMs.Services.Implements
             return eq;
         }
 
-        public async Task UpdateEquipment(int id, Equipment equipment)
+        public async Task<Equipment> UpdateEquipment(int id, Equipment equipment)
         {
             if (repository.GetEquipment(id) != null)
             {
                 equipment.equipment_id = id;
-                repository.UpdateEquipment(equipment);
+               return await repository.UpdateEquipment(equipment);
             }
+            return null;
         }
 
         public async Task<dynamic> AddImages(int id, List<HttpPostedFile> files)

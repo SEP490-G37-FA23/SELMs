@@ -17,8 +17,13 @@ namespace SELMs.Repositories.Implements
         private SELMsContext db = new SELMsContext();
         public void DeleteEquipment(int id)
         {
-            dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
-            if (equipment != null) db.Equipments.Remove(equipment);
+            Equipment equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
+            if (equipment != null)
+            {
+                dynamic equipInLocation = db.Equipment_Location_History.Where(e => e.system_equipment_code == equipment.system_equipment_code).ToList();
+                db.Equipment_Location_History.RemoveRange(equipInLocation);
+                db.Equipments.Remove(equipment);
+            }
             db.SaveChangesAsync();
 
         }
@@ -29,7 +34,7 @@ namespace SELMs.Repositories.Implements
             return equipment;
         }
 
-        public Equipment SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
+        public Equipment SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             db.Equipments.Add(equipment);
             Equipment_Location_History his = new Equipment_Location_History();
@@ -37,13 +42,17 @@ namespace SELMs.Repositories.Implements
             his.system_equipment_code = equipment.system_equipment_code;
             his.from_date = DateTime.Now;
             db.Equipment_Location_History.Add(his);
-            foreach(EquipComponentDTO item in ListComponentEquips)
+            if (ListComponentEquips.Count > 0)
             {
-                Equipment_Component component = new Equipment_Component();
-                component.system_equipment_code_parent = equipment.system_equipment_code;
-                component.system_equipment_code_component = item.system_equipment_code;
-                db.Equipment_Component.Add(component);
-            }           
+                foreach (EquipComponentDTO item in ListComponentEquips)
+                {
+                    Equipment_Component component = new Equipment_Component();
+                    component.system_equipment_code_parent = equipment.system_equipment_code;
+                    component.system_equipment_code_component = item.system_equipment_code;
+                    db.Equipment_Component.Add(component);
+                }
+            }
+            
             db.SaveChanges();
 
             return equipment;
@@ -86,11 +95,12 @@ namespace SELMs.Repositories.Implements
             return equipments;
         }
 
-        public async Task UpdateEquipment(Equipment equipment)
+        public async Task<Equipment> UpdateEquipment(Equipment equipment)
         {
             Equipment orgEquipment = db.Equipments.Where(e => e.equipment_id == equipment.equipment_id).FirstOrDefault();
             db.Entry(orgEquipment).CurrentValues.SetValues(equipment);
-            db.SaveChangesAsync();
+            await db.SaveChangesAsync();
+            return orgEquipment;
         }
 
         public Equipment GetLastEquipment()

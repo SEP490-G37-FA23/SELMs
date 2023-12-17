@@ -5,6 +5,10 @@
 }
 <script src="~/Content/js/LabDicrector/Project/CreateNewProjectCtrl.js"></script>
 <div ng-app="myApp" ng-controller="CreateNewProjectCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div id="notification" class="col-md-12"></div>
     <section class="section">
         <form class="row g-3">
             <div>
@@ -95,12 +99,12 @@
                                         </button>
                                     </li>
                                     @*<li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="cost-tab" data-bs-toggle="tab"
-                                                data-bs-target="#cost" type="button" role="tab" aria-controls="cost"
-                                                aria-selected="false">
-                                            Chi phí
-                                        </button>
-                                    </li>*@
+                                            <button class="nav-link" id="cost-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#cost" type="button" role="tab" aria-controls="cost"
+                                                    aria-selected="false">
+                                                Chi phí
+                                            </button>
+                                        </li>*@
                                 </ul>
                                 <div class="tab-content pt-2" id="myTabContent">
                                     <div class="tab-pane fade show active" id="member" role="tabpanel"
@@ -243,15 +247,15 @@
                                                 <tr><td colspan="8" class="text-center"><button type="button" class="btn btn-primary" ng-click="HandleNewEquip()">Thêm thiết bị</button></td></tr>
                                             </tbody>
                                         </table>
-   
+
                                     </div>
                                     @*<div class="tab-pane fade" id="cost" role="tabpanel"
-                                         aria-labelledby="cost-tab">
-                                        Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis
-                                        cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis
-                                        accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
-                                        fuga tempore dolor.
-                                    </div>*@
+                                             aria-labelledby="cost-tab">
+                                            Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis
+                                            cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis
+                                            accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
+                                            fuga tempore dolor.
+                                        </div>*@
                                 </div>
                             </div>
                         </div>

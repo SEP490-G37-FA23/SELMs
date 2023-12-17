@@ -76,6 +76,8 @@ app.controller('ProjectListCtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.LoadProjectList();
-
+    $scope.LoadProjectDetails = function (proj) {
+        window.location.href = "/Project/EquipmentDetails/" + proj.project_id;
+    }
 
 });
