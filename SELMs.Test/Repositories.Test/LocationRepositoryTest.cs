@@ -130,8 +130,8 @@ namespace SELMs.Test.Repositories.Test
 
 
 		[Theory]
-		[InlineData(-10)]
 		[InlineData(0)]
+		[InlineData(2)]
 		public void TestGetListSubLocation_ReturnList(int id)
 		{
 			var list = locationRepository.GetListSubLocation(id);

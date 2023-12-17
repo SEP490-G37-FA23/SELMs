@@ -81,22 +81,26 @@
 		[Fact]
 		public void TestSaveManyEquipment_ReturnNothing()
 		{
-			try
-			{
-				List<Equipment> equipments = new()
+			SELMsContext sELMsContext = new();
+
+			List<Equipment> equipments = new()
 				{
 					new Equipment() { equipment_name = "New one" },
-					new Equipment() { equipment_name = "New one 1" },
-					new Equipment() { equipment_name = "New one 2" }
+					new Equipment() { equipment_name = "" },
+					new Equipment() { equipment_name = "N" }
 				};
+			equipmentRepository.SaveEquipments(equipments);
+			Thread.Sleep(1000);
 
-				equipmentRepository.SaveEquipments(equipments);
-				output.WriteLine($"Created multiple equipment successfully");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			var e1 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals("New one"));
+			var e2 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals(""));
+			var e3 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals("N"));
+
+			Assert.Equal("New one", e1.equipment_name);
+			Assert.Equal("", e2.equipment_name);
+			Assert.Equal("N", e3.equipment_name);
+
+			output.WriteLine($"Created many equipments successfully");
 		}
 
 
@@ -109,12 +113,19 @@
 		{
 			try
 			{
+				SELMsContext sELMsContext = new();
 				equipmentRepository.UpdateEquipment(equipment);
-				output.WriteLine($"Update equipment successfully");
+				Thread.Sleep(1500);
+
+				var e = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_id == equipment.equipment_id);
+
+				Assert.Equal(equipment.equipment_name, e.equipment_name);
+				output.WriteLine("Updated successfully");
 			}
 			catch (Exception e)
 			{
-				Assert.Fail(e.ToString());
+				Assert.IsType<ArgumentNullException>(e);
+				output.WriteLine(e.Message);
 			}
 		}
 
@@ -151,19 +162,20 @@
 
 		[Theory]
 		[InlineData(0)]
-		[InlineData(32)]
+		[InlineData(86)]
 		public void TestDeleteEquipment_ReturnNoException(int id)
 		{
-			try
+			SELMsContext sELMsContext = new();
+			var equipment = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_id == id);
+
+			if (equipment != null)
 			{
 				equipmentRepository.DeleteEquipment(id);
 				Thread.Sleep(2000);
 				output.WriteLine("Delete successfull");
 			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			else
+				output.WriteLine("Equipment not found to delete");
 		}
 
 
@@ -175,15 +187,10 @@
 		[MemberData(nameof(EquipmentRepositoryTestData.SaveEquipmentWithComponentTestData), MemberType = typeof(EquipmentRepositoryTestData))]
 		public void TestSaveEquipmentWithComponent_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
 		{
-			try
-			{
-				equipmentRepository.SaveEquipment(equipment, location_id, ListComponentEquips);
-				output.WriteLine("Test case passed");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+
+			equipmentRepository.SaveEquipment(equipment, location_id, ListComponentEquips);
+			output.WriteLine("Equipment created successfully");
+
 		}
 		#endregion
 	}
@@ -256,8 +263,8 @@
 
 		public static IEnumerable<object[]> UpdateEquipmentTestData()
 		{
-			yield return new object[] { new Equipment() { equipment_id = 11, equipment_name = "halo" } };
-			yield return new object[] { new Equipment() { equipment_id = 9, equipment_name = "new update" } };
+			yield return new object[] { new Equipment() { equipment_id = 0, equipment_name = "halo" } };
+			yield return new object[] { new Equipment() { equipment_id = 9, equipment_name = "G" } };
 		}
 
 

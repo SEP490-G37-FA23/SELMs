@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Web.Http.Results;
 
 namespace SELMs.Test.Controllers.Test
 {
@@ -36,22 +37,23 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentLocationHistoryControllerTestData.CreateHistoryTestData), MemberType = typeof(EquipmentLocationHistoryControllerTestData))]
-		public async Task TestCreateEquipmentLocationHistory_ReturnSuccessOrFailMessage(EquipmentLocationHistoryDTO equipmentLocationHistoryDTO)
+		public async Task TestCreateEquipmentLocationHistory_ReturnSuccessOrFailMessage(bool expectedException, EquipmentLocationHistoryDTO equipmentLocationHistoryDTO)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentLocationHistoryController.AddEquipmentLocationHistory(equipmentLocationHistoryDTO);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentLocationHistoryController.AddEquipmentLocationHistory(equipmentLocationHistoryDTO);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				if (content.Equals("null"))
-					output.WriteLine("History not found");
-				else
-					output.WriteLine(content);
-			}
-			catch (Exception ex)
+
+			if (expectedException)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.Equal(400, (int)response.StatusCode);
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+				output.WriteLine(content);
+			}
+			else
+			{
+				Assert.Equal(200, (int)response.StatusCode);
+				output.WriteLine(content);
 			}
 		}
 
@@ -84,20 +86,25 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentLocationHistoryControllerTestData.UpdateHistoryTestData), MemberType = typeof(EquipmentLocationHistoryControllerTestData))]
-		public async Task TestUpdateEquipmentLocationHistory_ReturnSuccessOrFailMessage(int id, EquipmentLocationHistoryDTO equipmentLocationHistoryDTO)
+		public async Task TestUpdateEquipmentLocationHistory_ReturnSuccessOrFailMessage(bool expectedException, int id, EquipmentLocationHistoryDTO equipmentLocationHistoryDTO)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentLocationHistoryController.UpdateEquipmentLocationHistory(id, equipmentLocationHistoryDTO);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentLocationHistoryController.UpdateEquipmentLocationHistory(id, equipmentLocationHistoryDTO);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
+
+
+			if (expectedException)
+			{
+				Assert.Equal(400, (int)response.StatusCode);
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
 				output.WriteLine(content);
 			}
-			catch (Exception ex)
+			else
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				output.WriteLine(content);
 			}
+
 		}
 		#endregion
 	}
@@ -108,15 +115,17 @@ namespace SELMs.Test.Controllers.Test
 	{
 		public static IEnumerable<object[]> CreateHistoryTestData()
 		{
-			yield return new object[] { new EquipmentLocationHistoryDTO() { location_id = 1, system_equipment_code = "E0010" } };
-			yield return new object[] { new EquipmentLocationHistoryDTO() { location_id = 5, system_equipment_code = "E0020" } };
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new EquipmentLocationHistoryDTO() { location_id = 1, system_equipment_code = "E0010" } };
+			yield return new object[] { false, new EquipmentLocationHistoryDTO() { location_id = 2, system_equipment_code = "" } };
 		}
 
 
 		public static IEnumerable<object[]> UpdateHistoryTestData()
 		{
-			yield return new object[] { 0, new EquipmentLocationHistoryDTO() { location_id = 0, system_equipment_code = "E0010" } };
-			yield return new object[] { 30, new EquipmentLocationHistoryDTO() { location_id = 8, system_equipment_code = "E0021" } };
+			yield return new object[] { true, 0, null! };
+			yield return new object[] { false, 0, new EquipmentLocationHistoryDTO() { location_id = 0, system_equipment_code = "E0010" } };
+			yield return new object[] { false, 1, new EquipmentLocationHistoryDTO() { location_id = 1, system_equipment_code = "E0021" } };
 		}
 	}
 }

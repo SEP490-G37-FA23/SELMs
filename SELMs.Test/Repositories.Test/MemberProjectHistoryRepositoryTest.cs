@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using System.Data.Entity;
 
 namespace SELMs.Test.Repositories.Test
 {
 	public class MemberProjectHistoryRepositoryTest
 	{
-
 		private readonly ITestOutputHelper output;
+		private readonly SELMsContext sELMsContext = new();
 		private readonly IMemberProjectHistoryRepository memberProjectHistoryRepository = new MemberProjectHistoryRepository();
 
 
@@ -50,15 +51,17 @@ namespace SELMs.Test.Repositories.Test
 		[MemberData(nameof(MemberProjectHistoryRepositoryTestData.SaveHistoryTestData), MemberType = typeof(MemberProjectHistoryRepositoryTestData))]
 		public async Task TestSaveHistory_ReturnNoException(Member_Project_History memberProjectHistory)
 		{
-			try
-			{
-				await memberProjectHistoryRepository.SaveHistory(memberProjectHistory);
-				output.WriteLine("Add new successfully");
 
-			}
-			catch (Exception ex)
+			await memberProjectHistoryRepository.SaveHistory(memberProjectHistory);
+
+			var project = await sELMsContext.Projects.FirstOrDefaultAsync(p => p.project_id == memberProjectHistory.project_id);
+
+			if (project != null)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				var list = sELMsContext.Member_Project_History.Where(m => m.project_id == project.project_id).ToList();
+
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
 			}
 		}
 
@@ -67,21 +70,29 @@ namespace SELMs.Test.Repositories.Test
 
 		[Theory]
 		[MemberData(nameof(MemberProjectHistoryRepositoryTestData.UpdateHistoryTestData), MemberType = typeof(MemberProjectHistoryRepositoryTestData))]
-		public async Task TestUpdateHistory_ReturnNoException(Member_Project_History memberProjectHistory)
+		public async Task TestUpdateHistory_ReturnNoException(string expectedUserCode, Member_Project_History memberProjectHistory)
 		{
 			try
 			{
 				bool updateSuccessfull = await memberProjectHistoryRepository.UpdateHistory(memberProjectHistory);
 
 				if (updateSuccessfull)
+				{
+					var history = await sELMsContext.Member_Project_History.FirstOrDefaultAsync(a => a.id == memberProjectHistory.id);
+
+					Assert.Equal(expectedUserCode, history.user_code);
+
 					output.WriteLine("Update successfully");
+				}
 				else
-					output.WriteLine("Update Fail");
+					Assert.Fail("Update fail");
 			}
 			catch (Exception ex)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.IsType<ArgumentNullException>(ex);
+				output.WriteLine(ex.Message);
 			}
+
 		}
 	}
 
@@ -94,22 +105,22 @@ namespace SELMs.Test.Repositories.Test
 	{
 		public static IEnumerable<object[]> SaveHistoryTestData()
 		{
-			yield return new object[] { new Member_Project_History() { project_id = 6, user_code = "DatTT", status = "ACTIVE", date = DateTime.Now } };
-			yield return new object[] { new Member_Project_History() { project_id = 2, user_code = "LuyenLV", status = "INACTIVE", date = DateTime.Now } };
-			yield return new object[] { new Member_Project_History() { project_id = 11, user_code = "LuatNV", status = "INACTIVE", date = DateTime.Now } };
+			yield return new object[] { new Member_Project_History() { project_id = 0, user_code = "LuyenLV", status = "INACTIVE", date = DateTime.Now } };
+			yield return new object[] { new Member_Project_History() { project_id = 1, user_code = "", status = "", date = null } };
+			yield return new object[] { new Member_Project_History() { project_id = 2, user_code = "DatTT", status = "ACTIVE", date = DateTime.Now } };
 		}
 
 
 
 		public static IEnumerable<object[]> UpdateHistoryTestData()
 		{
-			var a = new Member_Project_History() { id = 19, project_id = 10, user_code = "DucTM1", status = "INACTIVE", note = "huh?" };
-			var b = new Member_Project_History() { id = 20, project_id = 20, user_code = "", status = "ACTIVE" };
-			var c = new Member_Project_History() { id = 0, project_id = 21, user_code = "DatTT", status = "" };
+			var a = new Member_Project_History() { id = 1, project_id = 0, user_code = "DucTM1" };
+			var b = new Member_Project_History() { id = 2, project_id = 1, user_code = "" };
+			var c = new Member_Project_History() { id = 3, project_id = 3, user_code = "DatTT" };
 
-			yield return new object[] { a };
-			yield return new object[] { b };
-			yield return new object[] { c };
+			yield return new object[] { "DucTM1", a };
+			yield return new object[] { "", b };
+			yield return new object[] { "DatTT", c };
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection;
 
 namespace SELMs.Test.Repositories.Test
 {
@@ -36,21 +37,16 @@ namespace SELMs.Test.Repositories.Test
 		[MemberData(nameof(ProjectRepositoryTestData.GetProjectListByMultiConditionTestData), MemberType = typeof(ProjectRepositoryTestData))]
 		public async Task TestGetProjectListByMultiCondition_ReturnListProject(Argument argument)
 		{
-			try
-			{
-				var list = await projectRepository.GetProjectList(argument);
-				Thread.Sleep(1000);
 
-				if (list is IList { Count: > 0 })
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				else
-					output.WriteLine("Project not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var list = await projectRepository.GetProjectList(argument);
+			Thread.Sleep(1000);
+
+			if (list is IList { Count: > 0 })
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("Project not found");
+
 		}
 
 
@@ -81,12 +77,21 @@ namespace SELMs.Test.Repositories.Test
 			try
 			{
 				projectRepository.SaveProject(project);
-				output.WriteLine("Test case passed");
+
+				SELMsContext sELMsContext = new();
+
+				var p = sELMsContext.Projects.FirstOrDefault(p => p.project_name.Equals(project.project_name));
+
+				Assert.NotNull(p);
+
+				output.WriteLine("Project created successfully\n" + JsonConvert.SerializeObject(p));
 			}
 			catch (Exception ex)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.IsType<ArgumentNullException>(ex);
+				output.WriteLine(ex.Message);
 			}
+
 		}
 
 
@@ -106,11 +111,17 @@ namespace SELMs.Test.Repositories.Test
 
 				Assert.Equal(expectedName, p.project_name);
 
-				output.WriteLine("Test case passed");
+				output.WriteLine("Updated successfully");
 			}
-			catch (Exception ex)
+			catch (TargetException ex)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.IsType<TargetException>(ex);
+				output.WriteLine(ex.Message);
+			}
+			catch (ArgumentNullException ex)
+			{
+				Assert.IsType<ArgumentNullException>(ex);
+				output.WriteLine(ex.Message);
 			}
 		}
 
@@ -146,42 +157,30 @@ namespace SELMs.Test.Repositories.Test
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
-		[InlineData(4)]
+		[InlineData(2)]
 		public async Task TestProjectEquipment_ReturnEquipmentInProject(int projectId)
 		{
-			try
-			{
-				var list = await projectRepository.GetProjectEquipments(projectId);
 
-				if (list is IList { Count: > 0 })
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				else
-					output.WriteLine("No equipment found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var list = await projectRepository.GetProjectEquipments(projectId);
+
+			if (list is IList { Count: > 0 })
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("No equipment found");
 		}
 
 
 
 		[Theory]
 		[InlineData(0)]
-		[InlineData(2)]
-		[InlineData(4)]
+		[InlineData(1)]
+		[InlineData(int.MaxValue)]
 		public void TestDeleteProject_ReturnNoException(int projectId)
 		{
-			try
-			{
-				projectRepository.DeleteProject(projectId);
-				output.WriteLine("Test case passed");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			projectRepository.DeleteProject(projectId);
+			Assert.Null(projectRepository.GetProject(projectId));
+			output.WriteLine("Test case passed");
 		}
 	}
 
@@ -196,22 +195,27 @@ namespace SELMs.Test.Repositories.Test
 	{
 		public static IEnumerable<object[]> CreateProjectTestData()
 		{
-			yield return new object[] { new Project() { project_name = "Ứng dụng lập trình" } };
-			yield return new object[] { new Project() { project_name = "Nâng cao tính thực tế của AI" } };
+			yield return new object[] { null! };
+			yield return new object[] { new Project() { project_name = "Ứng dụng lập trình", status = true } };
+			yield return new object[] { new Project() { project_name = "Nâng cao tính thực tế của AI", status = false } };
 		}
 
 
 		public static IEnumerable<object[]> GetProjectListByMultiConditionTestData()
 		{
-			yield return new object[] { new Argument() { username = "", text = "" } };
-			yield return new object[] { new Argument() { username = "LyMT", text = "IOT" } };
-			yield return new object[] { new Argument() { username = "AnhNV", text = "d" } };
+			// Username is manager
+			yield return new object[] { new Argument() { username = "pm", text = "very new", isadmin = false } };
+			yield return new object[] { new Argument() { username = "LyMT", text = "very new", isadmin = true } };
+			yield return new object[] { new Argument() { username = "LyMT", text = "", isadmin = false } };
+			yield return new object[] { new Argument() { username = "DucTM4", text = "", isadmin = false } };
+			yield return new object[] { new Argument() { username = "CuongNV", text = "very new" } };
 		}
 
 
 		public static IEnumerable<object[]> UpdateProjectTestData()
 		{
-			yield return new object[] { "very new", new Project() { project_id = 2, project_name = "very new" } };
+			yield return new object[] { string.Empty, null! };
+			yield return new object[] { "very new", new Project() { project_id = 3, project_name = "very new" } };
 			yield return new object[] { "Nghiên cứu nguyên liệu hiếm", new Project() { project_id = 4, project_name = "Nghiên cứu nguyên liệu hiếm" } };
 		}
 	}

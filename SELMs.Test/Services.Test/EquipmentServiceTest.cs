@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Services.Test
+﻿using System.Web;
+
+namespace SELMs.Test.Services.Test
 {
 	public class EquipmentServiceTest
 	{
@@ -21,11 +23,11 @@
 
 		[Theory]
 		[MemberData(nameof(EquipmentServiceTestData.CreateEquipmentTestData), MemberType = typeof(EquipmentServiceTestData))]
-		public async Task TestSaveEquipment_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
+		public async Task TestSaveEquipment_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips, List<HttpPostedFileBase> images)
 		{
 			try
 			{
-				//await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips);
+				await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips, images);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.Data.Entity.Validation;
 
 namespace SELMs.Test.Repositories.Test
 {
 	public class EquipmentImportApplicationRepositoryTest
 	{
 		private readonly ITestOutputHelper output;
+		private readonly SELMsContext sELMsContext = new();
 		private readonly IEquipmentImportApplicationRepository repository = new EquipmentImportApplicationRepository();
 
 		public EquipmentImportApplicationRepositoryTest(ITestOutputHelper output)
@@ -65,12 +67,23 @@ namespace SELMs.Test.Repositories.Test
 		{
 			try
 			{
-				var app = repository.SaveApplication(application);
-				output.WriteLine(JsonConvert.SerializeObject(app));
+				repository.SaveApplication(application);
+
+				var app = sELMsContext.Equipment_Import_Application
+						.FirstOrDefault(e => e.ei_application_code
+						.Equals(application.ei_application_code) && e.created_by
+						.Equals(application.created_by));
+
+
+				Assert.Equal(application.ei_application_code, app.ei_application_code);
+				Assert.Equal(application.created_by, app.created_by);
+
+				output.WriteLine("Created successfully");
 			}
 			catch (Exception ex)
 			{
-				Assert.Fail(ex.Message);
+				Assert.IsType<DbEntityValidationException>(ex);
+				output.WriteLine(ex.Message);
 			}
 		}
 
@@ -78,7 +91,7 @@ namespace SELMs.Test.Repositories.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentImportApplicationRepositoryTestData.UpdateApplicationTestData), MemberType = typeof(EquipmentImportApplicationRepositoryTestData))]
-		public void TestUpdateApplication_ReturnNoException(string expectedCreatedByName, Equipment_Import_Application application)
+		public void TestUpdateApplication_ReturnNoException(Equipment_Import_Application application)
 		{
 			try
 			{
@@ -86,12 +99,19 @@ namespace SELMs.Test.Repositories.Test
 				Thread.Sleep(1000);
 				Equipment_Import_Application app = repository.GetApplication(application.application_id);
 
-				Assert.Equal(expectedCreatedByName, app.created_by);
-				output.WriteLine("Test case passed");
+				Assert.Equal(application.ei_application_code, app.ei_application_code);
+				Assert.Equal(application.created_by, app.created_by);
+				output.WriteLine("Update successfully");
 			}
-			catch (Exception ex)
+			catch (ArgumentNullException ex)
 			{
-				Assert.Fail(ex.Message);
+				Assert.IsType<ArgumentNullException>(ex);
+				output.WriteLine(ex.Message);
+			}
+			catch (DbEntityValidationException ex)
+			{
+				Assert.IsType<DbEntityValidationException>(ex);
+				output.WriteLine(ex.Message);
 			}
 		}
 
@@ -99,18 +119,19 @@ namespace SELMs.Test.Repositories.Test
 
 		[Theory]
 		[InlineData(0)]
-		[InlineData(3)]
+		[InlineData(1)]
+		[InlineData(2)]
 		public void TestDeleteApplicationById_ReturnNoException(int id)
 		{
-			try
-			{
-				repository.DeleteApplication(id);
+			repository.DeleteApplication(id);
+			Thread.Sleep(800);
+
+			var app = repository.GetApplication(id);
+
+			if (app == null)
 				output.WriteLine("Test case passed");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail(ex.Message);
-			}
+			else
+				Assert.Fail("Can't delete application");
 		}
 		#endregion
 
@@ -252,23 +273,40 @@ namespace SELMs.Test.Repositories.Test
 	{
 		public static IEnumerable<object[]> CreateApplicationTestData()
 		{
-			var a = new Equipment_Import_Application() { ei_application_code = "EIA202311254", created_by = "Lockheed Martin" };
-			var b = new Equipment_Import_Application() { ei_application_code = "EIA202311255", created_by = "Mikoyan" };
-			var c = new Equipment_Import_Application() { ei_application_code = "EIA202311256", created_by = "Avtomat Kalashnikov" };
+			var a = new Equipment_Import_Application() { ei_application_code = "", created_by = "" };
+			var b = new Equipment_Import_Application() { ei_application_code = "", created_by = "Lockheed Martin" };
+			var c = new Equipment_Import_Application() { ei_application_code = null, created_by = "General Electricity" };
+			var d = new Equipment_Import_Application() { ei_application_code = "EIA202311255", created_by = "" };
+			var e = new Equipment_Import_Application() { ei_application_code = "EIA202311256", created_by = null };
+			var f = new Equipment_Import_Application() { ei_application_code = "EIA202311257", created_by = "Avtomat Kalashnikov" };
 
 			yield return new object[] { a };
 			yield return new object[] { b };
 			yield return new object[] { c };
+			yield return new object[] { d };
+			yield return new object[] { e };
+			yield return new object[] { f };
 		}
 
 
 		public static IEnumerable<object[]> UpdateApplicationTestData()
 		{
-			var a = new Equipment_Import_Application() { application_id = 1, ei_application_code = "EIA20231125", created_by = "Porsche" };
+			var a = new Equipment_Import_Application() { application_id = 0, ei_application_code = "EIA20231125", created_by = "" };
 			var b = new Equipment_Import_Application() { application_id = 2, ei_application_code = "EIA202311251", created_by = "Misubitshi" };
+			var c = new Equipment_Import_Application() { application_id = 3, ei_application_code = "EIA202311255", created_by = "" };
+			var d = new Equipment_Import_Application() { application_id = 1, ei_application_code = "", created_by = "" };
 
-			yield return new object[] { "Porsche", a };
-			yield return new object[] { "Misubitshi", b };
+			var e = new Equipment_Import_Application() { application_id = 1, ei_application_code = null, created_by = null };
+			var f = new Equipment_Import_Application() { application_id = 1, ei_application_code = null, created_by = "Hello" };
+			var g = new Equipment_Import_Application() { application_id = 1, ei_application_code = "EIA20231125", created_by = null };
+
+			yield return new object[] { a };
+			yield return new object[] { b };
+			yield return new object[] { c };
+			yield return new object[] { d };
+			yield return new object[] { e };
+			yield return new object[] { f };
+			yield return new object[] { g };
 		}
 
 

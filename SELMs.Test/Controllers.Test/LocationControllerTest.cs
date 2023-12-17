@@ -1,10 +1,14 @@
 ﻿using System.Collections;
+using System.Data.Entity;
+using System.Web.Http.Results;
+using Newtonsoft.Json.Linq;
 
 namespace SELMs.Test.Controllers.Test
 {
 	public class LocationControllerTest
 	{
 		private readonly ITestOutputHelper output;
+		private readonly SELMsContext sELMsContext = new();
 		private readonly ApiLocationController apiLocationController = new();
 
 		public LocationControllerTest(ITestOutputHelper output)
@@ -38,20 +42,31 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(LocationControllerTestData.GetLocationListByMultiConditionTestData), MemberType = typeof(LocationControllerTestData))]
-		public async Task TestGetLocationListByMultiCondition_ReturnList(Argument argument)
+		public async Task TestGetLocationListByMultiCondition_ReturnList(bool expectException, Argument argument)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.GetLocationList(argument);
-				Thread.Sleep(1000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiLocationController.GetLocationList(argument);
+			Thread.Sleep(1000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+
+			if (!expectException)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.Equal(200, (int)response.StatusCode);
+				var list = JsonConvert.DeserializeObject<List<dynamic>>(content);
+
+				if (list.Count > 0)
+					foreach (var item in list)
+						output.WriteLine(JsonConvert.SerializeObject(item));
+				else
+					output.WriteLine("Location not found");
+			}
+			else
+			{
+				Assert.Equal(400, (int)response.StatusCode);
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+				output.WriteLine(content);
 			}
 		}
 
@@ -61,21 +76,27 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(LocationControllerTestData.GetAllSubLocationListTestData), MemberType = typeof(LocationControllerTestData))]
-		public async Task TestGetAllSubLocationList_ReturnList(Argument argument)
+		public async Task TestGetAllSubLocationList_ReturnList(bool exception, Argument argument)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.GetAllSubLocationList(argument);
-				Thread.Sleep(1000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiLocationController.GetAllSubLocationList(argument);
+			Thread.Sleep(1000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+
+			if (exception)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.Equal(400, (int)response.StatusCode);
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+				output.WriteLine(content);
 			}
+			else
+			{
+				Assert.Equal(200, (int)response.StatusCode);
+				output.WriteLine(content);
+			}
+
 		}
 
 
@@ -87,19 +108,24 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(LocationControllerTestData.CreateLocationTestData), MemberType = typeof(LocationControllerTestData))]
-		public async Task TestCreateLocation_ReturnStatusCode200(LocationRequest locationRequest)
+		public async Task TestCreateLocation_ReturnStatusCode200(bool expectException, LocationRequest locationRequest)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.SaveLocation(locationRequest);
-				Thread.Sleep(2000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiLocationController.SaveLocation(locationRequest);
+			Thread.Sleep(2000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+
+
+			if (expectException)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				string content = await response.Content.ReadAsStringAsync();
+				Assert.Equal(400, (int)response.StatusCode);
+				output.WriteLine(content);
+			}
+			else
+			{
+				Assert.Equal(200, (int)response.StatusCode);
+				output.WriteLine("Add new success");
 			}
 		}
 
@@ -131,22 +157,19 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData(0)]
-		[InlineData(7)]
+		[InlineData(1)]
+		[InlineData(2)]
+		[InlineData(9)]
 		public void TestGetDetailLocation_ReturnStatusCode200(int id)
 		{
-			try
-			{
-				var location = apiLocationController.GetDetailLocation(id);
+			var location = apiLocationController.GetDetailLocation(id);
 
-				if (location.location_info == null)
-					output.WriteLine("Location not found");
-				else
-					output.WriteLine(JsonConvert.SerializeObject(location));
-			}
-			catch (Exception ex)
+			if (location.location_info == null)
+				output.WriteLine("Location not found");
+			else
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				JToken jsonToken = JToken.Parse(JsonConvert.SerializeObject(location));
+				output.WriteLine(jsonToken.ToString(Formatting.Indented));
 			}
 		}
 
@@ -156,19 +179,24 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(LocationControllerTestData.CreateEquipLocationHistoryTestData), MemberType = typeof(LocationControllerTestData))]
-		public async Task TestCreateEquipLocationHistory_ReturnStatusCode200(EquipLocationHistoryDTO dto)
+		public async Task TestCreateEquipLocationHistory_ReturnStatusCode200(bool expectException, EquipLocationHistoryDTO dto)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.SaveEquipLocationHistory(dto);
-				Thread.Sleep(1000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiLocationController.SaveEquipLocationHistory(dto);
+			Thread.Sleep(2000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+
+
+			if (expectException)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				string content = await response.Content.ReadAsStringAsync();
+				Assert.Equal(400, (int)response.StatusCode);
+				output.WriteLine(content);
+			}
+			else
+			{
+				Assert.Equal(200, (int)response.StatusCode);
+				output.WriteLine("Add new success");
 			}
 		}
 
@@ -177,25 +205,19 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData(0)]
 		[InlineData(1)]
+		[InlineData(2)]
+		[InlineData(44)]
 		public async Task TestGetLocationById_ReturnLocation(int id)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.GetLocation(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiLocationController.GetLocation(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				if ((int)response.StatusCode == 200)
-					output.WriteLine(content);
-				else
-					output.WriteLine("Location not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if ((int)response.StatusCode == 200)
+				output.WriteLine(content);
+			else
+				output.WriteLine("Location not found");
 		}
 
 
@@ -207,23 +229,20 @@ namespace SELMs.Test.Controllers.Test
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
+		[InlineData(2)]
 		public async Task TestDeleteLocation_ReturnStatusCode200(int id)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.DeleteLocations(id);
+			var actionResult = await apiLocationController.DeleteLocations(id);
+			Thread.Sleep(1000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				Thread.Sleep(1000);
+			Assert.Equal(200, (int)response.StatusCode);
 
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				Assert.Equal(200, (int)response.StatusCode);
-				output.WriteLine("Test case passed");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			var location = await sELMsContext.Locations.FirstOrDefaultAsync(l => l.location_id == id);
+
+			if (location == null)
+				output.WriteLine("Delete successfull");
 		}
 		#endregion
 	}
@@ -238,19 +257,21 @@ namespace SELMs.Test.Controllers.Test
 	{
 		public static IEnumerable<object[]> GetLocationListByMultiConditionTestData()
 		{
-			// id is parent_id , text is location description, username is
-			yield return new object[] { new Argument() { id = 1, text = "" } };
-			yield return new object[] { new Argument() { id = 2, text = "Phòng học AL-104R" } };
-			yield return new object[] { new Argument() { id = 4, text = "AL-104R" } };
+			// id is parent_id , text is location description
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new Argument() { id = 1, text = "" } };
+			yield return new object[] { false, new Argument() { id = 2, text = "Tủ" } };
+			yield return new object[] { false, new Argument() { id = 4, text = "Ngăn cột 1, Tủ 102, Phòng học AL-104R" } };
 		}
 
 
 
 		public static IEnumerable<object[]> GetAllSubLocationListTestData()
 		{
-			yield return new object[] { new Argument() { id = 1, text = "" } };
-			yield return new object[] { new Argument() { id = 2, text = "Phòng học AL-104R" } };
-			yield return new object[] { new Argument() { id = 4, text = "AL-104R" } };
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new Argument() { id = 1, text = "" } };
+			yield return new object[] { false, new Argument() { id = 2, text = "Phòng học AL-104R" } };
+			yield return new object[] { false, new Argument() { id = 4, text = "AL-104R" } };
 		}
 
 
@@ -273,9 +294,10 @@ namespace SELMs.Test.Controllers.Test
 			List<LocationDTO> list3 = new() { new LocationDTO() { location_code = "BE-113", is_active = false } };
 
 
-			yield return new object[] { new LocationRequest() { Location = l1, SubLocations = list1 } };
-			yield return new object[] { new LocationRequest() { Location = l2, SubLocations = list2 } };
-			yield return new object[] { new LocationRequest() { Location = l3, SubLocations = list3 } };
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new LocationRequest() { Location = l1, SubLocations = list1 } };
+			yield return new object[] { false, new LocationRequest() { Location = l2, SubLocations = list2 } };
+			yield return new object[] { false, new LocationRequest() { Location = l3, SubLocations = list3 } };
 		}
 
 
@@ -318,10 +340,10 @@ namespace SELMs.Test.Controllers.Test
 				new Equipment_Location_History() { system_equipment_code = "E0044", location_id = 5 }
 			};
 
-
-			yield return new object[] { new EquipLocationHistoryDTO() { ListEquipLocationHistory = list1 } };
-			yield return new object[] { new EquipLocationHistoryDTO() { ListEquipLocationHistory = list2 } };
-			yield return new object[] { new EquipLocationHistoryDTO() { ListEquipLocationHistory = list3 } };
+			yield return new object[] { true, null! };
+			yield return new object[] { false, new EquipLocationHistoryDTO() { ListEquipLocationHistory = list1 } };
+			yield return new object[] { false, new EquipLocationHistoryDTO() { ListEquipLocationHistory = list2 } };
+			yield return new object[] { false, new EquipLocationHistoryDTO() { ListEquipLocationHistory = list3 } };
 		}
 	}
 }
