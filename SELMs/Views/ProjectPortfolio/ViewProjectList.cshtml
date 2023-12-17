@@ -57,15 +57,12 @@
                                     </td>
 
                                     <td>
-                                        <button class="btn btn-warning" data-toggle="modal"
-                                                data-target="#suakhachhang" ng-click="GetKH(item)">
-                                            <i class="far fa-edit"></i>
-                                        </button>
                                         <button class="btn btn-danger" ng-click="DeleteKH(item)">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                         <a class="btn btn-primary" data-bs-toggle="modal"
-                                           data-bs-target="#user-details"></a>
+                                           data-bs-target="#user-details" ng-click="LoadProjectDetails(item)"><i class="far fa-info-square" style="color: #ffffff;"></i></a>
+
                                     </td>
                                 </tr>
                             </tbody>

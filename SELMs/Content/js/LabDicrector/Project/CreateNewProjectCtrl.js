@@ -44,14 +44,20 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
     //this removes everything before the last slash in the path
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
-    $scope.NewProject = {
-        project_name: '',
-        acronym: '',
-        description: '',
-        manager: '',
-        location_id: 0,
-        status: 'Pending'
+
+    $scope.ResetNewProject = function () {
+        $scope.NewProject = {
+            project_name: '',
+            acronym: '',
+            description: '',
+            manager: '',
+            location_id: 0,
+            status: 'Pending'
+        }
+        $scope.ListMembersJoinProject = [];
+        $scope.ListEquipmentProject = [];
     }
+    $scope.ResetNewProject();
     $scope.check = false;
     if (parseInt(url) > 0) {
         $scope.NewProject.location_id = url;
@@ -170,17 +176,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Thêm mới dự án thành công!');
-                $scope.NewProject = {
-                    project_name: '',
-                    acronym: '',
-                    description: '',
-                    manager: '',
-                    location_id: 0,
-                    status: 'Pending'
-                }
-                $scope.ListMembersJoinProject = [];
-                $scope.ListEquipmentProject = [];
-
+                $scope.ResetNewProject();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });

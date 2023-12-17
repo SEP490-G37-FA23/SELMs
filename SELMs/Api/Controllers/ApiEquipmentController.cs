@@ -128,7 +128,7 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Delete equipment by id
-		[HttpGet]
+		[HttpPost]
 		[Route("equipments/delete/{id}")]
 		public async Task<IHttpActionResult> DeleteEquipment(int id)
 		{
@@ -155,7 +155,7 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				List<Equipment> equipments = mapper.Map<List<Equipment>>(dto.ListEquipImport);
-				service.ImportEquipments(equipments, dto.username);
+				await service.ImportEquipments(equipments, dto.username);
 				return Ok();
 			}
 			catch (Exception ex)
@@ -169,21 +169,21 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Update equipment
-		[HttpPut]
+		[HttpPost]
 		[Route("equipments/update/{id}")]
-		public async Task<IHttpActionResult> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
+		public async Task<Equipment> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
 		{
 			try
 			{
 				Equipment mem = mapper.Map<Equipment>(equipment);
-				service.UpdateEquipment(id, mem);
-				return Ok();
+				return await service.UpdateEquipment(id, mem);
+				
 			}
 			catch (Exception ex)
 			{
 				Log.Error("Error: ", ex);
 				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				return null;
 				throw;
 			}
 		}

@@ -82,7 +82,9 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
     $scope.LoadProjectsList = function () {
         var data = {
             username: username,
-            text: $scope.project_name
+            project_name: $scope.project_name,
+            manager_name: '',
+            location_name:''
         }
         $http.post(origin + '/api/v1/projects/search', data).then(function (response) {
             $scope.ListProjects = response.data;

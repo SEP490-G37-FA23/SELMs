@@ -167,6 +167,7 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
             .then(function (response) {
                 $scope.SuccessSystem('Nhập danh sách thiết bị thành công');
                 $scope.LoadEquipmentsList();
+                $scope.ListEquipImport = [];
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });

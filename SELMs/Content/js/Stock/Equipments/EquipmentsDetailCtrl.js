@@ -149,7 +149,6 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
    
 
     $scope.UpdateEquip = function (equip) {
-        console.log(equip);
         var data = {
             equip: {
                 standard_equipment_code: equip.standard_equipment_code,
@@ -169,13 +168,12 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             location_id: equip.location_id,
             ListComponentEquips: $scope.ListComponentEquips
         }
-      
-
-        var partialUrl = origin + '/api/v1/equipments/update/' + equip.equipment_id;
+        var partialUrl = origin + '/api/v1/equipments/update/' + equip.equipment_id ;
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thiết bị thành công!');
-                $scope.GetDetailEquip(url);
+                $scope.UpdateImageEquip(response.data)
+              
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
@@ -203,6 +201,4 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
                 $scope.ErrorSystem(error.data.Message);
             });
     };
-
-
 });
