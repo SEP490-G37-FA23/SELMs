@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title">Danh sách danh mục thiết bị</h5>
                 <div class="mt-4 ms-3">
-                    <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Categories")">Thêm danh mục mới</a>
+                    <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Category")">Thêm danh mục mới</a>
                     <button type="button" class="btn btn-primary ms-2">Xuất Excel</button>
                 </div>
                 <table class="table table-bordered mt-5">
@@ -59,7 +59,7 @@
                             <td>{{item.number_equip}}</td>
                             <td>
                                 <button class="btn btn-primary mx-3" ng-click="LoadCategoryDetails(item)"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-danger "><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-danger " ng-click="DeleteCategory(item)"><i class="fas fa-trash-alt"></i></button>
                             </td>
 
                         </tr>

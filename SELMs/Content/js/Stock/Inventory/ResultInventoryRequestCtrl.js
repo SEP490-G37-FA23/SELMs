@@ -47,7 +47,7 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
             listUpdate: $scope.ListEquipUpdate
         }
         console.log(data)
-        var partialUrl = origin + '/api/v1/inventory-request/update-equipment-result';
+        var partialUrl = origin + '/api/v1/inventory-request/update-equipment-result'; 
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật tình trạng thiết bị theo kiểm kê thành công!');
@@ -65,7 +65,7 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
             if (existingItemIndex == -1) {
                 $scope.ListEquipUpdate.push({
                     application_detail_id: item.application_detail_id,
-                    actual_usage_status: item.actual_usage_status,
+                    actual_usage_status: item.actual_usage_status, 
                     equipment_id: item.equipment_id,
                     inventory_results: 'Đã cập nhật thiết bị'
                 });

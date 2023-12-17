@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SELMs.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,8 +50,8 @@ namespace SELMs.Api.DTOs
     public class DetailEquipDTO
     {
         public dynamic equip { get; set; }
-        public List<EquipComponentDTO> ListComponentEquips { get; set; }
-
+        public List<EquipComponentDTO> ListComponentEquips { get; set; } = null;
+        public List<Image> ListImageEquips { get; set; } = null;
 
     }
 

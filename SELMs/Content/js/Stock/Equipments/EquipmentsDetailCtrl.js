@@ -55,9 +55,14 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategoriesList();
 
     $scope.LoadLocationsList = function () {
-
-        $http.post(origin + '/api/v1/locations').then(function (response) {
-            $scope.ListLocations = response.data;
+        var data = {
+            username: username,
+            text: '',
+            id: -1
+        }
+        $http.post(origin + '/api/v1/locations', data).then(function (response) {
+            $scope.ListLocations = response.data.Result;
+            $scope.sumLocations = $scope.ListLocations.length;
         });
     }
 
@@ -114,21 +119,34 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
         item.usage_status = eq.usage_status;
 
     }
-
+    $scope.image_url = '';
     $scope.GetDetailEquip = function (system_equip_code) {
         new QRCode(document.getElementById('id_qrcode'), origin + '/Equipments/EquipmentDetails/' + system_equip_code);
         var partialUrl = origin + '/api/v1/equipments/detail/' + system_equip_code;
         $http.post(partialUrl)
             .then(function (response) {
                 console.log(response.data);
-                $scope.DetailEquip = response.data.equip[0];
+                $scope.DetailEquip = response.data.equip;
                 $scope.ListComponentEquips = response.data.ListComponentEquips;
+                var listImage = response.data.ListImageEquips;
+                var partialUrl = origin + '/api/v1/images/' + listImage[0].image_id;
+                    //+ listImage[0].image_id;
+                $http.get(partialUrl).then(function (res) {
+                    console.log(res)
+                    $scope.image_url = res.config.url;
+                })
+               
 
+                
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
     $scope.GetDetailEquip(url);
+    // Assume raw data is a flat array of RGBA values
+    // For example, [R1, G1, B1, A1, R2, G2, B2, A2, ...]
+
+   
 
     $scope.UpdateEquip = function (equip) {
         console.log(equip);

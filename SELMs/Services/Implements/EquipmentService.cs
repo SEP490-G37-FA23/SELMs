@@ -45,7 +45,7 @@ namespace SELMs.Services.Implements
         }
 
 
-        public async Task<dynamic> SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
+        public async Task<Equipment> SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             Equipment eq = equipment;
             string code = GenerateEquipmentCode();

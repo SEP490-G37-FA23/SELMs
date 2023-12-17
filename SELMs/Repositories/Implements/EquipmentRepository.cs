@@ -29,7 +29,7 @@ namespace SELMs.Repositories.Implements
             return equipment;
         }
 
-        public dynamic SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
+        public Equipment SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             db.Equipments.Add(equipment);
             Equipment_Location_History his = new Equipment_Location_History();
@@ -44,7 +44,8 @@ namespace SELMs.Repositories.Implements
                 component.system_equipment_code_component = item.system_equipment_code;
                 db.Equipment_Component.Add(component);
             }           
-            db.SaveChangesAsync();
+            db.SaveChanges();
+
             return equipment;
         }
 
@@ -101,7 +102,7 @@ namespace SELMs.Repositories.Implements
         public dynamic GetDetailEquipment(string code)
         {
             dynamic equipments = null;
-            equipments = db.Database.Connection.QueryAsync<dynamic>("Proc_GetDetailEquipment", new
+            equipments = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailEquipment", new
             {
                 system_code = code
 

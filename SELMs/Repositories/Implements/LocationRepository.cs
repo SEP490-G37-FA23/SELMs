@@ -16,7 +16,7 @@ namespace SELMs.Repositories.Implements
         private SELMsContext db = new SELMsContext();
         public dynamic GetLocationList()
         {
-            dynamic locations = db.Locations.ToList();
+            dynamic locations = db.Locations.ToListAsync();
             return locations;
         }
         public void DeleteLocation(int id)
