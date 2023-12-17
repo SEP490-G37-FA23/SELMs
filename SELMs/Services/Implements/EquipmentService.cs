@@ -32,26 +32,16 @@ namespace SELMs.Services.Implements
 
         public async Task ImportEquipments(List<Equipment> equipments, string username)
         {
-            try
+            Equipment obj = repository.GetLastEquipment();
+            int num = obj == null ? 1 : Convert.ToInt32(obj.system_equipment_code.Replace("E", "")) + 1;
+            foreach (Equipment equip in equipments)
             {
-                Equipment obj = repository.GetLastEquipment();
-                int num = obj == null ? 1 : obj.equipment_id;
-                foreach (Equipment equip in equipments)
-                {
-                    string code = "E";
-                    code += num < 10000 ? num.ToString("D4") : num.ToString();
-                    equip.system_equipment_code = code;
-                    equip.create_date = DateTime.Now;
-                    equip.responsibler = username;
-                    equip.is_available = true;
-                }
-                await repository.SaveEquipments(equipments);
+                string code = "E";
+                code += num < 10000 ? num.ToString("D4") : num.ToString();
+                equip.system_equipment_code = code;
+                num++;
             }
-            catch (Exception ex)
-            {
-               Console.WriteLine(ex.Message);   
-            }
-
+            repository.SaveEquipments(equipments);
         }
 
 
@@ -101,8 +91,8 @@ namespace SELMs.Services.Implements
         string GenerateEquipmentCode()
         {
             string eqmtCode = "E";
-            dynamic equipment = repository.GetLastEquipment();
-            int num = equipment == null ? 1 : equipment.equipment_id + 1;
+            Equipment equipment = repository.GetLastEquipment();
+            int num = equipment == null ? 1 : Convert.ToInt32(equipment.system_equipment_code.Replace("E","")) + 1;
             eqmtCode += num < 10000 ? num.ToString("D4") : num.ToString();
             return eqmtCode;
         }
