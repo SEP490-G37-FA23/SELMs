@@ -13,7 +13,7 @@ namespace SELMs.Services.Implements
     {
         private ILocationRepository repository = new LocationRepository();
 
-        public async Task SaveLocation(Location location, List<Location> subLocations)
+        public async Task<dynamic> SaveLocation(Location location, List<Location> subLocations)
         {
             Location loc = repository.SaveLocation(location);
             foreach (Location subLocation in subLocations)
@@ -22,14 +22,15 @@ namespace SELMs.Services.Implements
                 subLocation.location_level = loc.location_level + 1;
             }
             repository.SaveLocations(subLocations);
+            return loc;
         }
 
-        public async Task UpdateLocation(int id, Location location, List<Location> subLocations)
+        public async Task<dynamic> UpdateLocation(int id, Location location, List<Location> subLocations)
         {
-            if (await repository.GetLocation(id) != null)
+            if (repository.GetLocation(id) != null)
             {
                 location.location_id = id;
-                repository.UpdateLocation(location);
+                location = repository.UpdateLocation(location);
                 foreach (Location item in subLocations)
                 {
                     if (item.location_id == null || item.location_level == null)
@@ -42,6 +43,7 @@ namespace SELMs.Services.Implements
                     }
                 }
             }
+            return location;
         }
         public async Task SaveEquipLocationHistory(Equipment_Location_History item)
         {
