@@ -25,23 +25,12 @@ namespace SELMs.Services.Implements
             return loc;
         }
 
-        public async Task<dynamic> UpdateLocation(int id, Location location, List<Location> subLocations)
+        public async Task<dynamic> UpdateLocation(int id, Location location)
         {
             if (repository.GetLocation(id) != null)
             {
                 location.location_id = id;
                 location = repository.UpdateLocation(location);
-                foreach (Location item in subLocations)
-                {
-                    if (item.location_id == null || item.location_level == null)
-                    {
-                        repository.SaveLocation(item);
-                    }
-                    else
-                    {
-                        repository.UpdateLocation(item);
-                    }
-                }
             }
             return location;
         }
