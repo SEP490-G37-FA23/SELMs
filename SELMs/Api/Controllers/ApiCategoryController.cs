@@ -155,5 +155,25 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Deactivate category
+        [HttpPost]
+        [Route("categories/deactive/{id}")]
+        public async Task<IHttpActionResult> DeactivateCategory(int id)
+        {
+            try
+            {
+				service.DeactivateCategory(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
     }
 }

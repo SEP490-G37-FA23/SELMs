@@ -45,5 +45,15 @@ namespace SELMs.Services.Implements
 				repository.UpdateCategory(category);
 			}
 		}
-	}
+
+        public async Task DeactivateCategory(int id)
+		{
+			Category category = repository.GetCategory(id);
+			if (category != null)
+			{
+				category.is_active = false;
+			}
+			repository.UpdateCategory(category);
+		}
+    }
 }

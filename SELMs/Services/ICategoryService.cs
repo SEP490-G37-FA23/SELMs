@@ -10,6 +10,7 @@ namespace SELMs.Services
 {
     public interface ICategoryService
     {
+        Task DeactivateCategory(int id);
         Task SaveCategory(Category category, List<StandardEquipmentDTO> equipments);
         Task UpdateCategory(int id, Category category);
     }
