@@ -52,14 +52,14 @@ namespace SELMs.Services.Implements
             return eq;
         }
 
-        public async Task<Equipment> UpdateEquipment(int id, Equipment equipment)
+        public async Task<dynamic> UpdateEquipment(int id, Equipment equipment)
         {
             if (repository.GetEquipment(id) != null)
             {
                 equipment.equipment_id = id;
-               return await repository.UpdateEquipment(equipment);
+                equipment = repository.UpdateEquipment(equipment);
             }
-            return null;
+            return equipment;
         }
 
         public async Task<dynamic> AddImages(int id, List<HttpPostedFile> files)
