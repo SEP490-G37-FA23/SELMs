@@ -98,7 +98,8 @@ namespace SELMs.Api.Controllers
 			DetailEquipDTO returnedData = new DetailEquipDTO();
 			returnedData.equip = await repository.GetDetailEquipment(code);
 			returnedData.ListComponentEquips =  repository.GetListComponentEquips(code);
-			return returnedData;
+            returnedData.ListImageEquips = repository.GetEquipmentImages(returnedData.equip.equipment_id);
+            return returnedData;
 
 
 		}
@@ -108,19 +109,19 @@ namespace SELMs.Api.Controllers
 
 		[HttpPost]
 		[Route("equipments/new-equipment")]
-		public async Task<IHttpActionResult> SaveEquipment(EquipmentNew data)
+		public async Task<Equipment> SaveEquipment(EquipmentNew data)
 		{
 			try
 			{
 				Equipment equipment = mapper.Map<Equipment>(data.equip);
-				service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips);
-				return Ok();
+                return await service.SaveEquipment(equipment, data.location_id, data.ListComponentEquips);
+				
 			}
 			catch (Exception ex)
 			{
 				Log.Error("Error: ", ex);
 				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				return null;
 				throw;
 			}
 		}
@@ -189,27 +190,6 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Add Images
-    //    [HttpPost]
-    //    [Route("equipments/images/add")]
-    //    public async Task<IHttpActionResult> AddImages()
-    //    {
-    //        try
-    //        {
-    //            var equipmentId = HttpContext.Current.Request.Params["equipment_id"];
-    //            var files = HttpContext.Current.Request.Files.GetMultiple("images").ToList();
-				//service.AddImages(Convert.ToInt32(equipmentId), files);
-    //            return Ok();
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Log.Error("Error: ", ex);
-    //            Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-    //            return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-    //            throw;
-    //        }
-    //    }
-        #endregion
-
         [HttpPost]
         [Route("equipments/images/add")]
         public IHttpActionResult AddImages()
@@ -247,5 +227,8 @@ namespace SELMs.Api.Controllers
                 return BadRequest($"{ex.Message} \n {ex.StackTrace}");
             }
         }
+        #endregion
+
+
     }
 }

@@ -49,7 +49,7 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
     $scope.text = '';
     $scope.HandelLocation = function (lc, NewLocation) {
         $scope.text = lc.location_desciption;
-        NewLocation.parent_location_id = lc.parent_location_id;
+        NewLocation.parent_location_id = lc.location_id;
 
     }
     $scope.NewLocation = {

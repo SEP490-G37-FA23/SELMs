@@ -73,4 +73,16 @@ app.controller('LocationManagementCtrl', function ($scope, $http, $sce) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
+
+    $scope.DeleteLocation = function (location) {
+
+        var partialUrl = origin + '/api/v1/locations/delete/' + location.location_id;
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Xóa vị trí thành công!');
+                $scope.LoadAllLocationList('');
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
 });

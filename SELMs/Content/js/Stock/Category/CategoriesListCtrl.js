@@ -73,7 +73,17 @@ app.controller('CategoriesListCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategorisList();
 
     $scope.LoadCategoryDetails = function (item) {
-        window.location.href = "https://localhost:44335/Category/CategoryDetail/" + item.category_id;
+        window.location.href = origin +  "Category/CategoryDetail/" + item.category_id;
+    }
+    $scope.DeleteCategory = function (category) {
+        var partialUrl = origin + '/api/v1/categories/deactive/' + category.category_id;
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Xóa danh mục thiết bị thành công!');
+                $scope.ResetNewCategory();
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
     }
 
 });

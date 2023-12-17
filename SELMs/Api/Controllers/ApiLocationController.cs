@@ -30,12 +30,12 @@ namespace SELMs.Api.Controllers
         #region Get locations list
         [HttpPost]
         [Route("all-locations")]
-        public dynamic GetLocationList()
+        public async Task<IHttpActionResult> GetLocationList()
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetLocationList();
+                returnedData = await repository.GetLocationList();
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Delete Location
-        [HttpDelete]
+        [HttpPost]
         [Route("locations/delete/{id}")]
         public async Task<IHttpActionResult> DeleteLocations(int id)
         {
