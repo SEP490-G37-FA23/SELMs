@@ -190,9 +190,12 @@
                         <label for="equipStatus" class="form-label">Thông số kĩ thuật</label>
                         <textarea ng-model="DetailEquip.specification" class="form-control"></textarea>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 row">
                         <label for="equipStatus" class="form-label">Hình ảnh thiết bị</label>
-                        <textarea ng-model="DetailEquip.img" class="form-control"></textarea>
+                        <img id="image" style="height: auto; width: auto" alt="Dynamic Image" src={{image_url}} class="col-md-3">
+                        <br />
+                        <input class="form-control; col-md-4" type="file" id="formFile" multiple>
+                        @*<textarea ng-model="DetailEquip.img" class="form-control"></textarea>*@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" ng-click="UpdateEquip(DetailEquip)">Cập nhật</button>

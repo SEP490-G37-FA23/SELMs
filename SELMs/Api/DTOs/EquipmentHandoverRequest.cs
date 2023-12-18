@@ -9,6 +9,5 @@ namespace SELMs.Api.DTOs
     {
         public EquipmentHandoverFormDTO application { get; set; }
         public List<EquipmentHandoverFormDetailDTO> application_details { get; set; }
-        public HttpPostedFileBase attachment {  get; set; }
     }
 }

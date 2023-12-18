@@ -13,5 +13,6 @@ namespace SELMs.Repositories
         void UpdateMember(User member);
         dynamic DeleteMember(User member);
         string GetLastMemberCode(string prefix);
+        Task SendGmailAllocationAccountAsync(User mem);
     }
 }

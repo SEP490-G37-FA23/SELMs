@@ -1,80 +1,79 @@
 ﻿
 @{
-    ViewBag.Title = "ViewProjectList";
+    ViewBag.Title = "Danh sách dự án";
     Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
-<section class="section">
+<script src="~/Content/js/Project/ProjectListCtrl.js"></script>
+<div ng-app="myApp" ng-controller="ProjectListCtrl">
+    <section class="section">
 
-    <div class="row">
-        <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
 
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Danh Sách Dự Án</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Danh Sách Dự Án</h5>
 
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <a class="btn btn-primary" href="@Url.Action("CreateNewProject", "ProjectPortfolio")">Thêm dự án mới</a>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <a class="btn btn-primary" href="@Url.Action("CreateNewProject", "ProjectPortfolio")">Thêm dự án mới</a>
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary">Xuất file Excel</button>
+                            </div>
                         </div>
-                        <div class="col-md-4">
+                        <div>
+                            <p></p>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Dự án</th>
+                                    <th scope="col">Mã viết tắt</th>
+                                    <th scope="col">Mã phòng lab</th>
+                                    <th scope="col">Miêu tả</th>
+                                    <th scope="col">Quản lý</th>
+                                    <th scope="col">Thời gian</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Thông tin tạo</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ListProject">
+                                    <td>{{item.project_name}}</td>
+                                    <td>{{item.acronym}}</td>
+                                    <td>{{item.location_code}}</td>
+                                    <td>{{item.description}}</td>
+                                    <td>{{item.manager_name}}</td>
+                                    <td>{{item.start_date|date:'dd/MM/yyyy'}} - {{item.end_date|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{item.status==1?'Đã hoàn thành':'Đang diễn ra'}}</td>
+                                    <td>
+                                        {{item.creater_name}} -{{item.create_date|date:'dd/MM/yyyy'}}
+                                    </td>
 
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn btn-primary">Xuất file Excel</button>
-                        </div>
+                                    <td>
+                                        <button class="btn btn-danger" ng-click="DeleteKH(item)">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <a class="btn btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#user-details" ng-click="LoadProjectDetails(item)"><i class="far fa-info-square" style="color: #ffffff;"></i></a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
                     </div>
-                    <div>
-                        <p></p>
-                    </div>
-                    <!-- Table with stripped rows -->
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã dự án</th>
-                                <th scope="col">Dự ánán</th>
-                                <th scope="col">Quản lý</th>
-                                <th scope="col">Tags</th>
-                                <th scope="col">Tasks</th>
-                                <th scope="col">Trạng Thái</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>P202309280001</td>
-                                <td>Adaptive Cruise Control System</td>
-                                <td>SonVT2</td>
-                                <td>Research, Automation</td>
-                                <td>52/250</td>
-                                <td>
-                                    <select id="projectStatus" class="form-select">
-                                        <option selected>Pending</option>
-                                        <option>Activate</option>
-                                        <option>Overdue</option>
-                                        <option>Finished</option>
-                                        <option>Canceled</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button class="btn btn-warning" data-toggle="modal"
-                                            data-target="#suakhachhang" ng-click="GetKH(item)">
-                                        <i class="far fa-edit"></i>Edit
-                                    </button>
-                                    <button class="btn btn-danger" ng-click="DeleteKH(item)">
-                                        <i class="fas fa-trash-alt"></i>Cancel
-                                    </button>
-                                    <a class="btn btn-primary" data-bs-toggle="modal"
-                                       data-bs-target="#user-details">Finish</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- End Table with stripped rows -->
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
- 
+    </section>
+</div>
+

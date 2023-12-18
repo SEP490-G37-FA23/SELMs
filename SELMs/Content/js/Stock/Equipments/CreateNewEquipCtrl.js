@@ -44,9 +44,14 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategoriesList();
 
     $scope.LoadLocationsList = function () {
-
-        $http.post(origin + '/api/v1/all-locations').then(function (response) {
-            $scope.ListLocations = response.data;
+        var data = {
+            username: username,
+            text: '',
+            id: -1
+        }
+        $http.post(origin + '/api/v1/locations', data).then(function (response) {
+            $scope.ListLocations = response.data.Result;
+            $scope.sumLocations = $scope.ListLocations.length;
         });
     }
 
@@ -144,8 +149,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
                 usage_status: equip.usage_status,
                 specification: equip.specification,
                 is_integration: equip.is_integration
-            },        
-            img: [],
+            },     
             location_id: equip.location_id,
             ListComponentEquips: $scope.ListComponentEquips
         }
@@ -153,10 +157,36 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Thêm mới thiết bị thành công!');
+                $scope.UpdateImageEquip(response.data)
                 $scope.ResetNewEquip();
 
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
+
+
+    $scope.UpdateImageEquip = function (equip) {
+        var ListFileAttach = document.getElementById('formFile').files;
+        let formData = new FormData();
+
+        for (let i = 0; i < ListFileAttach.length; i++) {
+            formData.append('images[]', ListFileAttach[i]);
+        }
+
+        formData.append('equipment_id', equip.equipment_id);
+
+        var partialUrl = origin + '/api/v1/equipments/images/add';
+
+        $http.post(partialUrl, formData, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }  // Let AngularJS set the content type
+        })
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật ảnh thiết bị thành công!');
+                $scope.GetDetailEquip(url);
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    };
 });

@@ -275,3 +275,789 @@ System.Data.SqlClient.SqlException (0x80131904): Could not find stored procedure
    at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in D:\FULearning\Fall2023\SELMs\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 45
 ClientConnectionId:50bd8f72-1587-4c71-9d9a-7e9dc41b93d8
 Error Number:2812,State:62,Class:16
+2023-12-10 17:02:12,305 [8] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: The type arguments for method 'System.Web.Http.ApiController.Ok<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+   at CallSite.Target(Closure , CallSite , ApiImageController , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 39
+2023-12-10 17:38:48,234 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_460bd5ac-639a-4a51-9709-56457391292c'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:40:55,128 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\AppData\BodyPart_117c5c0c-cbe7-4ac8-abe5-0441d33c48ec'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:43:50,571 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_f45a0ca4-86de-4a4e-82e2-d861a338615d'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:44:00,362 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Web.Http.HttpResponseException: Processing of the HTTP request resulted in an exception. Please see the HTTP response returned by the 'Response' property of this exception for details.
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 64
+2023-12-10 17:44:13,334 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_0a8fd0e9-f59e-44fc-a1ce-5f7d4dbd1c7f'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:52:39,634 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error writing MIME multipart body part to output stream. ---> System.InvalidOperationException: The stream provider of type 'MultipartFormDataStreamProvider' threw an exception. ---> System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\App_Data\BodyPart_d150cb77-d987-4d69-be51-5327e3351da3'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.Net.Http.MultipartFileStreamProvider.GetStream(HttpContent parent, HttpContentHeaders headers)
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.MimeBodyPart.GetOutputStream()
+   at System.Net.Http.MimeBodyPart.<WriteSegment>d__24.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 66
+2023-12-10 17:55:37,585 [11] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Net.Http.HttpRequestException: Error while copying content to a stream. ---> System.ObjectDisposedException: Cannot access a closed file.
+   at System.IO.__Error.FileNotOpen()
+   at System.IO.FileStream.BeginRead(Byte[] array, Int32 offset, Int32 numBytes, AsyncCallback userCallback, Object stateObject)
+   at System.Net.Http.StreamToStreamCopy.StartRead()
+   --- End of inner exception stack trace ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 71
+2023-12-11 20:53:30,870 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 20:53:44,435 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 20:54:27,797 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:09:10,898 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:09:14,123 [7] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:12:11,493 [37] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:13:16,410 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:15:40,426 [9] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:20:16,117 [8] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:20:30,913 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:20:31,765 [8] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.IO.IOException: Error reading MIME multipart body part. ---> System.Web.HttpException: Maximum request length exceeded.
+   at System.Web.HttpBufferlessInputStream.ValidateRequestEntityLength()
+   at System.Web.HttpBufferlessInputStream.GetPreloadedContent(Byte[] buffer, Int32& offset, Int32& count)
+   at System.Web.HttpBufferlessInputStream.BeginRead(Byte[] buffer, Int32 offset, Int32 count, AsyncCallback callback, Object state)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_0(Stream stream, ReadWriteParameters args, AsyncCallback callback, Object state)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrim[TInstance,TArgs](TInstance thisRef, TArgs args, Func`5 beginMethod, Func`3 endMethod)
+   at System.IO.Stream.BeginEndReadAsync(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.Stream.ReadAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at System.Web.Http.WebHost.SeekableBufferedRequestStream.<ReadAsync>d__11.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContentMultipartExtensions.<MultipartReadAsync>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Net.Http.HttpContentMultipartExtensions.<ReadAsMultipartAsync>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 68
+2023-12-11 21:25:09,885 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Web.HttpException (0x80004005): Maximum request length exceeded.
+   at System.Web.HttpRequest.GetEntireRawContent()
+   at System.Web.HttpRequest.GetMultipartContent()
+   at System.Web.HttpRequest.FillInFormCollection()
+   at System.Web.HttpRequest.EnsureForm()
+   at System.Web.HttpRequest.get_Form()
+   at System.Web.HttpRequest.FillInParamsCollection()
+   at System.Web.HttpRequest.GetParams()
+   at SELMs.Api.Controllers.ApiImageController.<SaveImage>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 72
+2023-12-11 22:28:57,476 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Image' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.ImageService.<GetImage>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\ImageService.cs:line 23
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 41
+2023-12-11 22:31:10,768 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Image' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.ImageService.<GetImage>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\ImageService.cs:line 23
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 40
+2023-12-11 22:42:42,235 [6] ERROR SELMs.Api.Controllers.ApiImageController [(null)] - Error: 
+System.Runtime.InteropServices.ExternalException (0x80004005): A generic error occurred in GDI+.
+   at System.Drawing.Image.Save(String filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
+   at SELMs.Services.Implements.ImageService.GetImage(Int32 id) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\ImageService.cs:line 25
+   at SELMs.Api.Controllers.ApiImageController.<GetImage>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiImageController.cs:line 40
+2023-12-12 00:32:05,678 [6] ERROR SELMs.Api.Controllers.ApiAttachmentController [(null)] - Error: 
+System.Data.Entity.Infrastructure.DbUpdateException: Unable to update the EntitySet 'Attachment' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation. ---> System.Data.Entity.Core.UpdateException: Unable to update the EntitySet 'Attachment' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation.
+   at System.Data.Entity.SqlServer.SqlGen.DmlSqlGenerator.ExpressionTranslator.Visit(DbScanExpression expression)
+   at System.Data.Entity.SqlServer.SqlGen.DmlSqlGenerator.GenerateInsertSql(DbInsertCommandTree tree, SqlGenerator sqlGenerator, List`1& parameters, Boolean generateReturningSql, Boolean upperCaseKeywords, Boolean createParameters)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.GenerateSql(DbCommandTree tree, SqlVersion sqlVersion, List`1& parameters, CommandType& commandType, HashSet`1& paramsToForceNonUnicode)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateCommand(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.Core.Common.DbProviderServices.CreateCommand(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.CreateCommand(DbModificationCommandTree commandTree)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.CreateCommand(Dictionary`2 identifierValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at SELMs.Repositories.Implements.AttachmentRepository.SaveAttachment(Attachment attachment) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\AttachmentRepository.cs:line 28
+   at SELMs.Services.Implements.AttachmentService.<SaveAttachment>d__1.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\AttachmentService.cs:line 26
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiAttachmentController.<UploadAttachments>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiAttachmentController.cs:line 70
+2023-12-12 01:06:43,462 [9] ERROR SELMs.Api.Controllers.ApiEquipmentHandoverController [(null)] - Error: 
+System.Data.Entity.Infrastructure.DbUpdateException: Unable to update the EntitySet 'Application_Attachment' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation. ---> System.Data.Entity.Core.UpdateException: Unable to update the EntitySet 'Application_Attachment' because it has a DefiningQuery and no <InsertFunction> element exists in the <ModificationFunctionMapping> element to support the current operation.
+   at System.Data.Entity.SqlServer.SqlGen.DmlSqlGenerator.ExpressionTranslator.Visit(DbScanExpression expression)
+   at System.Data.Entity.SqlServer.SqlGen.DmlSqlGenerator.GenerateInsertSql(DbInsertCommandTree tree, SqlGenerator sqlGenerator, List`1& parameters, Boolean generateReturningSql, Boolean upperCaseKeywords, Boolean createParameters)
+   at System.Data.Entity.SqlServer.SqlGen.SqlGenerator.GenerateSql(DbCommandTree tree, SqlVersion sqlVersion, List`1& parameters, CommandType& commandType, HashSet`1& paramsToForceNonUnicode)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateCommand(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.SqlServer.SqlProviderServices.CreateDbCommandDefinition(DbProviderManifest providerManifest, DbCommandTree commandTree)
+   at System.Data.Entity.Core.Common.DbProviderServices.CreateCommand(DbCommandTree commandTree, DbInterceptionContext interceptionContext)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.CreateCommand(DbModificationCommandTree commandTree)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.CreateCommand(Dictionary`2 identifierValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at SELMs.Repositories.Implements.EquipmentHandoverFormRepository.AddAttachment(Int32 applicationId, Int32 attachmentId) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\EquipmentHandoverFormRepository.cs:line 160
+   at SELMs.Services.Implements.EquipmentHandoverService.<AddAttachment>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\EquipmentHandoverService.cs:line 80
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiEquipmentHandoverController.<AttachFile>d__8.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiEquipmentHandoverController.cs:line 130
+2023-12-12 01:21:18,721 [7] ERROR SELMs.Api.Controllers.ApiEquipmentHandoverController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment_Handover_Form' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.EquipmentHandoverService.<GetApplication>d__2.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\EquipmentHandoverService.cs:line 20
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiEquipmentHandoverController.<GetApplication>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiEquipmentHandoverController.cs:line 60
+2023-12-12 01:36:33,672 [6] ERROR SELMs.Api.Controllers.ApiEquipmentHandoverController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Attachment' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.EquipmentHandoverService.<AddAttachment>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Services\Implements\EquipmentHandoverService.cs:line 79
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiEquipmentHandoverController.<AttachFile>d__8.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiEquipmentHandoverController.cs:line 129
+2023-12-12 02:07:53,707 [8] ERROR SELMs.Api.Controllers.ApiEquipmentHandoverController [(null)] - Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at SELMs.Services.Implements.EquipmentHandoverService.<GetApplication>d__2.MoveNext()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.Start[TStateMachine](TStateMachine& stateMachine)
+   at SELMs.Services.Implements.EquipmentHandoverService.GetApplication(Int32 id)
+   at SELMs.Api.Controllers.ApiEquipmentHandoverController.<GetApplication>d__5.MoveNext()
+
+2023-12-12 23:07:08,870 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:08:46,462 [6] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:12:07,865 [22] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:12:38,323 [27] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:19:05,679 [30] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:20:03,407 [28] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:20:48,348 [26] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:24:49,246 [26] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:31:51,807 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:34:56,968 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:36:06,570 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:37:00,864 [27] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:37:15,819 [13] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-12 23:48:28,414 [12] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:03:34,407 [8] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:05:00,063 [9] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:05:34,237 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 230
+2023-12-13 00:06:54,323 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 230
+2023-12-13 00:09:38,595 [11] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:12:05,714 [8] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:12:13,380 [8] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:13:49,771 [6] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+System.InvalidCastException: Unable to cast object of type 'System.Collections.ObjectModel.ReadOnlyCollection`1[System.Web.HttpPostedFile]' to type 'System.Collections.Generic.List`1[System.Web.HttpPostedFile]'.
+   at SELMs.Api.Controllers.ApiEquipmentController.AddImages()
+2023-12-13 00:14:46,967 [9] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-13 00:20:58,465 [8] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-15 11:42:24,059 [9] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<CreateNewMember>d__8.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 101
+2023-12-15 11:45:01,223 [52] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Type Map configuration:
+UserDTO -> User
+SELMs.Api.DTOs.UserDTO -> SELMs.Models.User
+
+Destination Member:
+date_of_birth
+ ---> System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method(Closure , Object , User , ResolutionContext )
+   at AutoMapper.Mapper.MapCore[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, Type sourceType, Type destinationType, IMemberMap memberMap)
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination)
+   at AutoMapper.Mapper.Map[TDestination](Object source)
+   at SELMs.Api.HumanResource.ApiMemberController.<CreateNewMember>d__8.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 101
+2023-12-18 00:10:43,306 [10] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-18 00:16:41,525 [6] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-18 00:16:41,596 [6] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+System.Data.Entity.Core.EntityException: An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy. ---> System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.Entity.Core.EntityException: An exception has been raised that is likely due to a transient failure. If you are connecting to a SQL Azure database consider using SqlAzureExecutionStrategy. ---> System.Data.SqlClient.SqlException: The client was unable to establish a connection because of an error during connection initialization process before login. Possible causes include the following:  the client tried to connect to an unsupported version of SQL Server; the server was too busy to accept new connections; or there was a resource limitation (insufficient memory or maximum allowed connections) on the server. (provider: TCP Provider, error: 0 - An existing connection was forcibly closed by the remote host.) ---> System.ComponentModel.Win32Exception: An existing connection was forcibly closed by the remote host
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<>c__DisplayClass4.<<ExecuteAsync>b__3>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__9`1.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.EntityClient.EntityConnection.<OpenAsync>d__8.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.EntityConnection.<OpenAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Objects.ObjectContext.<EnsureConnectionAsync>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Objects.ObjectContext.<ExecuteInTransactionAsync>d__3d`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__9`1.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Utilities.TaskExtensions.CultureAwaiter`1.GetResult()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<GetResultsAsync>d__e.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Utilities.TaskExtensions.CultureAwaiter`1.GetResult()
+   at System.Data.Entity.Internal.LazyAsyncEnumerator`1.<FirstMoveNextAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.<ForEachAsync>d__5`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategoryList>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 36
+2023-12-18 00:16:41,636 [27] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.Data.SqlClient.SqlException (0x80131904): Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception (0x80004005): The wait operation timed out
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Dapper.SqlMapper.<QueryAsync>d__33`1.MoveNext() in C:\projects\dapper\Dapper\SqlMapper.Async.cs:line 419
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 39
+ClientConnectionId:e4aa1bdf-e295-4cc0-8bc3-86d194aee15d
+Error Number:-2,State:0,Class:11
+2023-12-18 00:17:36,509 [16] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59
+2023-12-18 00:17:36,533 [7] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+System.Data.Entity.Core.EntityCommandExecutionException: An error occurred while executing the command definition. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding. ---> System.ComponentModel.Win32Exception: The wait operation timed out
+   --- End of inner exception stack trace ---
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__180_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.<ExecuteStoreCommandsAsync>d__c.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Core.EntityClient.Internal.EntityCommandDefinition.<ExecuteStoreCommandsAsync>d__c.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Core.Objects.Internal.ObjectQueryExecutionPlan.<ExecuteAsync>d__0`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Utilities.TaskExtensions.CultureAwaiter`1.GetResult()
+   at System.Data.Entity.Core.Objects.ObjectContext.<ExecuteInTransactionAsync>d__3d`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.<ExecuteAsyncImplementation>d__9`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Utilities.TaskExtensions.CultureAwaiter`1.GetResult()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<GetResultsAsync>d__e.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Utilities.TaskExtensions.CultureAwaiter`1.GetResult()
+   at System.Data.Entity.Internal.LazyAsyncEnumerator`1.<FirstMoveNextAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.<ForEachAsync>d__5`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at CallSite.Target(Closure , CallSite , Object )
+   at SELMs.Api.Controllers.ApiCategoryController.<GetCategoryList>d__4.MoveNext() in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 36
+2023-12-18 00:18:03,827 [8] ERROR SELMs.Api.Controllers.ApiLocationController [(null)] - Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at SELMs.Repositories.Implements.LocationRepository.GetLocationList(Argument arg) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Repositories\Implements\LocationRepository.cs:line 52
+   at SELMs.Api.Controllers.ApiLocationController.GetLocationList(Argument args) in E:\FU\Semester 9\SEP490\repo\SELMs\SELMs\Api\Controllers\ApiLocationController.cs:line 59

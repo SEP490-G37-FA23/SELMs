@@ -9,8 +9,8 @@ namespace SELMs.Services
 {
     public interface ILocationService
     {
-        Task SaveLocation(Location location, List<Location> subLocations);
-        Task UpdateLocation(int id, Location location, List<Location> subLocations);
+        Task<dynamic> SaveLocation(Location location, List<Location> subLocations);
+        Task<dynamic> UpdateLocation(int id, Location location);
         Task SaveEquipLocationHistory(Equipment_Location_History item);
 
 

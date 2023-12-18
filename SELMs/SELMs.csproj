@@ -63,16 +63,130 @@
     <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Mvc.Core.2.2.5\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -158,7 +272,6 @@
     <Compile Include="Api\Controllers\ApiCategoryController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentAllocationController.cs" />
     <Compile Include="Api\Controllers\ApiEquipmentController.cs" />
-    <Compile Include="Api\Controllers\ApiEquipmentImportController.cs" />
     <Compile Include="Api\Controllers\ApiImageController.cs" />
     <Compile Include="Api\Controllers\ApiInventoryRequestController.cs" />
     <Compile Include="Api\Controllers\ApiLocationController.cs" />
@@ -178,16 +291,17 @@
     <Compile Include="Api\DTOs\EquipmentHandoverFormDetailDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentHandoverFormDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentHandoverRequest.cs" />
+    <Compile Include="Api\DTOs\EquipmentImportDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentLocationHistoryDTO.cs" />
     <Compile Include="Api\DTOs\EquipmentProjectHistoryDTO.cs" />
-    <Compile Include="Api\DTOs\EquipmentImportApplicationDetailDTO.cs" />
-    <Compile Include="Api\DTOs\EquipmentImportApplicationDTO.cs" />
-    <Compile Include="Api\DTOs\EquipmentImportApplicationRequest.cs" />
     <Compile Include="Api\DTOs\EquipmentRequest.cs" />
     <Compile Include="Api\DTOs\ImageDTO.cs" />
-    <Compile Include="Api\DTOs\InventoryRequestApplicationDetailDTO.cs" />
-    <Compile Include="Api\DTOs\InventoryRequestApplicationDTO.cs" />
-    <Compile Include="Api\DTOs\InventoryRequestRequest.cs" />
+    <Compile Include="Api\DTOs\ImageRequest.cs" />
+    <Compile Include="Api\DTOs\Inventory\InventoryRequestApplicationDetailDTO.cs" />
+    <Compile Include="Api\DTOs\Inventory\InventoryRequestApplicationDTO.cs" />
+    <Compile Include="Api\DTOs\Inventory\InventoryRequestRequest.cs" />
+    <Compile Include="Api\DTOs\Inventory\PerformInventoryDTO.cs" />
+    <Compile Include="Api\DTOs\Inventory\UpdateEquipmentResultDTO.cs" />
     <Compile Include="Api\DTOs\LocationDTO.cs" />
     <Compile Include="Api\DTOs\LocationRequest.cs" />
     <Compile Include="Api\DTOs\MemberLocationHistoryDTO.cs" />
@@ -233,7 +347,6 @@
     <Compile Include="Controllers\Authorization\HomeController.cs" />
     <Compile Include="Controllers\Equipment\CategoryController.cs" />
     <Compile Include="Controllers\Equipment\EquipmentAllocationController.cs" />
-    <Compile Include="Controllers\Equipment\EquipmentImportController.cs" />
     <Compile Include="Controllers\Equipment\EquipmentManagementReportsController.cs" />
     <Compile Include="Controllers\Equipment\EquipmentsController.cs" />
     <Compile Include="Controllers\Equipment\InventoryEquipmentsController.cs" />
@@ -257,6 +370,7 @@
     <Compile Include="Models\BusinessModel\Argument.cs" />
     <Compile Include="Models\BusinessModel\ApplicationStatus.cs" />
     <Compile Include="Models\BusinessModel\CategoryModel.cs" />
+    <Compile Include="Models\BusinessModel\HandleDateTime.cs" />
     <Compile Include="Models\BusinessModel\EquipmentModel.cs" />
     <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
@@ -281,19 +395,10 @@
     <Compile Include="Models\Equipment_Handover_Form_Detail.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Equipment_Import_Application.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Equipment_Import_Application_Detail.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Equipment_Location_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Project_History.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Equipment_Usage_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
@@ -317,12 +422,6 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Project_Investment_Cost_Application.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Project_Investment_Cost_Application_Detail.cs">
-      <DependentUpon>SELMs.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -341,6 +440,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -350,9 +452,7 @@
     <Compile Include="Repositories\IEquipmentProjectHistoryRepository.cs" />
     <Compile Include="Repositories\IEquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentHandoverFormRepository.cs" />
-    <Compile Include="Repositories\IEquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\IEquipmentRepository.cs" />
-    <Compile Include="Repositories\IEquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\IImageRepository.cs" />
     <Compile Include="Repositories\IInventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\ILocationRepository.cs" />
@@ -365,10 +465,8 @@
     <Compile Include="Repositories\Implements\EquipmentProjectHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentAllocationApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentHandoverFormRepository.cs" />
-    <Compile Include="Repositories\Implements\EquipmentImportApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\EquipmentRepository.cs" />
     <Compile Include="Repositories\IEquipmentLocationHistoryRepository.cs" />
-    <Compile Include="Repositories\Implements\EquipmentUsageHistoryRepository.cs" />
     <Compile Include="Repositories\Implements\ImageRepository.cs" />
     <Compile Include="Repositories\Implements\InventoryRequestApplicationRepository.cs" />
     <Compile Include="Repositories\Implements\LocationRepository.cs" />
@@ -383,7 +481,6 @@
     <Compile Include="Services\IEquipmentHandoverService.cs" />
     <Compile Include="Services\IEquipmentLocationHistoryService.cs" />
     <Compile Include="Services\IEquipmentProjectHistoryService.cs" />
-    <Compile Include="Services\IEquipmentImportService.cs" />
     <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Services\IImageService.cs" />
     <Compile Include="Services\IInventoryRequestService.cs" />
@@ -397,7 +494,6 @@
     <Compile Include="Services\Implements\EquipmentLocationHistoryService.cs" />
     <Compile Include="Services\Implements\EquipmentProjectHistoryService.cs" />
     <Compile Include="Services\Implements\EquipmentAllocationService.cs" />
-    <Compile Include="Services\Implements\EquipmentImportService.cs" />
     <Compile Include="Services\Implements\EquipmentService.cs" />
     <Compile Include="Services\Implements\ImageService.cs" />
     <Compile Include="Services\Implements\InventoryRequestService.cs" />
@@ -415,28 +511,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\assets\css\style.css" />
-    <Content Include="Content\css\assets\img\apple-touch-icon.png" />
-    <Content Include="Content\css\assets\img\card.jpg" />
-    <Content Include="Content\css\assets\img\favicon.png" />
     <Content Include="Content\css\assets\img\logo.png" />
-    <Content Include="Content\css\assets\img\messages-1.jpg" />
-    <Content Include="Content\css\assets\img\messages-2.jpg" />
-    <Content Include="Content\css\assets\img\messages-3.jpg" />
-    <Content Include="Content\css\assets\img\news-1.jpg" />
-    <Content Include="Content\css\assets\img\news-2.jpg" />
-    <Content Include="Content\css\assets\img\news-3.jpg" />
-    <Content Include="Content\css\assets\img\news-4.jpg" />
-    <Content Include="Content\css\assets\img\news-5.jpg" />
-    <Content Include="Content\css\assets\img\not-found.svg" />
-    <Content Include="Content\css\assets\img\product-1.jpg" />
-    <Content Include="Content\css\assets\img\product-2.jpg" />
-    <Content Include="Content\css\assets\img\product-3.jpg" />
-    <Content Include="Content\css\assets\img\product-4.jpg" />
-    <Content Include="Content\css\assets\img\product-5.jpg" />
-    <Content Include="Content\css\assets\img\profile-img.jpg" />
-    <Content Include="Content\css\assets\img\slides-1.jpg" />
-    <Content Include="Content\css\assets\img\slides-2.jpg" />
-    <Content Include="Content\css\assets\img\slides-3.jpg" />
     <Content Include="Content\css\assets\js\main.js" />
     <Content Include="Content\css\assets\scss\Readme.txt" />
     <Content Include="Content\css\assets\vendor\apexcharts\apexcharts.amd.js" />
@@ -697,6 +772,7 @@
     <Content Include="Content\js\Project\ListEAACtrl.js" />
     <Content Include="Content\js\LabDicrector\Project\ProjectDetailCtrl.js" />
     <Content Include="Content\js\Project\ListHEFCtrl.js" />
+    <Content Include="Content\js\Project\ProjectListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoriesListCtrl.js" />
     <Content Include="Content\js\Stock\Category\CategoryDetailCtrl.js" />
     <Content Include="Content\js\Stock\Category\CreateNewCategoryCtrl.js" />
@@ -704,22 +780,13 @@
     <Content Include="Content\js\Stock\Equipments\EquipGenderQRCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsDetailCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
+    <Content Include="Content\js\Stock\Inventory\CreateNewInventoryRequestCtrl.js" />
+    <Content Include="Content\js\Stock\Inventory\PerformInventoryRequestCtrl.js" />
+    <Content Include="Content\js\Stock\Inventory\ResultInventoryRequestCtrl.js" />
     <Content Include="Content\js\Stock\Locations\CreateNewLocationCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationDetailCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationManagementCtrl.js" />
     <Content Include="Content\js\Stock\Locations\LocationsListCtrl.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.eslintrc.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.gitattributes" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\angular-web-notification.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\index.html" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.eslintrc.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.gitattributes" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\index.html" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\karma.conf.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\stylelint.config.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\web-notification.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\karma.conf.js" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\stylelint.config.js" />
     <Content Include="Content\service\AjaxServices.js" />
     <Content Include="ErrorLog\log.txt" />
     <Content Include="favicon.ico" />
@@ -756,41 +823,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.atom-build.yml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.bithoundrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.editorconfig" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jsbeautifyrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jscs.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jshintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\.jslintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\bower.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\api.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\docs\CHANGELOG.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\inch.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\LICENSE" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.atom-build.yml" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.bithoundrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.editorconfig" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jsbeautifyrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jscs.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jshintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.jslintrc" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\.npmignore" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\bower.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\api.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\docs\CHANGELOG.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\inch.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\LICENSE" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\package.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\jshintrc-common.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\README-footer-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\project\config\README-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\node_modules\simple-web-notification\README.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\package.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\jshintrc-common.json" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\README-footer-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\project\config\README-template.md" />
-    <Content Include="Content\Script\node_modules\angular-web-notification\README.md" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\ar.json" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\ca.json" />
     <Content Include="Content\css\assets\vendor\apexcharts\locales\cs.json" />
@@ -880,6 +912,7 @@
     <Content Include="Content\css\assets\vendor\tinymce\package.json" />
     <Content Include="Content\css\assets\vendor\tinymce\README.md" />
     <Content Include="Content\css\forms\contact.php" />
+    <Content Include="App_Data\BodyPart_3b7003d3-a65b-4796-86dc-ba090052e8be" />
     <EntityDeploy Include="Models\SELMs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SELMs.Designer.cs</LastGenOutput>
@@ -918,7 +951,6 @@
     <Content Include="Views\User\AddNewMember.cshtml" />
     <Content Include="Views\User\MemberDetails.cshtml" />
     <Content Include="Views\User\MembersList.cshtml" />
-    <Content Include="Views\ImportEquipments\ImportEquipmentsProposalsDetail.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectList.cshtml" />
     <Content Include="Views\ProjectPortfolio\CreateNewProject.cshtml" />
     <Content Include="Views\ProjectPortfolio\ViewProjectDetails.cshtml" />
@@ -928,7 +960,6 @@
     <Content Include="Views\ProjectInvestmentCost\CreateInvestmentCost.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostDetail.cshtml" />
     <Content Include="Views\ProjectInvestmentCost\InvestmentCostList.cshtml" />
-    <Content Include="Views\Equipments\ViewEquipmentDetails.cshtml" />
     <Content Include="Views\News\NotificationList.cshtml" />
     <Content Include="Views\News\CreateNewNotification.cshtml" />
     <Content Include="Views\News\NotificationDetail.cshtml" />
@@ -962,8 +993,8 @@
     <Content Include="Views\EquipmentAllocation\HEFList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\js\Stock\DeliveryEquipment\" />
+    <Folder Include="Content\Script\" />
     <Folder Include="Controllers\HumanResource\" />
     <Folder Include="obj\Debug\" />
     <Folder Include="Views\Categories\" />
@@ -1023,7 +1054,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54626</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44335/</IISUrl>
+          <IISUrl>https://localhost:44334/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

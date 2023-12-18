@@ -25,7 +25,7 @@ namespace SELMs.Repositories.Implements
         public dynamic SaveAttachment(Attachment attachment)
         {
             db.Attachments.Add(attachment);
-            db.SaveChangesAsync();
+            db.SaveChanges();
             return attachment;
         }
 

@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using SELMs.Api.DTOs.Inventory;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SELMs.Services.Implements
 {
@@ -15,10 +17,12 @@ namespace SELMs.Services.Implements
     {
         private IInventoryRequestApplicationRepository repository = new InventoryRequestApplicationRepository();
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
+        private IEquipmentRepository equipmentRepository = new EquipmentRepository();
+
         public async Task<ApplicationModel> GetApplication(int id)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
-            List<Inventory_Request_Application> applicationDetails = repository.GetApplicationDetailList(application.ir_application_code);
+            Inventory_Request_Application application = await repository.GetApplication(id);
+            List<Inventory_Request_Application> applicationDetails = await repository.GetApplicationDetailList(application.ir_application_code);
             //Attachment attachment = repository.GetApplicationAttachment(application.application_id);
             ApplicationModel result = new ApplicationModel()
             {
@@ -29,20 +33,23 @@ namespace SELMs.Services.Implements
             return result;
         }
 
-        public async Task<dynamic> SaveApplication(Inventory_Request_Application application, List<Inventory_Request_Application_Detail> applicationDetails)
+        public async Task<dynamic> SaveApplication(Inventory_Request_Application application, List<string> applicationDetails)
         {
             string applicationCode = GenerateApplicationCode();
             application.ir_application_code = applicationCode;
             application.request_date = DateTime.Now.ToString();
             application.status = false;
-            Attachment attachment = new Attachment();
-            foreach (Inventory_Request_Application_Detail item in applicationDetails)
-            {
-                item.ir_application_code = applicationCode;
-            }
-
             application = repository.SaveApplication(application);
-            repository.SaveApplicationDetails(applicationDetails);
+            Attachment attachment = new Attachment();
+            foreach (string item in applicationDetails)
+            {
+                Inventory_Request_Application_Detail detail = new Inventory_Request_Application_Detail();
+                detail.ir_application_code = applicationCode;
+                detail.system_equipment_code = item;
+                detail.is_perform = false;
+                repository.SaveApplicationDetail(detail);
+            }            
+            
             return application;
         }
 
@@ -71,7 +78,7 @@ namespace SELMs.Services.Implements
 
         public async Task<dynamic> ConfirmApplication(int id, User member)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
+            Inventory_Request_Application application = await repository.GetApplication(id);
             if (application != null)
             {
                 application.status = true;
@@ -84,7 +91,7 @@ namespace SELMs.Services.Implements
 
         public async Task CancelApplication(int id)
         {
-            Inventory_Request_Application application = repository.GetApplication(id);
+            Inventory_Request_Application application = await repository.GetApplication(id);
             if (application != null)
             {
                 repository.DeleteApplication(id);
@@ -125,6 +132,34 @@ namespace SELMs.Services.Implements
                 extension = Path.GetExtension(file.FileName)
             };
             return result;
+        }
+
+        public async  Task<dynamic> PerformInventoryRequest(PerformInventoryDTO perform)
+        {
+            foreach (PerformInventoryDetailDTO item in perform.listPerform)
+            {
+                Inventory_Request_Application_Detail detail = await repository.GetApplicationDetail(item.application_detail_id);
+                detail.inventory_date = DateTime.Now;
+                detail.actual_usage_status = item.actual_usage_status;
+                detail.is_perform = item.is_perform;
+                await repository.UpdateApplicationDetail(detail);
+            }
+            return "Thành công";
+        }
+
+        public async Task<dynamic> UpdateEquipmentResult(UpdateEquipmentResultDTO updateEquip)
+        {
+            foreach (UpdateDetailDTO item in updateEquip.listUpdate)
+            {
+                Inventory_Request_Application_Detail detail = await repository.GetApplicationDetail(item.application_detail_id);
+                detail.inventory_results = item.inventory_results;
+                await repository.UpdateApplicationDetail(detail);
+
+                Equipment equip = await equipmentRepository.GetEquipment(item.equipment_id);
+                equip.usage_status = item.actual_usage_status;
+                await equipmentRepository.UpdateEquipment(equip);
+            }
+            return "Thành công";
         }
     }
 }

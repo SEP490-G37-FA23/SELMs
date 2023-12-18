@@ -15,10 +15,11 @@ namespace SELMs.Services.Implements
     {
         private IEquipmentRepository repository = new EquipmentRepository();
         private IImageRepository imageRepository = new ImageRepository();
+        private readonly IEquipmentLocationHistoryRepository equipmentLocationHistoryRepository = new EquipmentLocationHistoryRepository();
 
         public async Task<dynamic> GetEquipment(int id)
         {
-            Equipment equipment = repository.GetEquipment(id);
+            Equipment equipment = await repository.GetEquipment(id);
             List<Image> images = repository.GetEquipmentImages(id);
             List<EquipComponentDTO> components = repository.GetListComponentEquips(equipment.system_equipment_code);
             EquipmentModel equipmentModel = new EquipmentModel()
@@ -30,46 +31,43 @@ namespace SELMs.Services.Implements
             return equipmentModel;
         }
 
-        public async Task ImportEquipments(List<Equipment> equipments)
+        public async Task ImportEquipments(List<Equipment> equipments, string username)
         {
-            Equipment obj = repository.GetLastEquipment();
-            int num = obj == null ? 1 : obj.equipment_id;
+            List<EquipComponentDTO> ListComponentEquips = new List<EquipComponentDTO>();
             foreach (Equipment equip in equipments)
             {
-                string code = "E";
-                code += num < 10000 ? num.ToString("D4") : num.ToString();
-                equip.system_equipment_code = code;
+                equip.create_date = DateTime.Now;
+                equip.responsibler = username;
+                await SaveEquipment(equip, 2, ListComponentEquips);
             }
-            repository.SaveEquipments(equipments);
         }
 
 
-        public async Task SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips, List<HttpPostedFileBase> images)
+        public async Task<dynamic> SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             Equipment eq = equipment;
             string code = GenerateEquipmentCode();
             eq.system_equipment_code = code;
             eq = repository.SaveEquipment(eq, location_id, ListComponentEquips);
-            if (images != null && images.Count > 0)
-            {
-                AddImages(eq, images);
-            }
+            return eq;
         }
 
-        public async Task UpdateEquipment(int id, Equipment equipment)
+        public async Task<dynamic> UpdateEquipment(int id, Equipment equipment)
         {
             if (repository.GetEquipment(id) != null)
             {
                 equipment.equipment_id = id;
-                repository.UpdateEquipment(equipment);
+                equipment = repository.UpdateEquipment(equipment);
             }
+            return equipment;
         }
 
-        public async Task<dynamic> AddImages(Equipment equipment, List<HttpPostedFileBase> files)
+        public async Task<dynamic> AddImages(int id, List<HttpPostedFile> files)
         {
+            Equipment equipment = await repository.GetEquipment(id);
             int order = 1;
             List<Image> imgs = new List<Image>();
-            foreach (HttpPostedFileBase item in files)
+            foreach (HttpPostedFile item in files)
             {
                 if (item.ContentType.StartsWith("image"))
                 {
@@ -82,9 +80,9 @@ namespace SELMs.Services.Implements
                     };
                     imgs.Add(img);
                 }
-
+                order++;
             }
-            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : imgs;
+            imgs = imgs.Count > 0 ? imageRepository.SaveImages(imgs) : new List<Image>();
             return imgs;
         }
 
@@ -92,8 +90,8 @@ namespace SELMs.Services.Implements
         string GenerateEquipmentCode()
         {
             string eqmtCode = "E";
-            dynamic equipment = repository.GetLastEquipment();
-            int num = equipment == null ? 1 : equipment.equipment_id + 1;
+            Equipment equipment = repository.GetLastEquipment();
+            int num = equipment == null ? 1 : Convert.ToInt32(equipment.system_equipment_code.Replace("E","")) + 1;
             eqmtCode += num < 10000 ? num.ToString("D4") : num.ToString();
             return eqmtCode;
         }

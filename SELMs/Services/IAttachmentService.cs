@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SELMs.Services
 {
     public interface IAttachmentService
     {
-        Task DownloadAttachment(int id);
-        Task UpdateAttachment(int id, Attachment attachment);
+        Task<dynamic> SaveAttachment(HttpPostedFile file);
     }
 }

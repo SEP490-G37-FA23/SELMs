@@ -26,5 +26,10 @@ namespace SELMs.Models.BusinessModel
         public string text2 { set; get; }
         public string text3 { set; get; }
 
+        public string project_name { set; get; }
+        public string location_name { set; get; }
+        public string creater_name { set; get; }
+        public string manager_name { set; get; }
+
     }
 }

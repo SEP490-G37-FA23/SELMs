@@ -1,111 +1,91 @@
 ﻿
 @{
-    ViewBag.Title = "PerformInventoryEquipmentsRequest";
+    ViewBag.Title = "Thực hiện yêu cầu kiểm kê";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="~/Content/js/Stock/Inventory/PerformInventoryRequestCtrl.js"></script>
+<div ng-app="myApp" ng-controller="PerformInventoryRequestCtrl">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
+    <div id="notification" class="col-md-12"></div>
+    <div class="card">
+        <section class="section">
+            <h4 class="card-title">Thực hiện kiểm kê</h4>
+            <div class="row">
+                <div class="col-6">
+                    <label class=" col-form-label">Phòng Lab</label>
+                    <div>
+                        <select ng-model="location_id" class="form-control" ng-change="GetListIERInLocation(location_id);">
+                            <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6 text-right">
+                    <button class="btn btn-primary" ng-click="SavePerformInventory()" style="margin-top: 38px; margin-right: 20px;">Lưu</button>
+                    </div>
+                </div>
+                <form class="mt-5">
 
+                    <div class="card-body">
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã hệ thống</th>
+                                    <th>Mã chuẩn</th>
+                                    <th>Tên thiết bị</th>
+                                    <th>Vị trí</th>
+                                    <th>Trạng thái</th>
+                                    <th>Đơn yêu cầu</th>
+                                    <th>Người yêu cầu</th>
+                                    <th>Ngày yêu cầu</th>
+                                    <th>Đã thực hiện</th>
+                                    <th>Tình trạng thực tế</th>
 
-<section class="section">
-    <h4 class="text-center">Thực hiện kiểm kê</h4>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a>Thực hiện kiểm kê</a></li>
-        </ol>
-    </nav>
-    <form class="mt-5">
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input placeholder="Search..." ng-model="itemSearch" style="width:90%" class="form-control">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
 
-        <div class="card-body">
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Mã hệ thống</th>
-                        <th>Mã chuẩn</th>
-                        <th>Tên thiết bị</th>
-                        <th>Đơn vị tính</th>
-                        <th>SerieNo</th>
-                        <th>Loại thiết bị</th>
-                        <th>Nhóm thiết bị</th>
-                        <th>Vị trí</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày yêu cầu</th>
-                        <th>Đã thực hiện</th>
-                        <th>Tình trạng thực tế</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <td>
-                            <input placeholder="Search..." style="width:90%">
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckDefault"></td>
-                        <td><textarea></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckDefault"></td>
-                        <td><textarea></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input type="text" style="border: hidden; width:90%" /></td>
-                        <td><input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckDefault"></td>
-                        <td><textarea></textarea></td>
-                    </tr>
+                                </tr>
 
+                                <tr ng-repeat="item in ListInventoryDetail|filter: itemSearch">
+                                    <th>{{$index + 1}}</th>
+                                    <td>{{item.system_equipment_code}}</td>
+                                    <td>{{item.standard_equipment_code}}</td>
+                                    <td>{{item.equipment_name}}</td>
+                                    <td>{{item.location_code}}</td>
+                                    <td>{{item.usage_status}}</td>
+                                    <td>{{item.ir_application_code}}</td>
+                                    <td>{{item.requester_name}}</td>
+                                    <td>{{item.request_date}}</td>
+                                    <td><input class="form-check-input ms-2" type="checkbox" ng-model="item.is_perform"></td>
+                                    <td><textarea ng-model="item.actual_usage_status" class="form-control" ng-click="item.is_perform = true;"></textarea></td>
+                                </tr>
 
-                </tbody>
-            </table>
+                            </tbody>
+                        </table>
 
-        </div>
+                    </div>
 
-    </form>
+                </form>
 </section>
 
-
+        </div>
+    </div>
 

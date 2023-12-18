@@ -58,7 +58,7 @@ namespace SELMs.Repositories.Implements
         {
             Category orgCategory = db.Categories.Where(c => c.category_id == category.category_id).FirstOrDefault();
             db.Entry(orgCategory).CurrentValues.SetValues(category);
-            db.SaveChangesAsync();
+            db.SaveChanges();
         }
 
 

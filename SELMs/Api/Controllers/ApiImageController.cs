@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using log4net;
+using Newtonsoft.Json.Linq;
 using SELMs.Api.DTOs;
 using SELMs.App_Start;
 using SELMs.Models;
@@ -9,10 +10,13 @@ using SELMs.Services;
 using SELMs.Services.Implements;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 
 namespace SELMs.Api.Controllers
@@ -29,33 +33,41 @@ namespace SELMs.Api.Controllers
         #region Get image by id
         [HttpGet]
         [Route("images/{id}")]
-        public async Task<IHttpActionResult> GetImage(int id)
+        public async Task<HttpResponseMessage> GetImage(int id)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = repository.GetImage(id);
-                return Ok(returnedData);
+                Image image = repository.GetImage(id);
+                HttpResponseMessage result = Request.CreateResponse(HttpStatusCode.OK);
+                result.Content = new StreamContent(new MemoryStream(image.content));
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentDisposition.FileName = $"{image.image_name}.png";
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+                return result;
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
                 throw;
             }
         }
         #endregion
 
-        #region Add new image
+        #region Upload images
         [HttpPost]
-        [Route("api/images/new-image")]
-        public async Task<IHttpActionResult> SaveImage(ImageDTO dto)
+        [Route("api/images/upload")]
+        public async Task<IHttpActionResult> UploadImages()
         {
             try
             {
-                Image image = mapper.Map<Image>(dto);
-                repository.SaveImage(image);
+                var name = HttpContext.Current.Request.Params["name"];
+                var files = HttpContext.Current.Request.Files.GetMultiple("files").ToList();
+                foreach (var file in files)
+                {
+                    service.SaveImage(file, name);
+                }
                 return Ok();
             }
             catch (Exception ex)

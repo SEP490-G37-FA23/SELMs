@@ -77,7 +77,7 @@ namespace SELMs.Repositories.Implements
         public dynamic GetApplicationDetailList(string applicationCode)
         {
             dynamic applicationDetails = db.Equipment_Handover_Form_Detail.
-                Where(a => a.form_code.Equals(applicationCode)).ToListAsync();
+                Where(a => a.form_code.Equals(applicationCode)).ToList();
             return applicationDetails;
         }
 
@@ -139,12 +139,12 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetApplicationAttachment(int applicationId)
         {
-            var attachment =
-                (from a in db.Equipment_Handover_Form
-                 join aa in db.Application_Attachment on a.form_id equals aa.application_id
-                 join at in db.Attachments on aa.attachment_id equals at.attach_id
-                 where aa.application_type.Equals(ApplicationType.EHF) && aa.application_id.Equals(applicationId)
-                 select at).FirstOrDefaultAsync();
+            dynamic attachment =
+                (from at in db.Attachments
+                 join aa in db.Application_Attachment on at.attach_id equals aa.attachment_id
+                 join a in db.Equipment_Handover_Form on aa.application_id equals a.form_id
+                 where aa.application_type == ApplicationType.EHF && aa.application_id == applicationId
+                 select at).ToList();
             return attachment;
         }
 

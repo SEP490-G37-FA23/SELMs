@@ -16,14 +16,14 @@ namespace SELMs.Repositories.Implements
         private SELMsContext db = new SELMsContext();
         public dynamic GetLocationList()
         {
-            dynamic locations = db.Locations.ToList();
+            dynamic locations = db.Locations.ToListAsync();
             return locations;
         }
         public void DeleteLocation(int id)
         {
             dynamic location = db.Locations.Where(l => l.location_id == id).FirstOrDefault();
             if (location != null) db.Locations.Remove(location);
-            db.SaveChangesAsync();
+            db.SaveChanges();
         }
 
         public dynamic GetLocation(int id)
@@ -72,11 +72,12 @@ namespace SELMs.Repositories.Implements
             return categories;
         }
 
-        public void UpdateLocation(Location location)
+        public dynamic UpdateLocation(Location location)
         {
             Location orgLocation = db.Locations.Where(l => l.location_id == location.location_id).FirstOrDefault();
             db.Entry(orgLocation).CurrentValues.SetValues(location);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+            return location;
         }
 
         public List<LocationDTO> GetListSubLocation(int id)

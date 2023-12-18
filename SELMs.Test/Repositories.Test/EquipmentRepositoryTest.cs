@@ -46,7 +46,7 @@
 		[InlineData(int.MaxValue)]
 		public void TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
-			Equipment equipment = equipmentRepository.GetEquipment(id);
+			Equipment equipment =  equipmentRepository.GetEquipment(id);
 
 			if (equipment is null)
 				output.WriteLine("Equipment not found");

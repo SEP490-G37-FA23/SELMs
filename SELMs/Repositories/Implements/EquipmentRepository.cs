@@ -17,19 +17,24 @@ namespace SELMs.Repositories.Implements
         private SELMsContext db = new SELMsContext();
         public void DeleteEquipment(int id)
         {
-            dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
-            if (equipment != null) db.Equipments.Remove(equipment);
+            Equipment equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
+            if (equipment != null)
+            {
+                dynamic equipInLocation = db.Equipment_Location_History.Where(e => e.system_equipment_code == equipment.system_equipment_code).ToList();
+                db.Equipment_Location_History.RemoveRange(equipInLocation);
+                db.Equipments.Remove(equipment);
+            }
             db.SaveChangesAsync();
 
         }
 
-        public dynamic GetEquipment(int id)
+        public async Task<dynamic> GetEquipment(int id)
         {
             dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
             return equipment;
         }
 
-        public dynamic SaveEquipment(Equipment equipment,int location_id, List<EquipComponentDTO> ListComponentEquips)
+        public Equipment SaveEquipment(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
         {
             db.Equipments.Add(equipment);
             Equipment_Location_History his = new Equipment_Location_History();
@@ -37,22 +42,40 @@ namespace SELMs.Repositories.Implements
             his.system_equipment_code = equipment.system_equipment_code;
             his.from_date = DateTime.Now;
             db.Equipment_Location_History.Add(his);
-            foreach(EquipComponentDTO item in ListComponentEquips)
+            if (ListComponentEquips.Count > 0)
             {
-                Equipment_Component component = new Equipment_Component();
-                component.system_equipment_code_parent = equipment.system_equipment_code;
-                component.system_equipment_code_component = item.system_equipment_code;
-                db.Equipment_Component.Add(component);
-            }           
-            db.SaveChangesAsync();
+                foreach (EquipComponentDTO item in ListComponentEquips)
+                {
+                    Equipment_Component component = new Equipment_Component();
+                    component.system_equipment_code_parent = equipment.system_equipment_code;
+                    component.system_equipment_code_component = item.system_equipment_code;
+                    db.Equipment_Component.Add(component);
+                }
+            }
+            
+            db.SaveChanges();
+
             return equipment;
         }
 
         public dynamic SaveEquipments(List<Equipment> equipments)
         {
-            db.Equipments.AddRange(equipments);
-            db.SaveChangesAsync();
-            return equipments;
+            try
+            {
+                foreach (var equipment in equipments)
+                {
+                    db.Entry(equipment).State = EntityState.Added;
+                }
+
+                db.SaveChanges();
+
+                return equipments;
+            }
+            catch (Exception ex)
+            {
+                // Handle or log the exception
+                return $"Error: {ex.Message}";
+            }
         }
 
         public dynamic GetEquipmentList(Argument arg)
@@ -72,11 +95,12 @@ namespace SELMs.Repositories.Implements
             return equipments;
         }
 
-        public void UpdateEquipment(Equipment equipment)
+        public dynamic UpdateEquipment(Equipment equipment)
         {
             Equipment orgEquipment = db.Equipments.Where(e => e.equipment_id == equipment.equipment_id).FirstOrDefault();
             db.Entry(orgEquipment).CurrentValues.SetValues(equipment);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+            return orgEquipment;
         }
 
         public Equipment GetLastEquipment()
@@ -88,7 +112,7 @@ namespace SELMs.Repositories.Implements
         public dynamic GetDetailEquipment(string code)
         {
             dynamic equipments = null;
-            equipments = db.Database.Connection.QueryAsync<dynamic>("Proc_GetDetailEquipment", new
+            equipments = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailEquipment", new
             {
                 system_code = code
 
@@ -137,6 +161,7 @@ namespace SELMs.Repositories.Implements
                     item.category_code = equip.category_code;
                 }
             }
+            db.SaveChanges();
         }
 
         public dynamic GetEquipmentImages(int id)

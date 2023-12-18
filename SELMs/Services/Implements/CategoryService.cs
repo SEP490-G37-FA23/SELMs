@@ -30,11 +30,15 @@ namespace SELMs.Services.Implements
         public async Task SaveCategory(Category category, List<StandardEquipmentDTO> equipments)
 		{
 			Category obj = repository.SaveCategory(category);
-			foreach (StandardEquipmentDTO equipment in equipments)
+			if(equipments.Count > 0)
 			{
-				equipment.category_code = obj.category_code;
-			}
-			equipmentRepos.SaveEquipmentsToCategory(equipments);
+                foreach (StandardEquipmentDTO equipment in equipments)
+                {
+                    equipment.category_code = obj.category_code;
+                }
+                equipmentRepos.SaveEquipmentsToCategory(equipments);
+            }
+			
 		}
 
 		public async Task UpdateCategory(int id, Category category)
@@ -45,5 +49,15 @@ namespace SELMs.Services.Implements
 				repository.UpdateCategory(category);
 			}
 		}
-	}
+
+        public async Task DeactivateCategory(int id)
+		{
+			Category category = repository.GetCategory(id);
+			if (category != null)
+			{
+				category.is_active = false;
+			}
+			repository.UpdateCategory(category);
+		}
+    }
 }

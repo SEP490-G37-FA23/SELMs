@@ -31,6 +31,7 @@ namespace SELMs.Services.Implements
             mem.password = ConfigurationManager.AppSettings["DefaultPassword"];
 
             repository.SaveMember(mem);
+            await repository.SendGmailAllocationAccountAsync(mem);
         }
 
         public async Task UpdateMember(int id, User member)
@@ -47,7 +48,7 @@ namespace SELMs.Services.Implements
         string generateMemberCode(string name)
         {
             List<string> nameParts = name.Split(' ').ToList();
-            string memCode = RemoveDiacritics(nameParts.Last());
+            string memCode = nameParts.Last();
             string lastMemCode = repository.GetLastMemberCode(memCode);
             if (nameParts.Count > 1)
             {
@@ -57,6 +58,7 @@ namespace SELMs.Services.Implements
                         memCode += item.First().ToString().ToUpper();
                 }
             }
+            memCode = RemoveDiacritics(memCode);
 
             if (lastMemCode.Length > 0)
             {
@@ -71,8 +73,6 @@ namespace SELMs.Services.Implements
                     memCode += "1";
                 }
             }
-            memCode = memCode.Replace("Đ", "D");
-            memCode = memCode.Replace("đ", "d");
             return memCode;
         }
 
@@ -88,7 +88,8 @@ namespace SELMs.Services.Implements
                     stringBuilder.Append(c);
                 }
             }
-
+            stringBuilder.Replace("Đ", "D");
+            stringBuilder.Replace("đ", "d");
             return stringBuilder.ToString();
         }
 

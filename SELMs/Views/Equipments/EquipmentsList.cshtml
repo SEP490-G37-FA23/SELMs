@@ -3,6 +3,7 @@
     ViewBag.Title = "EquipmentsList";
     Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 <script src="~/Content/js/Stock/Equipments/EquipmentsListCtrl.js"></script>
 <div ng-app="myApp" ng-controller="EquipmentsListCtrl" style="display:inline-block;width:100%;">
     <input type="hidden" id="username" name="username" value="@Session["username"]" />
@@ -107,149 +108,82 @@
         </div>
     </section>
 
-    <div class="modal fade" id="ImportListEquipments" role="dialog" tabindex="-1" style="overflow: auto;">
-        <div class="modal-dialog modal-lg" style="width:100%; max-width: 1390px !important">
+
+    <div class="modal fade" id="ImportListEquipments" tabindex="-1">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <div class="row" style="width: 100%">
-                        <div class="col-md-12 text-center"><h4 class="text-white">Danh sách thiết bị mới </h4></div>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Danh sách thiết bị mới {{ListEquipImport.length}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-md-12" style="float: right">
-                        <div class="col-md-6">
-                            <label for="file-upload-sp" class="custom-file-upload">
-                                <i class="fa fa-cloud-upload"></i>Import Excel
-                            </label>
-
-                            <form enctype="multipart/form-data">
-                                <input id="file-upload-sp" type=file name="files[]">
-                            </form>
-                        </div>
-
-                    </div>
-                    <div lass="col-md-1" style="float: right">
-                        <a href="~/Content/Files/ImportListEquip.xlsx" target="_blank">Lấy files mẫu</a>
-                    </div>
+                    <input ng-model="input_file" type="file" id="input_file" class="form-control" />
+                    <button ng-click="readExcelFile()">Read Excel File</button>
 
                     <div class="col-md-12">
-                        <ul class="nav nav-tabs">
-                            <li><a data-toggle="tab" ng-click="loai = 'Thông tin thiết bị';">Thông tin thiết bị</a></li>
-                            <li><a data-toggle="tab" ng-click="loai = 'Thiết bị thành phần';">Thiết bị thành phần</a></li>
-                        </ul>
-                        <table class="table" ng-show="loai == 'Thông tin thiết bị'">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th style="width:50px" rowspan="2">STT</th>
-                                    <th style="min-width:120px" class="text-center" rowspan="2">Mã hàng</th>
-                                    <th style="min-width:60px" class="text-center" rowspan="2">Giá list</th>
-                                    <th style="min-width:80px" class="text-center" rowspan="2">Giá bán web</th>
-                                    <th style="min-width:60px" class="text-center" rowspan="2">Giá KM</th>
-                                    <th style="min-width:60px" class="text-center" rowspan="2">Số lượng KM</th>
-                                    <th style="min-width:60px" class="text-center">Quà tặng</th>
-
-
-                                </tr>
-                                <tr>
-                                    <th style="min-width:60px" class="text-center">Loại quà tặng</th>
-                                    <th style="min-width:60px" class="text-center">Mã quà tặng</th>
-                                    <th style="min-width:60px" class="text-center">Số lượng</th>
-                                    <th style="min-width:60px" class="text-center">Giá trị</th>
-
+                                    <th style="min-width:120px" class="text-center">Mã chuẩn</th>
+                                    <th style="min-width:60px" class="text-center">Tên thiết bị</th>
+                                    <th style="min-width:80px" class="text-center">SerialNo</th>
+                                    <th style="min-width:60px" class="text-center">DVT</th>
+                                    <th style="min-width:60px" class="text-center">Thông số kĩ thuật</th>
+                                    <th style="min-width:60px" class="text-center">Loại thiết bị</th>
+                                    <th style="min-width:60px" class="text-center">Ghi chú</th>
+                                    <th style="min-width:60px" class="text-center">Mã nhóm thiết bị</th>
+                                    <th style="min-width:60px" class="text-center">Giá tiền</th>
 
                                 </tr>
-
                             </thead>
 
                             <tbody>
-                                <tr ng-repeat="(index,item) in ListEquipImport">
+                                <tr ng-repeat="item in ListEquipImport">
                                     <td class="text-center">{{$index +1}}</td>
-                                    <td class="text-center">
-                                        {{item.MA_HANG}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_LIST| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_BAN_WEB| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_KM| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.SL_KM}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.LOAI_QUA_TANG}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.MA_QT}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.SO_LUONG}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_TRI_QT| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_TRI_TOI_DA| currency: '':0}}
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <td class="text-left">
+                            <input ng-model="item.standard_equipment_code" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.equipment_name" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.serial_no" class="form-control" type="text" />
+                        </td>
+                        <td class="text-center">
+                            <input ng-model="item.unit" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.specification" class="form-control" type="text" />
+                        </td>
+                        <td class="text-left">
+                            <input ng-model="item.specification" class="form-control" type="text" />
+                        </td>
+                        <td class="text-center">
+                            {{item.MA_QT}}
+                        </td>
+                        <td class="text-center">
+                            {{item.SO_LUONG}}
+                        </td>
+                        <td class="text-center">
+                            {{item.GIA_TRI_QT| currency: '':0}}
+                        </td>
+                        <td class="text-center">
+                            {{item.GIA_TRI_TOI_DA| currency: '':0}}
+                        </td>
+                        </tr>
+                        </tbody>
                         </table>
-                        <table class="table" ng-show="loai == 'Thiết bị thành phần'">
-                            <thead>
-                                <tr>
-                                    <th style="width:50px" rowspan="2">STT</th>
-                                    <th style="min-width:120px" class="text-center">Khi mua mã hàng</th>
-                                    <th style="min-width:60px" class="text-center">Mua kèm sản phẩm</th>
-                                    <th style="min-width:80px" class="text-center">Giá bán thường</th>
-                                    <th style="min-width:60px" class="text-center">Điều kiện</th>
-                                    <th style="min-width:60px" class="text-center">Giá khuyến mãi</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody>
-                                <tr ng-repeat="(index,item) in ListComponentEquipImport">
-                                    <td class="text-center">{{$index +1}}</td>
-                                    <td class="text-center">
-                                        {{item.MA_HANG_TG_KM}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.MA_HANG}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_BAN_THUONG| currency: '':0}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.DIEU_KIEN}}
-                                    </td>
-                                    <td class="text-center">
-                                        {{item.GIA_KHUYEN_MAI| currency: '':0}}
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+</div>
                 </div>
-                <div class="modal-footer" style="margin-top: 30px;">
-                    <center style="margin-top: 20px;">
-                        <button id="exit" name="exit" class="btn btn-success" data-dismiss="modal" style="padding:5px !important" ng-click="SaveImport()">
-                            Lưu
-                        </button>
-                        <button id="exit" name="exit" class="btn btn-danger" data-dismiss="modal" style="padding:5px !important">
-                            Exit
-                        </button>
-                    </center>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="SaveImportListEquip()">Save changes</button>
                 </div>
             </div>
-
-
         </div>
-    </div>
+    </div><!-- End Large Modal-->
+
 
 </div>

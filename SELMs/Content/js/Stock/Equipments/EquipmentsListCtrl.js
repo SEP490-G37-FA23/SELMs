@@ -101,6 +101,77 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
     }
 
     $scope.LoadEquipDetails = function (equip) {
-        window.location.href = "https://localhost:44335/Equipments/EquipmentDetails/" + equip.system_equipment_code;
+        window.location.href = "/Equipments/EquipmentDetails/" + equip.system_equipment_code;
     }
+    $scope.ListEquipImport =[]
+    $scope.readExcelFile = function () {
+        var input = document.getElementById('input_file');
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, { type: 'binary' });
+
+                // Assuming there is only one sheet in the Excel file
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+
+                // Parse sheet data as needed
+                var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+                // Output the parsed data
+                console.log(jsonData);
+
+               
+                var extractedColumns = extractColumns(jsonData)
+                $scope.ListEquipImport = extractedColumns;
+                console.log($scope.ListEquipImport);
+            };
+
+            reader.readAsBinaryString(file);
+        } else {
+            console.error("No file selected");
+        }
+    };
+
+    function extractColumns(jsonData) {
+        // Get the header row from jsonData
+        var headerRow = jsonData[0];
+
+        // Define the indices of the columns you want to extract
+        var indicesToExtract = [0, 1, 2, 3, 4, 5, 6, 7,8]; // Adjust these indices based on your needs
+
+        // Extract columns based on indices and create an array of objects
+        var extractedColumns = jsonData.slice(1).map(function (row) {
+            var extractedObject = {};
+            indicesToExtract.forEach(function (index, i) {
+                extractedObject[headerRow[index]] = row[i];
+            });
+            return extractedObject;
+        });
+
+        return extractedColumns;
+    }
+
+    $scope.SaveImportListEquip = function () { 
+        var data = {
+            username: username,
+            ListEquipImport:$scope.ListEquipImport
+        }
+        console.log(data);
+        var partialUrl = origin + '/api/v1/equipments/import-equipments';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Nhập danh sách thiết bị thành công');
+                $scope.LoadEquipmentsList();
+                $scope.ListEquipImport = [];
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+
+
 });

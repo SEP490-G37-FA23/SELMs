@@ -18,18 +18,18 @@ namespace SELMs.Services.Implements
         public async Task<ApplicationModel> GetApplication(int id)
         {
             Equipment_Handover_Form application = repository.GetApplication(id);
-            List<Equipment_Handover_Form> applicationDetails = repository.GetApplicationDetailList(application.form_code);
-            Attachment attachment = repository.GetApplicationAttachment(application.form_id);
+            List<Equipment_Handover_Form_Detail> applicationDetails = repository.GetApplicationDetailList(application.form_code);
+            List<Attachment> attachments = repository.GetApplicationAttachment(application.form_id);
             ApplicationModel result = new ApplicationModel()
             {
                 application = application,
                 applicationDetails = applicationDetails,
-                attachment = attachment
+                attachments = attachments
             };
             return result;
         }
 
-        public async Task SaveApplication(Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails, HttpPostedFileBase file)
+        public async Task<dynamic> SaveApplication(Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails)
         {
             string applicationCode = GenerateApplicationCode();
             application.form_code = applicationCode;
@@ -40,21 +40,12 @@ namespace SELMs.Services.Implements
             {
                 item.form_code = applicationCode;
             }
-
             application = repository.SaveApplication(application);
             repository.SaveApplicationDetails(applicationDetails);
-
-            if (file != null)
-            {
-                attachment = CreateAttachment(file);
-                attachment.name = applicationCode;
-                attachment.date = DateTime.Now;
-                attachment = attachmentRepository.SaveAttachment(attachment);
-                repository.AddAttachment(application.form_id, attachment.attach_id);
-            }
+            return application;
         }
 
-        public async Task UpdateApplication(int id, Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails, HttpPostedFileBase file)
+        public async Task<dynamic> UpdateApplication(int id, Equipment_Handover_Form application, List<Equipment_Handover_Form_Detail> applicationDetails)
         {
 
             if (repository.GetApplication(id) != null)
@@ -74,10 +65,10 @@ namespace SELMs.Services.Implements
                     repository.SaveApplicationDetail(item);
                 }
             }
-
+            return application;
         }
 
-        public async Task<dynamic> AddAttachment(int id, HttpPostedFileBase file)
+        public async Task<dynamic> AddAttachment(int id, HttpPostedFile file)
         {
             Equipment_Handover_Form application = repository.GetApplication(id);
             if (application != null)
@@ -152,7 +143,7 @@ namespace SELMs.Services.Implements
             return code;
         }
 
-        Attachment CreateAttachment(HttpPostedFileBase file)
+        Attachment CreateAttachment(HttpPostedFile file)
         {
             BinaryReader reader = new BinaryReader(file.InputStream);
             Attachment result = new Attachment()

@@ -48,7 +48,7 @@ namespace SELMs.Controllers
                         return RedirectToAction("MembersList", "User", new { area = "" });
                         break;
                     case "LD":
-                        return RedirectToAction("LocationList", "Locations", new { area = "" });
+                        return RedirectToAction("LocationsList", "Locations", new { area = "" });
                         break;
                     case "SM":
                         return RedirectToAction("EquipmentsList", "Equipments", new { area = "" });

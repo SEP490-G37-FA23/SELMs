@@ -14,6 +14,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using SELMs.Models;
+using System.Web;
+using System.IO;
 
 namespace SELMs.Api.Controllers
 {
@@ -29,34 +31,45 @@ namespace SELMs.Api.Controllers
         #region Get attachment by id
         [HttpGet]
         [Route("attachments/{id}")]
-        public async Task<IHttpActionResult> GetAttachment(int id)
+        public async Task<HttpResponseMessage> GetAttachment(int id)
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = repository.GetAttachment(id);
-                return Ok(returnedData);
+                Attachment attachment = repository.GetAttachment(id);
+                HttpResponseMessage result = Request.CreateResponse(HttpStatusCode.OK);
+                if (attachment != null)
+                {                    
+                    result.Content = new StreamContent(new MemoryStream(attachment.content));
+                    result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                    result.Content.Headers.ContentDisposition.FileName = $"{attachment.name}{attachment.extension}";
+                    result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                }
+                return result;
             }
             catch (Exception ex)
             {
                 Log.Error("Error: ", ex);
                 Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
                 throw;
             }
         }
         #endregion
 
-        #region Add new attachment
+        #region Upload attachments
         [HttpPost]
-        [Route("api/attachments/new-attachment")]
-        public async Task<IHttpActionResult> SaveAttachment(AttachmentDTO dto)
+        [Route("attachments/upload")]
+        public async Task<IHttpActionResult> UploadAttachments()
         {
             try
             {
-                Attachment attachment = mapper.Map<Attachment>(dto);
-                repository.SaveAttachment(attachment);
-                return Ok();
+                var result = new List<dynamic>();
+                var files = HttpContext.Current.Request.Files.GetMultiple("files").ToList();
+                foreach (var file in files)
+                {
+                    result.Add(await service.SaveAttachment(file));
+                }
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -68,25 +81,5 @@ namespace SELMs.Api.Controllers
         }
         #endregion        
 
-        #region Update attachment
-        [HttpPut]
-        [Route("attachments/{id}")]
-        public async Task<IHttpActionResult> UpdateAttachment(int id, [FromBody] AttachmentDTO attachment)
-        {
-            try
-            {
-                Attachment mem = mapper.Map<Attachment>(attachment);
-                service.UpdateAttachment(id, mem);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
     }
 }

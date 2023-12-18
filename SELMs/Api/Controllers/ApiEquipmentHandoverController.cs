@@ -57,8 +57,7 @@ namespace SELMs.Api.Controllers
         {
             try
             {
-                dynamic returnedData = null;
-                returnedData = repository.GetApplication(id);
+                dynamic returnedData = service.GetApplication(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -80,8 +79,7 @@ namespace SELMs.Api.Controllers
             {
                 Equipment_Handover_Form application = mapper.Map<Equipment_Handover_Form>(applicationRequest.application);
                 List<Equipment_Handover_Form_Detail> details = mapper.Map<List<Equipment_Handover_Form_Detail>>(applicationRequest.application_details);
-                HttpPostedFileBase attachment = applicationRequest.attachment;
-                service.SaveApplication(application, details, attachment);
+                service.SaveApplication(application, details);
                 return Ok();
             }
             catch (Exception ex)
@@ -103,8 +101,7 @@ namespace SELMs.Api.Controllers
             {
                 Equipment_Handover_Form application = mapper.Map<Equipment_Handover_Form>(applicationRequest.application);
                 List<Equipment_Handover_Form_Detail> details = mapper.Map<List<Equipment_Handover_Form_Detail>>(applicationRequest.application_details);
-                HttpPostedFileBase attachment = applicationRequest.attachment;
-                service.UpdateApplication(id, application, details, attachment);
+                service.UpdateApplication(id, application, details);
                 return Ok();
             }
             catch (Exception ex)
@@ -119,12 +116,19 @@ namespace SELMs.Api.Controllers
 
         #region Attach file to application
         [HttpPost]
-        [Route("equipment-handover/finish-file/{id}")]
-        public async Task<IHttpActionResult> AttachFile(int id, [FromBody] HttpPostedFileBase file_attach)
+        [Route("equipment-handover/finish-file/")]
+        public async Task<IHttpActionResult> AttachFile()
         {
             try
             {
-                dynamic result = service.AddAttachment(id, file_attach);
+                var result = new List<dynamic>();
+                var applicationId = HttpContext.Current.Request.Params["application_id"];
+                var files = HttpContext.Current.Request.Files.GetMultiple("attachments");
+                foreach (var file in files)
+                {
+                    var item = await service.AddAttachment(Convert.ToInt32(applicationId), file);
+                    result.Add(item);
+                }
                 return Ok(result);
             }
             catch (Exception ex)

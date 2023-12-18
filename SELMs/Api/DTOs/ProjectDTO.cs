@@ -18,7 +18,7 @@ namespace SELMs.Api.DTOs
         //public Nullable<System.DateTime> end_date { get; set; }
         public string end_date { get; set; }
         //public Nullable<System.DateTime> create_date { get; set; }
-        public string create_date { get; set; }
+        public DateTime? create_date { get; set; }
         public string creater { get; set; }
         public bool status { get; set; }
         public Nullable<int> location_id { get; set; }
