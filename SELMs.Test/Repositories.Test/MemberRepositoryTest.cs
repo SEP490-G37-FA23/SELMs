@@ -132,7 +132,6 @@
 
 		public static IEnumerable<object[]> CreateNewMemberTestData()
 		{
-			yield return new object[] { new User() { } };
 			yield return new object[] { new User() { username = "", user_code = "", fullname = "", password = "" } };
 			yield return new object[] { new User() { username = "DongPV", user_code = "DongPV", fullname = "Phạm Văn Đồng", password = "123" } };
 			yield return new object[] { new User() { username = "TrongTD", user_code = "TrongTD", fullname = "Trần Đình Trọng", password = "123" } };

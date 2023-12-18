@@ -21,7 +21,7 @@
 		public async Task TestSaveMember_ReturnNothing(User userDTO)
 		{
 			await memberService.SaveMember(userDTO);
-			output.WriteLine("Test case passed");
+			output.WriteLine("Create member successfully");
 		}
 
 

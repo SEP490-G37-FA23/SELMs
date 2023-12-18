@@ -1,4 +1,6 @@
-﻿namespace SELMs.Test.Services.Test
+﻿using System.Data.Entity;
+
+namespace SELMs.Test.Services.Test
 {
 	public class LocationServiceTest
 	{
@@ -37,17 +39,22 @@
 
 		[Theory]
 		[MemberData(nameof(LocationServiceTestData.UpdateLocationTestData), MemberType = typeof(LocationServiceTestData))]
-		public async Task TestUpdateLocation_ReturnNoException(int id, Location location, List<Location> subLocations)
+		public async Task TestUpdateLocation_ReturnNoException(int id, Location location)
 		{
-			try
+
+			await locationService.UpdateLocation(id, location);
+			SELMsContext a = new SELMsContext();
+
+			var loc = await a.Locations.FirstOrDefaultAsync(l => l.location_id == id);
+
+			if (loc != null)
 			{
-				await locationService.UpdateLocation(id, location, subLocations);
-				output.WriteLine("Test case passed");
+				Assert.Equal(location.location_code, loc.location_code);
+				Assert.Equal(location.is_active, loc.is_active);
+				output.WriteLine("Update successfull");
 			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			else
+				output.WriteLine("Location not found to update");
 		}
 
 

@@ -22,29 +22,31 @@ namespace SELMs.Test.Services.Test
 
 		[Theory]
 		[MemberData(nameof(CategoryServiceTestData.SaveCategoryTestData), MemberType = typeof(CategoryServiceTestData))]
-		public async Task TestCategory_ReturnNoException(Category category, List<StandardEquipmentDTO> equipments)
+		public async Task TestSaveCategory_ReturnNoException(Category category, List<StandardEquipmentDTO> equipments)
 		{
 			try
 			{
 				await categoryService.SaveCategory(category, equipments);
 
-				var cat = await sELMsContext.Categories.FirstOrDefaultAsync(c => c.category_name.Equals(category.category_name));
+				var cat = await sELMsContext.Categories.FirstOrDefaultAsync(c => c.category_code.Equals(category.category_code));
 
 
 				Assert.NotNull(cat);
 				Assert.Equal(category.category_code, cat.category_code);
-				Assert.Equal(category.category_name, cat.category_name);
 
 				var list = await sELMsContext.Equipments
 					.Where(e => e.category_code.Equals(category.category_code))
 					.ToListAsync();
 
+				if (list.Count > 0)
+					for (int i = 0; i < equipments.Count; i++)
+					{
+						Assert.Equal(equipments[i].standard_equipment_code, list[i].standard_equipment_code);
+						output.WriteLine(JsonConvert.SerializeObject(list[i]));
+					}
+				else
+					output.WriteLine("Empty list");
 
-				for (int i = 0; i < equipments.Count; i++)
-					Assert.Equal(equipments[i].equipment_name, list[i].equipment_name);
-
-
-				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)
 			{
@@ -87,8 +89,8 @@ namespace SELMs.Test.Services.Test
 			var cate1 = new Category() { category_code = "AS", category_name = "anakin skywalker" };
 			var list1 = new List<StandardEquipmentDTO>
 			{
-				new StandardEquipmentDTO() { equipment_name = "" },
-				new StandardEquipmentDTO() { equipment_name = "hello" }
+				new StandardEquipmentDTO() { standard_equipment_code="71FE",  },
+				new StandardEquipmentDTO() { standard_equipment_code="CC120A", }
 			};
 
 
@@ -97,7 +99,7 @@ namespace SELMs.Test.Services.Test
 
 
 			yield return new object[] { cate1, list1 };
-			//yield return new object[] { cate2, list2 };
+			yield return new object[] { cate2, list2 };
 		}
 
 

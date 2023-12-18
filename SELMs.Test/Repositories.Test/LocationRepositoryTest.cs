@@ -207,7 +207,7 @@ namespace SELMs.Test.Repositories.Test
 		{
 			locationRepository.UpdateEquipLocationHistory(history);
 			Thread.Sleep(1000);
-			output.WriteLine("Test case passed");
+			output.WriteLine("Update successfull");
 		}
 	}
 

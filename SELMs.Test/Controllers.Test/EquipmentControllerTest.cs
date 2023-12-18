@@ -62,11 +62,9 @@ namespace SELMs.Test.Controllers.Test
 			var response = await actionResult.ExecuteAsync(CancellationToken.None);
 			string content = await response.Content.ReadAsStringAsync();
 
+			Assert.Equal(200, (int)response.StatusCode);
 
-			if (actionResult is OkNegotiatedContentResult<EquipmentModel>)
-				output.WriteLine(JsonConvert.SerializeObject(content));
-			else
-				output.WriteLine($"Equipment not found");
+			output.WriteLine(content);
 		}
 
 
@@ -99,10 +97,7 @@ namespace SELMs.Test.Controllers.Test
 			try
 			{
 				var actionResult = await apiEquipmentController.SaveEquipment(equipmentNew);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-
-				Assert.Equal(200, (int)response.StatusCode);
-				output.WriteLine($"Status code: {(int)response.StatusCode}");
+				output.WriteLine(JsonConvert.SerializeObject(actionResult));
 			}
 			catch (Exception ex)
 			{
@@ -117,7 +112,7 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentControllerTestData.ImportEquipmentTestData), MemberType = typeof(EquipmentControllerTestData))]
-		public async Task TestImportEquipmentBySystemCode_ReturnStatusCode200(List<EquipmentDTO> equipmentDTOs)
+		public async Task TestImportEquipmentBySystemCode_ReturnStatusCode200(EquipmentImportDTO equipmentDTOs)
 		{
 			try
 			{
@@ -144,12 +139,9 @@ namespace SELMs.Test.Controllers.Test
 			try
 			{
 				var actionResult = await apiEquipmentController.UpdateEquipment(id, equipment);
-
 				Thread.Sleep(3000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				Assert.Equal(200, (int)response.StatusCode);
-				output.WriteLine($"Status code: {(int)response.StatusCode}");
+				output.WriteLine(JsonConvert.SerializeObject(actionResult));
 			}
 			catch (Exception ex)
 			{

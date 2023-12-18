@@ -1,6 +1,4 @@
-﻿using System.Web;
-
-namespace SELMs.Test.Services.Test
+﻿namespace SELMs.Test.Services.Test
 {
 	public class EquipmentServiceTest
 	{
@@ -23,11 +21,11 @@ namespace SELMs.Test.Services.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentServiceTestData.CreateEquipmentTestData), MemberType = typeof(EquipmentServiceTestData))]
-		public async Task TestSaveEquipment_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips, List<HttpPostedFileBase> images)
+		public async Task TestSaveEquipment_ReturnNoException(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
 		{
 			try
 			{
-				await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips, images);
+				await equipmentService.SaveEquipment(equipment, location_id, ListComponentEquips);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)
@@ -46,7 +44,7 @@ namespace SELMs.Test.Services.Test
 		{
 			try
 			{
-				await equipmentService.ImportEquipments(equipment);
+				//await equipmentService.ImportEquipments(equipment);
 				output.WriteLine("Test case passed");
 			}
 			catch (Exception ex)

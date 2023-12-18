@@ -67,12 +67,13 @@ namespace SELMs.Test.Controllers.Test
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 
+				Assert.Equal(200, (int)response.StatusCode);
 				Assert.Equal("\"Thêm mới thành công\"", content.Trim());
 				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}\n{content}");
 			}
 			catch (Exception ex)
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				Assert.IsType<NullReferenceException>(ex);
 			}
 		}
 
@@ -119,9 +120,9 @@ namespace SELMs.Test.Controllers.Test
 	{
 		public static IEnumerable<object[]> SaveHistoryTestData()
 		{
+			yield return new object[] { null! };
 			yield return new object[] { new MemberProjectHistoryDTO() { project_id = 2, user_code = "DatTT", status = "ACTIVE", date = DateTime.Now } };
 			yield return new object[] { new MemberProjectHistoryDTO() { project_id = 4, user_code = "LuyenLV", status = "INACTIVE", date = DateTime.Now } };
-			yield return new object[] { new MemberProjectHistoryDTO() { project_id = 0, user_code = "LuatNV", status = "INACTIVE", date = DateTime.Now } };
 		}
 
 

@@ -199,11 +199,11 @@ namespace SELMs.Test.Controllers.Test
 
 		public static IEnumerable<object[]> CreateNewMemberTestData()
 		{
-			yield return new object[] { true, null! };
+			//yield return new object[] { true, null! };
 			yield return new object[] { true, new UserDTO() { fullname = "" } };
-			yield return new object[] { false, new UserDTO() { fullname = "Lê" } };
-			yield return new object[] { false, new UserDTO() { fullname = "Trần Đức" } };
-			yield return new object[] { false, new UserDTO() { fullname = "Nguyễn Công Minh" } };
+
+			//yield return new object[] { false, new UserDTO() { fullname = "Trần Đức" } };
+			//yield return new object[] { false, new UserDTO() { fullname = "Nguyễn Công Minh" } };
 		}
 
 

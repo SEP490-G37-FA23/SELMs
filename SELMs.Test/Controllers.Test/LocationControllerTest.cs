@@ -135,20 +135,32 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(LocationControllerTestData.UpdateLocationTestData), MemberType = typeof(LocationControllerTestData))]
-		public async Task TestUpdateLocation_ReturnStatusCode200(int id, LocationRequest locationRequest)
+		public async Task TestUpdateLocation_ReturnStatusCode200(int id, LocationDTO locationDTO)
 		{
-			try
-			{
-				var actionResult = await apiLocationController.UpdateLocation(id, locationRequest);
-				Thread.Sleep(2000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
-				output.WriteLine($"Test case passed - Status code: {(int)response.StatusCode}");
-			}
-			catch (Exception ex)
+			var actionResult = await apiLocationController.UpdateLocation(id, locationDTO);
+			Thread.Sleep(2000);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+
+			Assert.Equal(200, (int)response.StatusCode);
+
+
+			var actionResult1 = await apiLocationController.GetLocation(id);
+			var response1 = await actionResult1.ExecuteAsync(CancellationToken.None);
+			string content1 = await response1.Content.ReadAsStringAsync();
+
+
+			if (content1.Equals("null"))
 			{
-				Assert.Fail("Test case failed\n" + ex.Message);
+				LocationDTO l = JsonConvert.DeserializeObject<LocationDTO>(content1);
+
+				Assert.Equal(locationDTO.location_code, l.location_code);
+				Assert.Equal(locationDTO.is_active, l.is_active);
+
+				output.WriteLine("Update sucessfull");
 			}
+			else
+				output.WriteLine("Location not found");
 		}
 
 
@@ -308,13 +320,8 @@ namespace SELMs.Test.Controllers.Test
 			LocationDTO l1 = new() { location_code = "", is_active = true };
 			LocationDTO l2 = new() { location_code = "DE-318", is_active = true };
 
-
-			List<LocationDTO> list1 = new() { new LocationDTO() { location_code = "BE-110", is_active = false }, };
-			List<LocationDTO> list2 = new() { new LocationDTO() { location_code = "BE-111", is_active = true } };
-
-
-			yield return new object[] { 0, new LocationRequest() { Location = l1, SubLocations = list1 } };
-			yield return new object[] { 5, new LocationRequest() { Location = l2, SubLocations = list2 } };
+			yield return new object[] { 1, l1 };
+			yield return new object[] { 20, l2 };
 		}
 
 

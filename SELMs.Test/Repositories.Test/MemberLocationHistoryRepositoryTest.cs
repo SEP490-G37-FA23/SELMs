@@ -36,6 +36,7 @@
 				output.WriteLine(JsonConvert.SerializeObject(history));
 			else
 				output.WriteLine("History not found");
+
 		}
 
 
