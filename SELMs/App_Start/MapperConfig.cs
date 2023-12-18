@@ -99,20 +99,16 @@ namespace SELMs.App_Start
              
 
                 //Configuring Equipment_Location_History and EquipmentLocationHistoryDTO
-                cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap()
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+                cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap();
 
                 //Configuring Equipment_Project_History and EquipmentProjectHistoryDTO
-                cfg.CreateMap<EquipmentProjectHistoryDTO, Equipment_Project_History>().ReverseMap()
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+                cfg.CreateMap<EquipmentProjectHistoryDTO, Equipment_Project_History>().ReverseMap();
 
                 //Configuring Member_Location_History and MemberLocationHistoryDTO
-                cfg.CreateMap<MemberLocationHistoryDTO, Member_Location_History>().ReverseMap()
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+                cfg.CreateMap<MemberLocationHistoryDTO, Member_Location_History>().ReverseMap();
 
                 //Configuring Member_Project_History and MemberProjectHistoryDTO
-                cfg.CreateMap<MemberProjectHistoryDTO, Member_Project_History>().ReverseMap()
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
+                cfg.CreateMap<MemberProjectHistoryDTO, Member_Project_History>().ReverseMap();
 
                 //Configuring Member_Project_History and MemberProjectHistoryDTO
                 cfg.CreateMap<AttachmentDTO, Attachment>()
