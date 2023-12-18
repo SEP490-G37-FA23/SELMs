@@ -136,15 +136,13 @@ namespace SELMs.Api.Controllers
         #region Update location
         [HttpPost]
         [Route("locations/update/{id}")]
-        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationRequest locationRequest)
+        public async Task<IHttpActionResult> UpdateLocation(int id, [FromBody] LocationDTO dto)
         {
             try
             {
-                Location location = mapper.Map<Location>(locationRequest.Location);
-                List<Location> subLocations = mapper.Map<List<Location>>(locationRequest.SubLocations);
-                service.SaveLocation(location, subLocations);
-                service.UpdateLocation(id, location, subLocations);
-                return Ok();
+                Location location = mapper.Map<Location>(dto);
+                dynamic result = service.UpdateLocation(id, location);
+                return Ok(result);
             }
             catch (Exception ex)
             {
