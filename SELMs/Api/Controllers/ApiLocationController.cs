@@ -197,12 +197,14 @@ namespace SELMs.Api.Controllers
         {
             try
             {
-                foreach(var item in dto.ListEquipLocationHistory)
+                List<dynamic> result = new List<dynamic>();
+                foreach(var history in dto.ListEquipLocationHistory)
                 {
-                    service.SaveEquipLocationHistory(item);
+                    var item = service.SaveEquipLocationHistory(history);
+                    result.Add(item);
                 }
                
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
