@@ -71,7 +71,7 @@ namespace SELMs.Api.Controllers
 
 		#region Add new 
 		[HttpPost]
-		[Route("member-location-histories/create")]
+		[Route("member-location-history/create")]
 		public async Task<IHttpActionResult> SaveCategory([FromBody] MemberLocationHistoryDTO memberLocationHistoryDTO)
 		{
 			try

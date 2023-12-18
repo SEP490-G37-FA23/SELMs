@@ -281,7 +281,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             ListMembersJoinLocation: ListSave
         }
         console.log(data);
-        var partialUrl = origin + '/api/v1/locations/member-location-history/create';
+        var partialUrl = origin + '/api/v1/member-location-history/create';
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thành viên sử dụng vị trí thành công!');
