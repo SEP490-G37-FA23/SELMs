@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
@@ -71,18 +72,20 @@ namespace SELMs.Api.Controllers
 
 		#region Add new 
 		[HttpPost]
-		[Route("member-location-histories/create")]
-		public async Task<IHttpActionResult> SaveHistory([FromBody] MemberLocationHistoryDTO memberLocationHistoryDTO)
+		[Route("member-location-history/create")]
+		public async Task<IHttpActionResult> SaveCategory([FromBody] ListMemberLocationHistoryDTO dto)
 		{
 			try
 			{
-				var history = mapper.Map<Member_Location_History>(memberLocationHistoryDTO);
-				bool createSuccessfull = await memberLocationHistoryRepository.AddMemberLocationHistory(history);
-
-				if (createSuccessfull)
-					return Ok("Thêm mới thành công");
-
-				return BadRequest("Thêm mới thất bại");
+				var histories = mapper.Map<List<Member_Location_History>>(dto.ListMembersJoinLocation);
+				List<dynamic> result = new List<dynamic>();
+				foreach (var history in histories)
+				{
+					history.date = DateTime.Now;
+					var item = memberLocationHistoryRepository.AddMemberLocationHistory(history);
+					result.Add(history);
+				}
+				return Ok("Thêm mới thành công");
 			}
 			catch (Exception ex)
 			{

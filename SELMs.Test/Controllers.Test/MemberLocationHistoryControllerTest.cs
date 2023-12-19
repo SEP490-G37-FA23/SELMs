@@ -67,7 +67,7 @@
 		{
 			try
 			{
-				var actionResult = await apiMemberLocationHistoryController.SaveHistory(memberLocationHistoryDTO);
+				var actionResult = await apiMemberLocationHistoryController.SaveCategory(null);
 				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 				string content = await response.Content.ReadAsStringAsync();
 
