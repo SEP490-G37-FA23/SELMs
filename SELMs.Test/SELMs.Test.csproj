@@ -10,12 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers.Test\CategoryControllerTest.cs" />
-    <Compile Remove="Controllers.Test\EquipmentControllerTest.cs" />
     <Compile Remove="Repositories.Test\CategoryRepositoryTest.cs" />
     <Compile Remove="Repositories.Test\EquipmentRepositoryTest.cs" />
-    <Compile Remove="Services.Test\CategoryServiceTest.cs" />
-    <Compile Remove="Services.Test\EquipmentServiceTest.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +32,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SELMs\SELMs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
   </ItemGroup>
 
 </Project>
