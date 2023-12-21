@@ -44,7 +44,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
 
 
     $scope.GetDetailLocation = function (location_id) {
-        new QRCode(document.getElementById('id_qrcode'), 'https://localhost:44335/Locations/LocationDetails/' + location_id);
+        new QRCode(document.getElementById('id_qrcode'), origin + '/Locations/LocationDetails/' + location_id);
         var partialUrl = origin + '/api/v1/locations/detail/' + location_id;
         $http.post(partialUrl)
             .then(function (response) {
@@ -86,7 +86,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
         $scope.showSubLocation = true;
         $scope.showMembers = false;
         document.getElementById('id_qrcode_sub').innerHTML = '';
-        new QRCode(document.getElementById('id_qrcode_sub'), 'https://localhost:44335/Locations/LocationDetails/' + item.location_id);
+        new QRCode(document.getElementById('id_qrcode_sub'), origin + '/Locations/LocationDetails/' + item.location_id);
         var partialUrl = origin + '/api/v1/locations/detail/' + item.location_id;
         $http.post(partialUrl)
             .then(function (response) {
@@ -290,5 +290,32 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
+    $scope.NewLocation = {
+        location_code: '',
+        location_desciption: '',
+        parent_location_id: parseInt(url),
+        location_level: 2,
+        is_active: true
+    }
+    $scope.SaveNewLocation = function (newLocation) {
+        var data = {
+            Location: {
+                location_code: newLocation.location_code,
+                location_desciption: newLocation.location_desciption,
+                parent_location_id: newLocation.parent_location_id,
+                location_level: newLocation.location_level,
+                is_active: true
+            },
+            SubLocations: []
 
+        }
+        var partialUrl = origin + '/api/v1/locations/new-location';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Thêm mới vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
 });

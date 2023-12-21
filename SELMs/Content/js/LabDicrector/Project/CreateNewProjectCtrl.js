@@ -180,8 +180,12 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         }
         var data = {
             Project: $scope.Project,
-            ProjectMembers: $scope.ListMembersJoinProject,
-            ProjectEquipments: $scope.ListEquipmentProject
+            ProjectMembers: $scope.ListMembersJoinProject.map(function (member) {
+                return member.user_code;
+            }),
+            ProjectEquipments: $scope.ListEquipmentProject.map(function (member) {
+                return member.system_equipment_code;
+            })
         }
         var partialUrl = origin + '/api/v1/projects/new-project';
         $http.post(partialUrl, data)
