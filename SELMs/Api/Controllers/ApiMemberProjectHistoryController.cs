@@ -85,29 +85,29 @@ namespace SELMs.Api.Controllers
 		}
 		#endregion
 
-		#region Update category
-		[HttpPut]
-		[Route("categories/{id}")]
-		public async Task<IHttpActionResult> UpdateHistory(int id, [FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
-		{
-			try
-			{
-				var history = mapper.Map<Member_Project_History>(memberProjectHistoryDTO);
-				bool updateSuccessfull = await memberProjectHistoryService.UpdateHistory(id, history);
+		//#region Update category
+		//[HttpPut]
+		//[Route("categories/{id}")]
+		//public async Task<IHttpActionResult> UpdateHistory(int id, [FromBody] MemberProjectHistoryDTO memberProjectHistoryDTO)
+		//{
+		//	try
+		//	{
+		//		var history = mapper.Map<Member_Project_History>(memberProjectHistoryDTO);
+		//		bool updateSuccessfull = await memberProjectHistoryService.UpdateHistory(id, history);
 
-				if (updateSuccessfull)
-					return Ok("Cập nhật thành công");
+		//		if (updateSuccessfull)
+		//			return Ok("Cập nhật thành công");
 
-				return BadRequest("Cập nhật thất bại");
-			}
-			catch (Exception ex)
-			{
-				Log.Error("Error: ", ex);
-				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-				throw;
-			}
-		}
-		#endregion
+		//		return BadRequest("Cập nhật thất bại");
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Log.Error("Error: ", ex);
+		//		Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+		//		return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+		//		throw;
+		//	}
+		//}
+		//#endregion
 	}
 }

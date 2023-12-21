@@ -68,7 +68,7 @@ namespace SELMs.Api.Controllers
         #endregion
 
 		#region Get category by id
-		[HttpPost]
+		[HttpGet]
 		[Route("categories/{id}")]
 		public async Task<CategoryModel> GetCategory(int id)
 		{
@@ -157,7 +157,7 @@ namespace SELMs.Api.Controllers
         #endregion
 
         #region Deactivate category
-        [HttpPost]
+        [HttpGet]
         [Route("categories/deactive/{id}")]
         public async Task<IHttpActionResult> DeactivateCategory(int id)
         {
