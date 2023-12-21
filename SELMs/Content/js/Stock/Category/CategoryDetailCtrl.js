@@ -43,7 +43,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     //return
     $scope.GetDetailCategory = function (category_id) {
         var partialUrl = origin + '/api/v1/categories/' + category_id;
-        $http.post(partialUrl)
+        $http.get(partialUrl)
             .then(function (response) {
                 console.log(response.data);
                 $scope.DetailCategory = response.data.category;

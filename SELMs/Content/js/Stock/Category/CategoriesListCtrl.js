@@ -73,7 +73,7 @@ app.controller('CategoriesListCtrl', function ($scope, $http, $sce) {
     $scope.LoadCategorisList();
 
     $scope.LoadCategoryDetails = function (item) {
-        window.location.href = origin +  "Category/CategoryDetail/" + item.category_id;
+        window.location.href = origin +  "/Category/CategoryDetail/" + item.category_id;
     }
     $scope.DeleteCategory = function (category) {
         var partialUrl = origin + '/api/v1/categories/deactive/' + category.category_id;

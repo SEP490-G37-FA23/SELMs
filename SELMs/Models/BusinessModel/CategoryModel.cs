@@ -7,7 +7,7 @@ namespace SELMs.Models.BusinessModel
 {
     public class CategoryModel
     {
-        public dynamic category { get; set; }
+        public Category category { get; set; }
         public dynamic category_equipments { get; set; }
     }
 }
