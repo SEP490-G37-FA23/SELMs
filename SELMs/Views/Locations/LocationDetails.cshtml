@@ -469,7 +469,7 @@
                             <div class="row mb-3">
                                 <label class=" col-form-label" for="inputName5">Mã chuẩn</label>
                                 <div>
-                                    <input type="text" class="form-control" id="inputText">
+                                    <input type="text" class="form-control" id="inputText" ng-model="NewLocation.location_code">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -485,7 +485,7 @@
                             <div class="row mb-3">
                                 <label class=" col-form-label">Vị trí cha</label>
                                 <div>
-                                    <input type="text" class="form-control" ng-model="DetailLocation.location_code" disabled>
+                                    <input type="text" class="form-control" ng-model="NewLocation.parent_location_id" disabled>
                                 </div>
                             </div>
 
@@ -498,7 +498,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="SaveNewLocation(NewLocation)">Save changes</button>
                 </div>
             </div>
         </div>
