@@ -30,5 +30,7 @@ namespace SELMs.Models
         public Nullable<decimal> price { get; set; }
         public Nullable<bool> is_integration { get; set; }
         public bool is_available { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

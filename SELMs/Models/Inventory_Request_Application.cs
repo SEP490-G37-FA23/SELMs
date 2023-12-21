@@ -14,6 +14,12 @@ namespace SELMs.Models
     
     public partial class Inventory_Request_Application
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Inventory_Request_Application()
+        {
+            this.Inventory_Request_Application_Detail = new HashSet<Inventory_Request_Application_Detail>();
+        }
+    
         public int application_id { get; set; }
         public string ir_application_code { get; set; }
         public string requester { get; set; }
@@ -23,5 +29,11 @@ namespace SELMs.Models
         public bool status { get; set; }
         public string type_inventory { get; set; }
         public Nullable<int> location_id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory_Request_Application_Detail> Inventory_Request_Application_Detail { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

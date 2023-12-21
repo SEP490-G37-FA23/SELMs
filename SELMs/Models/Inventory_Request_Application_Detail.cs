@@ -21,5 +21,7 @@ namespace SELMs.Models
         public string actual_usage_status { get; set; }
         public Nullable<System.DateTime> inventory_date { get; set; }
         public bool is_perform { get; set; }
+    
+        public virtual Inventory_Request_Application Inventory_Request_Application { get; set; }
     }
 }

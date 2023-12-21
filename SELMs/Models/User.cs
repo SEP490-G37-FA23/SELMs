@@ -14,6 +14,23 @@ namespace SELMs.Models
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Equipments = new HashSet<Equipment>();
+            this.Equipment_Allocation_Application = new HashSet<Equipment_Allocation_Application>();
+            this.Equipment_Allocation_Application1 = new HashSet<Equipment_Allocation_Application>();
+            this.Inventory_Request_Application = new HashSet<Inventory_Request_Application>();
+            this.Inventory_Request_Application1 = new HashSet<Inventory_Request_Application>();
+            this.Member_Location_History = new HashSet<Member_Location_History>();
+            this.Member_Project_History = new HashSet<Member_Project_History>();
+            this.Projects = new HashSet<Project>();
+            this.Projects1 = new HashSet<Project>();
+            this.Equipment_Handover_Form = new HashSet<Equipment_Handover_Form>();
+            this.Equipment_Handover_Form1 = new HashSet<Equipment_Handover_Form>();
+            this.Equipment_Handover_Form2 = new HashSet<Equipment_Handover_Form>();
+        }
+    
         public int user_id { get; set; }
         public string user_code { get; set; }
         public string username { get; set; }
@@ -33,5 +50,31 @@ namespace SELMs.Models
         public string skill { get; set; }
         public string job_description { get; set; }
         public Nullable<bool> is_active { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment> Equipments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory_Request_Application> Inventory_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory_Request_Application> Inventory_Request_Application1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Member_Location_History> Member_Location_History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Member_Project_History> Member_Project_History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects1 { get; set; }
+        public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form2 { get; set; }
     }
 }

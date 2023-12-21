@@ -14,6 +14,12 @@ namespace SELMs.Models
     
     public partial class Equipment_Allocation_Application
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Equipment_Allocation_Application()
+        {
+            this.Equipment_Allocation_Application_Detail = new HashSet<Equipment_Allocation_Application_Detail>();
+        }
+    
         public int application_id { get; set; }
         public string ea_application_code { get; set; }
         public System.DateTime application_date { get; set; }
@@ -27,5 +33,12 @@ namespace SELMs.Models
         public string status { get; set; }
         public Nullable<int> location_id { get; set; }
         public Nullable<int> project_id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application_Detail> Equipment_Allocation_Application_Detail { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }
