@@ -68,6 +68,7 @@ app.controller('LocationsListCtrl', function ($scope, $http, $sce) {
         }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
             $scope.ListLocations = response.data;
+            console.log($scope.ListLocations);
             $scope.sumLocations = $scope.ListLocations.length;
         });
     }
