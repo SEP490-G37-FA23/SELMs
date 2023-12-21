@@ -19,6 +19,10 @@ namespace SELMs.Controllers
 
         public ActionResult Login()
         {
+            Session["isadmin"] = "";
+            Session["username"] = "";
+            Session["fullname"] = "";
+            Session["role"] = "";
             ViewBag.Title = "Login Page";
 
             return View();

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers.Test\MemberLocationHistoryControllerTest.cs" />
     <Compile Remove="Repositories.Test\CategoryRepositoryTest.cs" />
     <Compile Remove="Repositories.Test\EquipmentRepositoryTest.cs" />
   </ItemGroup>

@@ -91,7 +91,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             id: 0
         }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
-            $scope.ListLocations = response.data.Result;
+            $scope.ListLocations = response.data;
         });
     }
     $scope.LoadLocationsList();
@@ -143,6 +143,17 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         })
     }
     $scope.HandelEquipJoinProject = function (eq, item) {
+        // Kiểm tra nếu system_equipment_code đã tồn tại trong ListEquipmentProject
+        var existingItemIndex = $scope.ListEquipmentProject.findIndex(function (existingItem) {
+            return existingItem.system_equipment_code === eq.system_equipment_code;
+        });
+
+        if (existingItemIndex !== -1) {
+            // Nếu tồn tại, xóa dòng cũ trước khi thêm dòng mới
+            $scope.ListEquipmentProject.splice(existingItemIndex, 1);
+        }
+
+        // Thêm dòng mới
         item.textEquip = eq.system_equipment_code;
         item.system_equipment_code = eq.system_equipment_code;
         item.standard_equipment_code = eq.standard_equipment_code;
@@ -150,7 +161,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         item.unit = eq.unit;
         item.responsibler = eq.responsibler;
         item.usage_status = eq.usage_status;
-    }
+    };
     $scope.DeleteEquipProject = function (list, index) {
         list.splice(index, 1);
     }
