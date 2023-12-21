@@ -11,8 +11,10 @@
 
   <ItemGroup>
     <Compile Remove="Controllers.Test\MemberLocationHistoryControllerTest.cs" />
+    <Compile Remove="Controllers.Test\ProjectControllerTest.cs" />
     <Compile Remove="Repositories.Test\CategoryRepositoryTest.cs" />
     <Compile Remove="Repositories.Test\EquipmentRepositoryTest.cs" />
+    <Compile Remove="Services.Test\ProjectServiceTest.cs" />
   </ItemGroup>
 
   <ItemGroup>

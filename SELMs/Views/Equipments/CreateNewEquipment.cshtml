@@ -176,7 +176,12 @@
                     </div>
                     <div class="col-md-12">
                         <label for="equipStatus" class="form-label">Trạng thái</label>
-                        <textarea ng-model="NewEquip.usage_status" class="form-control"></textarea>
+                        <select ng-model="NewEquip.usage_status" class="form-control">
+                            <option value="Thiết bị mới">Thiết bị mới</option>
+                            <option value="Thiết bị đang sử dụng">Thiết bị đang sử dụng</option>
+                            <option value="Thiết bị hỏng">Thiết bị hỏng</option>
+                            <option value="Thiết bị cần kiểm tra">Thiết bị cần kiểm tra</option>
+                        </select>
                     </div>
                     <div class="col-md-12">
                         <label for="equipStatus" class="form-label">Thông số kĩ thuật</label>
