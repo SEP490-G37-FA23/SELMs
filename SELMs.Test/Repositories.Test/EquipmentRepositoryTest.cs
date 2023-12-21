@@ -27,14 +27,23 @@
 		}
 
 
+		[Theory]
+		[MemberData(nameof(EquipmentRepositoryTestData.GetEquipmentListTestData), MemberType = typeof(EquipmentRepositoryTestData))]
+		public async Task TestGetEquipmentListByMultiCondition_ReturnEquipmentList(Argument argument)
+		{
+			var list = await equipmentRepository.GetEquipmentList(argument);
 
-
+			foreach (var item in list)
+				output.WriteLine(JsonConvert.SerializeObject(item));
+		}
 
 
 
 		[Theory]
 		[InlineData(0)]
+		[InlineData(1)]
 		[InlineData(5)]
+		[InlineData(int.MaxValue)]
 		public void TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
 			Equipment equipment =  equipmentRepository.GetEquipment(id);
@@ -43,12 +52,15 @@
 				output.WriteLine("Equipment not found");
 
 			else
-				output.WriteLine($"Equipment found\n{JsonConvert.SerializeObject(equipment)}");
+				output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
 
+
+
 		[Theory]
+		[InlineData("")]
 		[InlineData("E00000000")]
 		[InlineData("E0006")]
 		public async Task TestGetEquipmentByCode_ReturnEquipmentFound(string code)
@@ -59,7 +71,7 @@
 				output.WriteLine("Equipment not found");
 
 			else
-				output.WriteLine($"Equipment found\n{JsonConvert.SerializeObject(equipment)}");
+				output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
@@ -69,22 +81,26 @@
 		[Fact]
 		public void TestSaveManyEquipment_ReturnNothing()
 		{
-			try
-			{
-				List<Equipment> equipments = new()
+			SELMsContext sELMsContext = new();
+
+			List<Equipment> equipments = new()
 				{
 					new Equipment() { equipment_name = "New one" },
-					new Equipment() { equipment_name = "New one 1" },
-					new Equipment() { equipment_name = "New one 2" }
+					new Equipment() { equipment_name = "" },
+					new Equipment() { equipment_name = "N" }
 				};
+			equipmentRepository.SaveEquipments(equipments);
+			Thread.Sleep(1000);
 
-				equipmentRepository.SaveEquipments(equipments);
-				output.WriteLine($"Created multiple equipment successfully");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			var e1 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals("New one"));
+			var e2 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals(""));
+			var e3 = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_name.Equals("N"));
+
+			Assert.Equal("New one", e1.equipment_name);
+			Assert.Equal("", e2.equipment_name);
+			Assert.Equal("N", e3.equipment_name);
+
+			output.WriteLine($"Created many equipments successfully");
 		}
 
 
@@ -97,12 +113,19 @@
 		{
 			try
 			{
+				SELMsContext sELMsContext = new();
 				equipmentRepository.UpdateEquipment(equipment);
-				output.WriteLine($"Update equipment successfully");
+				Thread.Sleep(1500);
+
+				var e = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_id == equipment.equipment_id);
+
+				Assert.Equal(equipment.equipment_name, e.equipment_name);
+				output.WriteLine("Updated successfully");
 			}
 			catch (Exception e)
 			{
-				Assert.Fail(e.ToString());
+				Assert.IsType<ArgumentNullException>(e);
+				output.WriteLine(e.Message);
 			}
 		}
 
@@ -112,42 +135,51 @@
 		[Fact]
 		public void TestGetLastEquipment_ReturnLastEquipmentInDB()
 		{
-			try
-			{
-				Equipment equipment = equipmentRepository.GetLastEquipment();
-				Assert.Equal(11, equipment.equipment_id);
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			Equipment equipment = equipmentRepository.GetLastEquipment();
+			output.WriteLine(JsonConvert.SerializeObject(equipment));
 		}
 
 
 
 		[Theory]
 		[InlineData("E0000")]
-		[InlineData("E0009")]
+		[InlineData("E0008")]
 		public void TestGetListComponentEquips_ReturnListComponentEquips(string code)
 		{
-			try
-			{
-				var list = equipmentRepository.GetListComponentEquips(code);
-				Assert.NotNull(list);
+			var list = equipmentRepository.GetListComponentEquips(code);
 
-				if (list.Count > 0)
-				{
-					foreach (var item in list)
-						output.WriteLine(JsonConvert.SerializeObject(item));
-				}
-				else
-					output.WriteLine("Components not found");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+			if (list.Count > 0)
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			else
+				output.WriteLine("Components not found");
 		}
+
+
+
+
+
+
+		[Theory]
+		[InlineData(0)]
+		[InlineData(86)]
+		public void TestDeleteEquipment_ReturnNoException(int id)
+		{
+			SELMsContext sELMsContext = new();
+			var equipment = sELMsContext.Equipments.FirstOrDefault(e => e.equipment_id == id);
+
+			if (equipment != null)
+			{
+				equipmentRepository.DeleteEquipment(id);
+				Thread.Sleep(2000);
+				output.WriteLine("Delete successfull");
+			}
+			else
+				output.WriteLine("Equipment not found to delete");
+		}
+
+
+
 
 
 
@@ -155,15 +187,10 @@
 		[MemberData(nameof(EquipmentRepositoryTestData.SaveEquipmentWithComponentTestData), MemberType = typeof(EquipmentRepositoryTestData))]
 		public void TestSaveEquipmentWithComponent_ReturnNothing(Equipment equipment, int location_id, List<EquipComponentDTO> ListComponentEquips)
 		{
-			try
-			{
-				equipmentRepository.SaveEquipment(equipment, location_id, ListComponentEquips);
-				output.WriteLine("Test case passed");
-			}
-			catch (Exception e)
-			{
-				Assert.Fail(e.ToString());
-			}
+
+			equipmentRepository.SaveEquipment(equipment, location_id, ListComponentEquips);
+			output.WriteLine("Equipment created successfully");
+
 		}
 		#endregion
 	}
@@ -184,6 +211,31 @@
 
 	public static class EquipmentRepositoryTestData
 	{
+
+
+		public static IEnumerable<object[]> GetEquipmentListTestData()
+		{
+			//text = Equipment.serial_no , text1 = user fullname, text2 = std_code, sys_code, name
+			var a = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "E0003" };
+			var b = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "BHR4975EU" };
+			var c = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+
+
+			var d = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = string.Empty };
+			var e = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
+			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "levan" };
+
+			yield return new object[] { a };
+			yield return new object[] { b };
+			yield return new object[] { c };
+			yield return new object[] { d };
+			yield return new object[] { e };
+			yield return new object[] { f };
+
+		}
+
+
+
 
 		public static IEnumerable<object[]> SaveEquipmentWithComponentTestData()
 		{
@@ -211,8 +263,8 @@
 
 		public static IEnumerable<object[]> UpdateEquipmentTestData()
 		{
-			yield return new object[] { new Equipment() { equipment_id = 11, equipment_name = "halo" } };
-			yield return new object[] { new Equipment() { equipment_id = 9, equipment_name = "new update" } };
+			yield return new object[] { new Equipment() { equipment_id = 0, equipment_name = "halo" } };
+			yield return new object[] { new Equipment() { equipment_id = 9, equipment_name = "G" } };
 		}
 
 

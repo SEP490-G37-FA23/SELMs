@@ -10,10 +10,11 @@ namespace SELMs.Repositories.Implements
 		private readonly SELMsContext db = new SELMsContext();
 
 
-		public async Task<bool> AddMemberLocationHistory(Member_Location_History memberLocationHistory)
+		public dynamic AddMemberLocationHistory(Member_Location_History memberLocationHistory)
 		{
 			db.Member_Location_History.Add(memberLocationHistory);
-			return (await db.SaveChangesAsync() > 0);
+			db.SaveChanges();
+			return memberLocationHistory;
 		}
 
 

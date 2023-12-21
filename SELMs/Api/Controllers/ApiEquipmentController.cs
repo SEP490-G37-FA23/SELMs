@@ -176,8 +176,8 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Equipment mem = mapper.Map<Equipment>(equipment);
-				return await service.UpdateEquipment(id, mem);
-				
+				dynamic result = service.UpdateEquipment(id, mem);
+				return Ok(result);
 			}
 			catch (Exception ex)
 			{

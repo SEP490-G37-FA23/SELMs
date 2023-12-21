@@ -31,7 +31,7 @@ namespace SELMs.Api.Controllers
 		#region Get list
 		[HttpGet]
 		[Route("equipment-project-histories")]
-		public async Task<IHttpActionResult> GetListEquipmentLocationHistory()
+		public async Task<IHttpActionResult> GetListEquipmentProjectHistory()
 		{
 			try
 			{
@@ -60,7 +60,7 @@ namespace SELMs.Api.Controllers
 		#region Create
 		[HttpPost]
 		[Route("equipment-project-history/create")]
-		public async Task<IHttpActionResult> AddEquipmentLocationHistory(EquipmentProjectHistoryDTO equipmentProjectHistoryDTO)
+		public async Task<IHttpActionResult> AddEquipmentProjectHistory(EquipmentProjectHistoryDTO equipmentProjectHistoryDTO)
 		{
 			try
 			{
@@ -94,7 +94,7 @@ namespace SELMs.Api.Controllers
 		#region Get by id
 		[HttpGet]
 		[Route("equipment-location-history/{id}")]
-		public async Task<IHttpActionResult> GetEquipmentLocationHistoryById(int id)
+		public async Task<IHttpActionResult> GetEquipmentProjectHistoryById(int id)
 		{
 			try
 			{
@@ -119,7 +119,7 @@ namespace SELMs.Api.Controllers
 		#region Update
 		[HttpPut]
 		[Route("equipment-project-history/{id}")]
-		public async Task<IHttpActionResult> UpdateEquipmentLocationHistory(int id, [FromBody] EquipmentProjectHistoryDTO equipmentProjectHistoryDTO)
+		public async Task<IHttpActionResult> UpdateEquipmentProjectHistory(int id, [FromBody] EquipmentProjectHistoryDTO equipmentProjectHistoryDTO)
 		{
 			try
 			{

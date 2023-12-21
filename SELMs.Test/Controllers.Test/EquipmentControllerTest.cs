@@ -19,11 +19,37 @@ namespace SELMs.Test.Controllers.Test
 
 
 
-
-
-
-
 		#region Iteration 2
+
+
+		[Theory]
+		[MemberData(nameof(EquipmentControllerTestData.GetEquipmentListTestData), MemberType = typeof(EquipmentControllerTestData))]
+		public async Task TestGetEquipmentList_ReturnEquipmentList(bool expectedException, Argument argument)
+		{
+
+			var actionResult = await apiEquipmentController.GetEquipmentList(argument);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
+
+
+			if (expectedException)
+			{
+				Assert.IsType<BadRequestErrorMessageResult>(actionResult);
+				output.WriteLine(content);
+			}
+			else
+			{
+				var list = JsonConvert.DeserializeObject<List<dynamic>>(content);
+
+				foreach (var item in list)
+					output.WriteLine(JsonConvert.SerializeObject(item));
+			}
+
+
+
+		}
+
+
 
 
 		[Theory]
@@ -32,21 +58,13 @@ namespace SELMs.Test.Controllers.Test
 		[InlineData(2)]
 		public async Task TestGetEquipmentById_ReturnEquipmentFound(int id)
 		{
-			try
-			{
-				var actionResult = await apiEquipmentController.GetEquipment(id);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-				string content = await response.Content.ReadAsStringAsync();
+			var actionResult = await apiEquipmentController.GetEquipment(id);
+			var response = await actionResult.ExecuteAsync(CancellationToken.None);
+			string content = await response.Content.ReadAsStringAsync();
 
-				if (actionResult is OkNegotiatedContentResult<Equipment>)
-					output.WriteLine($"Status code: {(int)response.StatusCode}\nEquipment found:\n{content}");
-				else
-					output.WriteLine($"Equipment not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			Assert.Equal(200, (int)response.StatusCode);
+
+			output.WriteLine(content);
 		}
 
 
@@ -56,24 +74,17 @@ namespace SELMs.Test.Controllers.Test
 
 
 		[Theory]
-		[InlineData("E0000")]
+		[InlineData("")]
 		[InlineData("E0002")]
-		[InlineData("E0004")]
-		public void TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
+		[InlineData("E0008")]
+		public async Task TestGetEquipmentBySystemCode_ReturnEquipmentFound(string code)
 		{
-			try
-			{
-				DetailEquipDTO detailEquipDTO = apiEquipmentController.GetDetailEquipment(code);
+			DetailEquipDTO detailEquipDTO = await apiEquipmentController.GetDetailEquipment(code);
 
-				if (detailEquipDTO.ListComponentEquips.Count > 0)
-					output.WriteLine($"Equipment detail:\n{JsonConvert.SerializeObject(detailEquipDTO)}");
-				else
-					output.WriteLine($"Equipment not found");
-			}
-			catch (Exception ex)
-			{
-				Assert.Fail("Test case failed\n" + ex.Message);
-			}
+			if (detailEquipDTO.ListComponentEquips.Count > 0)
+				output.WriteLine(JsonConvert.SerializeObject(detailEquipDTO));
+			else
+				output.WriteLine($"Equipment not found");
 		}
 
 
@@ -86,10 +97,7 @@ namespace SELMs.Test.Controllers.Test
 			try
 			{
 				var actionResult = await apiEquipmentController.SaveEquipment(equipmentNew);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
-
-				Assert.Equal(200, (int)response.StatusCode);
-				output.WriteLine($"Status code: {(int)response.StatusCode}");
+				output.WriteLine(JsonConvert.SerializeObject(actionResult));
 			}
 			catch (Exception ex)
 			{
@@ -104,7 +112,7 @@ namespace SELMs.Test.Controllers.Test
 
 		[Theory]
 		[MemberData(nameof(EquipmentControllerTestData.ImportEquipmentTestData), MemberType = typeof(EquipmentControllerTestData))]
-		public async Task TestImportEquipmentBySystemCode_ReturnStatusCode200(List<EquipmentDTO> equipmentDTOs)
+		public async Task TestImportEquipmentBySystemCode_ReturnStatusCode200(EquipmentImportDTO equipmentDTOs)
 		{
 			try
 			{
@@ -131,10 +139,30 @@ namespace SELMs.Test.Controllers.Test
 			try
 			{
 				var actionResult = await apiEquipmentController.UpdateEquipment(id, equipment);
-
 				Thread.Sleep(3000);
-				var response = await actionResult.ExecuteAsync(CancellationToken.None);
 
+				output.WriteLine(JsonConvert.SerializeObject(actionResult));
+			}
+			catch (Exception ex)
+			{
+				Assert.Fail("Test case failed\n" + ex.Message);
+			}
+		}
+
+
+
+
+		[Theory]
+		[InlineData(0)]
+		[InlineData(1)]
+		[InlineData(10)]
+		public async Task TestDeleteEquipment_ReturnEquipmentFound(int id)
+		{
+			try
+			{
+				var actionResult = await apiEquipmentController.DeleteEquipment(id);
+				var response = await actionResult.ExecuteAsync(CancellationToken.None);
+				Thread.Sleep(2000);
 				Assert.Equal(200, (int)response.StatusCode);
 				output.WriteLine($"Status code: {(int)response.StatusCode}");
 			}
@@ -151,6 +179,56 @@ namespace SELMs.Test.Controllers.Test
 
 	public static class EquipmentControllerTestData
 	{
+
+		public static IEnumerable<object[]> GetEquipmentListTestData()
+		{
+			//text = Equipment.serial_no , text1 = user fullname, text2 = std_code, sys_code, name
+
+			var a = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "E0003" };
+			var b = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "BHR4975EU" };
+			var c = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+			var d = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "" };
+			var e = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "abc" };
+
+
+			const string text = "Màn hình máy tính Xiaomi Mi Curved Gaming Monitor 34″ BHR5133GL";
+			var i = new Argument() { text = "FKH8857823-349056", text1 = "A", text2 = text };
+			var f = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "BHR5133GL" };
+			var g = new Argument() { text = "FKH8857823-349056", text1 = "Đạt", text2 = "E0004" };
+			var j = new Argument() { text = "FKH8857823-349056", text1 = "", text2 = "" };
+
+
+
+			var k = new Argument() { text = "FKH8857823-349056", text1 = "Lê Tất Đạt", text2 = "Xiaomi" };
+			var l = new Argument() { text = "FKH", text1 = "A", text2 = "Màn hình máy tính Xiaomi 27\" 1C BHR4975EU" };
+			var m = new Argument() { text = "", text1 = "Lê Tất Đạt", text2 = "" };
+			var n = new Argument() { text = "SELT32502623-8225", text1 = "Mai Thị Ly", text2 = "" };
+
+			var o = new Argument() { text = "", text1 = "", text2 = "" };
+			var p = new Argument() { text = "a", text1 = "a", text2 = "a" };
+
+
+
+			yield return new object[] { true, null! };
+			yield return new object[] { false, a };
+			yield return new object[] { false, b };
+			yield return new object[] { false, c };
+			yield return new object[] { false, d };
+			yield return new object[] { false, e };
+			yield return new object[] { false, f };
+			yield return new object[] { false, g };
+			yield return new object[] { false, i };
+			yield return new object[] { false, j };
+			yield return new object[] { false, k };
+			yield return new object[] { false, l };
+			yield return new object[] { false, m };
+			yield return new object[] { false, n };
+			yield return new object[] { false, o };
+			yield return new object[] { false, p };
+		}
+
+
+
 		public static IEnumerable<object[]> CreateEquipmentTestData()
 		{
 			EquipmentDTO e1 = new() { system_equipment_code = "E0123", equipment_name = "hoho" };

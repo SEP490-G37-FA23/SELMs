@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SELMs.Api.DTOs
 {
@@ -9,4 +10,9 @@ namespace SELMs.Api.DTOs
 		public string reason { get; set; }
 		public DateTime? date { get; set; }
 	}
+
+	public class ListMemberLocationHistoryDTO
+	{
+		public List<MemberLocationHistoryDTO> ListMembersJoinLocation;
+    }
 }
