@@ -98,6 +98,7 @@ namespace SELMs.Api.Controllers
                 projectRequest.Project.create_date = DateTime.Now;
                 Project project = mapper.Map<Project>(projectRequest.Project);
                 List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
+
                 List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
                 service.SaveProject(project, projectMembers, projectEquipments);
                 return Ok();
