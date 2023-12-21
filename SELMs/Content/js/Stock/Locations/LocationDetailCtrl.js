@@ -53,6 +53,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
                 $scope.ListSubLocation = response.data.ListSubLocation;
                 $scope.ListProjectInLocation = response.data.ListProjectInLocation;
                 $scope.ListEquipmentInLocation = response.data.ListEquipmentInLocation;
+                $scope.ListMembersJoinLocation = response.data.ListMemberInLocation;
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });

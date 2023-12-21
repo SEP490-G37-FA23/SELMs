@@ -23,5 +23,6 @@ namespace SELMs.Api.DTOs
         public List<LocationDTO> ListSubLocation { get; set; }
         public List<ProjectDTO> ListProjectInLocation { get; set; }
         public List<EquipmentDTO> ListEquipmentInLocation { get; set; }
+        public List<UserDTO> ListMemberInLocation { get; set; }
     }
 }

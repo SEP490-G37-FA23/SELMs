@@ -140,5 +140,17 @@ namespace SELMs.Repositories.Implements
             db.Entry(his).CurrentValues.SetValues(item);
             db.SaveChangesAsync();
         }
+
+        public List<UserDTO> GetListMemberInLocation(int id)
+        {
+            List<UserDTO> categories = null;
+            categories = db.Database.Connection.Query<UserDTO>("Proc_GetMemberListInLocation", new
+            {
+             
+                location_id = id
+            }
+                , commandType: CommandType.StoredProcedure).ToList(); ;
+            return categories;
+        }
     }
 }

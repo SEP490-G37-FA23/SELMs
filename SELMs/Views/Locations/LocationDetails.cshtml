@@ -197,7 +197,9 @@
                             <td>
                                 <ng-form>
                                     <div class="form-member-project">
-                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(item.text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.user_code" ng-change="LoadMembersList(item.user_code)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+
                                         <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
                                     </div>
 
@@ -231,12 +233,8 @@
                                 </ng-form>
                             </td>
                             <td><input ng-model="item.fullname" class="form-control" disabled /></td>
-                            <td>
-                                <select ng-model="item.status" class="form-control" disabled>
-                                    <option value="Đang tham gia" selected>Đang tham gia</option>
-                                    <option value="Đã rời dự án">Đã rời dự án</option>
-
-                                </select>
+                            <td><input ng-model="item.is_active==1?'Đang tham gia':'Đã rời dự án'" class="form-control" disabled />
+                               
                             </td>
                             <td><input ng-model="item.note" class="form-control" /></td>
                             <td><i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteMemberLocation(ListMembersJoinLocation,$index)"></i></td>
