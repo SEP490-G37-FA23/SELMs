@@ -36,17 +36,17 @@ namespace SELMs.Services.Implements
             }
         }
 
-        public async Task SaveProject(Project project, List<User> projectMembers, List<Equipment> projectEquipments)
+        public async Task SaveProject(Project project, List<string> projectMembers, List<string> projectEquipments)
         {
             try
             {
                 project = repository.SaveProject(project);
 
-                foreach (User user in projectMembers)
+                foreach (string user in projectMembers)
                 {
                     Member_Project_History history = new Member_Project_History()
                     {
-                        user_code = user.user_code,
+                        user_code = user,
                         project_id = project.project_id,
                         date = DateTime.Now,
                         status = "ACTIVE",
@@ -55,12 +55,12 @@ namespace SELMs.Services.Implements
                     await projectMemberHistoryRepository.SaveHistory(history);
                 }
 
-                foreach (Equipment equipment in projectEquipments)
+                foreach (string equipment in projectEquipments)
                 {
                     Equipment_Project_History history = new Equipment_Project_History()
                     {
                         project_id = project.project_id,
-                        system_equiment_code = equipment.system_equipment_code,
+                        system_equiment_code = equipment,
                         from_date = DateTime.Now,
                         to_date = project.end_date,
                         note = ""
@@ -76,7 +76,7 @@ namespace SELMs.Services.Implements
 
         }
 
-        public async Task UpdateProject(int id, Project project, List<User> projectMembers, List<Equipment> projectEquipments)
+        public async Task UpdateProject(int id, Project project, List<string> projectMembers, List<string> projectEquipments)
         {
             try
             {
@@ -85,15 +85,27 @@ namespace SELMs.Services.Implements
                     project.project_id = id;
                     project = repository.UpdateProject(project);
                     List<User> currentMembers = await repository.GetProjectMembers(id);
-                    List<Equipment> currentEquipments = await repository.GetProjectEquipments(id);
-
-                    foreach (User user in projectMembers)
+                    List<string> currentMemberCodes = new List<string>();
+                    foreach (User user in currentMembers)
                     {
-                        if (!currentMembers.Contains(user))
+                        currentMemberCodes.Add(user.user_code);
+                    }
+                    
+                    List<Equipment> currentEquipments = await repository.GetProjectEquipments(id);
+                    List<string> currentEquipmentCodes = new List<string>();
+
+                    foreach (Equipment equip in currentEquipments)
+                    {
+                        currentEquipmentCodes.Add(equip.system_equipment_code);
+                    }
+
+                    foreach (string user in projectMembers)
+                    {
+                        if (!currentMemberCodes.Contains(user))
                         {
                             Member_Project_History history = new Member_Project_History()
                             {
-                                user_code = user.user_code,
+                                user_code = user,
                                 project_id = project.project_id,
                                 date = DateTime.Now,
                                 status = "ACTIVE",
@@ -103,14 +115,14 @@ namespace SELMs.Services.Implements
                         }
                     }
 
-                    foreach (Equipment equipment in projectEquipments)
+                    foreach (string equipment in projectEquipments)
                     {
-                        if (!currentEquipments.Contains(equipment))
+                        if (!currentEquipmentCodes.Contains(equipment))
                         {
                             Equipment_Project_History history = new Equipment_Project_History()
                             {
                                 project_id = project.project_id,
-                                system_equiment_code = equipment.system_equipment_code,
+                                system_equiment_code = equipment,
                                 from_date = DateTime.Now,
                                 to_date = project.end_date,
                                 note = ""

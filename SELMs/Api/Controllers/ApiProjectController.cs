@@ -97,9 +97,9 @@ namespace SELMs.Api.Controllers
             {
                 projectRequest.Project.create_date = DateTime.Now;
                 Project project = mapper.Map<Project>(projectRequest.Project);
-                List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
+                List<string> projectMembers = projectRequest.ProjectMembers;
 
-                List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
+                List<string> projectEquipments = projectRequest.ProjectEquipments;
                 service.SaveProject(project, projectMembers, projectEquipments);
                 return Ok();
             }
@@ -121,8 +121,8 @@ namespace SELMs.Api.Controllers
 			try
 			{
 				Project project = mapper.Map<Project>(projectRequest.Project);
-				List<User> projectMembers = mapper.Map<List<User>>(projectRequest.ProjectMembers);
-				List<Equipment> projectEquipments = mapper.Map<List<Equipment>>(projectRequest.ProjectEquipments);
+				List<string> projectMembers = projectRequest.ProjectMembers;
+				List<string> projectEquipments = projectRequest.ProjectEquipments;
 				await service.UpdateProject(id, project, projectMembers, projectEquipments);
 				return Ok();
 			}

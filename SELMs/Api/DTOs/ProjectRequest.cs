@@ -8,7 +8,7 @@ namespace SELMs.Api.DTOs
     public class ProjectRequest
     {
         public ProjectDTO Project { get; set; }
-        public List<EquipmentDTO> ProjectEquipments { get; set; }
-        public List<UserDTO> ProjectMembers { get; set; }
+        public List<string> ProjectEquipments { get; set; }
+        public List<string> ProjectMembers { get; set; }
     }
 }

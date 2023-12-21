@@ -11,8 +11,8 @@ namespace SELMs.Services
     public interface IProjectService
     {
         Task<ProjectModel> GetProject(int id);
-        Task SaveProject(Project project, List<User> projectMembers, List<Equipment> projectEquipments);
-        Task UpdateProject(int id, Project project, List<User> projectMembers, List<Equipment> projectEquipments);
+        Task SaveProject(Project project, List<string> projectMembers, List<string> projectEquipments);
+        Task UpdateProject(int id, Project project, List<string> projectMembers, List<string> projectEquipments);
         Task CancelProject(int id);
     }
 }
