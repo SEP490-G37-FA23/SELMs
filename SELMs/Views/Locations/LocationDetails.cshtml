@@ -197,7 +197,9 @@
                             <td>
                                 <ng-form>
                                     <div class="form-member-project">
-                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.user_code" ng-change="LoadMembersList(user_code)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.user_code" ng-change="LoadMembersList(item.user_code)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+
                                         <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
                                     </div>
 

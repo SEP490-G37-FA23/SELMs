@@ -27,5 +27,11 @@ namespace SELMs.Models
         public bool is_finish { get; set; }
         public Nullable<int> location_id { get; set; }
         public Nullable<int> project_id { get; set; }
+    
+        public virtual Location Location { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual User User2 { get; set; }
     }
 }

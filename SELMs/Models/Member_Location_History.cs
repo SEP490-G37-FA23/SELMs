@@ -19,5 +19,8 @@ namespace SELMs.Models
         public Nullable<int> location_id { get; set; }
         public string reason { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+    
+        public virtual Location Location { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace SELMs.Models
         public string application_type { get; set; }
         public Nullable<int> application_id { get; set; }
         public Nullable<int> attachment_id { get; set; }
+    
+        public virtual Attachment Attachment { get; set; }
     }
 }

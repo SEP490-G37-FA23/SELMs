@@ -14,11 +14,35 @@ namespace SELMs.Models
     
     public partial class Location
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Location()
+        {
+            this.Equipment_Allocation_Application = new HashSet<Equipment_Allocation_Application>();
+            this.Equipment_Location_History = new HashSet<Equipment_Location_History>();
+            this.Inventory_Request_Application = new HashSet<Inventory_Request_Application>();
+            this.Equipment_Handover_Form = new HashSet<Equipment_Handover_Form>();
+            this.Member_Location_History = new HashSet<Member_Location_History>();
+            this.Projects = new HashSet<Project>();
+        }
+    
         public int location_id { get; set; }
         public string location_code { get; set; }
         public string location_desciption { get; set; }
         public Nullable<int> parent_location_id { get; set; }
         public Nullable<int> location_level { get; set; }
         public bool is_active { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Location_History> Equipment_Location_History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory_Request_Application> Inventory_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Member_Location_History> Member_Location_History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }
