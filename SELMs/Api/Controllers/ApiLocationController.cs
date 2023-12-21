@@ -181,7 +181,8 @@ namespace SELMs.Api.Controllers
 			returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
 			returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
 			returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);
-			return returnedData;
+            returnedData.ListMemberInLocation = (List<UserDTO>)repository.GetListMemberInLocation(id);
+            return returnedData;
 
 
 		}
