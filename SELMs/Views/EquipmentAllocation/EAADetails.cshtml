@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Chi tiết đơn yêu cầu cấp phát thiết bị";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = Session["role_code"] == "SM" ? "~/Views/Shared/_LayoutStockManagement.cshtml" : Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml" : "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
 
 <div class="pagetitle">

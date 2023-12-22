@@ -1,11 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "Danh sách yêu cầu cấp phát thiết bị";
-    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+    Layout = Session["role_code"] == "SM"?"~/Views/Shared/_LayoutStockManagement.cshtml": Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml": "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
 <script src="~/Content/js/Project/ListEAACtrl.js"></script>
 <div ng-app="myApp" ng-controller="ListEAACtrl" style="display:inline-block;width:100%;">
-    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />s
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
     <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />

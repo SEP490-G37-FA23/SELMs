@@ -1,7 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "_CreateNewInventoryEquipmentsRequest";
-    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+    Layout = Session["role_code"] == "SM" ? "~/Views/Shared/_LayoutStockManagement.cshtml" : Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml" : "~/Views/Shared/_LayoutProjectManagement.cshtml";
+
 }
 
 
