@@ -95,5 +95,13 @@ namespace SELMs.Services.Implements
             eqmtCode += num < 10000 ? num.ToString("D4") : num.ToString();
             return eqmtCode;
         }
+
+        public async Task<dynamic> DeleteEquipment(int id)
+        {
+            Equipment equipment = await repository.GetEquipment(id);
+            equipment.is_available = false;
+            Equipment result = repository.UpdateEquipment(equipment);
+            return result;
+        }
     }
 }

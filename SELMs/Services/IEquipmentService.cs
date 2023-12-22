@@ -17,5 +17,6 @@ namespace SELMs.Services
         Task<dynamic> UpdateEquipment(int id, Equipment equipment);
         Task<dynamic> AddImages(int id, List<HttpPostedFile> images);
 
+        Task<dynamic>DeleteEquipment(int id);
     }
 }
