@@ -95,7 +95,7 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
     $scope.HandelProject = function (pj, NewEAA) {
         NewEAA.location_id = pj.location_id;
         NewEAA.project_id = pj.project_id;
-        NewEAA.location_desciption = pj.location_desciption;
+        NewEAA.location_desciption = pj.location_name;
         $scope.project_name = pj.project_name;
     }
     $scope.HandelNewEquipRequest = function (ListEquipRequest) {
@@ -158,7 +158,7 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Thêm mới yêu cầu cấp thiết bị thành công!');
-                $scope.ResetNewEquip();
+                $scope.Reset();
 
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);

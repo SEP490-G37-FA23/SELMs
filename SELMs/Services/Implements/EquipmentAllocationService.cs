@@ -62,13 +62,32 @@ namespace SELMs.Services.Implements
 
         string GenerateApplicationCode()
         {
-            string code = $"EAA{DateTime.Now.ToString("yyyyMMdd")}";
+            string codePrefix = $"EAA{DateTime.Now.ToString("yyyyMMdd")}";
             Equipment_Allocation_Application lastDailyApplication = repository.GetLastDailyApplication();
 
-            int num = lastDailyApplication == null ? 1 : Convert.ToInt32((lastDailyApplication.ea_application_code).Replace(code, "")) + 1;
-            code +=  num < 10000 ? num.ToString("D4") : num.ToString();
-            return code;
+            int num;
+
+            if (lastDailyApplication != null && lastDailyApplication.ea_application_code.StartsWith(codePrefix))
+            {
+                // Extract the numeric part from the existing code and increment it.
+                string numericPart = lastDailyApplication.ea_application_code.Substring(codePrefix.Length);
+                num = int.Parse(numericPart) + 1;
+            }
+            else
+            {
+                // If there is no lastDailyApplication or the code does not start with the expected prefix,
+                // start with 1.
+                num = 1;
+            }
+
+            // Build the new code.
+            string newCode = codePrefix + (num < 10000 ? num.ToString("D4") : num.ToString());
+
+            return newCode;
         }
+
+
+
 
 
     }
