@@ -77,7 +77,7 @@ app.controller('CategoriesListCtrl', function ($scope, $http, $sce) {
     }
     $scope.DeleteCategory = function (category) {
         var partialUrl = origin + '/api/v1/categories/deactive/' + category.category_id;
-        $http.post(partialUrl, data)
+        $http.post(partialUrl)
             .then(function (response) {
                 $scope.SuccessSystem('Xóa danh mục thiết bị thành công!');
                 $scope.ResetNewCategory();

@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Danh sách yêu cầu cấp phát thiết bị";
-    Layout = Session["role_code"] == "SM"?"~/Views/Shared/_LayoutStockManagement.cshtml": Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml": "~/Views/Shared/_LayoutProjectManagement.cshtml";
+    Layout = Session["role_code"] == "SM"?"~/Views/Shared/_LayoutStockManagement.cshtml": "~/Views/Shared/_LayoutLabDirector.cshtml";
 }
 <script src="~/Content/js/Project/ListEAACtrl.js"></script>
 <div ng-app="myApp" ng-controller="ListEAACtrl" style="display:inline-block;width:100%;">
