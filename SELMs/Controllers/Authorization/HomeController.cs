@@ -39,7 +39,7 @@ namespace SELMs.Controllers
         public ActionResult Login(string username, string password)
         {
 
-            var user = db.Users.SingleOrDefault(x => x.username == username && x.password == password);
+            var user = db.Users.SingleOrDefault(x => x.username == username && x.password == password && x.is_active == true);
             if (user != null)
             {
                 Session["isadmin"] = user.is_admin;

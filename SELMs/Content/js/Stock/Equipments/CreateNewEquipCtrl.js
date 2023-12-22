@@ -50,7 +50,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             id: -1
         }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
-            $scope.ListLocations = response.data.Result;
+            $scope.ListLocations = response.data;
             $scope.sumLocations = $scope.ListLocations.length;
         });
     }
