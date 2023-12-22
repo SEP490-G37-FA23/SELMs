@@ -20,5 +20,8 @@ namespace SELMs.Models
         public string status { get; set; }
         public string note { get; set; }
         public Nullable<System.DateTime> date { get; set; }
+    
+        public virtual Project Project { get; set; }
+        public virtual User User { get; set; }
     }
 }

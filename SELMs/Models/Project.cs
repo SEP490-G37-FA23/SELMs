@@ -14,8 +14,16 @@ namespace SELMs.Models
     
     public partial class Project
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Project()
+        {
+            this.Equipment_Allocation_Application = new HashSet<Equipment_Allocation_Application>();
+            this.Equipment_Project_History = new HashSet<Equipment_Project_History>();
+            this.Member_Project_History = new HashSet<Member_Project_History>();
+            this.Equipment_Handover_Form = new HashSet<Equipment_Handover_Form>();
+        }
+    
         public int project_id { get; set; }
-        public string project_code { get; set; }
         public string project_name { get; set; }
         public string acronym { get; set; }
         public string description { get; set; }
@@ -26,5 +34,17 @@ namespace SELMs.Models
         public string creater { get; set; }
         public bool status { get; set; }
         public Nullable<int> location_id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Project_History> Equipment_Project_History { get; set; }
+        public virtual Location Location { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Member_Project_History> Member_Project_History { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

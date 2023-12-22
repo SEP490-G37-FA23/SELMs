@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SELMsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SELMs.dbo.Application_Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Application_Attachment">
           <Key>
             <PropertyRef Name="id" />
@@ -16,8 +14,6 @@ warning 6002: The table/view 'SELMs.dbo.Application_Attachment' does not have a 
           <Property Name="application_id" Type="int" />
           <Property Name="attachment_id" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Attachment">
           <Key>
             <PropertyRef Name="attach_id" />
@@ -32,9 +28,10 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
+            <PropertyRef Name="category_code" />
           </Key>
           <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="category_code" Type="varchar" MaxLength="128" />
+          <Property Name="category_code" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="category_name" Type="nvarchar" MaxLength="256" />
           <Property Name="desciption" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
@@ -44,15 +41,16 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="equipment_id" />
+            <PropertyRef Name="system_equipment_code" />
           </Key>
           <Property Name="equipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
+          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="standard_equipment_code" Type="nvarchar" MaxLength="128" />
           <Property Name="equipment_name" Type="nvarchar" MaxLength="256" />
           <Property Name="serial_no" Type="varchar" MaxLength="64" />
           <Property Name="create_date" Type="date" />
           <Property Name="unit" Type="nvarchar" MaxLength="25" />
-          <Property Name="specification" Type="nvarchar" MaxLength="100" />
+          <Property Name="specification" Type="nvarchar(max)" />
           <Property Name="responsibler" Type="varchar" MaxLength="64" />
           <Property Name="usage_status" Type="nvarchar" MaxLength="500" />
           <Property Name="type_equipment" Type="varchar" MaxLength="64" />
@@ -64,7 +62,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
-            <PropertyRef Name="application_id" />
+            <PropertyRef Name="ea_application_code" />
           </Key>
           <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ea_application_code" Type="varchar" MaxLength="64" Nullable="false" />
@@ -103,9 +101,14 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="system_equipment_code_parent" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="system_equipment_code_component" Type="varchar" MaxLength="64" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SELMs.dbo.Equipment_Handover_Form' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Equipment_Handover_Form">
           <Key>
             <PropertyRef Name="form_id" />
+            <PropertyRef Name="form_code" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="is_finish" />
           </Key>
           <Property Name="form_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="form_code" Type="varchar" MaxLength="64" Nullable="false" />
@@ -157,18 +160,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="to_date" Type="datetime" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="Equipment_Usage_History">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_code" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="system_equipment_code" Type="varchar" MaxLength="64" />
-          <Property Name="checkin" Type="datetime" />
-          <Property Name="checkout" Type="datetime" />
-          <Property Name="location_id" Type="int" />
-          <Property Name="note_checkout" Type="nvarchar" MaxLength="500" />
-        </EntityType>
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="image_id" />
@@ -181,7 +172,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
-            <PropertyRef Name="application_id" />
+            <PropertyRef Name="ir_application_code" />
           </Key>
           <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ir_application_code" Type="varchar" MaxLength="64" Nullable="false" />
@@ -242,7 +233,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <PropertyRef Name="project_id" />
           </Key>
           <Property Name="project_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="project_code" Type="varchar" MaxLength="128" />
           <Property Name="project_name" Type="nvarchar" MaxLength="256" />
           <Property Name="acronym" Type="varchar" MaxLength="64" />
           <Property Name="description" Type="nvarchar" MaxLength="500" />
@@ -254,42 +244,12 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="bit" Nullable="false" />
           <Property Name="location_id" Type="int" />
         </EntityType>
-        <EntityType Name="Project_Investment_Cost_Application">
-          <Key>
-            <PropertyRef Name="application_id" />
-          </Key>
-          <Property Name="application_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pic_application_code" Type="varchar" MaxLength="64" />
-          <Property Name="application_date" Type="date" />
-          <Property Name="project_id" Type="int" />
-          <Property Name="title" Type="nvarchar" MaxLength="64" />
-          <Property Name="reason" Type="nvarchar" MaxLength="500" />
-          <Property Name="notes" Type="nvarchar" MaxLength="564" />
-          <Property Name="creater" Type="varchar" MaxLength="64" />
-          <Property Name="create_date" Type="date" />
-          <Property Name="total_cost" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="attachment_path" Type="nvarchar" MaxLength="500" />
-          <Property Name="status" Type="varchar" MaxLength="64" />
-          <Property Name="approve_date" Type="date" />
-          <Property Name="approver" Type="varchar" MaxLength="64" />
-          <Property Name="approver_notes" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="Project_Investment_Cost_Application_Detail">
-          <Key>
-            <PropertyRef Name="application_detail_id" />
-          </Key>
-          <Property Name="application_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pic_application_code" Type="varchar" MaxLength="64" />
-          <Property Name="explaination" Type="nvarchar" MaxLength="256" />
-          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="notes" Type="nvarchar" MaxLength="256" />
-        </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="role_id" />
+            <PropertyRef Name="role_code" />
           </Key>
           <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="role_code" Type="varchar" MaxLength="128" />
+          <Property Name="role_code" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="role_name" Type="nvarchar" MaxLength="256" />
           <Property Name="is_active" Type="bit" />
         </EntityType>
@@ -305,14 +265,14 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="user_id" />
+            <PropertyRef Name="user_code" />
           </Key>
           <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_code" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="fullname" Type="nvarchar" MaxLength="564" Nullable="false" />
-          <Property Name="role_code" Type="varchar" MaxLength="64" />
+          <Property Name="role_code" Type="varchar" MaxLength="128" />
           <Property Name="is_admin" Type="bit" />
           <Property Name="date_of_birth" Type="date" />
           <Property Name="hotline" Type="varchar" MaxLength="20" />
@@ -327,17 +287,356 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="job_description" Type="nvarchar(max)" />
           <Property Name="is_active" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'Application_Attachment_application_id_FK_Equipment_Handover_Form_form_id' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="Application_Attachment_application_id_FK_Equipment_Handover_Form_form_id" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'Equipment_Handover_Form_Detail_FK_Equipment_Handover_Form_form_code' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="Equipment_Handover_Form_Detail_FK_Equipment_Handover_Form_form_code" />-->
+        <Association Name="FK_Application_Attachment_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Application_Attachment" Type="Self.Application_Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="attach_id" />
+            </Principal>
+            <Dependent Role="Application_Attachment">
+              <PropertyRef Name="attachment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1">
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application_Detail" Type="Self.Equipment_Allocation_Application_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment_Allocation_Application">
+              <PropertyRef Name="ea_application_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application_Detail">
+              <PropertyRef Name="ea_application_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Location2">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_User3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="approver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Category' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Category" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Component_Equipment' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Component_Equipment" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Component_Equipment1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Component_Equipment1" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Handover_Form_Detail_Equipment1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Handover_Form_Detail_Equipment1" />-->
+        <Association Name="FK_Equipment_Handover_Form_Location2">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User6">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User7">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="handover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User8">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="receipter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Location_History_Equipment1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Location_History_Equipment1" />-->
+        <Association Name="FK_Equipment_Location_History_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Equipment_Location_History" Type="Self.Equipment_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Location_History">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Equipment_Project_History_Equipment' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Equipment_Project_History_Equipment" />-->
+        <Association Name="FK_Equipment_Project_History_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Project_History" Type="Self.Equipment_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Project_History">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="responsibler" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipment1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_Inventory_Request_Application_Detail_Equipment1" />-->
+        <Association Name="FK_Inventory_Request_Application_Detail_Inventory_Request_Application">
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="0..1" />
+          <End Role="Inventory_Request_Application_Detail" Type="Self.Inventory_Request_Application_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Request_Application">
+              <PropertyRef Name="ir_application_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application_Detail">
+              <PropertyRef Name="ir_application_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Perform">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="performer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Requireer">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="requester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Location_History_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Member_Location_History" Type="Self.Member_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Member_Location_History">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Location_History_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Member_Location_History" Type="Self.Member_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Member_Location_History">
+              <PropertyRef Name="user_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Project_History_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Member_Project_History" Type="Self.Member_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Member_Project_History">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Project_History_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Member_Project_History" Type="Self.Member_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Member_Project_History">
+              <PropertyRef Name="user_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Creater">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Manager">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SELMsModelStoreContainer">
+          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="Self.Equipment_Allocation_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory_Request_Application" EntityType="Self.Inventory_Request_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" Schema="dbo" store:Type="Tables" />
@@ -345,41 +644,165 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Application_Attachment].[id] AS [id], 
-    [Application_Attachment].[application_type] AS [application_type], 
-    [Application_Attachment].[application_id] AS [application_id], 
-    [Application_Attachment].[attachment_id] AS [attachment_id]
-    FROM [dbo].[Application_Attachment] AS [Application_Attachment]</DefiningQuery>
+    [Equipment_Handover_Form].[form_id] AS [form_id], 
+    [Equipment_Handover_Form].[form_code] AS [form_code], 
+    [Equipment_Handover_Form].[create_date] AS [create_date], 
+    [Equipment_Handover_Form].[creater] AS [creater], 
+    [Equipment_Handover_Form].[description] AS [description], 
+    [Equipment_Handover_Form].[handover_date] AS [handover_date], 
+    [Equipment_Handover_Form].[handover] AS [handover], 
+    [Equipment_Handover_Form].[receipt_date] AS [receipt_date], 
+    [Equipment_Handover_Form].[receipter] AS [receipter], 
+    [Equipment_Handover_Form].[handover_note] AS [handover_note], 
+    [Equipment_Handover_Form].[is_finish] AS [is_finish], 
+    [Equipment_Handover_Form].[location_id] AS [location_id], 
+    [Equipment_Handover_Form].[project_id] AS [project_id]
+    FROM [dbo].[Equipment_Handover_Form] AS [Equipment_Handover_Form]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Attachment" EntityType="Self.Attachment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Attachment].[attach_id] AS [attach_id], 
-    [Attachment].[name] AS [name], 
-    [Attachment].[content] AS [content], 
-    [Attachment].[date] AS [date], 
-    [Attachment].[notes] AS [notes], 
-    [Attachment].[extension] AS [extension]
-    FROM [dbo].[Attachment] AS [Attachment]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_Application_Attachment_Attachment" Association="Self.FK_Application_Attachment_Attachment">
+            <End Role="Attachment" EntitySet="Attachment" />
+            <End Role="Application_Attachment" EntitySet="Application_Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1" Association="Self.FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1">
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+            <End Role="Equipment_Allocation_Application_Detail" EntitySet="Equipment_Allocation_Application_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Location2" Association="Self.FK_Equipment_Allocation_Application_Location2">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Project1" Association="Self.FK_Equipment_Allocation_Application_Project1">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_User2" Association="Self.FK_Equipment_Allocation_Application_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_User3" Association="Self.FK_Equipment_Allocation_Application_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_Location2" Association="Self.FK_Equipment_Handover_Form_Location2">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_Project1" Association="Self.FK_Equipment_Handover_Form_Project1">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User6" Association="Self.FK_Equipment_Handover_Form_User6">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User7" Association="Self.FK_Equipment_Handover_Form_User7">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User8" Association="Self.FK_Equipment_Handover_Form_User8">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Location_History_Location1" Association="Self.FK_Equipment_Location_History_Location1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Equipment_Location_History" EntitySet="Equipment_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Project_History_Project" Association="Self.FK_Equipment_Project_History_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Equipment_Project_History" EntitySet="Equipment_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_User" Association="Self.FK_Equipment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Detail_Inventory_Request_Application" Association="Self.FK_Inventory_Request_Application_Detail_Inventory_Request_Application">
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+            <End Role="Inventory_Request_Application_Detail" EntitySet="Inventory_Request_Application_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Location1" Association="Self.FK_Inventory_Request_Application_Location1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Perform" Association="Self.FK_Inventory_Request_Application_Perform">
+            <End Role="User" EntitySet="User" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Requireer" Association="Self.FK_Inventory_Request_Application_Requireer">
+            <End Role="User" EntitySet="User" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Location_History_Location1" Association="Self.FK_Member_Location_History_Location1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Member_Location_History" EntitySet="Member_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Location_History_User" Association="Self.FK_Member_Location_History_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Member_Location_History" EntitySet="Member_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Project_History_Project1" Association="Self.FK_Member_Project_History_Project1">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Member_Project_History" EntitySet="Member_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Project_History_User" Association="Self.FK_Member_Project_History_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Member_Project_History" EntitySet="Member_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Creater" Association="Self.FK_Project_Creater">
+            <End Role="User" EntitySet="User" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Location1" Association="Self.FK_Project_Location1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Manager" Association="Self.FK_Project_Manager">
+            <End Role="User" EntitySet="User" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SELMsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application_Attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="application_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="application_id" Type="Int32" />
+          <Property Name="attachment_id" Type="Int32" />
+          <NavigationProperty Name="Attachment" Relationship="Self.FK_Application_Attachment_Attachment" FromRole="Application_Attachment" ToRole="Attachment" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="attach_id" />
+          </Key>
+          <Property Name="attach_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application_Attachment" Relationship="Self.FK_Application_Attachment_Attachment" FromRole="Attachment" ToRole="Application_Attachment" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category_id" />
+            <PropertyRef Name="category_code" />
           </Key>
           <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="category_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="category_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="category_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="desciption" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
@@ -389,15 +812,16 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         <EntityType Name="Equipment">
           <Key>
             <PropertyRef Name="equipment_id" />
+            <PropertyRef Name="system_equipment_code" />
           </Key>
           <Property Name="equipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="standard_equipment_code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="equipment_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="serial_no" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Precision="0" />
           <Property Name="unit" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="specification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="specification" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="responsibler" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="type_equipment" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
@@ -406,10 +830,11 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="is_integration" Type="Boolean" />
           <Property Name="is_available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Equipment_User" FromRole="Equipment" ToRole="User" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application">
           <Key>
-            <PropertyRef Name="application_id" />
+            <PropertyRef Name="ea_application_code" />
           </Key>
           <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ea_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
@@ -424,6 +849,11 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="location_id" Type="Int32" />
           <Property Name="project_id" Type="Int32" />
+          <NavigationProperty Name="Equipment_Allocation_Application_Detail" Relationship="Self.FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1" FromRole="Equipment_Allocation_Application" ToRole="Equipment_Allocation_Application_Detail" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Equipment_Allocation_Application_Location2" FromRole="Equipment_Allocation_Application" ToRole="Location" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Equipment_Allocation_Application_Project1" FromRole="Equipment_Allocation_Application" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Equipment_Allocation_Application_User2" FromRole="Equipment_Allocation_Application" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Equipment_Allocation_Application_User3" FromRole="Equipment_Allocation_Application" ToRole="User" />
         </EntityType>
         <EntityType Name="Equipment_Allocation_Application_Detail">
           <Key>
@@ -439,6 +869,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment_Allocation_Application" Relationship="Self.FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1" FromRole="Equipment_Allocation_Application_Detail" ToRole="Equipment_Allocation_Application" />
         </EntityType>
         <EntityType Name="Equipment_Component">
           <Key>
@@ -447,24 +878,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="system_equipment_code_parent" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="system_equipment_code_component" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Equipment_Handover_Form">
-          <Key>
-            <PropertyRef Name="form_id" />
-          </Key>
-          <Property Name="form_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="form_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="handover_date" Type="DateTime" Precision="0" />
-          <Property Name="handover" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="receipt_date" Type="DateTime" Precision="0" />
-          <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="is_finish" Type="Boolean" Nullable="false" />
-          <Property Name="location_id" Type="Int32" />
-          <Property Name="project_id" Type="Int32" />
         </EntityType>
         <EntityType Name="Equipment_Handover_Form_Detail">
           <Key>
@@ -490,6 +903,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="from_date" Type="DateTime" Precision="3" />
           <Property Name="to_date" Type="DateTime" Precision="3" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Equipment_Location_History_Location1" FromRole="Equipment_Location_History" ToRole="Location" />
         </EntityType>
         <EntityType Name="Equipment_Project_History">
           <Key>
@@ -501,18 +915,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="from_date" Type="DateTime" Precision="3" />
           <Property Name="to_date" Type="DateTime" Precision="3" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Equipment_Usage_History">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="system_equipment_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="checkin" Type="DateTime" Precision="3" />
-          <Property Name="checkout" Type="DateTime" Precision="3" />
-          <Property Name="location_id" Type="Int32" />
-          <Property Name="note_checkout" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Equipment_Project_History_Project" FromRole="Equipment_Project_History" ToRole="Project" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -526,7 +929,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         </EntityType>
         <EntityType Name="Inventory_Request_Application">
           <Key>
-            <PropertyRef Name="application_id" />
+            <PropertyRef Name="ir_application_code" />
           </Key>
           <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ir_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
@@ -537,6 +940,10 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="type_inventory" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="location_id" Type="Int32" />
+          <NavigationProperty Name="Inventory_Request_Application_Detail" Relationship="Self.FK_Inventory_Request_Application_Detail_Inventory_Request_Application" FromRole="Inventory_Request_Application" ToRole="Inventory_Request_Application_Detail" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Inventory_Request_Application_Location1" FromRole="Inventory_Request_Application" ToRole="Location" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Inventory_Request_Application_Perform" FromRole="Inventory_Request_Application" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Inventory_Request_Application_Requireer" FromRole="Inventory_Request_Application" ToRole="User" />
         </EntityType>
         <EntityType Name="Inventory_Request_Application_Detail">
           <Key>
@@ -549,6 +956,7 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="actual_usage_status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="inventory_date" Type="DateTime" Precision="0" />
           <Property Name="is_perform" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Inventory_Request_Application" Relationship="Self.FK_Inventory_Request_Application_Detail_Inventory_Request_Application" FromRole="Inventory_Request_Application_Detail" ToRole="Inventory_Request_Application" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -560,6 +968,12 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="parent_location_id" Type="Int32" />
           <Property Name="location_level" Type="Int32" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Equipment_Allocation_Application" Relationship="Self.FK_Equipment_Allocation_Application_Location2" FromRole="Location" ToRole="Equipment_Allocation_Application" />
+          <NavigationProperty Name="Equipment_Location_History" Relationship="Self.FK_Equipment_Location_History_Location1" FromRole="Location" ToRole="Equipment_Location_History" />
+          <NavigationProperty Name="Inventory_Request_Application" Relationship="Self.FK_Inventory_Request_Application_Location1" FromRole="Location" ToRole="Inventory_Request_Application" />
+          <NavigationProperty Name="Equipment_Handover_Form" Relationship="Self.FK_Equipment_Handover_Form_Location2" FromRole="Location" ToRole="Equipment_Handover_Form" />
+          <NavigationProperty Name="Member_Location_History" Relationship="Self.FK_Member_Location_History_Location1" FromRole="Location" ToRole="Member_Location_History" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Location1" FromRole="Location" ToRole="Project" />
         </EntityType>
         <EntityType Name="Member_Location_History">
           <Key>
@@ -570,6 +984,8 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="location_id" Type="Int32" />
           <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Member_Location_History_Location1" FromRole="Member_Location_History" ToRole="Location" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Member_Location_History_User" FromRole="Member_Location_History" ToRole="User" />
         </EntityType>
         <EntityType Name="Member_Project_History">
           <Key>
@@ -581,13 +997,14 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="status" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Member_Project_History_Project1" FromRole="Member_Project_History" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Member_Project_History_User" FromRole="Member_Project_History" ToRole="User" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="project_id" />
           </Key>
           <Property Name="project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="project_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="project_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="acronym" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -598,45 +1015,23 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
           <Property Name="location_id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Project_Investment_Cost_Application">
-          <Key>
-            <PropertyRef Name="application_id" />
-          </Key>
-          <Property Name="application_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pic_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="application_date" Type="DateTime" Precision="0" />
-          <Property Name="project_id" Type="Int32" />
-          <Property Name="title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="notes" Type="String" MaxLength="564" FixedLength="false" Unicode="true" />
-          <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="create_date" Type="DateTime" Precision="0" />
-          <Property Name="total_cost" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="attachment_path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="approve_date" Type="DateTime" Precision="0" />
-          <Property Name="approver" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="approver_notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Project_Investment_Cost_Application_Detail">
-          <Key>
-            <PropertyRef Name="application_detail_id" />
-          </Key>
-          <Property Name="application_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pic_application_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="explaination" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="notes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipment_Allocation_Application" Relationship="Self.FK_Equipment_Allocation_Application_Project1" FromRole="Project" ToRole="Equipment_Allocation_Application" />
+          <NavigationProperty Name="Equipment_Project_History" Relationship="Self.FK_Equipment_Project_History_Project" FromRole="Project" ToRole="Equipment_Project_History" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Project_Location1" FromRole="Project" ToRole="Location" />
+          <NavigationProperty Name="Member_Project_History" Relationship="Self.FK_Member_Project_History_Project1" FromRole="Project" ToRole="Member_Project_History" />
+          <NavigationProperty Name="Equipment_Handover_Form" Relationship="Self.FK_Equipment_Handover_Form_Project1" FromRole="Project" ToRole="Equipment_Handover_Form" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Project_Creater" FromRole="Project" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Project_Manager" FromRole="Project" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="role_id" />
+            <PropertyRef Name="role_code" />
           </Key>
           <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="role_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="role_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="role_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -650,14 +1045,14 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
         </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="user_id" />
+            <PropertyRef Name="user_code" />
           </Key>
           <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fullname" Type="String" MaxLength="564" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="role_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="role_code" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="is_admin" Type="Boolean" />
           <Property Name="date_of_birth" Type="DateTime" Precision="0" />
           <Property Name="hotline" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -671,38 +1066,369 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <Property Name="skill" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="job_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="is_active" Type="Boolean" />
+          <NavigationProperty Name="Equipments" Relationship="Self.FK_Equipment_User" FromRole="User" ToRole="Equipment" />
+          <NavigationProperty Name="Equipment_Allocation_Application" Relationship="Self.FK_Equipment_Allocation_Application_User2" FromRole="User" ToRole="Equipment_Allocation_Application" />
+          <NavigationProperty Name="Equipment_Allocation_Application1" Relationship="Self.FK_Equipment_Allocation_Application_User3" FromRole="User" ToRole="Equipment_Allocation_Application" />
+          <NavigationProperty Name="Inventory_Request_Application" Relationship="Self.FK_Inventory_Request_Application_Perform" FromRole="User" ToRole="Inventory_Request_Application" />
+          <NavigationProperty Name="Inventory_Request_Application1" Relationship="Self.FK_Inventory_Request_Application_Requireer" FromRole="User" ToRole="Inventory_Request_Application" />
+          <NavigationProperty Name="Member_Location_History" Relationship="Self.FK_Member_Location_History_User" FromRole="User" ToRole="Member_Location_History" />
+          <NavigationProperty Name="Member_Project_History" Relationship="Self.FK_Member_Project_History_User" FromRole="User" ToRole="Member_Project_History" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Creater" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="Projects1" Relationship="Self.FK_Project_Manager" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Equipment_Handover_Form" Relationship="Self.FK_Equipment_Handover_Form_User6" FromRole="User" ToRole="Equipment_Handover_Form" />
+          <NavigationProperty Name="Equipment_Handover_Form1" Relationship="Self.FK_Equipment_Handover_Form_User7" FromRole="User" ToRole="Equipment_Handover_Form" />
+          <NavigationProperty Name="Equipment_Handover_Form2" Relationship="Self.FK_Equipment_Handover_Form_User8" FromRole="User" ToRole="Equipment_Handover_Form" />
         </EntityType>
-        <EntityType Name="Application_Attachment">
+        <EntityType Name="Equipment_Handover_Form">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="form_id" />
+            <PropertyRef Name="form_code" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="is_finish" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="application_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="application_id" Type="Int32" />
-          <Property Name="attachment_id" Type="Int32" />
+          <Property Name="form_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="form_code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="creater" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="handover_date" Type="DateTime" Precision="0" />
+          <Property Name="handover" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="receipt_date" Type="DateTime" Precision="0" />
+          <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="is_finish" Type="Boolean" Nullable="false" />
+          <Property Name="location_id" Type="Int32" />
+          <Property Name="project_id" Type="Int32" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Equipment_Handover_Form_Location2" FromRole="Equipment_Handover_Form" ToRole="Location" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_Equipment_Handover_Form_Project1" FromRole="Equipment_Handover_Form" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Equipment_Handover_Form_User6" FromRole="Equipment_Handover_Form" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Equipment_Handover_Form_User7" FromRole="Equipment_Handover_Form" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_Equipment_Handover_Form_User8" FromRole="Equipment_Handover_Form" ToRole="User" />
         </EntityType>
-        <EntityType Name="Attachment">
-          <Key>
-            <PropertyRef Name="attach_id" />
-          </Key>
-          <Property Name="attach_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="content" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="notes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-        </EntityType>
+        <Association Name="FK_Application_Attachment_Attachment">
+          <End Role="Attachment" Type="Self.Attachment" Multiplicity="0..1" />
+          <End Role="Application_Attachment" Type="Self.Application_Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachment">
+              <PropertyRef Name="attach_id" />
+            </Principal>
+            <Dependent Role="Application_Attachment">
+              <PropertyRef Name="attachment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="responsibler" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1">
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application_Detail" Type="Self.Equipment_Allocation_Application_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment_Allocation_Application">
+              <PropertyRef Name="ea_application_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application_Detail">
+              <PropertyRef Name="ea_application_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Location2">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Allocation_Application_User3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Allocation_Application" Type="Self.Equipment_Allocation_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Allocation_Application">
+              <PropertyRef Name="approver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Location_History_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Equipment_Location_History" Type="Self.Equipment_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Location_History">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Project_History_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Project_History" Type="Self.Equipment_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Project_History">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Detail_Inventory_Request_Application">
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="0..1" />
+          <End Role="Inventory_Request_Application_Detail" Type="Self.Inventory_Request_Application_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory_Request_Application">
+              <PropertyRef Name="ir_application_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application_Detail">
+              <PropertyRef Name="ir_application_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Perform">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="performer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Request_Application_Requireer">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Inventory_Request_Application" Type="Self.Inventory_Request_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Inventory_Request_Application">
+              <PropertyRef Name="requester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_Location2">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Location_History_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Member_Location_History" Type="Self.Member_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Member_Location_History">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Location1">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="location_id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Location_History_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Member_Location_History" Type="Self.Member_Location_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Member_Location_History">
+              <PropertyRef Name="user_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Project_History_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Member_Project_History" Type="Self.Member_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Member_Project_History">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Member_Project_History_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Member_Project_History" Type="Self.Member_Project_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Member_Project_History">
+              <PropertyRef Name="user_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_Project1">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Creater">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Manager">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User6">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="creater" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User7">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="handover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_Handover_Form_User8">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Equipment_Handover_Form" Type="Self.Equipment_Handover_Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_code" />
+            </Principal>
+            <Dependent Role="Equipment_Handover_Form">
+              <PropertyRef Name="receipter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SELMsContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Equipment_Allocation_Application" EntityType="Self.Equipment_Allocation_Application" />
           <EntitySet Name="Equipment_Allocation_Application_Detail" EntityType="Self.Equipment_Allocation_Application_Detail" />
           <EntitySet Name="Equipment_Component" EntityType="Self.Equipment_Component" />
-          <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" />
           <EntitySet Name="Equipment_Handover_Form_Detail" EntityType="Self.Equipment_Handover_Form_Detail" />
           <EntitySet Name="Equipment_Location_History" EntityType="Self.Equipment_Location_History" />
           <EntitySet Name="Equipment_Project_History" EntityType="Self.Equipment_Project_History" />
-          <EntitySet Name="Equipment_Usage_History" EntityType="Self.Equipment_Usage_History" />
           <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="Inventory_Request_Application" EntityType="Self.Inventory_Request_Application" />
           <EntitySet Name="Inventory_Request_Application_Detail" EntityType="Self.Inventory_Request_Application_Detail" />
@@ -710,13 +1436,114 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
           <EntitySet Name="Member_Location_History" EntityType="Self.Member_Location_History" />
           <EntitySet Name="Member_Project_History" EntityType="Self.Member_Project_History" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
-          <EntitySet Name="Project_Investment_Cost_Application" EntityType="Self.Project_Investment_Cost_Application" />
-          <EntitySet Name="Project_Investment_Cost_Application_Detail" EntityType="Self.Project_Investment_Cost_Application_Detail" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
-          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
+          <EntitySet Name="Equipment_Handover_Form" EntityType="Self.Equipment_Handover_Form" />
+          <AssociationSet Name="FK_Application_Attachment_Attachment" Association="Self.FK_Application_Attachment_Attachment">
+            <End Role="Attachment" EntitySet="Attachments" />
+            <End Role="Application_Attachment" EntitySet="Application_Attachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_User" Association="Self.FK_Equipment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment" EntitySet="Equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1" Association="Self.FK_Equipment_Allocation_Application_Detail_Equipment_Allocation_Application1">
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+            <End Role="Equipment_Allocation_Application_Detail" EntitySet="Equipment_Allocation_Application_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Location2" Association="Self.FK_Equipment_Allocation_Application_Location2">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_Project1" Association="Self.FK_Equipment_Allocation_Application_Project1">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_User2" Association="Self.FK_Equipment_Allocation_Application_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Allocation_Application_User3" Association="Self.FK_Equipment_Allocation_Application_User3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Location_History_Location1" Association="Self.FK_Equipment_Location_History_Location1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Equipment_Location_History" EntitySet="Equipment_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Project_History_Project" Association="Self.FK_Equipment_Project_History_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Equipment_Project_History" EntitySet="Equipment_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Detail_Inventory_Request_Application" Association="Self.FK_Inventory_Request_Application_Detail_Inventory_Request_Application">
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+            <End Role="Inventory_Request_Application_Detail" EntitySet="Inventory_Request_Application_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Location1" Association="Self.FK_Inventory_Request_Application_Location1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Perform" Association="Self.FK_Inventory_Request_Application_Perform">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Request_Application_Requireer" Association="Self.FK_Inventory_Request_Application_Requireer">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Inventory_Request_Application" EntitySet="Inventory_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_Location2" Association="Self.FK_Equipment_Handover_Form_Location2">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Location_History_Location1" Association="Self.FK_Member_Location_History_Location1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Member_Location_History" EntitySet="Member_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Location1" Association="Self.FK_Project_Location1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Location_History_User" Association="Self.FK_Member_Location_History_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Member_Location_History" EntitySet="Member_Location_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Project_History_Project1" Association="Self.FK_Member_Project_History_Project1">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Member_Project_History" EntitySet="Member_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Member_Project_History_User" Association="Self.FK_Member_Project_History_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Member_Project_History" EntitySet="Member_Project_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_Project1" Association="Self.FK_Equipment_Handover_Form_Project1">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Creater" Association="Self.FK_Project_Creater">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Manager" Association="Self.FK_Project_Manager">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User6" Association="Self.FK_Equipment_Handover_Form_User6">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User7" Association="Self.FK_Equipment_Handover_Form_User7">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_Handover_Form_User8" Association="Self.FK_Equipment_Handover_Form_User8">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Equipment_Handover_Form" EntitySet="Equipment_Handover_Form" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -724,6 +1551,28 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SELMsModelStoreContainer" CdmEntityContainer="SELMsContext">
+          <EntitySetMapping Name="Application_Attachment">
+            <EntityTypeMapping TypeName="SELMsModel.Application_Attachment">
+              <MappingFragment StoreEntitySet="Application_Attachment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="application_type" ColumnName="application_type" />
+                <ScalarProperty Name="application_id" ColumnName="application_id" />
+                <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="SELMsModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="SELMsModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -803,25 +1652,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Equipment_Handover_Form">
-            <EntityTypeMapping TypeName="SELMsModel.Equipment_Handover_Form">
-              <MappingFragment StoreEntitySet="Equipment_Handover_Form">
-                <ScalarProperty Name="form_id" ColumnName="form_id" />
-                <ScalarProperty Name="form_code" ColumnName="form_code" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="handover_date" ColumnName="handover_date" />
-                <ScalarProperty Name="handover" ColumnName="handover" />
-                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
-                <ScalarProperty Name="receipter" ColumnName="receipter" />
-                <ScalarProperty Name="handover_note" ColumnName="handover_note" />
-                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Equipment_Handover_Form_Detail">
             <EntityTypeMapping TypeName="SELMsModel.Equipment_Handover_Form_Detail">
               <MappingFragment StoreEntitySet="Equipment_Handover_Form_Detail">
@@ -858,19 +1688,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
                 <ScalarProperty Name="from_date" ColumnName="from_date" />
                 <ScalarProperty Name="to_date" ColumnName="to_date" />
                 <ScalarProperty Name="note" ColumnName="note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Equipment_Usage_History">
-            <EntityTypeMapping TypeName="SELMsModel.Equipment_Usage_History">
-              <MappingFragment StoreEntitySet="Equipment_Usage_History">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user_code" ColumnName="user_code" />
-                <ScalarProperty Name="system_equipment_code" ColumnName="system_equipment_code" />
-                <ScalarProperty Name="checkin" ColumnName="checkin" />
-                <ScalarProperty Name="checkout" ColumnName="checkout" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="note_checkout" ColumnName="note_checkout" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -952,7 +1769,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
             <EntityTypeMapping TypeName="SELMsModel.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="project_code" ColumnName="project_code" />
                 <ScalarProperty Name="project_name" ColumnName="project_name" />
                 <ScalarProperty Name="acronym" ColumnName="acronym" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -963,38 +1779,6 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
                 <ScalarProperty Name="creater" ColumnName="creater" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="location_id" ColumnName="location_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Project_Investment_Cost_Application">
-            <EntityTypeMapping TypeName="SELMsModel.Project_Investment_Cost_Application">
-              <MappingFragment StoreEntitySet="Project_Investment_Cost_Application">
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-                <ScalarProperty Name="pic_application_code" ColumnName="pic_application_code" />
-                <ScalarProperty Name="application_date" ColumnName="application_date" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="creater" ColumnName="creater" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
-                <ScalarProperty Name="attachment_path" ColumnName="attachment_path" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="approve_date" ColumnName="approve_date" />
-                <ScalarProperty Name="approver" ColumnName="approver" />
-                <ScalarProperty Name="approver_notes" ColumnName="approver_notes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Project_Investment_Cost_Application_Detail">
-            <EntityTypeMapping TypeName="SELMsModel.Project_Investment_Cost_Application_Detail">
-              <MappingFragment StoreEntitySet="Project_Investment_Cost_Application_Detail">
-                <ScalarProperty Name="application_detail_id" ColumnName="application_detail_id" />
-                <ScalarProperty Name="pic_application_code" ColumnName="pic_application_code" />
-                <ScalarProperty Name="explaination" ColumnName="explaination" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1044,25 +1828,22 @@ warning 6002: The table/view 'SELMs.dbo.Attachment' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Application_Attachment">
-            <EntityTypeMapping TypeName="SELMsModel.Application_Attachment">
-              <MappingFragment StoreEntitySet="Application_Attachment">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="application_type" ColumnName="application_type" />
-                <ScalarProperty Name="application_id" ColumnName="application_id" />
-                <ScalarProperty Name="attachment_id" ColumnName="attachment_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Attachments">
-            <EntityTypeMapping TypeName="SELMsModel.Attachment">
-              <MappingFragment StoreEntitySet="Attachment">
-                <ScalarProperty Name="attach_id" ColumnName="attach_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="extension" ColumnName="extension" />
+          <EntitySetMapping Name="Equipment_Handover_Form">
+            <EntityTypeMapping TypeName="SELMsModel.Equipment_Handover_Form">
+              <MappingFragment StoreEntitySet="Equipment_Handover_Form">
+                <ScalarProperty Name="form_id" ColumnName="form_id" />
+                <ScalarProperty Name="form_code" ColumnName="form_code" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="creater" ColumnName="creater" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="handover_date" ColumnName="handover_date" />
+                <ScalarProperty Name="handover" ColumnName="handover" />
+                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+                <ScalarProperty Name="receipter" ColumnName="receipter" />
+                <ScalarProperty Name="handover_note" ColumnName="handover_note" />
+                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

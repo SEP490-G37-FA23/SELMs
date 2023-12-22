@@ -14,11 +14,20 @@ namespace SELMs.Models
     
     public partial class Attachment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Attachment()
+        {
+            this.Application_Attachment = new HashSet<Application_Attachment>();
+        }
+    
         public int attach_id { get; set; }
         public string name { get; set; }
         public byte[] content { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public string notes { get; set; }
         public string extension { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Application_Attachment> Application_Attachment { get; set; }
     }
 }

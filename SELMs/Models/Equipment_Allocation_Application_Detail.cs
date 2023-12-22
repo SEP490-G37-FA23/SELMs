@@ -24,5 +24,7 @@ namespace SELMs.Models
         public string usage_status { get; set; }
         public string note { get; set; }
         public string status { get; set; }
+    
+        public virtual Equipment_Allocation_Application Equipment_Allocation_Application { get; set; }
     }
 }
