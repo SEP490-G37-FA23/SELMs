@@ -134,8 +134,8 @@ namespace SELMs.Api.Controllers
 		{
 			try
 			{
-				repository.DeleteEquipment(id);
-				return Ok();
+				dynamic result = await service.DeleteEquipment(id);
+				return Ok(result);
 			}
 			catch (Exception ex)
 			{
