@@ -29,5 +29,13 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
+        public ActionResult EquipmentStatusReport()
+        {
+            return View();
+        }
+        public ActionResult EquipmentAllocationReport()
+        {
+            return View();
+        }
     }
 }
