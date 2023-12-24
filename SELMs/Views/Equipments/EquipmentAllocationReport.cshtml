@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "EquipmentAllocationReport";
+    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+}
+<script src="~/Content/js/Stock/Equipments/EquipmentAllocationReportCtrl.js"></script>
+<div ng-app="myApp" ng-controller="EquipmentAllocationReportCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+
+    <section class="section">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Báo cáo giao nhận thiết bị</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-12 text-right">
+                                <button class="btn btn-success" type="button" ng-click="tableToExcel('EquipData')"><i class="icon-spinner2 spinner"></i> Xuất báo cáo</button>
+                            </div>
+                        </div>
+                        <div>
+                            <table class="table" id="EquipData">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="text-center">Báo cáo tình trạng thiết bị</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Mã hệ thống </th>
+                                        <th scope="col">Mã chuẩn</th>
+                                        <th scope="col">Tên thiết bị</th>
+                                        <th scope="col">Đơn vị tính</th>
+                                        <th scope="col">Nhóm thiết bị</th>
+                                        <th scope="col">Vị trí</th>
+                                        <th scope="col">Trạng thái</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in ListEquips">
+                                        <td>{{item.system_equipment_code}}</td>
+                                        <td>{{item.standard_equipment_code}}</td>
+                                        <td>{{item.equipment_name}}</td>
+                                        <td>{{item.unit}}</td>
+                                        <td>{{item.category_name}}</td>
+                                        <td>{{item.location_desciption}}</td>
+                                        <td>{{item.usage_status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="text-center">{{ListEquips.length}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
