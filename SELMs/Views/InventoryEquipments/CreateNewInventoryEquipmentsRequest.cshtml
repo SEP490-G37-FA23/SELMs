@@ -23,7 +23,7 @@
             </div>
 
             <div class="col-6">
-                <label class=" col-form-label">Người thực hiện</label>
+                <label class=" col-form-label">Người thực hiện</label><span style="color:red">*</span>
                 <div>
                     <ng-form>
                         <div class="form-member">
@@ -62,7 +62,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <label class=" col-form-label">Phòng Lab</label>
+                <label class=" col-form-label">Phòng Lab</label><span style="color:red">*</span>
                 <div>
                     <select ng-model="NewInventory.location_id" class="form-control" ng-change="GetDetailLocation(NewInventory.location_id);">
                         <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
