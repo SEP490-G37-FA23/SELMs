@@ -1,7 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "Danh sách biên bản bàn giao";
-    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+    string layoutPath;
+
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
 }
 
 <script src="~/Content/js/Project/ListHEFCtrl.js"></script>
@@ -43,11 +58,11 @@
                                     <th scope="col">Người nhận</th>
                                     <th scope="col">Ngày bàn giao</th>
                                     <th scope="col">Dự án</th>
-                                    <th scope="col">Phòng lab</th>
+                                    <th scope="col" style="min-width:90px">Phòng lab</th>
                                     <th scope="col">Tổng số thiết bị</th>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col">Biên bản xác nhận</th>
-                                    <th scope="col" style="min-width:160px;">Tác vụ</th>
+                                    <th scope="col" style="min-width:250px">Biên bản xác nhận</th>
+                                    <th scope="col" style="min-width:60px;">Tác vụ</th>
                                 </tr>
                                 <tr>
                                     <td></td>

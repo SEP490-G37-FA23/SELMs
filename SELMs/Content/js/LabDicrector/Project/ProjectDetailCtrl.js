@@ -1,11 +1,7 @@
-﻿/// <reference path="../../../../scripts/angular.js" />
-/// <reference path="../../../../scripts/jquery-3.4.1.intellisense.js" />
-/// <reference path="../../../../scripts/angular-route.min.js" />
-
-
+﻿
 var app = angular.module("myApp", []);
 
-app.module("myApp", []).controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
+app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var fullname = $('#fullname').val();
@@ -47,27 +43,53 @@ app.module("myApp", []).controller('ProjectDetailCtrl', function ($scope, $http,
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
 
-    $scope.ListUnits = ['Cái', 'Chiếc', 'Bộ', 'Cặp', 'Hộp'];
+
+    $scope.GetDetailProject = function (project_id) {
+        var partialUrl = origin + '/api/v1/projects/detail/' + project_id;
+        $http.post(partialUrl)
+            .then(function (response) {
+                console.log(response.data);
+                $scope.DetailProject = response.data.project;
+                $scope.ListMembersJoinProject = response.data.ListMemberInProject;
+                $scope.ListEquipmentProject = response.data.ListEquipmentInProject;
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+    $scope.GetDetailProject(url);
 
 
-    $scope.LoadEquipmentList = function () {
-
-        $http.post(origin + '/api/v1/categories').then(function (response) {
-            $scope.ListCategories = response.data;
-        });
+    $scope.Resetproject = function () {
+        $scope.project = {
+            project_name: '',
+            acronym: '',
+            description: '',
+            manager: '',
+            location_id: 0,
+            status: 'Pending'
+        }
+        $scope.ListMembersJoinProject = [];
+        $scope.ListEquipmentProject = [];
+    }
+    $scope.Resetproject();
+    $scope.check = false;
+    if (parseInt(url) > 0) {
+        $scope.project.location_id = url;
+        $scope.check = true;
     }
 
-    $scope.LoadCategoriesList();
-
-    $scope.LoadLocationsList = function () {
-        $http.post(origin + '/api/v1/all-locations').then(function (response) {
-            $scope.ListLocations = response.data;
+    $scope.HandelMember = function (mb, project) {
+        $scope.project.manager = mb.user_code;
+        $scope.text = mb.fullname;
+        $scope.ListMembersJoinProject.push({
+            text: mb.user_code,
+            user_code: mb.user_code,
+            fullname: mb.fullname,
+            status: 'Đang tham gia',
+            note: 'Người quản lý'
         });
     }
-
-    $scope.LoadLocationsList();
-
-    $scope.text = fullname;
+    $scope.text = '';
     $scope.LoadMembersList = function (text) {
         var data = {
             username: username,
@@ -79,20 +101,42 @@ app.module("myApp", []).controller('ProjectDetailCtrl', function ($scope, $http,
             $scope.ListMembers = response.data;
         });
     }
-    $scope.LoadMembersList();
+    //$scope.LoadMembersList();
 
-    $scope.HandelMember = function (mem) {
-        $scope.text = mem.fullname;
-        $scope.NewEquip.responsibler = mem.username;
-    }
-    $scope.HandelComponentEquip = function (ListComponentEquips) {
-        ListComponentEquips.push({
-            system_equipment_code: '',
-            standard_equipment_code: '',
-            equipment_name: '',
-            usage_status: ''
+
+    $scope.LoadLocationsList = function () {
+        var data = {
+            username: username,
+            text: '',
+            level: 1,
+            id: 0
+        }
+        $http.post(origin + '/api/v1/locations', data).then(function (response) {
+            $scope.ListLocations = response.data;
         });
     }
+    $scope.LoadLocationsList();
+
+    $scope.ListMembersJoinProject = [];
+    $scope.HandleNewMember = function () {
+        $scope.ListMembersJoinProject.push({
+            user_code: '',
+            fullname: '',
+            status: 'Đang tham gia',
+            note: ''
+        })
+    }
+    $scope.HandelMemberJoinProject = function (mb, item) {
+        item.text = mb.user_code;
+        item.user_code = mb.user_code;
+        item.fullname = mb.fullname;
+
+    }
+    $scope.DeleteMemberProject = function (list, index) {
+        list.splice(index, 1);
+    }
+
+    $scope.textEquip = '';
     $scope.LoadEquipmentsList = function (text) {
         var data = {
             username: username,
@@ -108,29 +152,68 @@ app.module("myApp", []).controller('ProjectDetailCtrl', function ($scope, $http,
             $scope.ListEquips = response.data;
         });
     }
-    $scope.DeleteComponentEquip = function (ListComponentEquips, index) {
-        ListComponentEquips.splice(index, 1);
+    $scope.ListEquipmentProject = [];
+    $scope.HandleNewEquip = function () {
+        $scope.ListEquipmentProject.push({
+            system_equipment_code: '',
+            standard_equipment_code: '',
+            equipment_name: '',
+            unit: '',
+            responsibler: '',
+            usage_status: ''
+        })
     }
-    $scope.HandelEquip = function (eq, item) {
+    $scope.HandelEquipJoinProject = function (eq, item) {
+        // Kiểm tra nếu system_equipment_code đã tồn tại trong ListEquipmentProject
+        var existingItemIndex = $scope.ListEquipmentProject.findIndex(function (existingItem) {
+            return existingItem.system_equipment_code === eq.system_equipment_code;
+        });
+
+        if (existingItemIndex !== -1) {
+            // Nếu tồn tại, xóa dòng cũ trước khi thêm dòng mới
+            $scope.ListEquipmentProject.splice(existingItemIndex, 1);
+        }
+
+        // Thêm dòng mới
+        item.textEquip = eq.system_equipment_code;
         item.system_equipment_code = eq.system_equipment_code;
         item.standard_equipment_code = eq.standard_equipment_code;
         item.equipment_name = eq.equipment_name;
+        item.unit = eq.unit;
+        item.responsibler = eq.responsibler;
         item.usage_status = eq.usage_status;
-
+    };
+    $scope.DeleteEquipProject = function (list, index) {
+        list.splice(index, 1);
     }
-
-    $scope.GetDetailEquip = function (system_equip_code) {
-        new QRCode(document.getElementById('id_qrcode'), 'https://localhost:44335/Equipments/EquipmentDetails/' + system_equip_code);
-        var partialUrl = origin + '/api/v1/equipments/detail/' + system_equip_code;
-        $http.post(partialUrl)
+    $scope.UpdateProject = function (project) {
+        $scope.Project = {
+            acronym: project.acronym,
+            description: project.description,
+            manager: project.manager,
+            start_date: $('#startDate').val(),
+            end_date: $('#endDate').val(),
+            project_name: project.project_name,
+            location_id: project.location_id,
+            status: true,
+            creater: username
+        }
+        var data = {
+            Project: $scope.Project,
+            ProjectMembers: $scope.ListMembersJoinProject.map(function (member) {
+                return member.user_code;
+            }),
+            ProjectEquipments: $scope.ListEquipmentProject.map(function (member) {
+                return member.system_equipment_code;
+            })
+        }
+        var partialUrl = origin + '/api/v1/projects/update-project/' + project.project_id;
+        $http.post(partialUrl, data)
             .then(function (response) {
-                console.log(response.data);
-                $scope.DetailEquip = response.data.equip.Result[0];
-                $scope.ListComponentEquips = response.data.ListComponentEquips;
-
+                $scope.SuccessSystem('Cập nhật dự án thành công!');
+                $scope.Resetproject();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
-    $scope.GetDetailEquip(url);
 });

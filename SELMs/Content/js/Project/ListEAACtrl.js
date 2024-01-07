@@ -77,6 +77,20 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.LoadEAAsList();
+    $scope.ApproveEAA = function (item) {
+        var userConfirmed = confirm("Bạn chắc chắn muốn xóa dự án này");
 
+        // Check the user's response
+        if (userConfirmed) {
+            $http.post(origin + '/api/v1/equipment-allocation-application/approve-EAA/' + item.ea_application_code).then(function (response) {
+
+                $scope.SuccessSystem('Duyệt yêu cầu cấp thiết bị thành công!');
+                $scope.LoadEAAsList();
+
+            });
+        } else {
+            console.log("User canceled the action.");
+        }
+    }
    
 });

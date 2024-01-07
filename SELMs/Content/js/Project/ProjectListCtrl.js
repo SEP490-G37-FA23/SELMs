@@ -77,7 +77,23 @@ app.controller('ProjectListCtrl', function ($scope, $http, $sce) {
     }
     $scope.LoadProjectList();
     $scope.LoadProjectDetails = function (proj) {
-        window.location.href = "/Project/EquipmentDetails/" + proj.project_id;
+        window.location.href = "/ProjectPortfolio/ViewProjectDetails/" + proj.project_id;
+    }
+
+    $scope.DeleteProject = function (project) {
+        var userConfirmed = confirm("Bạn chắc chắn muốn xóa dự án này");
+
+        // Check the user's response
+        if (userConfirmed) {
+            $http.post(origin + '/api/v1/projects/delete/' + project.project_id).then(function (response) {
+
+                $scope.SuccessSystem('Xóa dự án thành công!');
+                $scope.LoadProjectList();
+            });
+        } else {
+            console.log("User canceled the action.");
+        }
+       
     }
 
 });

@@ -1,75 +1,85 @@
 ﻿
 @{
     ViewBag.Title = "ViewProjectDetails";
-    Layout = "~/Views/Shared/_LayoutHumanResourceManagement.cshtml";
+    Layout = "~/Views/Shared/_LayoutProjectManagement.cshtml";
 }
-
-<div id="content" ng-controller="ProjectDetailCtrl">
-
-    <div class="pagetitle">
-        <!--Start Page Title-->
-        <h1>Thông tin dự án</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="/ProjectPortfolio/ViewProjectList">Projects List</a></li>
-                <li class="breadcrumb-item active"><a href="/ProjectPortfolio/ViewProjectDetails">View Project's Details</a></li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
-
+<script src="~/Content/js/LabDicrector/Project/ProjectDetailCtrl.js"></script>
+<div ng-app="myApp" ng-controller="ProjectDetailCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <div id="notification" class="col-md-12"></div>
     <section class="section">
         <form class="row g-3">
             <div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Thông tin dự án</h4>
-                        <button class="btn btn-primary">Chỉnh sửa thông tin</button>
-                        <div>
-                            <p> </p>
-                        </div>
+                        <h4 class="card-title">Chi tiết dự án</h4>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="projectName" class="form-label">Tên dự án</label>
-                                <input type="text" class="form-control" id="projectName">
+                                <label for="projectName" class="form-label">Tên dự án <span style="color:red">*</span></label>
+                                <input type="text" class="form-control" ng-model="DetailProject.project_name" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="projectGido" class="form-label">Viết tắt</label>
-                                <input type="text" class="form-control" id="projectGido">
+                                <input type="text" class="form-control" ng-model="DetailProject.acronym">
                             </div>
                             <div class="col-md-12">
                                 <label for="projectDescription" class="form-label">Mô tả dự án</label>
-                                <input type="text" class="form-control" id="projectDescription">
+                                <textarea type="text" class="form-control" ng-model="DetailProject.description"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectRefer" class="form-label">Lĩnh vực</label>
-                                <input type="text" class="form-control" id="projectRefer">
-                            </div>
-                            <div class="col-md-6">
-                                <laber for="projectTag" class="form-label">Tags</laber>
-                                <input type="text" class="form-control" id="projectTag">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="projectManager" class="form-label">Người quản lý</label>
-                                <input type="text" class="form-control" id="projectManager">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="projectStatus" class="form-label">Status</label>
-                                <select id="projectStatus" class="form-select">
-                                    <option selected>Pending</option>
-                                    <option>Activate</option>
-                                    <option>Overdue</option>
-                                    <option>Finished</option>
-                                    <option>Canceled</option>
+                                <label for="projectRefer" class="form-label">Phòng LAB sử dụng <span style="color:red">*</span></label>
+                                <select ng-model="DetailProject.location_id" ng-disabled="check" class="form-control">
+                                    <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectStartDate" class="form-label">Ngày bắt đầu</label>
-                                <input type="Date" class="form-control" id="projectStartDate">
+                                <label for="projectManager" class="form-label">Người quản lý <span style="color:red">*</span></label>
+                                <ng-form>
+                                    <div class="form-member">
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                                        <input type="text" class="form-control" ng-model="DetailProject.manager" style="display:none">
+                                    </div>
+
+                                    <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                        <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMB">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="bg-blue text-white">
+                                                        <tr>
+                                                            <th>Họ tên</th>
+                                                            <th>Chức vụ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr style="cursor:pointer" ng-mousedown="HandelMember(mb, DetailProject);" ng-repeat="mb in ListMembers">
+                                                            <td>
+                                                                {{mb.fullname}}
+                                                            </td>
+                                                            <td>{{mb.role_name}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-form>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectEndDate" class="form-label">Ngày kết thúc</label>
-                                <input type="Date" class="form-control" id="projectEndDate">
+                                <label for="projectStartDate" class="form-label">Ngày bắt đầu <span style="color:red">*</span></label>
+                                <input type="text" id="startDate" class="form-control" ng-model="DetailProject.start_date">
+                                <script>
+                                    $("#startDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
+                                </script>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="projectEndDate" class="form-label">Ngày kết thúc <span style="color:red">*</span></label>
+                                <input type="text" id="endDate" class="form-control" ng-model="DetailProject.end_date">
+                                <script>
+                                    $("#endDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
+                                </script>
                             </div>
 
                             <div>
@@ -82,26 +92,19 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="task-tab" data-bs-toggle="tab"
-                                                data-bs-target="#task" type="button" role="tab" aria-controls="task"
-                                                aria-selected="false">
-                                            Tasks
-                                        </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="equipment-tab" data-bs-toggle="tab"
                                                 data-bs-target="#equipment" type="button" role="tab"
                                                 aria-controls="equipment" aria-selected="false">
                                             Equipments
                                         </button>
                                     </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="cost-tab" data-bs-toggle="tab"
-                                                data-bs-target="#cost" type="button" role="tab" aria-controls="cost"
-                                                aria-selected="false">
-                                            Chi phí
-                                        </button>
-                                    </li>
+                                    @*<li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="cost-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#cost" type="button" role="tab" aria-controls="cost"
+                                                    aria-selected="false">
+                                                Chi phí
+                                            </button>
+                                        </li>*@
                                 </ul>
                                 <div class="tab-content pt-2" id="myTabContent">
                                     <div class="tab-pane fade show active" id="member" role="tabpanel"
@@ -111,70 +114,147 @@
                                                 <tr>
                                                     <th scope="col">Mã nhân viên</th>
                                                     <th scope="col">Họ và Tên</th>
-                                                    <th scope="col">Giới tính</th>
-                                                    <th scope="col">Vị trí</th>
+                                                    <th scope="col">Trạng thái</th>
+                                                    <th scope="col">Ghi chú</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>ductm</td>
-                                                    <td>Tran Minh Duc</td>
-                                                    <td>Nam</td>
-                                                    <td>Manager</td>
+                                                <tr ng-repeat="item in ListMembersJoinProject">
+                                                    <td>
+                                                        <ng-form>
+                                                            <div class="form-member-project">
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(item.text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
+                                                            </div>
+
+                                                            <div class="input-group-btn" style="position:relative;width:100%;display:inline-block">
+                                                                <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableMBPj">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead class="bg-blue text-white">
+                                                                                <tr>
+                                                                                    <th>Mã thành viên</th>
+                                                                                    <th>Họ tên</th>
+                                                                                    <th>Chức vụ</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr style="cursor:pointer" ng-mousedown="HandelMemberJoinProject(mb, item);" ng-repeat="mb in ListMembers">
+                                                                                    <td>
+                                                                                        {{mb.user_code}}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        {{mb.fullname}}
+                                                                                    </td>
+                                                                                    <td>{{mb.role_name}}</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-form>
+                                                    </td>
+                                                    <td><input ng-model="item.fullname" class="form-control" disabled /></td>
+                                                    <td>
+                                                        <select ng-model="item.status" class="form-control" disabled>
+                                                            <option value="Đang tham gia" selected>Đang tham gia</option>
+
+                                                        </select>
+                                                    </td>
+                                                    <td><input ng-model="item.note" class="form-control" /></td>
+                                                    <td><i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteMemberProject(ListMembersJoinProject,$index)"></i></td>
+
                                                 </tr>
                                             </tbody>
+                                            <tr>
+                                                <td colspan="5" class="text-center" ng-click="HandleNewMember()">Thêm thành viên</td>
+                                            </tr>
                                         </table>
-                                        <div>
-                                            <button type="button" class="btn btn-primary">Thêm thành viên</button>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="task" role="tabpanel" aria-labelledby="task-tab">
-                                        Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos
-                                        quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque
-                                        aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae
-                                        mollitia dolores. Ut laboriosam voluptatum dicta.
+
                                     </div>
                                     <div class="tab-pane fade" id="equipment" role="tabpanel"
                                          aria-labelledby="equipment-tab">
                                         <table class="table">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">Mã hệ thống</th>
                                                     <th scope="col">Mã thiết bị</th>
                                                     <th scope="col">Tên thiết bị</th>
-                                                    <th scope="col">Ngày mượn</th>
                                                     <th scope="col">Đơn vị</th>
-                                                    <th scope="col">Số lượng</th>
-                                                    <th scope="col">Người mượn</th>
+                                                    <th scope="col">Người chịu trách nhiệm</th>
                                                     <th scope="col">Trạng thái</th>
+                                                    <th scope="col">Ghi chú</th>
                                                     <th scope="col">Tác vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>ductm</td>
-                                                    <td>Tran Minh Duc</td>
-                                                    <td>29/10/2023</td>
-                                                    <td>người</td>
-                                                    <td>1</td>
-                                                    <td>LyMT</td>
-                                                    <td>hỏng nửa người</td>
+                                                <tr ng-repeat="item in ListEquipmentProject">
                                                     <td>
-                                                        <button class="btn btn-primary">edit</button>
-                                                        <button class="btn btn-secondary">trả</button>
+                                                        <ng-form>
+                                                            <div class="form-member-project">
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.textEquip" ng-change="LoadEquipmentsList(item.textEquip)" ng-focus="showtableEquipPj = true" ng-blur="showtableEquipPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" class="form-control" ng-model="item.system_equipment_code" style="display:none">
+                                                            </div>
+
+                                                            <div class="input-group-btn" style="position:relative;width:200%;display:inline-block">
+                                                                <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableEquipPj">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead class="bg-blue text-white">
+                                                                                <tr>
+                                                                                    <th scope="col">Mã hệ thống </th>
+                                                                                    <th scope="col">Mã chuẩn</th>
+                                                                                    <th scope="col">Tên thiết bị</th>
+                                                                                    <th scope="col">Đơn vị tính</th>
+                                                                                    <th scope="col">Loại thiết bị</th>
+                                                                                    <th scope="col">Nhóm thiết bị</th>
+                                                                                    <th scope="col">Vị trí</th>
+                                                                                    <th scope="col">Người chịu trách nhiệm quản lý</th>
+                                                                                    <th scope="col">Trạng thái</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr style="cursor:pointer" ng-mousedown="HandelEquipJoinProject(eq, item);" ng-repeat="eq in ListEquips">
+                                                                                    <td>{{eq.system_equipment_code}}</td>
+                                                                                    <td>{{eq.standard_equipment_code}}</td>
+                                                                                    <td>{{eq.equipment_name}}</td>
+                                                                                    <td>{{eq.unit}}</td>
+                                                                                    <td>{{eq.type_equipment}}</td>
+                                                                                    <td>{{eq.category_name}}</td>
+                                                                                    <td>{{eq.location_desciption}}</td>
+                                                                                    <td>{{eq.responsibler}}</td>
+                                                                                    <td>{{eq.usage_status}}</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-form>
                                                     </td>
+                                                    <td><input ng-model="item.standard_equipment_code" class="form-control" disabled /></td>
+                                                    <td><input ng-model="item.equipment_name" class="form-control" disabled /></td>
+                                                    <td><input ng-model="item.unit" class="form-control" disabled /></td>
+                                                    <td><input ng-model="item.responsibler" class="form-control" disabled /></td>
+                                                    <td><input ng-model="item.usage_status" class="form-control" disabled /></td>
+                                                    <td><input ng-model="item.note" class="form-control" /></td>
+                                                    <td><i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteEquipProject(ListEquipmentProject,$index)"></i></td>
                                                 </tr>
+                                                <tr><td colspan="8" class="text-center"><button type="button" class="btn btn-primary" ng-click="HandleNewEquip()">Thêm thiết bị</button></td></tr>
                                             </tbody>
                                         </table>
-                                        <div>
-                                            <button type="button" class="btn btn-primary">Thêm thiết bị</button>
-                                        </div>
+
                                     </div>
-                                    <div class="tab-pane fade" id="cost" role="tabpanel" aria-labelledby="cost-tab">
-                                        Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis
-                                        cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis
-                                        accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
-                                        fuga tempore dolor.
-                                    </div>
+                                    @*<div class="tab-pane fade" id="cost" role="tabpanel"
+                                             aria-labelledby="cost-tab">
+                                            Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis
+                                            cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis
+                                            accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos
+                                            fuga tempore dolor.
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
@@ -183,13 +263,9 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Thêm dự án mới</button>
+                <button type="submit" class="btn btn-primary" ng-click="UpdateProject(DetailProject)">Cập nhật dự án</button>
             </div>
+
         </form>
     </section>
-
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/Content/js/LabDicrector/Project/ProjectDetailCtrl.js"></script>
 </div>
-
