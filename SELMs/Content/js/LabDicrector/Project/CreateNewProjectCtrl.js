@@ -67,6 +67,13 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
     $scope.HandelMember = function (mb, NewProject) {
         $scope.NewProject.manager = mb.user_code;
         $scope.text = mb.fullname;
+        $scope.ListMembersJoinProject.push({
+            text: mb.user_code,
+            user_code: mb.user_code,
+            fullname: mb.fullname,
+            status: 'Đang tham gia',
+            note: 'Người quản lý'
+        });
     }
     $scope.text = '';
     $scope.LoadMembersList = function (text) {

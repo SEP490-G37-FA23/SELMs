@@ -1,7 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "Tình trạng thiết bị yêu cầu nhập";
-    Layout = Session["role_code"] == "SM" ? "~/Views/Shared/_LayoutStockManagement.cshtml" : Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml" : "~/Views/Shared/_LayoutProjectManagement.cshtml";
+    string layoutPath;
+
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
 }
 
 <script src="~/Content/js/Project/EquipAllocationDetailsCtrl.js"></script>
@@ -51,7 +66,7 @@
                                                 <th scope="col">Dự án yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
-                                                <th scope="col">Mã thiết bị tương ứng</th>
+                                                <th scope="col" ng-show="role == 'SM'">Mã thiết bị tương ứng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -61,7 +76,7 @@
                                                 <td>{{item.unit}}</td>
                                                 <td>{{item.location_desciption}}</td>
                                                 <td>
-                                                    <select ng-model="item.status" class="form-control">
+                                                    <select ng-model="item.status" class="form-control" ng-disabled="role != 'SM'">
                                                         <option value="Thiết bị cần nhập mới">Thiết bị cần nhập mới	</option>
                                                         <option value="Thiết bị đang đợi nhập">Thiết bị đang đợi nhập	</option>
                                                         <option value="Thiết bị đã nhập về">Thiết bị đã nhập về	</option>
@@ -70,7 +85,7 @@
                                                 <td>{{item.project_name}}</td>
                                                 <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
                                                 <td>{{item.fullname}}</td>
-                                                <td>
+                                                <td ng-show="role == 'SM'">
                                                     <ng-form>
                                                         <div class="form-equip">
                                                             <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.system_equipment_code_corresponding" ng-change="LoadEquipmentsList(item.system_equipment_code_corresponding)" ng-focus="showtableEquip = true" ng-blur="showtableEquip = false" ng-model-options="{debounce:700}" required>
@@ -109,8 +124,8 @@
                                     </table>
                                     <!-- End Table with stripped rows -->
                                     <a class="btn btn-dark" data-bs-toggle="modal"
-                                       data-bs-target="#create-import-request">Tạo yêu cầu nhập thiết bị</a>
-                                    <button ng-click="UpdateDetailAllowEquip()" class="btn btn-success" >Cập nhật</button>
+                                       data-bs-target="#create-import-request" ng-show="role == 'SM'">Tạo yêu cầu nhập thiết bị</a>
+                                    <button ng-click="UpdateDetailAllowEquip()" class="btn btn-success" ng-show="role == 'SM'">Cập nhật</button>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +182,7 @@
                                     </table>
                                     <!-- End Table with stripped rows -->
                                     <a class="btn btn-primary" data-bs-toggle="modal"
-                                       data-bs-target="#create-allocation-request">Tạo yêu cầu cấp phát</a>
+                                       data-bs-target="#create-allocation-request" ng-show="role == 'SM'">Tạo yêu cầu cấp phát</a>
                                 </div>
                             </div>
                         </div>

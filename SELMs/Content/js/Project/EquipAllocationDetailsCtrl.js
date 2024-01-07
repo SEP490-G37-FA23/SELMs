@@ -147,7 +147,7 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
         var partialUrl = origin + '/api/v1/equipment-handover-form/new-form';
         $http.post(partialUrl, data)
             .then(function (response) {
-                $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
+                $scope.SuccessSystem('Tạo đơn bàn giaot thiết bị thành công!');
                 $scope.ResetHandoverForm();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);

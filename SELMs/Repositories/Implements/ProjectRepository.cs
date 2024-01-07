@@ -50,8 +50,19 @@ namespace SELMs.Repositories.Implements
 				, commandType: CommandType.StoredProcedure);
 			return projects;
 		}
+        public dynamic GetDoingProjectList(Argument arg)
+        {
+            dynamic projects = null;
+            projects = db.Database.Connection.QueryAsync<dynamic>("Proc_GetProjectList", new
+            {
+                username = arg.username,
+                project_name = arg.project_name
+            }
+                , commandType: CommandType.StoredProcedure);
+            return projects;
+        }
 
-		public dynamic UpdateProject(Project project)
+        public dynamic UpdateProject(Project project)
 		{
 			Project orgProject = db.Projects.Where(p => p.project_id == project.project_id).FirstOrDefault();
 			db.Entry(orgProject).CurrentValues.SetValues(project);

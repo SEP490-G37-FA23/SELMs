@@ -82,11 +82,9 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
     $scope.LoadProjectsList = function () {
         var data = {
             username: username,
-            project_name: $scope.project_name,
-            manager_name: '',
-            location_name:''
+            project_name: $scope.project_name
         }
-        $http.post(origin + '/api/v1/projects/search', data).then(function (response) {
+        $http.post(origin + '/api/v1/projects/doing', data).then(function (response) {
             $scope.ListProjects = response.data;
         });
     }
@@ -95,7 +93,7 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
     $scope.HandelProject = function (pj, NewEAA) {
         NewEAA.location_id = pj.location_id;
         NewEAA.project_id = pj.project_id;
-        NewEAA.location_desciption = pj.location_name;
+        NewEAA.location_desciption = pj.location_desciption;
         $scope.project_name = pj.project_name;
     }
     $scope.HandelNewEquipRequest = function (ListEquipRequest) {

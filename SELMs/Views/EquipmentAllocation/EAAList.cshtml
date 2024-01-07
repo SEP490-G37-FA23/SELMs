@@ -1,11 +1,27 @@
 ﻿
 @{
     ViewBag.Title = "Danh sách yêu cầu cấp phát thiết bị";
-    Layout = Session["role_code"] == "SM"?"~/Views/Shared/_LayoutStockManagement.cshtml": Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml": "~/Views/Shared/_LayoutProjectManagement.cshtml";
-}
+
+    string layoutPath;
+
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
+    }
 <script src="~/Content/js/Project/ListEAACtrl.js"></script>
 <div ng-app="myApp" ng-controller="ListEAACtrl" style="display:inline-block;width:100%;">
-    <input type="hidden" id="username" name="username" value="@Session["username"]" />s
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
     <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
     <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
@@ -43,7 +59,7 @@
                                     <th scope="col">Tổng số thiết bị</th>
                                     <th scope="col">Ghi chú</th>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col">Tác vụ</th>
+                                    <th scope="col" ng-show="(role=='LD'|| isadmin)">Tác vụ</th>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -61,7 +77,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ListEAA">
+                                <tr ng-repeat="item in ListEAA" ng-if="role=='SM' && item.status =='APPROVED'">
                                     <td>{{$index+1}}</td>
                                     <td>{{item.ea_application_code}}</td>
                                     <td>{{item.desciption}}</td>
@@ -73,7 +89,7 @@
                                     <td>{{item.notes}}</td>
                                     <td>{{item.status}}</td>
                                     <td>
-                                        <button class="btn btn-warning" ng-click="" ng-show="role=='LD'|| isadmin">Duyệt</button>
+                                        <button class="btn btn-warning" ng-click="ApproveEAA(item)" ng-show="(role=='LD'|| isadmin) && item.status == 'PENDING'">Duyệt</button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -17,7 +17,7 @@
                         <h4 class="card-title">Thêm dự án mới</h4>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="projectName" class="form-label">Tên dự án</label>
+                                <label for="projectName" class="form-label">Tên dự án <span style="color:red">*</span></label>
                                 <input type="text" class="form-control" ng-model="NewProject.project_name">
                             </div>
                             <div class="col-md-6">
@@ -29,13 +29,13 @@
                                 <textarea type="text" class="form-control" ng-model="NewProject.description"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectRefer" class="form-label">Phòng LAB sử dụng</label>
+                                <label for="projectRefer" class="form-label">Phòng LAB sử dụng <span style="color:red">*</span></label>
                                 <select ng-model="NewProject.location_id" ng-disabled="check" class="form-control">
                                     <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectManager" class="form-label">Người quản lý</label>
+                                <label for="projectManager" class="form-label">Người quản lý <span style="color:red">*</span></label>
                                 <ng-form>
                                     <div class="form-member">
                                         <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
@@ -68,14 +68,14 @@
                                 </ng-form>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectStartDate" class="form-label">Ngày bắt đầu</label>
+                                <label for="projectStartDate" class="form-label">Ngày bắt đầu <span style="color:red">*</span></label>
                                 <input type="text" id="startDate" class="form-control" ng-model="NewProject.start_date">
                                 <script>
                                     $("#startDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
                                 </script>
                             </div>
                             <div class="col-md-6">
-                                <label for="projectEndDate" class="form-label">Ngày kết thúc</label>
+                                <label for="projectEndDate" class="form-label">Ngày kết thúc <span style="color:red">*</span></label>
                                 <input type="text" id="endDate" class="form-control" ng-model="NewProject.end_date">
                                 <script>
                                     $("#endDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
@@ -160,7 +160,6 @@
                                                     <td>
                                                         <select ng-model="item.status" class="form-control" disabled>
                                                             <option value="Đang tham gia" selected>Đang tham gia</option>
-                                                            <option value="Đã rời dự án">Đã rời dự án</option>
 
                                                         </select>
                                                     </td>

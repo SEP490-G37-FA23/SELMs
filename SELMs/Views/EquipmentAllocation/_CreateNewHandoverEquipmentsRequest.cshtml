@@ -1,8 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "_CreateNewHandoverEquipmentsRequest";
-    Layout = Session["role_code"] == "SM" ? "~/Views/Shared/_LayoutStockManagement.cshtml" : Session["role_code"] == "LD" ? "~/Views/Shared/_LayoutLabDirector.cshtml" : "~/Views/Shared/_LayoutProjectManagement.cshtml";
+    string layoutPath;
 
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
 }
 
 <div class="modal fade" id="create-allocation-request" tabindex="-1">

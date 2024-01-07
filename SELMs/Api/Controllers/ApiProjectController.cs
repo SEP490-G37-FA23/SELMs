@@ -65,10 +65,31 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-		#endregion
+        #endregion
 
-		#region Get project by id
-		[HttpGet]
+        #region Search Project
+        [HttpPost]
+        [Route("projects/doing")]
+        public async Task<IHttpActionResult> GetDoingProjectsList(Argument args)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await repository.GetDoingProjectList(args);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Get project by id
+        [HttpGet]
 		[Route("projects/{id}")]
 		public async Task<IHttpActionResult> GetProject(int id)
 		{
@@ -157,7 +178,7 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Delete Project
-		[HttpDelete]
+		[HttpPost]
 		[Route("projects/delete/{id}")]
 		public async Task<IHttpActionResult> DeleteProjects(int id)
 		{
@@ -174,21 +195,21 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-        #endregion
+		#endregion
 
-        //#region Get detail project
-        //[HttpPost]
-        //[Route("projects/detail/{id}")]
-        //public async Task<DetailProjectDTO> GetDetailProject(int id)
-        //{
-        //    DetailProjectDTO returnedData = new DetailProjectDTO();
-        //    returnedData.project = await repository.GetDetailProject(id);
-        //    returnedData.ListMemberInProject = repository.GetListMemberInProject(id);
-        //    returnedData.ListEquipmentInProject = repository.GetListEquipmentInProject(id);
-        //    return returnedData;
+		//#region Get detail project
+		//[HttpGet]
+		//[Route("projects/detail/{id}")]
+		//public async Task<DetailProjectDTO> GetDetailProject(int id)
+		//{
+		//	DetailProjectDTO returnedData = new DetailProjectDTO();
+		//	returnedData.project = await repository.GetDetailProject(id);
+		//	returnedData.ListMemberInProject = repository.GetListMemberInProject(id);
+		//	returnedData.ListEquipmentInProject = repository.GetListEquipmentInProject(id);
+		//	return returnedData;
 
 
-        //}
-        //#endregion
-    }
+		//}
+		//#endregion
+	}
 }
