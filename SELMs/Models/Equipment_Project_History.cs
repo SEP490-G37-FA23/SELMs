@@ -20,7 +20,5 @@ namespace SELMs.Models
         public Nullable<System.DateTime> from_date { get; set; }
         public Nullable<System.DateTime> to_date { get; set; }
         public string note { get; set; }
-    
-        public virtual Project Project { get; set; }
     }
 }

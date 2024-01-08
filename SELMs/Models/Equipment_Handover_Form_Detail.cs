@@ -23,5 +23,7 @@ namespace SELMs.Models
         public string unit { get; set; }
         public string usage_status { get; set; }
         public string note { get; set; }
+    
+        public virtual Equipment_Handover_Form Equipment_Handover_Form { get; set; }
     }
 }

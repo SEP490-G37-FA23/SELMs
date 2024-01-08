@@ -19,5 +19,7 @@ namespace SELMs.Models
         public Nullable<int> equipment_id { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public byte[] content { get; set; }
+    
+        public virtual Equipment Equipment { get; set; }
     }
 }
