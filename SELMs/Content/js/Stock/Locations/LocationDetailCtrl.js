@@ -117,7 +117,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
 
 
     $scope.CreateNewProject = function () {
-        window.location.href = origin + "/ProjectPortfolio/CreateNewProject/" + url;
+        window.location.href = origin + '/ProjectPortfolio/CreateNewProject/' + url;
     }
     $scope.text = '';
     $scope.LoadMembersList = function (text) {
