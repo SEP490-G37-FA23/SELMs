@@ -401,6 +401,9 @@
     <Compile Include="Models\Equipment_Project_History.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment_Usage_History.cs">
+      <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Image.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
@@ -425,13 +428,20 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMs.Context.cs" />
-    <Compile Include="Models\SELMs.cs" />
-    <Compile Include="Models\SELMs.Designer.cs">
-      <DependentUpon>SELMs.cs</DependentUpon>
+    <Compile Include="Models\SELMs.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SELMs.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\SELMs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>SELMs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SELMs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SELMs.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMs.tt</DependentUpon>
@@ -786,13 +796,13 @@
     <Content Include="Global.asax" />
     <Content Include="Models\SELMs.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
-      <LastGenOutput>SELMsDatabase.Context.cs</LastGenOutput>
+      <DependentUpon>SELMs.edmx</DependentUpon>
+      <LastGenOutput>SELMs.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\SELMs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
-      <LastGenOutput>SELMsDatabase.cs</LastGenOutput>
+      <DependentUpon>SELMs.edmx</DependentUpon>
+      <LastGenOutput>SELMs.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -907,7 +917,7 @@
     <Content Include="App_Data\BodyPart_3b7003d3-a65b-4796-86dc-ba090052e8be" />
     <EntityDeploy Include="Models\SELMs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SELMs1.Designer.cs</LastGenOutput>
+      <LastGenOutput>SELMs.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\SELMs.edmx.diagram">
       <DependentUpon>SELMs.edmx</DependentUpon>
