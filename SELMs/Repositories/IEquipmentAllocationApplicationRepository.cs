@@ -13,9 +13,10 @@ namespace SELMs.Repositories
         dynamic GetApplicationList();
         dynamic GetApplicationList(Argument arg);
         dynamic GetApplication(int id);
+        dynamic GetApplicationByCode(string applicationCode);
         dynamic GetLastDailyApplication();
         dynamic SaveApplication(Equipment_Allocation_Application application);
-        void UpdateApplication(Equipment_Allocation_Application application);
+        dynamic UpdateApplication(Equipment_Allocation_Application application);
         void DeleteApplication(int id);
         dynamic GetApplicationDetailList(string applicationCode);
         dynamic GetApplicationDetailList(Argument arg);

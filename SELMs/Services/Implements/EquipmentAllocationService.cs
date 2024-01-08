@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.Web;
 using SELMs.Repositories;
 using SELMs.Repositories.Implements;
+using log4net;
 
 namespace SELMs.Services.Implements
 {
-    public class EquipmentAllocationService: IEquipmentAllocationService
+    public class EquipmentAllocationService : IEquipmentAllocationService
     {
         private IEquipmentAllocationApplicationRepository repository = new EquipmentAllocationApplicationRepository();
         public async Task<ApplicationModel> GetApplication(int id)
@@ -87,7 +88,28 @@ namespace SELMs.Services.Implements
         }
 
 
-
+        public async Task<dynamic> ApproveApplication(string code)
+        {
+            try
+            {
+                Equipment_Allocation_Application application = repository.GetApplicationByCode(code);
+                if (application != null)
+                {
+                    application.status = ApplicationStatus.APPROVED;
+                    var result = repository.UpdateApplication(application);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
 
 
     }

@@ -13,5 +13,6 @@ namespace SELMs.Services
         Task<ApplicationModel> GetApplication(int id);
         Task SaveApplication(Equipment_Allocation_Application application, List<Equipment_Allocation_Application_Detail> applicationDetails);
         Task UpdateApplication(int id, Equipment_Allocation_Application application, List<Equipment_Allocation_Application_Detail> applicationDetails);
+        Task<dynamic> ApproveApplication(string code);
     }
 }
