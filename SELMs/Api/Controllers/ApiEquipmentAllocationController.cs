@@ -158,12 +158,12 @@ namespace SELMs.Api.Controllers
         #region Approve Application
         [HttpPost]
         [Route("equipment-allocation-application/approve/{eaaCode}")]
-        public async Task<IHttpActionResult> GetNeedImportEquipmentList(string eaaCode)
+        public async Task<IHttpActionResult> ApproveApplication([FromUri]string eaaCode)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = service.ApproveApplication(eaaCode);
+                returnedData = await service.ApproveApplication(eaaCode);
                 return Ok(returnedData);
             }
             catch (Exception ex)
