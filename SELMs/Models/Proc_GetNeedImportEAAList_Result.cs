@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment_Allocation_Application_Detail
+    public partial class Proc_GetNeedImportEAAList_Result
     {
         public int application_detail_id { get; set; }
         public string ea_application_code { get; set; }
@@ -24,5 +23,14 @@ namespace SELMs.Models
         public string usage_status { get; set; }
         public string note { get; set; }
         public string status { get; set; }
+        public string ea_application_code1 { get; set; }
+        public System.DateTime application_date { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string location_desciption { get; set; }
+        public Nullable<int> project_id { get; set; }
+        public string project_name { get; set; }
+        public string creater { get; set; }
+        public string fullname { get; set; }
+        public string status1 { get; set; }
     }
 }

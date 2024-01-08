@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment_Allocation_Application
+    public partial class Proc_GetEAAList_Result
     {
         public int application_id { get; set; }
         public string ea_application_code { get; set; }
@@ -27,11 +26,8 @@ namespace SELMs.Models
         public string status { get; set; }
         public Nullable<int> location_id { get; set; }
         public Nullable<int> project_id { get; set; }
-    
-        public virtual Location Location { get; set; }
-        public virtual Location Location1 { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
+        public string name_creater { get; set; }
+        public string location_desciption { get; set; }
+        public string project_name { get; set; }
     }
 }

@@ -12,17 +12,14 @@ namespace SELMs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment_Allocation_Application_Detail
+    public partial class Equipment_Usage_History
     {
-        public int application_detail_id { get; set; }
-        public string ea_application_code { get; set; }
+        public int id { get; set; }
+        public string user_code { get; set; }
         public string system_equipment_code { get; set; }
-        public string standard_equipment_code { get; set; }
-        public string equipment_name { get; set; }
-        public string equipment_specification { get; set; }
-        public string unit { get; set; }
-        public string usage_status { get; set; }
-        public string note { get; set; }
-        public string status { get; set; }
+        public Nullable<System.DateTime> checkin { get; set; }
+        public Nullable<System.DateTime> checkout { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string note_checkout { get; set; }
     }
 }

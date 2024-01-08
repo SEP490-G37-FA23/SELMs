@@ -18,9 +18,11 @@ namespace SELMs.Models
         public Location()
         {
             this.Equipment_Allocation_Application = new HashSet<Equipment_Allocation_Application>();
+            this.Equipment_Allocation_Application1 = new HashSet<Equipment_Allocation_Application>();
+            this.Equipment_Handover_Form = new HashSet<Equipment_Handover_Form>();
+            this.Equipment_Handover_Form1 = new HashSet<Equipment_Handover_Form>();
             this.Equipment_Location_History = new HashSet<Equipment_Location_History>();
             this.Inventory_Request_Application = new HashSet<Inventory_Request_Application>();
-            this.Equipment_Handover_Form = new HashSet<Equipment_Handover_Form>();
             this.Member_Location_History = new HashSet<Member_Location_History>();
             this.Projects = new HashSet<Project>();
         }
@@ -35,11 +37,15 @@ namespace SELMs.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Allocation_Application> Equipment_Allocation_Application1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipment_Location_History> Equipment_Location_History { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_Request_Application> Inventory_Request_Application { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipment_Handover_Form> Equipment_Handover_Form { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member_Location_History> Member_Location_History { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

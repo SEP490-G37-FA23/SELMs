@@ -10,16 +10,9 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class Proc_GetAvailableEAAList_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipment()
-        {
-            this.Images = new HashSet<Image>();
-        }
-    
         public int equipment_id { get; set; }
         public string system_equipment_code { get; set; }
         public string standard_equipment_code { get; set; }
@@ -36,8 +29,16 @@ namespace SELMs.Models
         public Nullable<decimal> price { get; set; }
         public Nullable<bool> is_integration { get; set; }
         public bool is_available { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
+        public string ea_application_code { get; set; }
+        public System.DateTime application_date { get; set; }
+        public Nullable<int> location_id { get; set; }
+        public string location_desciption { get; set; }
+        public Nullable<int> project_id { get; set; }
+        public string project_name { get; set; }
+        public string creater { get; set; }
+        public string fullname { get; set; }
+        public int application_detail_id { get; set; }
+        public string status { get; set; }
+        public string note1 { get; set; }
     }
 }

@@ -10,16 +10,9 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Equipment_Handover_Form
+    public partial class Proc_GetEquipmentHandoverFormList_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipment_Handover_Form()
-        {
-            this.Equipment_Handover_Form_Detail = new HashSet<Equipment_Handover_Form_Detail>();
-        }
-    
         public int form_id { get; set; }
         public string form_code { get; set; }
         public System.DateTime create_date { get; set; }
@@ -33,17 +26,12 @@ namespace SELMs.Models
         public bool is_finish { get; set; }
         public Nullable<int> location_id { get; set; }
         public Nullable<int> project_id { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipment_Handover_Form_Detail> Equipment_Handover_Form_Detail { get; set; }
-        public virtual Location Location { get; set; }
-        public virtual Location Location1 { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        public virtual User User2 { get; set; }
-        public virtual User User3 { get; set; }
-        public virtual User User4 { get; set; }
-        public virtual User User5 { get; set; }
+        public string location_code { get; set; }
+        public string location_desciption { get; set; }
+        public string project_name { get; set; }
+        public string name_creater { get; set; }
+        public string name_handover { get; set; }
+        public string name_receipter { get; set; }
+        public Nullable<int> number_equips { get; set; }
     }
 }
