@@ -34,7 +34,12 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
 
     $scope.ListUnits = ['Cái', 'Chiếc', 'Bộ', 'Cặp', 'Hộp'];
     var url = document.location.href;
-    url = url.substring(url.indexOf("?") + 1);
+    if (url.includes('?')) {
+        url = url.substring(url.indexOf('?') + 1);
+    } else {
+        url = '';
+    }
+
     $scope.LoadCategoriesList = function () {
 
         $http.post(origin + '/api/v1/categories').then(function (response) {
