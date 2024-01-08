@@ -26,6 +26,12 @@ namespace SELMs.Repositories.Implements
             return application;
         }
 
+        public dynamic GetApplicationByCode(string applicationCode)
+        {
+            dynamic application = db.Equipment_Allocation_Application.Where(a => a.ea_application_code == applicationCode).FirstOrDefault();
+            return application;
+        }
+
         public dynamic GetApplicationList()
         {
             dynamic applications = db.Equipment_Allocation_Application.ToListAsync();
@@ -64,12 +70,13 @@ namespace SELMs.Repositories.Implements
             return applications;
         }
 
-        public void UpdateApplication(Equipment_Allocation_Application application)
+        public dynamic UpdateApplication(Equipment_Allocation_Application application)
         {
             Equipment_Allocation_Application orgApplication = db.Equipment_Allocation_Application
                 .Where(p => p.application_id == application.application_id).FirstOrDefault();
             db.Entry(orgApplication).CurrentValues.SetValues(application);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+            return orgApplication;
         }
 
         

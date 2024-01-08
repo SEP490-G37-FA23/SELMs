@@ -154,5 +154,26 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Approve Application
+        [HttpPost]
+        [Route("equipment-allocation-application/approve/{eaaCode}")]
+        public async Task<IHttpActionResult> ApproveApplication([FromUri]string eaaCode)
+        {
+            try
+            {
+                dynamic returnedData = null;
+                returnedData = await service.ApproveApplication(eaaCode);
+                return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
     }
 }
