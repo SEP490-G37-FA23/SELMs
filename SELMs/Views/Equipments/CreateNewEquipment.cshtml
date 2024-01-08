@@ -1,7 +1,22 @@
 ﻿
 @{
     ViewBag.Title = "CreateNewEquipment";
-    Layout = "~/Views/Shared/_LayoutStockManagement.cshtml";
+    string layoutPath;
+
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
 }
 <script src="~/Content/js/Stock/Equipments/CreateNewEquipCtrl.js"></script>
 <div ng-app="myApp" ng-controller="CreateNewEquipCtrl" style="display:inline-block;width:100%;">
@@ -161,8 +176,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr style="cursor:pointer" ng-mousedown="HandelMember(mb, NewEquip);" ng-repeat="mb in ListMembers">
-                                                    <td>{{mb.fullname}}
-                                    </td>
+                                                    <td>
+                                                        {{mb.fullname}}
+                                                    </td>
                                                     <td>{{mb.role_name}}</td>
                                                 </tr>
                                             </tbody>

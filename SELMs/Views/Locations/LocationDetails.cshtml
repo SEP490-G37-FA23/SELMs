@@ -109,7 +109,7 @@
             </form>
             <form ng-show="showEquip">
                 <h5 class="card-title">Danh sách thiết bị trong phòng lab</h5>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddEquipToLocation">Thêm thiết bị vào phòng lab</button>
+                <button  ng-click="AddEquipToLocation()" class="btn btn-primary">Thêm thiết bị vào phòng lab</button>
                 <div class="row">
                     <div class="col-md-3"> Tìm kiếm thiết bị:</div>
                     <div class="col-md-9">  <input type="text" class="form-control" ng-model="equip_search" placeholder="Tìm tên thiết bị"></div>
@@ -139,11 +139,11 @@
                             <td scope="row">{{item.fullname}}</td>
                             <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
 
-                            <td class="text-center">
+                            @*<td class="text-center">
                                 <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
                                 <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
 
-                            </td>
+                            </td>*@
                         </tr>
 
                     </tbody>
@@ -287,6 +287,7 @@
                             </div>
 
                         </div>
+                        <label for="inputEmail4" class="form-label">Danh sách vị trí con:</label>
                         <table class="table ">
                             <thead>
                                 <tr>
@@ -303,7 +304,7 @@
                                     <td><input ng-model="item.location_desciption" class="form-control" /></td>
 
                                     <td>
-                                        <i class="far fa-edit" style="color: #d67a24;" ng-click="UpdateSubLocation_L3(item)"></i>
+                                        @*<i class="far fa-edit" style="color: #d67a24;" ng-click="UpdateSubLocation_L3(item)"></i>*@
                                         <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteMemberProject(ListSubLocation_L3,$index)"></i>
                                     </td>
 
@@ -349,11 +350,11 @@
                                     <td scope="row">{{item.fullname}}</td>
                                     <td scope="row">{{item.from_date|date:'dd/MM/yyyy'}}</td>
 
-                                    <td class="text-center">
+                                    @*<td class="text-center">
                                         <button class="btn btn-primary" ng-click="CheckInUseEquip(item)">Checkin</button>
                                         <button class="btn btn-danger" ng-click="CheckOutUseEquip(item)">Checkout</button>
 
-                                    </td>
+                                    </td>*@
                                 </tr>
 
                             </tbody>

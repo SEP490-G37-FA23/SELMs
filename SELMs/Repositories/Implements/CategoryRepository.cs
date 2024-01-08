@@ -29,7 +29,9 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetCategoryList()
         {
-            dynamic categories = db.Categories.ToListAsync();
+            dynamic categories = null;
+            categories = db.Database.Connection.QueryAsync<dynamic>("Proc_GetAllCategoryList"
+                , commandType: CommandType.StoredProcedure);
             return categories;
         }
 

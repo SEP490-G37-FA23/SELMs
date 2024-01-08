@@ -56,6 +56,23 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
+
+    $scope.DeleteUsageEquip = function () {
+        var data = {
+            username: username,
+            listUpdate: $scope.ListEquipUpdate
+        }
+        console.log(data)
+        var partialUrl = origin + '/api/v1/inventory-request/delete-equipment-result';
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Xóa các kết quả kiểm kê thành công!');
+                $scope.GetResultIER();
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+    }
+
     $scope.ListEquipUpdate = [];
     $scope.SelectEquip = function (item) {
         const existingItemIndex = $scope.ListEquipUpdate.findIndex(e => e.system_equipment_code === item.system_equipment_code);
