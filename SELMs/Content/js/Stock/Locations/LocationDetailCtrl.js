@@ -174,9 +174,10 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             location_desciption: location.location_desciption,
             parent_location_id: location.parent_location_id,
             location_level: location.location_level,
-            is_active: true
+            is_active: true,
+            ListSubLocation: $scope.ListSubLocation_L3
             }
-        var partialUrl = origin + '/api/v1/locations/update/' + location.location_id;
+        var partialUrl = origin + '/api/v1/locations/update-sub-location/' + location.location_id;
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
@@ -318,5 +319,9 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
+    }
+
+    $scope.AddEquipToLocation = function () {
+        window.location.href = "/Equipments/CreateNewEquipment/ToLocationId?" + url;
     }
 });

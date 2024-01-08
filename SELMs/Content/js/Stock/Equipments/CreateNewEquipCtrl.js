@@ -33,7 +33,8 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
     };
 
     $scope.ListUnits = ['Cái', 'Chiếc', 'Bộ', 'Cặp', 'Hộp'];
-
+    var url = document.location.href;
+    url = url.substring(url.indexOf("?") + 1);
     $scope.LoadCategoriesList = function () {
 
         $http.post(origin + '/api/v1/categories').then(function (response) {
@@ -117,7 +118,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             serial_no: '',
             type_equipment: 'private',
             category_code: '',
-            location_id: 4,
+            location_id: url != '' ? parseInt(url):1,
             price: 0,
             create_date: new Date(),
             note: '',
@@ -129,6 +130,17 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
 
         }
         $scope.ListComponentEquips = [];
+        console.log(url);
+        if (url != '') {
+            var partialUrl = origin + '/api/v1/locations/detail/' + url;
+            $http.post(partialUrl)
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.ListLocations = response.data.ListSubLocation;
+                }, function (error) {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
     }
     $scope.ResetNewEquip();
    
@@ -165,7 +177,9 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             });
     }
 
-
+    $scope.LoadEquipDetailsBySystemCode = function (system_equipment_code) {
+        window.location.href = "/Equipments/EquipmentDetails/" + system_equipment_code;
+    }
     $scope.UpdateImageEquip = function (equip) {
         var ListFileAttach = document.getElementById('formFile').files;
         let formData = new FormData();
@@ -184,7 +198,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
         })
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật ảnh thiết bị thành công!');
-                $scope.GetDetailEquip(url);
+                $scope.LoadEquipDetailsBySystemCode(equip.system_equipment_code);
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
