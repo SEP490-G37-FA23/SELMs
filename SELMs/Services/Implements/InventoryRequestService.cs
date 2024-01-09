@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Web;
 using SELMs.Api.DTOs.Inventory;
 using static System.Net.Mime.MediaTypeNames;
+using AutoMapper;
+using SELMs.App_Start;
 
 namespace SELMs.Services.Implements
 {
@@ -18,6 +20,7 @@ namespace SELMs.Services.Implements
         private IInventoryRequestApplicationRepository repository = new InventoryRequestApplicationRepository();
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
         private IEquipmentRepository equipmentRepository = new EquipmentRepository();
+        private IMapper mapper = MapperConfig.Initialize();
 
         public async Task<ApplicationModel> GetApplication(int id)
         {
@@ -153,11 +156,12 @@ namespace SELMs.Services.Implements
             {
                 Inventory_Request_Application_Detail detail = await repository.GetApplicationDetail(item.application_detail_id);
                 detail.inventory_results = item.inventory_results;
-                await repository.UpdateApplicationDetail(detail);
+                detail.actual_usage_status = item.actual_usage_status;
+                var applicationDetail = repository.UpdateApplicationDetail(detail);
 
                 Equipment equip = await equipmentRepository.GetEquipment(item.equipment_id);
                 equip.usage_status = item.actual_usage_status;
-                await equipmentRepository.UpdateEquipment(equip);
+                var equipment = equipmentRepository.UpdateEquipment(equip);
             }
             return "Thành công";
         }

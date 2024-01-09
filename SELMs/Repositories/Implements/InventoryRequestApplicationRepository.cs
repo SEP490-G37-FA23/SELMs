@@ -121,21 +121,22 @@ namespace SELMs.Repositories.Implements
             return applicationDetails;
         }
 
-        public async Task UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
+        public dynamic UpdateApplicationDetail(Inventory_Request_Application_Detail applicationDetail)
         {
-            // Retrieve the original application detail asynchronously
-            Inventory_Request_Application_Detail orgApplicationDetail = await db.Inventory_Request_Application_Detail
+            // Retrieve the original application detail
+            Inventory_Request_Application_Detail orgApplicationDetail = db.Inventory_Request_Application_Detail
                 .Where(p => p.application_detail_id == applicationDetail.application_detail_id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
 
             // Update the values of the original application detail with the new values
             if (orgApplicationDetail != null)
             {
                 db.Entry(orgApplicationDetail).CurrentValues.SetValues(applicationDetail);
 
-                // Save changes asynchronously
-                await db.SaveChangesAsync();
+                // Save changes
+                db.SaveChanges();
             }
+            return orgApplicationDetail;
         }
 
 
@@ -144,7 +145,13 @@ namespace SELMs.Repositories.Implements
             dynamic applicationDetail = db.Inventory_Request_Application_Detail
                 .Where(a => a.application_detail_id == id).FirstOrDefault();
             if (applicationDetail != null) db.Inventory_Request_Application_Detail.Remove(applicationDetail);
-            db.SaveChangesAsync();
+            db.SaveChanges();
+        }
+
+        public void DeleteAllApplicationDetails()
+        {
+            db.Inventory_Request_Application_Detail.RemoveRange(db.Inventory_Request_Application_Detail.ToList());
+            db.SaveChanges();
         }
 
         public dynamic GetDetailIRAListInLocation(int location_id,Argument arg)
