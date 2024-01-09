@@ -1148,3 +1148,23 @@ System.Data.SqlClient.SqlException (0x80131904): Login failed for user 'sa'.
    at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 39
 ClientConnectionId:8e2b47e0-5d3c-44f4-9db1-c0249017620b
 Error Number:18456,State:1,Class:14
+2024-01-09 21:07:41,715 [10] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.InventoryRequestService.<UpdateEquipmentResult>d__12.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 163
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateIRAListResult>d__14.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 247
+2024-01-09 21:08:23,856 [6] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.InventoryRequestService.<UpdateEquipmentResult>d__12.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 163
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateIRAListResult>d__14.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 247

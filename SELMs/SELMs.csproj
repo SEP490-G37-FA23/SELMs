@@ -360,10 +360,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Application_Attachment.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Attachment.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessModel\ApplicationModel.cs" />
     <Compile Include="Models\BusinessModel\ApplicationType.cs" />
@@ -375,76 +375,66 @@
     <Compile Include="Models\BusinessModel\ProjectModel.cs" />
     <Compile Include="Models\BusinessModel\XuLyNgayThang.cs" />
     <Compile Include="Models\Category.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Allocation_Application.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Allocation_Application_Detail.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Component.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Handover_Form.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Handover_Form_Detail.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Location_History.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Project_History.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment_Usage_History.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory_Request_Application.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory_Request_Application_Detail.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Location_History.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member_Project_History.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMsDatabase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDatabase.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SELMsDatabase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SELMsDatabase.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
+    <Compile Include="Models\SELMs.Context.cs" />
+    <Compile Include="Models\SELMs.cs" />
+    <Compile Include="Models\SELMs.Designer.cs">
+      <DependentUpon>SELMs.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+      <DependentUpon>SELMs.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAttachmentRepository.cs" />
@@ -794,15 +784,13 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\SELMsDatabase.Context.tt">
+    <Content Include="Models\SELMs.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
-      <LastGenOutput>SELMsDatabase.Context.cs</LastGenOutput>
+      <LastGenOutput>SELMs.Context1.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SELMsDatabase.tt">
+    <Content Include="Models\SELMs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
-      <LastGenOutput>SELMsDatabase.cs</LastGenOutput>
+      <LastGenOutput>SELMs1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -915,12 +903,12 @@
     <Content Include="Content\css\assets\vendor\tinymce\README.md" />
     <Content Include="Content\css\forms\contact.php" />
     <Content Include="App_Data\BodyPart_3b7003d3-a65b-4796-86dc-ba090052e8be" />
-    <EntityDeploy Include="Models\SELMsDatabase.edmx">
+    <EntityDeploy Include="Models\SELMs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SELMsDatabase.Designer.cs</LastGenOutput>
+      <LastGenOutput>SELMs1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\SELMsDatabase.edmx.diagram">
-      <DependentUpon>SELMsDatabase.edmx</DependentUpon>
+    <Content Include="Models\SELMs.edmx.diagram">
+      <DependentUpon>SELMs.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\SELMs - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

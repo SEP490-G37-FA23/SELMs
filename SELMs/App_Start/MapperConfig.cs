@@ -96,7 +96,7 @@ namespace SELMs.App_Start
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Equipment_Import_Application_Detail and EquipmentImportApplicationDetailDTO
-             
+                
 
                 //Configuring Equipment_Location_History and EquipmentLocationHistoryDTO
                 cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap();
@@ -124,14 +124,17 @@ namespace SELMs.App_Start
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring InverntoryRequestApplicationDetailDTO and Inverntory_Request_Application_Detail
-                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>().ReverseMap()
-                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
-
-                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>().ReverseMap()
+                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>()
                 .ForMember(des => des.inventory_date, act => act.MapFrom(src => DateTime.Parse(src.inventory_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
+                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //ConfiguringInverntory_Request_Application_Detail
+                cfg.CreateMap<Inventory_Request_Application_Detail, Inventory_Request_Application_Detail>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
 
                 //Any Other Mapping Configuration ....  
