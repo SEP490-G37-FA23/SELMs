@@ -31,20 +31,26 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
     };
+    $scope.NewLocation = {
+        location_code: '',
+        location_desciption: '',
+        parent_location_id: 0,
+        location_level: 1,
+        is_active: true
+    }
 
-
-    $scope.LoadAllLocationList = function (text) {
+    $scope.LoadAllLocationList = function (text,id) {
         data = {
             username: username,
-            id: -1,
+            id: id,
             text: text
             }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
-            $scope.ListAllLocation = response.data.Result;
+            $scope.ListAllLocation = response.data;
         });
     }
 
-    $scope.LoadAllLocationList('');
+    $scope.LoadAllLocationList('',-1);
 
     $scope.text = '';
     $scope.HandelLocation = function (lc, NewLocation) {
@@ -52,13 +58,7 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
         NewLocation.parent_location_id = lc.location_id;
 
     }
-    $scope.NewLocation = {
-        location_code: '',
-        location_desciption: '',
-        parent_location_id: 0,
-        location_level: 1,
-        is_active: true
-        }
+    
     $scope.SaveNewLocation = function (newLocation) {
         var data = {
             Location :{
@@ -75,7 +75,13 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Thêm mới vị trí thành công!');
-
+                $scope.NewLocation = {
+                    location_code: '',
+                    location_desciption: '',
+                    parent_location_id: 0,
+                    location_level: 1,
+                    is_active: true
+                }
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });

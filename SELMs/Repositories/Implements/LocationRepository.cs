@@ -22,8 +22,9 @@ namespace SELMs.Repositories.Implements
         public void DeleteLocation(int id)
         {
             dynamic location = db.Locations.Where(l => l.location_id == id).FirstOrDefault();
-            if (location != null) db.Locations.Remove(location);
-            db.SaveChanges();
+            if (location != null) location.is_active = false;
+            db.Entry(location).CurrentValues.SetValues(location);
+            db.SaveChangesAsync();
         }
 
         public dynamic GetLocation(int id)
