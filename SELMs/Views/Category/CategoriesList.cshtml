@@ -22,7 +22,7 @@
                 <h5 class="card-title">Danh sách danh mục thiết bị</h5>
                 <div class="mt-4 ms-3">
                     <a class="btn btn-primary" href="@Url.Action("CreateNewCategory", "Category")">Thêm danh mục mới</a>
-                    <button type="button" class="btn btn-primary ms-2">Xuất Excel</button>
+                    @*<button type="button" class="btn btn-primary ms-2">Xuất Excel</button>*@
                 </div>
                 <table class="table table-bordered mt-5">
                     <thead>
@@ -41,12 +41,10 @@
                     <tbody>
                         <tr>
                             <th scope="row"></th>
-                            <td>
-                                <input placeholder="Search...">
+                            <td colspan="2">
+                                <input placeholder="Search..." class="form-control" ng-model="text" ng-change="LoadCategorisList()">
                             </td>
-                            <td>
-                                <input placeholder="Search...">
-                            </td>
+                           
                             <td></td>
                             <td></td>
                         <tr ng-repeat="item in ListCategories">
