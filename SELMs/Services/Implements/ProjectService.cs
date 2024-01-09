@@ -33,8 +33,8 @@ namespace SELMs.Services.Implements
 				ProjectDetailModel projectModel = new ProjectDetailModel()
 				{
 					Project = mapper.Map<ProjectDTO>(project),
-					ProjectEquipments = projectMembers.Select(p => p.user_code).ToList(),
-					ProjectMembers = projectEquipments.Select(p => p.system_equipment_code).ToList(),
+					ProjectEquipments = projectEquipments.Select(p => p.system_equipment_code).ToList(),
+					ProjectMembers = projectMembers.Select(p => p.user_code).ToList(),
 				};
 
 
