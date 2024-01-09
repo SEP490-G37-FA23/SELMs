@@ -65,31 +65,31 @@ namespace SELMs.Api.Controllers
 				throw;
 			}
 		}
-        #endregion
+		#endregion
 
-        #region Search Project
-        [HttpPost]
-        [Route("projects/doing")]
-        public async Task<IHttpActionResult> GetDoingProjectsList(Argument args)
-        {
-            try
-            {
-                dynamic returnedData = null;
-                returnedData = await repository.GetDoingProjectList(args);
-                return Ok(returnedData);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
+		#region Search Project
+		[HttpPost]
+		[Route("projects/doing")]
+		public async Task<IHttpActionResult> GetDoingProjectsList(Argument args)
+		{
+			try
+			{
+				dynamic returnedData = null;
+				returnedData = await repository.GetDoingProjectList(args);
+				return Ok(returnedData);
+			}
+			catch (Exception ex)
+			{
+				Log.Error("Error: ", ex);
+				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				throw;
+			}
+		}
+		#endregion
 
-        #region Get project by id
-        [HttpGet]
+		#region Get project by id
+		[HttpGet]
 		[Route("projects/{id}")]
 		public async Task<IHttpActionResult> GetProject(int id)
 		{
@@ -109,30 +109,30 @@ namespace SELMs.Api.Controllers
 		}
 		#endregion
 
-        #region Add new project
-        [HttpPost]
-        [Route("projects/new-project")]
-        public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
-        {
-            try
-            {
-                projectRequest.Project.create_date = DateTime.Now;
-                Project project = mapper.Map<Project>(projectRequest.Project);
-                List<string> projectMembers = projectRequest.ProjectMembers;
+		#region Add new project
+		[HttpPost]
+		[Route("projects/new-project")]
+		public async Task<IHttpActionResult> SaveProject(ProjectRequest projectRequest)
+		{
+			try
+			{
+				projectRequest.Project.create_date = DateTime.Now;
+				Project project = mapper.Map<Project>(projectRequest.Project);
+				List<string> projectMembers = projectRequest.ProjectMembers;
 
-                List<string> projectEquipments = projectRequest.ProjectEquipments;
-                service.SaveProject(project, projectMembers, projectEquipments);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error: ", ex);
-                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
-                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
-                throw;
-            }
-        }
-        #endregion
+				List<string> projectEquipments = projectRequest.ProjectEquipments;
+				await service.SaveProject(project, projectMembers, projectEquipments);
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				Log.Error("Error: ", ex);
+				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				throw;
+			}
+		}
+		#endregion
 
 		#region Update project
 		[HttpPut]
