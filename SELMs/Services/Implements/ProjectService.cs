@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using SELMs.Api.DTOs;
+using SELMs.App_Start;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
 using SELMs.Repositories;
@@ -14,6 +17,8 @@ namespace SELMs.Services.Implements
 		private IProjectRepository repository = new ProjectRepository();
 		private IMemberProjectHistoryRepository projectMemberHistoryRepository = new MemberProjectHistoryRepository();
 		private IEquipmentProjectHistoryRepository projectEquipmentHistoryRepository = new EquipmentProjectHistoryRepository();
+		private IMapper mapper = MapperConfig.Initialize();
+
 
 		public async Task<ProjectDetailModel> GetProject(int id)
 		{
@@ -27,7 +32,7 @@ namespace SELMs.Services.Implements
 
 				ProjectDetailModel projectModel = new ProjectDetailModel()
 				{
-					Project = project,
+					Project = mapper.Map<ProjectDTO>(project),
 					ProjectEquipments = projectMembers.Select(p => p.user_code).ToList(),
 					ProjectMembers = projectEquipments.Select(p => p.system_equipment_code).ToList(),
 				};

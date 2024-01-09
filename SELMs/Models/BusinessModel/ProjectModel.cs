@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SELMs.Api.DTOs;
 
 namespace SELMs.Models.BusinessModel
 {
@@ -11,7 +12,7 @@ namespace SELMs.Models.BusinessModel
 
 	public class ProjectDetailModel
 	{
-		public Project Project { get; set; }
+		public ProjectDTO Project { get; set; }
 		public List<string> ProjectEquipments { get; set; }
 		public List<string> ProjectMembers { get; set; }
 	}
