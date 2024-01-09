@@ -78,7 +78,7 @@ namespace SELMs.Repositories.Implements
 		{
 			Project orgProject = db.Projects.Where(p => p.project_id == project.project_id).FirstOrDefault();
 			db.Entry(orgProject).CurrentValues.SetValues(project);
-			db.SaveChangesAsync();
+			db.SaveChanges();
 			return orgProject;
 		}
 

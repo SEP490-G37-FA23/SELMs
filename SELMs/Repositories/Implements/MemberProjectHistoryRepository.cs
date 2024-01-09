@@ -41,5 +41,17 @@ namespace SELMs.Repositories.Implements
 
 			return (await db.SaveChangesAsync() > 0);
 		}
+
+
+		public async Task<List<Member_Project_History>> GetMemberProjectHistoryListByProjectId(int id)
+		{
+			return (await db.Member_Project_History.Where(m => m.project_id == id).ToListAsync());
+		}
+
+		public async Task RemoveAllMember(List<Member_Project_History> list)
+		{
+			db.Member_Project_History.RemoveRange(list);
+			await db.SaveChangesAsync();
+		}
 	}
 }
