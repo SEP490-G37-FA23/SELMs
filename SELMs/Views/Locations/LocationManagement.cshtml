@@ -26,6 +26,7 @@
                                 <th>Miêu tả</th>
                                 <th>Cấp độ</th>
                                 <th>Vị trí cha</th>
+                                <th>Tình trạng</th>
                                 <th>Tác vụ</th>
                             </tr>
                             <tr>
@@ -37,10 +38,11 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="lc in ListAllLocation">
+                            <tr ng-repeat="lc in ListAllLocation" ng-style="{'background-color': lc.is_active ? 'red' : 'transparent'}">
                                 <th scope="row">{{$index + 1}}</th>
                                 <td>
                                     {{lc.location_code}}
@@ -48,6 +50,7 @@
                                 <td>{{lc.location_desciption}}</td>
                                 <td>{{lc.location_level}}</td>
                                 <td>{{lc.parent_location}}</td>
+                                <td>{{lc.is_active?'Đang hoạt động':'Đã hủy'}}</td>
                                 <td>
                                     <i class="far fa-edit" style="color: #d67a24;" ng-click="UpdateLocation(lc)"></i>
                                     <i class="fas fa-minus-circle" style="color: #c01616;" ng-click="DeleteLocation(lc)"></i>

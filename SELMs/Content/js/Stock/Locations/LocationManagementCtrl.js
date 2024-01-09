@@ -40,7 +40,7 @@ app.controller('LocationManagementCtrl', function ($scope, $http, $sce) {
             text: text
         }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {
-            $scope.ListAllLocation = response.data.Result;
+            $scope.ListAllLocation = response.data;
         });
     }
 

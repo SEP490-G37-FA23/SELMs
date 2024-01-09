@@ -24,7 +24,7 @@
                     <div class="col-md-6">
                         <label class=" col-form-label">Cấp độ</label>
                         <div>
-                            <select class="form-select" aria-label="Default select example" ng-model="NewLocation.location_level">
+                            <select class="form-select" aria-label="Default select example" ng-model="NewLocation.location_level" ng-change="LoadAllLocationList('',NewLocation.location_level)">
                                 <option value="1" selected>1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
