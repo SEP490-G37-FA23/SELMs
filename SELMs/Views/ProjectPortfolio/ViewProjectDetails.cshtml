@@ -30,9 +30,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="projectRefer" class="form-label">Phòng LAB sử dụng <span style="color:red">*</span></label>
-                                <select ng-model="DetailProject.location_id" ng-disabled="check" class="form-control">
-                                    <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
-                                </select>
+                                <input ng-model="DetailProject.location_code" readonly class="form-control" /> 
+                                
                             </div>
                             <div class="col-md-6">
                                 <label for="projectManager" class="form-label">Người quản lý <span style="color:red">*</span></label>

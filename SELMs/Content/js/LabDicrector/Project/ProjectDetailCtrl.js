@@ -45,11 +45,12 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
 
 
     $scope.GetDetailProject = function (project_id) {
-        var partialUrl = origin + '/api/v1/projects/detail/' + project_id;
-        $http.post(partialUrl)
+        var partialUrl = origin + '/api/v1/projects/' + project_id;
+        $http.get(partialUrl)
             .then(function (response) {
                 console.log(response.data);
-                $scope.DetailProject = response.data.project;
+                $scope.DetailProject = response.data.Project;
+                $scope.text = $scope.DetailProject.manager_name;
                 $scope.ListMembersJoinProject = response.data.ListMemberInProject;
                 $scope.ListEquipmentProject = response.data.ListEquipmentInProject;
             }, function (error) {

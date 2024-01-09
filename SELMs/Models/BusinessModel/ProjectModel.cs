@@ -7,7 +7,7 @@ namespace SELMs.Models.BusinessModel
 {
     public class ProjectModel
     {
-        public Project Project { get; set; }
+        public dynamic Project { get; set; }
         public List<Equipment> ProjectEquipments { get; set; }
         public List<User> ProjectMembers { get; set; }
     }
