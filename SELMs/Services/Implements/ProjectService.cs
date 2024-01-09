@@ -94,38 +94,38 @@ namespace SELMs.Services.Implements
 				if (repository.GetProject(id) != null)
 				{
 					project.project_id = id;
-					project = repository.UpdateProject(project);
+					repository.UpdateProject(project);
+
+
+					var listMember = await projectMemberHistoryRepository.GetMemberProjectHistoryListByProjectId(project.project_id);
+
+					await projectMemberHistoryRepository.RemoveAllMember(listMember);
+
+					/*
 					List<User> currentMembers = await repository.GetProjectMembers(id);
-					List<string> currentMemberCodes = new List<string>();
-					foreach (User user in currentMembers)
-					{
-						currentMemberCodes.Add(user.user_code);
-					}
+					List<string> currentMemberCodes = currentMembers.Select(e => e.user_code).ToList();
+					*/
 
 					List<Equipment> currentEquipments = await repository.GetProjectEquipments(id);
-					List<string> currentEquipmentCodes = new List<string>();
+					List<string> currentEquipmentCodes = currentEquipments.Select(e => e.system_equipment_code).ToList();
 
-					foreach (Equipment equip in currentEquipments)
-					{
-						currentEquipmentCodes.Add(equip.system_equipment_code);
-					}
 
+
+					// update new member
 					foreach (string user in projectMembers)
 					{
-						if (!currentMemberCodes.Contains(user))
+						Member_Project_History history = new Member_Project_History()
 						{
-							Member_Project_History history = new Member_Project_History()
-							{
-								user_code = user,
-								project_id = project.project_id,
-								date = DateTime.Now,
-								status = "ACTIVE",
-								note = ""
-							};
-							await projectMemberHistoryRepository.SaveHistory(history);
-						}
+							user_code = user,
+							project_id = project.project_id,
+							date = DateTime.Now,
+							status = "ACTIVE",
+							note = ""
+						};
+						await projectMemberHistoryRepository.SaveHistory(history);
 					}
 
+					// update new equipment
 					foreach (string equipment in projectEquipments)
 					{
 						if (!currentEquipmentCodes.Contains(equipment))

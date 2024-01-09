@@ -10,5 +10,7 @@ namespace SELMs.Repositories
 		Task<Member_Project_History> GetMemberProjectHistoryById(int id);
 		Task SaveHistory(Member_Project_History memberProjectHistory);
 		Task<bool> UpdateHistory(Member_Project_History memberProjectHistory);
+		Task<List<Member_Project_History>> GetMemberProjectHistoryListByProjectId(int id);
+		Task RemoveAllMember(List<Member_Project_History> list);
 	}
 }
