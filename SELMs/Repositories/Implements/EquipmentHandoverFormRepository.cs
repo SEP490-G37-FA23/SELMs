@@ -28,7 +28,13 @@ namespace SELMs.Repositories.Implements
 
         public dynamic GetApplication(int id)
         {
-            dynamic application = db.Equipment_Handover_Form.Where(a => a.form_id == id).FirstOrDefault();
+            dynamic application = null;
+            application = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailHEF", new
+            {
+                project_id = id
+
+            }
+                , commandType: CommandType.StoredProcedure).Result;
             return application;
         }
 

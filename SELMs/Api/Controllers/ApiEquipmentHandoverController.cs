@@ -57,7 +57,7 @@ namespace SELMs.Api.Controllers
         {
             try
             {
-                dynamic returnedData = service.GetApplication(id);
+                dynamic returnedData = await service.GetApplication(id);
                 return Ok(returnedData);
             }
             catch (Exception ex)

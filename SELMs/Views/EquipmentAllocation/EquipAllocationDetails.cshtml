@@ -66,6 +66,7 @@
                                                 <th scope="col">Dự án yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
+                                            
                                                 <th scope="col" ng-show="role == 'SM'">Mã thiết bị tương ứng</th>
                                             </tr>
                                         </thead>
@@ -158,6 +159,7 @@
                                                 <th scope="col">Dự án yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
+                                                <th scope="col">Ghi chú</th>
                                                 <th scope="col">Tích</th>
                                             </tr>
                                         </thead>
@@ -175,7 +177,8 @@
                                                 <td>{{item.project_name}}</td>
                                                 <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
                                                 <td>{{item.fullname}}</td>
-                                                <td><input type="checkbox" ng-model="item.check" ng-change="SelectEquip(item)"/></td>
+                                                <td>{{item.note}}</td>
+                                                <td><input type="checkbox" ng-model="item.check" ng-change="SelectEquip(item)" /></td>
 
                                             </tr>
                                         </tbody>

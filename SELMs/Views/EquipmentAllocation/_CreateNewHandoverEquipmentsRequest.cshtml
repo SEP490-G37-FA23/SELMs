@@ -44,7 +44,7 @@
                                                 <label for="lab" class="form-label">Dự án</label>
                                                 <input type="text" class="form-control" ng-model="NewHandover.project_name" readonly>
                                             </div>
-                                           
+
                                             <div class="col-md-6">
                                                 <label for="receiver" class="form-label">Người tiếp nhận</label>
                                                 <ng-form>
@@ -104,27 +104,68 @@
                                     <div class="card-body">
 
                                         <h5 class="card-title">Danh sách thiết bị</h5>
-                                        
+
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
+                                                    <th scope="col">Mã hệ thống</th>
                                                     <th scope="col">Mã thiết bị</th>
                                                     <th scope="col">Tên thiết bị</th>
                                                     <th scope="col">Mô tả/Thông số</th>
                                                     <th scope="col">Tình trạng</th>
                                                     <th scope="col">Ghi chú</th>
+                                                    <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="item in ListDetailHandover">
                                                     <td>{{$index+1}}</td>
-                                                    <td>{{item.system_equipment_code}}</td>
+                                                    <td>
+                                                        {{item.system_equipment_code}}
+                                                        <ng-form ng-show="checkAdd">
+                                                            <div class="form-equip">
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.system_equipment_code" ng-change="LoadEquipmentsList(item.system_equipment_code)" ng-focus="showtableEquip = true" ng-blur="showtableEquip = false" ng-model-options="{debounce:700}" ng-disabled="item.status =='Thiết bị cần nhập mới'">
+                                                            </div>
+                                                            <div class="input-group-btn" style="position:relative;width:300%;display:inline-block">
+                                                                <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0" style="display: block;max-height: 400px;overflow:auto;position:absolute;width:100%" ng-show="showtableEquip">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead class="bg-blue text-white">
+                                                                                <tr>
+                                                                                    <th>Mã hệ thống</th>
+                                                                                    <th>Mã chuẩn</th>
+                                                                                    <th>Tên thiết bị</th>
+                                                                                    <th>Tình trạng thiết bị</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr style="cursor:pointer" ng-mousedown="HandelEquip(eq, item,ListDetailHandover);" ng-repeat="eq in ListEquips">
+                                                                                    <td>{{eq.system_equipment_code}}</td>
+                                                                                    <td>{{eq.standard_equipment_code}}</td>
+                                                                                    <td>{{eq.equipment_name}}</td>
+                                                                                    <td>{{eq.usage_status}}</td>
+
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </ng-form>
+                                                    </td>
+                                                    <td>{{item.standard_equipment_code}}</td>
                                                     <td>{{item.equipment_name}}</td>
                                                     <td>{{item.equipment_specification}}</td>
                                                     <td>{{item.usage_status}}</td>
-                                                    <td><input type="text" ng-model="item.note" class="form-control"/></td>
-
+                                                    <td><input type="text" ng-model="item.note" class="form-control" /></td>
+                                                    <td><button class="btn btn-danger" ng-click="RemoveEquip(ListDetailHandover,$index)">-</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7" class="text-center" ng-click="AddNewEquip(ListDetailHandover)">                                                     
+                                                        Thêm thiết bị mới 
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
