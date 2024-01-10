@@ -17,7 +17,7 @@ namespace SELMs.Services.Implements
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
         public async Task<ApplicationModel> GetApplication(int id)
         {
-            Equipment_Handover_Form application = repository.GetApplication(id);
+            dynamic application = repository.GetApplication(id);
             List<Equipment_Handover_Form_Detail> applicationDetails = repository.GetApplicationDetailList(application.form_code);
             List<Attachment> attachments = repository.GetApplicationAttachment(application.form_id);
             ApplicationModel result = new ApplicationModel()

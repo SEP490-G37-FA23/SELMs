@@ -104,11 +104,13 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
         $scope.NewHandover.project_id = item.project_id;
         $scope.ListDetailHandover.push({
             system_equipment_code: item.system_equipment_code,
+            standard_equipment_code: item.standard_equipment_code,
             equipment_name: item.equipment_name,
             unit: item.unit,
             equipment_specification: item.specification,
             usage_status: item.usage_status,
-            application_detail_id: item.application_detail_id
+            application_detail_id: item.application_detail_id,
+            status: 'Đã bàn giao'
             })
     }
     $scope.LoadMembersList = function (text) {
@@ -147,7 +149,8 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
         var partialUrl = origin + '/api/v1/equipment-handover-form/new-form';
         $http.post(partialUrl, data)
             .then(function (response) {
-                $scope.SuccessSystem('Tạo đơn bàn giaot thiết bị thành công!');
+                $scope.SuccessSystem('Tạo đơn bàn giao thiết bị thành công!');
+                $scope.LoadAvailableEquipmentList();
                 $scope.ResetHandoverForm();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
@@ -192,5 +195,43 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
     $scope.HandelEquip = function (eq, item) {
         item.system_equipment_code_corresponding = eq.system_equipment_code;
 
+    }
+
+
+    $scope.checkAdd = false;
+    $scope.AddNewEquip = function (ListDetailHandover) {
+        $scope.checkAdd = true;
+        ListDetailHandover.push({
+            system_equipment_code: '',
+            standard_equipment_code: '',
+            equipment_name: '',
+            equipment_specification: '',
+            usage_status: '',
+            note: '',
+            status:'Đã bàn giao'
+            })
+    }
+    $scope.HandelEquip = function (eq, item, ListDetailHandover) {
+        // Check if there is an item with the same system_equipment_code in ListDetailHandover
+        var existingItem = null;
+
+        for (var i = 0; i < ListDetailHandover.length; i++) {
+            if (ListDetailHandover[i].system_equipment_code === eq.system_equipment_code) {
+                existingItem = ListDetailHandover[i];
+                break;
+            }
+        }
+
+        if (!existingItem) {
+            item.system_equipment_code = eq.system_equipment_code;
+            item.standard_equipment_code = eq.standard_equipment_code;
+            item.equipment_name = eq.equipment_name;
+            item.equipment_specification = eq.specification;
+            item.usage_status = eq.usage_status;
+            $scope.checkAdd = false;
+        }
+    }
+    $scope.RemoveEquip = function (ListDetailHandover, index) {
+        ListDetailHandover.splice(index, 1);
     }
 });

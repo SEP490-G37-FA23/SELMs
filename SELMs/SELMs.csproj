@@ -782,6 +782,7 @@
     <Content Include="Content\js\Stock\Equipments\EquipmentAllocationReportCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentStatusReportCtrl.js" />
     <Content Include="Content\js\Stock\Equipments\EquipmentsListCtrl.js" />
+    <Content Include="Content\js\Stock\Equipments\HEFDetailCtrl.js" />
     <Content Include="Content\js\Stock\Inventory\CreateNewInventoryRequestCtrl.js" />
     <Content Include="Content\js\Stock\Inventory\PerformInventoryRequestCtrl.js" />
     <Content Include="Content\js\Stock\Inventory\ResultInventoryRequestCtrl.js" />
@@ -996,6 +997,7 @@
     <Content Include="Views\EquipmentAllocation\HEFList.cshtml" />
     <Content Include="Views\Equipments\EquipmentAllocationReport.cshtml" />
     <Content Include="Views\Equipments\EquipmentStatusReport.cshtml" />
+    <Content Include="Views\EquipmentAllocation\HEFDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\Stock\DeliveryEquipment\" />

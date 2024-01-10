@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('ListEAACtrl', function ($scope, $http, $sce) {
+app.controller('ListHEFCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -71,6 +71,9 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
     }
     $scope.LoadHEFList();
 
+    $scope.GetDetailHandoverForm = function (item) {
+        window.location.href = "/EquipmentAllocation/HEFDetail/" + item.form_id;
+    }
     $scope.SaveAttachFileHandover = function (item) {
         var data = {
             form_id: item.form_id,
