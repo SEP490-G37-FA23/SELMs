@@ -17,7 +17,7 @@ namespace SELMs.Services.Implements
         private IAttachmentRepository attachmentRepository = new AttachmentRepository();
         public async Task<ApplicationModel> GetApplication(int id)
         {
-            dynamic application = repository.GetApplication(id);
+            dynamic application = repository.GetApplicationDetailById(id);
             List<Equipment_Handover_Form_Detail> applicationDetails = repository.GetApplicationDetailList(application.form_code);
             List<Attachment> attachments = repository.GetApplicationAttachment(application.form_id);
             ApplicationModel result = new ApplicationModel()
@@ -74,7 +74,7 @@ namespace SELMs.Services.Implements
             if (application != null)
             {
                 Attachment attachment = CreateAttachment(file);
-                attachment.name = application.form_code;
+                attachment.name = file.FileName;
                 attachment.date = DateTime.Now;
                 attachment = attachmentRepository.SaveAttachment(attachment);
                 repository.AddAttachment(application.form_id, attachment.attach_id);
@@ -96,14 +96,13 @@ namespace SELMs.Services.Implements
             }
         }
 
-        public async Task<dynamic> ConfirmApplication(int id, User member)
+        public async Task<dynamic> ConfirmApplication(int id)
         {
             Equipment_Handover_Form application = repository.GetApplication(id);
             if (application != null)
             {
                 application.is_finish = true;
-                application.receipter = member.user_code;
-                application.receipt_date = DateTime.Now;
+                application.finish_date = DateTime.Now;
                 repository.UpdateApplication(application);
                 return application;
             }

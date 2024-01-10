@@ -29,7 +29,7 @@ namespace SELMs.Api.Controllers
         private IEquipmentHandoverService service = new EquipmentHandoverService();
         private IMapper mapper = MapperConfig.Initialize();
 
-        #region Get application
+        #region OK - Get application list
         [HttpPost]
         [Route("equipment-handover/forms")]
         public async Task<IHttpActionResult> GetEHFList(Argument arg)
@@ -50,7 +50,7 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Get application by id
+        #region OK - Get application by id
         [HttpGet]
         [Route("equipment-handover-form/{id}")]
         public async Task<IHttpActionResult> GetApplication(int id)
@@ -70,7 +70,7 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Add new application
+        #region OK - Add new application
         [HttpPost]
         [Route("equipment-handover-form/new-form")]
         public async Task<IHttpActionResult> SaveApplication([FromBody] EquipmentHandoverRequest applicationRequest)
@@ -114,16 +114,16 @@ namespace SELMs.Api.Controllers
         }
         #endregion
 
-        #region Attach file to application
+        #region OK - Attach file to application
         [HttpPost]
-        [Route("equipment-handover/finish-file/")]
+        [Route("equipment-handover/new-attach_file")]
         public async Task<IHttpActionResult> AttachFile()
         {
             try
             {
                 var result = new List<dynamic>();
-                var applicationId = HttpContext.Current.Request.Params["application_id"];
-                var files = HttpContext.Current.Request.Files.GetMultiple("attachments");
+                var applicationId = HttpContext.Current.Request.Params["form_id"];
+                var files = HttpContext.Current.Request.Files.GetMultiple("file_attach");
                 foreach (var file in files)
                 {
                     var item = await service.AddAttachment(Convert.ToInt32(applicationId), file);
@@ -163,13 +163,12 @@ namespace SELMs.Api.Controllers
 
         #region Confirm application
         [HttpPost]
-        [Route("equipment-handover/confirm/{id}")]
-        public async Task<IHttpActionResult> ConfirmApplication(int id, [FromBody] UserDTO member)
+        [Route("equipment-handover/confirm-finish/{id}")]
+        public async Task<IHttpActionResult> ConfirmApplication(int id)
         {
             try
             {
-                User user = mapper.Map<User>(member);
-                dynamic result = service.ConfirmApplication(id, user);
+                dynamic result = service.ConfirmApplication(id);
                 return Ok(result);
             }
             catch (Exception ex)
