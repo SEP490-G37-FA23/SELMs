@@ -24,7 +24,9 @@ namespace SELMs.Api.Controllers
 
 		private IEquipmentHandoverFormRepository repository = new EquipmentHandoverFormRepository();
 		private IEquipmentHandoverService service = new EquipmentHandoverService();
+		private IMemberRepository memberRepository = new MemberRepository();
 		private IMapper mapper = MapperConfig.Initialize();
+
 
 		#region Get application
 		[HttpPost]
@@ -95,6 +97,8 @@ namespace SELMs.Api.Controllers
 
 				List<Equipment_Handover_Form_Detail> detailList = repository.GetApplicationDetailList(formDetail.form_code);
 				formDetail.Equipment_Handover_Form_Detail = mapper.Map<List<EquipmentHandoverFormDetailDTO>>(detailList);
+
+				formDetail.receipter = (await memberRepository.GetMemberByCodeOrUserName(originalFormDetail.receipter)).fullname;
 
 				return Ok(formDetail);
 			}
