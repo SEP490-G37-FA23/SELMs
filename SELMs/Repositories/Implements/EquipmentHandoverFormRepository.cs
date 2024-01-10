@@ -26,15 +26,21 @@ namespace SELMs.Repositories.Implements
             db.SaveChangesAsync();
         }
 
-        public dynamic GetApplication(int id)
+        public dynamic GetApplicationDetailById(int id)
         {
             dynamic application = null;
             application = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailHEF", new
             {
-                project_id = id
+                form_id = id
 
             }
                 , commandType: CommandType.StoredProcedure).Result;
+            return application;
+        }
+
+        public dynamic GetApplication(int id)
+        {
+            dynamic application = db.Equipment_Handover_Form.Where(p => p.form_id == id).FirstOrDefault();
             return application;
         }
 

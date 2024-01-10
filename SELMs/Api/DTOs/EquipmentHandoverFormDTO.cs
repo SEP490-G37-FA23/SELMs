@@ -14,7 +14,7 @@ namespace SELMs.Api.DTOs
         public string description { get; set; }
         public string handover_date { get; set; }
         public string handover { get; set; }
-        public string receipt_date { get; set; }
+        public string finish_date { get; set; }
         public string receipter { get; set; }
         public string handover_note { get; set; }
         public bool is_finish { get; set; }

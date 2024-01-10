@@ -42,7 +42,7 @@ app.controller('HEFDetailCtrl', function ($scope, $http, $sce) {
         $http.get(partialUrl)
             .then(function (response) {
                 console.log(response.data);
-                var res = response.data.Result;
+                var res = response.data;
                 $scope.DetailHandover = res.application;
                 $scope.ListDetailHandover = res.applicationDetails;
               
