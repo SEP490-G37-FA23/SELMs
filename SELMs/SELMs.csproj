@@ -433,11 +433,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMsDatabase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SELMsDatabase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SELMsDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SELMsDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -803,7 +798,6 @@
     <Content Include="Models\SELMsDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SELMsDatabase.edmx</DependentUpon>
-      <LastGenOutput>SELMsDatabase.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -992,7 +986,6 @@
     <Content Include="Views\InventoryEquipments\ListEquipmentNotExist.cshtml" />
     <Content Include="Views\InventoryEquipments\ListEquipmentsAlreadyExist.cshtml" />
     <Content Include="Views\InventoryEquipments\_CreateNewImportEquipmentsProposal.cshtml" />
-    <Content Include="Views\InventoryEquipments\_CreateNewInventoryEquipmentsRequest.cshtml" />
     <Content Include="Views\EquipmentAllocation\DeliveryEquipmentsList.cshtml" />
     <Content Include="Views\EquipmentAllocation\HEFList.cshtml" />
     <Content Include="Views\Equipments\EquipmentAllocationReport.cshtml" />

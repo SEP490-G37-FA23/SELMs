@@ -1469,7 +1469,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
           <EntitySet Name="Attachments" EntityType="Self.Attachment" />
           <EntitySet Name="Categories" EntityType="Self.Category" />

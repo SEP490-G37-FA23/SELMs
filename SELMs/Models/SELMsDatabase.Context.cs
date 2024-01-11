@@ -18,6 +18,8 @@ namespace SELMs.Models
         public SELMsContext()
             : base("name=SELMsContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
