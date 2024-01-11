@@ -110,7 +110,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="512" />
           <Property Name="handover_date" Type="date" />
           <Property Name="handover" Type="varchar" MaxLength="64" />
-          <Property Name="receipt_date" Type="date" />
+          <Property Name="finish_date" Type="date" />
           <Property Name="receipter" Type="varchar" MaxLength="64" />
           <Property Name="handover_note" Type="nvarchar" MaxLength="500" />
           <Property Name="is_finish" Type="bit" Nullable="false" />
@@ -1006,7 +1006,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
           <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="handover_date" Type="DateTime" Precision="0" />
           <Property Name="handover" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="receipt_date" Type="DateTime" Precision="0" />
+          <Property Name="finish_date" Type="DateTime" Precision="0" />
           <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="is_finish" Type="Boolean" Nullable="false" />
@@ -2287,7 +2287,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="handover_date" ColumnName="handover_date" />
                 <ScalarProperty Name="handover" ColumnName="handover" />
-                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+                <ScalarProperty Name="finish_date" ColumnName="finish_date" />
                 <ScalarProperty Name="receipter" ColumnName="receipter" />
                 <ScalarProperty Name="handover_note" ColumnName="handover_note" />
                 <ScalarProperty Name="is_finish" ColumnName="is_finish" />

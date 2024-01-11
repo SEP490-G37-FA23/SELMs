@@ -82,13 +82,13 @@ namespace SELMs.App_Start
                 cfg.CreateMap<EquipmentHandoverFormDTO, Equipment_Handover_Form>()
                 .ForMember(des => des.create_date, act => act.MapFrom(src => DateTime.Parse(src.create_date)))
                 .ForMember(des => des.handover_date, act => act.MapFrom(src => DateTime.Parse(src.handover_date)))
-                .ForMember(des => des.receipt_date, act => act.MapFrom(src => DateTime.Parse(src.receipt_date)))
+                .ForMember(des => des.finish_date, act => act.MapFrom(src => DateTime.Parse(src.finish_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 cfg.CreateMap<Equipment_Handover_Form, EquipmentHandoverFormDTO>()
                 .ForMember(des => des.create_date, act => act.MapFrom(src => src.create_date.ToString()))
                 .ForMember(des => des.handover_date, act => act.MapFrom(src => src.handover_date.ToString()))
-                .ForMember(des => des.receipt_date, act => act.MapFrom(src => src.receipt_date.ToString()))
+                .ForMember(des => des.finish_date, act => act.MapFrom(src => src.finish_date.ToString()))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Equipment_Handover_Form_Detail and EquipmentHandoverFormDetailDTO
@@ -96,7 +96,7 @@ namespace SELMs.App_Start
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring Equipment_Import_Application_Detail and EquipmentImportApplicationDetailDTO
-             
+                
 
                 //Configuring Equipment_Location_History and EquipmentLocationHistoryDTO
                 cfg.CreateMap<EquipmentLocationHistoryDTO, Equipment_Location_History>().ReverseMap();
@@ -124,14 +124,17 @@ namespace SELMs.App_Start
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
                 //Configuring InverntoryRequestApplicationDetailDTO and Inverntory_Request_Application_Detail
-                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>().ReverseMap()
-                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
-                .ForAllOtherMembers(act => act.NullSubstitute(null));
-
-                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>().ReverseMap()
+                cfg.CreateMap<InventoryRequestApplicationDetailDTO, Inventory_Request_Application_Detail>()
                 .ForMember(des => des.inventory_date, act => act.MapFrom(src => DateTime.Parse(src.inventory_date)))
                 .ForAllOtherMembers(act => act.NullSubstitute(null));
 
+                cfg.CreateMap<Inventory_Request_Application_Detail, InventoryRequestApplicationDetailDTO>()
+                .ForMember(des => des.inventory_date, act => act.MapFrom(src => src.inventory_date.ToString()))
+                .ForAllOtherMembers(act => act.NullSubstitute(null));
+
+                //ConfiguringInverntory_Request_Application_Detail
+                cfg.CreateMap<Inventory_Request_Application_Detail, Inventory_Request_Application_Detail>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
 
 
                 //Any Other Mapping Configuration ....  

@@ -53,12 +53,12 @@ namespace SELMs.Api.Controllers
         #region Get application detail-in-location
         [HttpPost]
         [Route("inventory/detail-in-location/{location_id}")]
-        public async Task<IHttpActionResult> GetDetailIRAListInLocation(int location_id,Argument arg)
+        public async Task<IHttpActionResult> GetDetailIRAListInLocation(int location_id, Argument arg)
         {
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetDetailIRAListInLocation(location_id,arg);
+                returnedData = repository.GetDetailIRAListInLocation(location_id, arg);
                 return Ok(returnedData);
             }
             catch (Exception ex)
@@ -224,8 +224,68 @@ namespace SELMs.Api.Controllers
             try
             {
                 dynamic returnedData = null;
-                returnedData = repository.GetResultIRAList(arg);
+                returnedData = await repository.GetResultIRAList(arg);
                 return Ok(returnedData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Update result
+        [HttpPost]
+        [Route("inventory-request/equipment-result/update")]
+        public async Task<IHttpActionResult> UpdateIRAListResult([FromBody] UpdateEquipmentResultDTO dto)
+        {
+            try
+            {
+                var result = service.UpdateEquipmentResult(dto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete result
+        [HttpPost]
+        [Route("inventory-request/detail/delete/{id}")]
+        public async Task<IHttpActionResult> DeleteIRAResult(int id)
+        {
+            try
+            {
+                repository.DeleteApplicationDetail(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
+
+        #region Delete all result
+        [HttpPost]
+        [Route("inventory-request/detail/delete/all")]
+        public async Task<IHttpActionResult> DeleteAllIRAResults()
+        {
+            try
+            {
+                repository.DeleteAllApplicationDetails();
+                return Ok();
             }
             catch (Exception ex)
             {

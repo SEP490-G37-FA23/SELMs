@@ -32,9 +32,15 @@ namespace SELMs.Repositories.Implements
 
 		public dynamic GetProject(int id)
 		{
-			dynamic project = db.Projects.Where(p => p.project_id == id).FirstOrDefault();
-			return project;
-		}
+            dynamic project = null;
+            project = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailProject", new
+            {
+                project_id = id
+
+            }
+                , commandType: CommandType.StoredProcedure).Result;
+            return project;
+        }
 
 		public dynamic GetProjectList()
 		{

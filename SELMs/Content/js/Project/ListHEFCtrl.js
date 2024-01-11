@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('ListEAACtrl', function ($scope, $http, $sce) {
+app.controller('ListHEFCtrl', function ($scope, $http, $sce) {
 
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
@@ -66,49 +66,79 @@ app.controller('ListEAACtrl', function ($scope, $http, $sce) {
         }
         $http.post(origin + '/api/v1/equipment-handover/forms', data).then(function (response) {
             $scope.ListHEF = response.data.Result
-            console.log($scope.ListHEF);
+            $scope.ListHEF.forEach(item => {
+                if (item.attachment_id != null) {
+                    var partialUrl = origin + '/api/v1/attachments/' + item.attachment_id;
+                    //+ listImage[0].image_id;
+                    $http.get(partialUrl).then(function (res) {
+                        console.log(res)
+                        item.url = res.config.url;
+                    })
+                }
+               
+            })
+           
         });
     }
     $scope.LoadHEFList();
 
+    $scope.GetDetailHandoverForm = function (item) {
+        window.location.href = "/EquipmentAllocation/HEFDetail/" + item.form_id;
+    }
     $scope.SaveAttachFileHandover = function (item) {
-        var data = {
-            form_id: item.form_id,
-            form_code: item.form_code,
-            file_attach: document.getElementById('attach_file' + item.form_code).files[0]
-        }
-        console.log(data);
+        console.log('attach_file' + item.form_code);
+
+        console.log(document.getElementById('attach_file' + item.form_code).files[0]);
+
+        var fileAttach = document.getElementById('attach_file' + item.form_code).files[0];
+        let formData = new FormData();
+        formData.append('file_attach', fileAttach);
+        formData.append('form_id', item.form_id);
+        formData.append('form_code', item.form_code);
         var partialUrl = origin + '/api/v1/equipment-handover/new-attach_file';
-        //Api lưu attach file
-        $http.post(partialUrl, data)
+
+        $http.post(partialUrl, formData, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }  // Let AngularJS set the content type
+        })
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhập biên bản bàn giao thành công!');
-
+                $scope.LoadHEFList();
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
     }
     $scope.SaveFinishHandover = function (item) {
-        var partialUrl = origin + '/api/v1/equipment-handover/finish-file/' + item.form_id;
-        //Api updatetrangj thái trong bảng handover cột is_finish = 1
-        $http.post(partialUrl)
-            .then(function (response) {
-                $scope.SuccessSystem('Kết thúc bàn giao thiết bị thành công!');
+        var userConfirmed = confirm("Đánh dấu hoàn thành quá trình bàn giao thiết bị?");
 
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+        // Check the user's response
+        if (userConfirmed) {
+            var partialUrl = origin + '/api/v1/equipment-handover/confirm-finish/' + item.form_id;
+            //Api updatetrangj thái trong bảng handover cột is_finish = 1
+            $http.post(partialUrl)
+                .then(function (response) {
+                    $scope.SuccessSystem('Đánh dấu hoàn thành quá trình bàn giao thiết bị thành công!');
+                    $scope.LoadHEFList();
+                }, function (error) {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
     }
     $scope.CancelHandover = function (item) {
-        var partialUrl = origin + '/api/v1/equipment-handover/cancel/' + item.form_id;
-        //Api này sẽ xóa đơn trong handover_form, xóa chi tiết handover_form, lấy ra các allocation_detail
-        //, update về trạng thái 'Có sẵn trong kho'
-        $http.post(partialUrl)
-            .then(function (response) {
-                $scope.SuccessSystem('Hủy đơn bàn giao thiết bị thành công!');
+        var userConfirmed = confirm("Hủy đơn bàn giao thiết bị?");
 
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+        // Check the user's response
+        if (userConfirmed) {
+            var partialUrl = origin + '/api/v1/equipment-handover/cancel/' + item.form_id;
+            //Api này sẽ xóa đơn trong handover_form, xóa chi tiết handover_form, lấy ra các allocation_detail
+            //, update về trạng thái 'Có sẵn trong kho'
+            $http.post(partialUrl)
+                .then(function (response) {
+                    $scope.SuccessSystem('Hủy đơn bàn giao thiết bị thành công!');
+
+                }, function (error) {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
     }
 });

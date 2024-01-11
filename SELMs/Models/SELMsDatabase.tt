@@ -2,7 +2,11 @@
 <#@ include file="EF6.Utility.CS.ttinclude"#><#@ 
  output extension=".cs"#><#
 
+<<<<<<<< HEAD:SELMs/Models/SELMsContext.tt
 const string inputFile = @"SELMsContext.edmx";
+========
+const string inputFile = @"SELMsDatabase.edmx";
+>>>>>>>> 8b8542482211ec20124a9cfb0436e2df174deb92:SELMs/Models/SELMsDatabase.tt
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);

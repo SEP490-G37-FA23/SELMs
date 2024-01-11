@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using SELMs.Models;
 using SELMs.Models.BusinessModel;
@@ -18,7 +19,7 @@ namespace SELMs.Services.Implements
         {
             try
             {
-                Project project = repository.GetProject(id);
+                dynamic project = repository.GetProject(id);
                 List<User> projectMembers = await repository.GetProjectMembers(id);
                 List<Equipment> projectEquipments = await repository.GetProjectEquipments(id);
                 ProjectModel projectModel = new ProjectModel()
