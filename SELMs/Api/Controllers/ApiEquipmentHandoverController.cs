@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -68,21 +67,6 @@ namespace SELMs.Api.Controllers
 			}
 		}
 		#endregion
-
-
-
-
-		[HttpGet]
-		[Route("equipment-handover-form/details/list")]
-		public async Task<IHttpActionResult> get()
-		{
-
-
-
-			return Ok(await new SELMsContext().Equipment_Handover_Form.ToListAsync());
-
-
-		}
 
 
 		#region Get application by id 2
