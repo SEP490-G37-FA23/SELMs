@@ -16,14 +16,15 @@ namespace SELMs.Repositories.Implements
         private SELMsContext db = new SELMsContext();
         public void DeleteApplication(int id)
         {
-            dynamic application = db.Equipment_Handover_Form.Where(a => a.form_id == id).FirstOrDefault();
+            Equipment_Handover_Form application = db.Equipment_Handover_Form.Where(a => a.form_id == id).FirstOrDefault();
             if (application != null)
             {
-                List<Equipment_Handover_Form_Detail> applicationDetails = GetApplicationDetail(id);
+                List<Equipment_Handover_Form_Detail> applicationDetails = GetApplicationDetailList(application.form_code);
+                if(applicationDetails != null)
                 db.Equipment_Handover_Form_Detail.RemoveRange(applicationDetails);
                 db.Equipment_Handover_Form.Remove(application);
             }
-            db.SaveChangesAsync();
+            db.SaveChanges();
         }
 
         public dynamic GetApplicationDetailById(int id)

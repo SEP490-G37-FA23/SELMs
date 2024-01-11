@@ -1168,3 +1168,13 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'SELMs.Models.Equipment' 
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateIRAListResult>d__14.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 247
+2024-01-11 17:30:13,598 [6] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot perform runtime binding on a null reference
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.InventoryRequestService.<CancelApplication>d__8.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 97
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<CancelApplication>d__12.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 206
