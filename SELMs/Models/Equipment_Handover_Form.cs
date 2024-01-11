@@ -27,7 +27,7 @@ namespace SELMs.Models
         public string description { get; set; }
         public Nullable<System.DateTime> handover_date { get; set; }
         public string handover { get; set; }
-        public Nullable<System.DateTime> receipt_date { get; set; }
+        public Nullable<System.DateTime> finish_date { get; set; }
         public string receipter { get; set; }
         public string handover_note { get; set; }
         public bool is_finish { get; set; }

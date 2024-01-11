@@ -14,12 +14,6 @@ namespace SELMs.Models
     
     public partial class Category
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
-        {
-            this.Category1 = new HashSet<Category>();
-        }
-    
         public int category_id { get; set; }
         public string category_code { get; set; }
         public string category_name { get; set; }
@@ -27,9 +21,5 @@ namespace SELMs.Models
         public Nullable<bool> is_active { get; set; }
         public int category_level { get; set; }
         public Nullable<int> category_parent_id { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Category1 { get; set; }
-        public virtual Category Category2 { get; set; }
     }
 }

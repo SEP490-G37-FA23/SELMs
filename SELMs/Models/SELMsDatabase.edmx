@@ -110,7 +110,7 @@
           <Property Name="description" Type="nvarchar" MaxLength="512" />
           <Property Name="handover_date" Type="date" />
           <Property Name="handover" Type="varchar" MaxLength="64" />
-          <Property Name="receipt_date" Type="date" />
+          <Property Name="finish_date" Type="date" />
           <Property Name="receipter" Type="varchar" MaxLength="64" />
           <Property Name="handover_note" Type="nvarchar" MaxLength="500" />
           <Property Name="is_finish" Type="bit" Nullable="false" />
@@ -291,18 +291,6 @@
             </Principal>
             <Dependent Role="Application_Attachment">
               <PropertyRef Name="attachment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Category_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="category_id" />
-            </Principal>
-            <Dependent Role="Category1">
-              <PropertyRef Name="category_parent_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -680,10 +668,6 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
             <End Role="Attachment" EntitySet="Attachment" />
             <End Role="Application_Attachment" EntitySet="Application_Attachment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Category1" EntitySet="Category" />
-          </AssociationSet>
           <AssociationSet Name="FK_Equipment_Allocation_Application_Location" Association="Self.FK_Equipment_Allocation_Application_Location">
             <End Role="Location" EntitySet="Location" />
             <End Role="Equipment_Allocation_Application" EntitySet="Equipment_Allocation_Application" />
@@ -835,8 +819,6 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
           <Property Name="is_active" Type="Boolean" />
           <Property Name="category_level" Type="Int32" Nullable="false" />
           <Property Name="category_parent_id" Type="Int32" />
-          <NavigationProperty Name="Category1" Relationship="Self.FK_Category_Category" FromRole="Category" ToRole="Category1" />
-          <NavigationProperty Name="Category2" Relationship="Self.FK_Category_Category" FromRole="Category1" ToRole="Category" />
         </EntityType>
         <EntityType Name="Equipment">
           <Key>
@@ -917,7 +899,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
           <Property Name="description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="handover_date" Type="DateTime" Precision="0" />
           <Property Name="handover" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="receipt_date" Type="DateTime" Precision="0" />
+          <Property Name="finish_date" Type="DateTime" Precision="0" />
           <Property Name="receipter" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="handover_note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="is_finish" Type="Boolean" Nullable="false" />
@@ -1148,18 +1130,6 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
             </Principal>
             <Dependent Role="Application_Attachment">
               <PropertyRef Name="attachment_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Category_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Category1" Type="Self.Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="category_id" />
-            </Principal>
-            <Dependent Role="Category1">
-              <PropertyRef Name="category_parent_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1499,7 +1469,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="false">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Application_Attachment" EntityType="Self.Application_Attachment" />
           <EntitySet Name="Attachments" EntityType="Self.Attachment" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -1524,10 +1494,6 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
           <AssociationSet Name="FK_Application_Attachment_Attachment" Association="Self.FK_Application_Attachment_Attachment">
             <End Role="Attachment" EntitySet="Attachments" />
             <End Role="Application_Attachment" EntitySet="Application_Attachment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Category1" EntitySet="Categories" />
           </AssociationSet>
           <AssociationSet Name="FK_Image_Equipment" Association="Self.FK_Image_Equipment">
             <End Role="Equipment" EntitySet="Equipments" />
@@ -1759,7 +1725,7 @@ warning 6035: The relationship 'FK_Inventory_Request_Application_Detail_Equipmen
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="handover_date" ColumnName="handover_date" />
                 <ScalarProperty Name="handover" ColumnName="handover" />
-                <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+                <ScalarProperty Name="finish_date" ColumnName="finish_date" />
                 <ScalarProperty Name="receipter" ColumnName="receipter" />
                 <ScalarProperty Name="handover_note" ColumnName="handover_note" />
                 <ScalarProperty Name="is_finish" ColumnName="is_finish" />
