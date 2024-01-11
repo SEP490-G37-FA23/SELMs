@@ -181,8 +181,8 @@ namespace SELMs.Api.Controllers
 			returnedData.ListSubLocation = (List<LocationDTO>)repository.GetListSubLocation(id);
 			returnedData.ListProjectInLocation = (List<ProjectDTO>)repository.GetListProjectInLocation(id);
 			returnedData.ListEquipmentInLocation = (List<EquipmentDTO>)repository.GetListEquipInLocation(id);
-            returnedData.ListMemberInLocation = (List<UserDTO>)repository.GetListMemberInLocation(id);
-            return returnedData;
+			returnedData.ListMemberInLocation = (List<UserDTO>)repository.GetListMemberInLocation(id);
+			return returnedData;
 
 
 		}
@@ -203,6 +203,50 @@ namespace SELMs.Api.Controllers
 				}
 
 				return Ok(result);
+			}
+			catch (Exception ex)
+			{
+				Log.Error("Error: ", ex);
+				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				throw;
+			}
+		}
+		#endregion
+
+
+
+
+
+
+		#region Update  location 2
+		[HttpPost]
+		[Route("locations/update-sub-location/{id}")]
+		public async Task<IHttpActionResult> UpdateLocation2(int id, [FromBody] LocationDTO2 locationDTO2)
+		{
+			try
+			{
+
+				Location location = new Location()
+				{
+					location_id = locationDTO2.location_id,
+					parent_location_id = locationDTO2.location_id,
+					location_desciption = locationDTO2.location_desciption,
+					is_active = locationDTO2.is_active,
+					location_level = locationDTO2.location_level,
+					location_code = locationDTO2.location_code,
+				};
+
+				List<Location> subLocation = new List<Location>();
+
+
+				foreach (var sublocation in locationDTO2.ListSubLocation)
+					subLocation.Add(mapper.Map<Location>(sublocation));
+
+
+				await service.UpdateLocationAndSublocation(id, location, subLocation);
+
+				return Ok();
 			}
 			catch (Exception ex)
 			{

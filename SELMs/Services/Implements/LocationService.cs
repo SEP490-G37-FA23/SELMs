@@ -42,5 +42,20 @@ namespace SELMs.Services.Implements
 				repository.UpdateEquipLocationHistory(item);
 			}
 		}
+
+		public async Task UpdateLocationAndSublocation(int id, Location location, List<Location> subLocations)
+		{
+			location.location_id = id;
+
+			// Update location
+			repository.UpdateLocation(location);
+
+			// delete all sub-location by parent_id
+			List<Location> oldSubLocation = await repository.GetSublocationByParentId(id);
+			await repository.RemoveRange(oldSubLocation);
+
+			// add new sub-location again
+			repository.SaveLocations(subLocations);
+		}
 	}
 }
