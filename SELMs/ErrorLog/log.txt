@@ -1148,3 +1148,44 @@ System.Data.SqlClient.SqlException (0x80131904): Login failed for user 'sa'.
    at SELMs.Api.HumanResource.ApiMemberController.<GetMemberList>d__5.MoveNext() in C:\Users\84969\Desktop\DoAn\Code\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 39
 ClientConnectionId:8e2b47e0-5d3c-44f4-9db1-c0249017620b
 Error Number:18456,State:1,Class:14
+2024-01-08 13:14:30,728 [69] ERROR SELMs.Api.Controllers.ApiCategoryController [(null)] - Error: 
+System.Data.Entity.Infrastructure.DbUpdateException: Unable to determine a valid ordering for dependent operations. Dependencies may exist due to foreign key constraints, model requirements, or store-generated values. ---> System.Data.Entity.Core.UpdateException: Unable to determine a valid ordering for dependent operations. Dependencies may exist due to foreign key constraints, model requirements, or store-generated values.
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.DependencyOrderingError(IEnumerable`1 remainder)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.ProduceCommands()
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   --- End of inner exception stack trace ---
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at SELMs.Repositories.Implements.CategoryRepository.SaveCategory(Category category) in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Repositories\Implements\CategoryRepository.cs:line 41
+   at SELMs.Services.Implements.CategoryService.<SaveCategory>d__3.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Services\Implements\CategoryService.cs:line 32
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.Controllers.ApiCategoryController.<SaveCategory>d__7.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Api\Controllers\ApiCategoryController.cs:line 104
+2024-01-08 13:30:48,899 [62] ERROR SELMs.Api.HumanResource.ApiMemberController [(null)] - Error: 
+System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at SELMs.Services.Implements.MemberService.generateMemberCode(String name) in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Services\Implements\MemberService.cs:line 68
+   at SELMs.Services.Implements.MemberService.<SaveMember>d__1.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Services\Implements\MemberService.cs:line 23
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at SELMs.Api.HumanResource.ApiMemberController.<CreateNewMember>d__8.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Api\Controllers\ApiMemberController.cs:line 102
+2024-01-08 14:17:57,198 [91] ERROR SELMs.Api.Controllers.ApiInventoryRequestController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'System.Data.Entity.DynamicProxies.Equipment_E922CBF72B6A015980962EE7879AD57F1FDBBA9C12005E0A7CC835B2EE1073BE' does not contain a definition for 'GetAwaiter'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Services.Implements.InventoryRequestService.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Services\Implements\InventoryRequestService.cs:line 160
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 186

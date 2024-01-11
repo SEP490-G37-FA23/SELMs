@@ -10,16 +10,16 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Proc_GetLocationList_Result
     {
-        public int category_id { get; set; }
-        public string category_code { get; set; }
-        public string category_name { get; set; }
-        public string desciption { get; set; }
-        public Nullable<bool> is_active { get; set; }
-        public int category_level { get; set; }
-        public Nullable<int> category_parent_id { get; set; }
+        public int location_id { get; set; }
+        public string location_code { get; set; }
+        public string location_desciption { get; set; }
+        public Nullable<int> parent_location_id { get; set; }
+        public Nullable<int> location_level { get; set; }
+        public bool is_active { get; set; }
+        public Nullable<int> number_equip { get; set; }
+        public string parent_location { get; set; }
     }
 }

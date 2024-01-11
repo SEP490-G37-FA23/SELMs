@@ -10,9 +10,8 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Proc_GetAllCategoryList_Result
     {
         public int category_id { get; set; }
         public string category_code { get; set; }
