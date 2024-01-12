@@ -10,16 +10,15 @@
 namespace SELMs.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Proc_GetCategoryList_Result
     {
-        public int category_id { get; set; }
         public string category_code { get; set; }
-        public string category_name { get; set; }
-        public string desciption { get; set; }
-        public Nullable<bool> is_active { get; set; }
+        public int category_id { get; set; }
         public int category_level { get; set; }
-        public Nullable<int> category_parent_id { get; set; }
+        public string category_name { get; set; }
+        public string category_parent { get; set; }
+        public string desciption { get; set; }
+        public Nullable<int> number_equip { get; set; }
     }
 }

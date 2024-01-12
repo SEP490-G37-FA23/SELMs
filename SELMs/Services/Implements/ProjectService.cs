@@ -19,6 +19,29 @@ namespace SELMs.Services.Implements
 		private IEquipmentProjectHistoryRepository projectEquipmentHistoryRepository = new EquipmentProjectHistoryRepository();
 		private IMapper mapper = MapperConfig.Initialize();
 
+		/*
+        public async Task<ProjectModel> GetProject(int id)
+        {
+            try
+            {
+                dynamic project = repository.GetProject(id);
+                List<User> projectMembers = await repository.GetProjectMembers(id);
+                List<Equipment> projectEquipments = await repository.GetProjectEquipments(id);
+                ProjectModel projectModel = new ProjectModel()
+                {
+                    Project = project,
+                    ProjectEquipments = projectEquipments,
+                    ProjectMembers = projectMembers
+                };
+                return projectModel;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+		*/
 
 		public async Task<ProjectDetailModel> GetProject(int id)
 		{
@@ -46,6 +69,7 @@ namespace SELMs.Services.Implements
 				throw;
 			}
 		}
+
 
 		public async Task SaveProject(Project project, List<string> projectMembers, List<string> projectEquipments)
 		{

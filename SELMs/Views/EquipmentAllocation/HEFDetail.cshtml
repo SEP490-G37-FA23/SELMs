@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "HEFDetail";
+    string layoutPath;
+
+    switch ((string)Session["role"])
+    {
+        case "SM":
+            layoutPath = "~/Views/Shared/_LayoutStockManagement.cshtml";
+            break;
+        case "LD":
+            layoutPath = "~/Views/Shared/_LayoutLabDirector.cshtml";
+            break;
+        default:
+            layoutPath = "~/Views/Shared/_LayoutProjectManagement.cshtml";
+            break;
+    }
+
+    Layout = layoutPath;
+}
+<script src="~/Content/js/Stock/Equipments/HEFDetailCtrl.js"></script>
+<div ng-app="myApp" ng-controller="HEFDetailCtrl" style="display:inline-block;width:100%;">
+    <input type="hidden" id="username" name="username" value="@Session["username"]" />
+    <input type="hidden" id="fullname" name="fullname" value="@Session["fullname"]" />
+    <input type="hidden" id="role" name="role" value="@Session["role"]" />
+    <input type="hidden" id="isadmin" name="isadmin" value="@Session["isadmin"]" />
+    <form class="row g-3">
+        <div class="row">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Thông tin cơ bản</h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="lab" class="form-label">Phòng lab</label>
+                                <input type="text" class="form-control" ng-model="DetailHandover.location_name" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lab" class="form-label">Dự án</label>
+                                <input type="text" class="form-control" ng-model="DetailHandover.project_name" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="receiver" class="form-label">Người tiếp nhận</label>
+                                <ng-form>
+                                    <div class="form-member-project">
+                                        <input type="text" style="color:black" class="form-control input-form" ng-model="DetailHandover.receipter_name" readonly>
+                                    </div>
+                                </ng-form>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dateRequest" class="form-label">Ngày bàn giao</label>
+                                <input type="text" class="form-control" ng-model="DetailHandover.handover_date|date:'dd/MM/yyyy'" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="requester" class="form-label">Người bàn giao</label>
+                                <input type="text" class="form-control" ng-model="DetailHandover.handover_name" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="description" class="form-label">Mô tả</label>
+                                <input type="text" class="form-control" ng-model="DetailHandover.description" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">Danh sách thiết bị</h5>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Mã hệ thống</th>
+                                    <th scope="col">Mã thiết bị</th>
+                                    <th scope="col">Tên thiết bị</th>
+                                    <th scope="col">Mô tả/Thông số</th>
+                                    <th scope="col">Tình trạng</th>
+                                    <th scope="col">Ghi chú</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ListDetailHandover">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        {{item.system_equipment_code}}
+                                    </td>
+                                    <td>{{item.standard_equipment_code}}</td>
+                                    <td>{{item.equipment_name}}</td>
+                                    <td>{{item.equipment_specification}}</td>
+                                    <td>{{item.usage_status}}</td>
+                                    <td>
+                                        {{item.note}}
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+

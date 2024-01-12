@@ -41,5 +41,9 @@ namespace SELMs.Controllers.Equipment
         {
             return View();
         }
+        public ActionResult HEFDetail()
+        {
+            return View();
+        }
     }
 }

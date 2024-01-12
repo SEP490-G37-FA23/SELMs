@@ -78,7 +78,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ListEAA" ng-if="role=='SM' && item.status =='APPROVED'">
+                                <tr ng-repeat="item in ListEAA" ng-if="(role=='SM' && item.status =='APPROVED') || role!='SM'">
                                     <td>{{$index+1}}</td>
                                     <td>{{item.ea_application_code}}</td>
                                     <td>{{item.desciption}}</td>

@@ -24,7 +24,7 @@ namespace SELMs.Repositories.Implements
                 db.Inventory_Request_Application_Detail.RemoveRange(applicationDetails);
                 db.Inventory_Request_Application.Remove(application);
             }
-            db.SaveChangesAsync();
+            db.SaveChanges();
         }
 
         public dynamic GetApplication(int id)

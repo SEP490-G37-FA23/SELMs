@@ -94,7 +94,7 @@ namespace SELMs.Services.Implements
 
         public async Task CancelApplication(int id)
         {
-            Inventory_Request_Application application = await repository.GetApplication(id);
+            Inventory_Request_Application application = repository.GetApplication(id);
             if (application != null)
             {
                 repository.DeleteApplication(id);

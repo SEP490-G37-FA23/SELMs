@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e8e52fb82af4c1e9f99f03ed78071d3" Name="Diagram1">
+<<<<<<<< HEAD:SELMs/Models/SELMsContext.edmx.diagram
+      <Diagram DiagramId="7870256a8b2747cab7ead0c26470fb33" Name="Diagram1">
+========
+      <Diagram DiagramId="f2305190bf004edcb55b0f8eacfd49ae" Name="Diagram1">
+>>>>>>>> 8b8542482211ec20124a9cfb0436e2df174deb92:SELMs/Models/SELMsDatabase.edmx.diagram
         <EntityTypeShape EntityType="SELMsModel.Application_Attachment" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SELMsModel.Attachment" Width="1.5" PointX="9.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="SELMsModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
@@ -27,7 +31,6 @@
         <EntityTypeShape EntityType="SELMsModel.Role" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SELMsModel.User" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="SELMsModel.FK_Application_Attachment_Attachment" ManuallyRouted="false" />
-        <AssociationConnector Association="SELMsModel.FK_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="SELMsModel.FK_Image_Equipment" ManuallyRouted="false" />
         <AssociationConnector Association="SELMsModel.FK_Equipment_Allocation_Application_Location" ManuallyRouted="false" />
         <AssociationConnector Association="SELMsModel.FK_Equipment_Allocation_Application_Location1" ManuallyRouted="false" />
