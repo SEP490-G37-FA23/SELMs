@@ -27,19 +27,19 @@
                             <h4 class="card-title">Thông tin cá nhân</h4>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="inputName5" class="form-label">Họ và tên</label>
-                                    <input type="text" class="form-control" ng-model="NewMember.fullname">
+                                    <label for="inputName5" class="form-label">Họ và tên <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" ng-model="NewMember.fullname" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="inputDob5" class="form-label">Ngày sinh</label>
-                                    <input type="text" id="dateOfBirth" autocomplete="off" datepicker ng-model="NewMember.date_of_birth" class="form-control input-form">
+                                    <label for="inputDob5" class="form-label">Ngày sinh <span style="color:red">*</span></label>
+                                    <input type="text" id="dateOfBirth" autocomplete="off" datepicker ng-model="NewMember.date_of_birth" class="form-control input-form" required>
                                 </div>
                                 <script>
                                     $("#dateOfBirth").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
                                 </script>
                                 <div class="col-md-6">
-                                    <label for="inputGender" class="form-label">Giới tính</label>
-                                    <select id="inputGender" class="form-select" ng-model="NewMember.gender">
+                                    <label for="inputGender" class="form-label">Giới tính <span style="color:red">*</span></label>
+                                    <select id="inputGender" class="form-select" ng-model="NewMember.gender" required>
                                         <option value="1">Nam</option>
                                         <option value="0">Nữ</option>
                                     </select>
@@ -55,12 +55,12 @@
                             <h4 class="card-title">Thông tin liên lạc</h4>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="inputPhoneNumber" class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control" ng-model="NewMember.hotline">
+                                    <label for="inputPhoneNumber" class="form-label">Số điện thoại <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" ng-model="NewMember.hotline" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="inputEmail" class="form-label">Địa chỉ Email</label>
-                                    <input type="text" class="form-control" ng-model="NewMember.email">
+                                    <label for="inputEmail" class="form-label">Địa chỉ Email <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" ng-model="NewMember.email" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Địa chỉ</label>
@@ -78,20 +78,20 @@
                             <div class="row g-3">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="inputDateAssign" class="form-label">Ngày ký hợp đồng</label>
-                                        <input type="text" id="hireDate" class="form-control" ng-model="NewMember.hire_date">
+                                        <label for="inputDateAssign" class="form-label">Ngày ký hợp đồng <span style="color:red">*</span></label>
+                                        <input type="text" id="hireDate" class="form-control" ng-model="NewMember.hire_date" required>
                                         <script>
                                             $("#hireDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
                                         </script>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="inputDuration" class="form-label">Thời hạn hợp đồng</label>
-                                        <input type="text" class="form-control" ng-model="NewMember.work_term">
+                                        <label for="inputDuration" class="form-label">Thời hạn hợp đồng <span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" ng-model="NewMember.work_term" required>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="inputPosition" class="form-label">Vị trí công việc</label>
-                                        <select ng-model="NewMember.role_code" class="form-control">
+                                        <label for="inputPosition" class="form-label">Vị trí công việc <span style="color:red">*</span></label>
+                                        <select ng-model="NewMember.role_code" class="form-control" required>
                                             <option ng-repeat="item in ListRoles" value="{{item.role_code}}">{{item.role_name}}</option>
                                         </select>
                                     </div>
@@ -104,16 +104,18 @@
                                         <input type="text" class="form-control" ng-model="NewMember.job_description">
                                     </div>
                                     @*<div class="col-md-6">
-                                        <label for="inputJD" class="form-label">Admin</label>
-                                        <input type="checkbox" ng-model="NewMember.is_admin" ng-checked="NewMember.is_admin">
-                                    </div>*@
+                                    <label for="inputJD" class="form-label">Admin</label>
+                                    <input type="checkbox" ng-model="NewMember.is_admin" ng-checked="NewMember.is_admin">
+                                </div>*@
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" ng-click="CreateNewMember(NewMember)">Thêm nhân viên mới</button>
+                    @*<button type="submit" class="btn btn-primary" ng-click="CreateNewMember(NewMember)">Thêm nhân viên mới</button>*@
+                    <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(NewMember)">Thêm nhân viên mới</button>
+                    @*<button type="submit" class="btn btn-primary">Thêm nhân viên mới</button>*@
                 </div>
             </div>
         </form>

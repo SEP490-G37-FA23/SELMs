@@ -34,8 +34,6 @@ app.controller('MemberListCtrl', function ($scope, $http, $sce) {
         notificationElement.style.paddingTop = '15px';
         notificationElement.style.zIndex = '10000';
         notificationElement.style.marginLeft = '100px';
-
-        // You can customize the notification style and appearance here.
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -50,11 +48,38 @@ app.controller('MemberListCtrl', function ($scope, $http, $sce) {
         notificationElement.style.paddingTop = '15px';
         notificationElement.style.zIndex = '10000';
         notificationElement.style.marginLeft = '100px';
-
-
-        // You can customize the notification style and appearance here.
     }
 
+    $scope.ValidateDataInput = function (detailMember) {
+        var regex1 = /\S/;
+        var regex2 = /^\d{10}$/;
+        var regex3 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var regex4 = /^[\p{L}\s]+$/u;
+
+        console.log('newMember.fullname:', detailMember.fullname);
+        console.log('newMember.dateOfBirth:', detailMember.dateOfBirth);
+        console.log('newMember.hotline:', detailMember.hotline);
+        console.log('check hotline:', regex2.test(detailMember.hotline));
+        console.log('newMember.email:', detailMember.email);
+        console.log('newMember.work_term:', detailMember.work_term);
+
+        if (!regex2.test(detailMember.hotline)) {
+            $scope.ErrorSystem('Số điện thoại không hợp lệ.');
+            console.log('phone');
+        }
+        else if (!regex3.test(detailMember.email)) {
+            $scope.ErrorSystem('Địa chỉ email không hợp lệ.');
+            console.log('mail');
+        }
+        else if (!regex1.test(detailMember.work_term)) {
+            $scope.ErrorSystem('Vui lòng nhập thời gian hợp đồng.');
+            console.log('time');
+        }
+        else {
+            $scope.UpdateMember(detailMember);
+            console.log('update');
+        }
+    }
 
     //===============Danh sách khách hàng=====================
     $scope.text = '';

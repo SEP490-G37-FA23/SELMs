@@ -21,7 +21,12 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
 
-        // You can customize the notification style and appearance here.
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -33,6 +38,13 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
+
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     };
 
     //this gets the full url
@@ -44,6 +56,29 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
     //this removes everything before the last slash in the path
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
+
+    $scope.ValidateDataInput = function (newProject) {
+        var regex = /\S/;
+
+        var data = {
+            start_date: $('#startDate').val(),
+            end_date: $('#endDate').val(),
+        }
+        console.log('Start Date:', data.start_date);
+        console.log('End Date:', data.end_date);
+        console.log('Comparison Result:', data.end_date < data.start_date);
+        console.log('Project name:', newProject.project_name);
+
+        if (data.end_date < data.start_date) {
+            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
+        }
+        else if (!regex.test(newProject.project_name)) {
+            $scope.ErrorSystem('Tên dự án không hợp lệ.');
+        }
+        else {
+            $scope.CreateNewProject(newProject);
+        }
+    }
 
     $scope.ResetNewProject = function () {
         $scope.NewProject = {

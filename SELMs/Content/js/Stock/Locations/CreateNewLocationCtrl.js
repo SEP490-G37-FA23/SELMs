@@ -39,6 +39,19 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
         is_active: true
     }
 
+    $scope.ValidateDataInput = function (NewLocation) {
+        var regex = /\S/;
+
+        if (!regex.test(NewLocation.location_code) || NewLocation.location_code == '') {
+            $scope.ErrorSystem('Vui lòng điền mã chuẩn.');
+            console.log('name');
+        }
+        else {
+            $scope.SaveNewLocation(NewLocation);
+            console.log('add');
+        }
+    }
+
     $scope.LoadAllLocationList = function (text,id) {
         data = {
             username: username,

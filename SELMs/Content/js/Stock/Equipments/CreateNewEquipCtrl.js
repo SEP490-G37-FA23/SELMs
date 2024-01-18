@@ -151,35 +151,49 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
    
     $scope.CreateNewEquip = function (equip) {
         console.log(equip);
-        var data = {
-            equip: {
-                standard_equipment_code: equip.standard_equipment_code,
-                equipment_name: equip.equipment_name,
-                unit: equip.unit,
-                serial_no: equip.serial_no,
-                type_equipment: equip.type_equipment,
-                category_code: equip.category_code,               
-                price: equip.price,
-                create_date: new Date(),
-                note: equip.note,
-                responsibler: equip.responsibler,
-                usage_status: equip.usage_status,
-                specification: equip.specification,
-                is_integration: equip.is_integration
-            },     
-            location_id: equip.location_id,
-            ListComponentEquips: $scope.ListComponentEquips
+        var regex = /\S/;
+        console.log('kiem tra regex', !regex.test(equip.standard_equipment_code));
+        console.log('kiem tra rong', newLocation.location_code == '');
+        if (!regex.test(equip.standard_equipment_code) || equip.standard_equipment_code == '') {
+            $scope.ErrorSystem('Vui lòng điền mã chuẩn.');
+            console.log('name');
         }
-        var partialUrl = origin + '/api/v1/equipments/new-equipment';
-        $http.post(partialUrl, data)
-            .then(function (response) {
-                $scope.SuccessSystem('Thêm mới thiết bị thành công!');
-                $scope.UpdateImageEquip(response.data)
-                $scope.ResetNewEquip();
+        else
+        {
+            var data =
+            {
+                equip:
+                {
+                    standard_equipment_code: equip.standard_equipment_code,
+                    equipment_name: equip.equipment_name,
+                    unit: equip.unit,
+                    serial_no: equip.serial_no,
+                    type_equipment: equip.type_equipment,
+                    category_code: equip.category_code,
+                    price: equip.price,
+                    create_date: new Date(),
+                    note: equip.note,
+                    responsibler: equip.responsibler,
+                    usage_status: equip.usage_status,
+                    specification: equip.specification,
+                    is_integration: equip.is_integration
+                },
+                location_id: equip.location_id,
+                ListComponentEquips: $scope.ListComponentEquips
+            }
+            var partialUrl = origin + '/api/v1/equipments/new-equipment';
+            $http.post(partialUrl, data)
+                .then(function (response)
+                {
+                    $scope.SuccessSystem('Thêm mới thiết bị thành công!');
+                    $scope.UpdateImageEquip(response.data)
+                    $scope.ResetNewEquip();
 
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+                }, function (error)
+                {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
     }
 
     $scope.LoadEquipDetailsBySystemCode = function (system_equipment_code) {

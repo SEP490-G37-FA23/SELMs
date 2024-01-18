@@ -30,8 +30,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="projectRefer" class="form-label">Phòng LAB sử dụng <span style="color:red">*</span></label>
-                                <input ng-model="DetailProject.location_code" readonly class="form-control" /> 
-                                
+                                <input ng-model="DetailProject.location_code" readonly class="form-control" />
+
                             </div>
                             <div class="col-md-6">
                                 <label for="projectManager" class="form-label">Người quản lý <span style="color:red">*</span></label>
@@ -262,7 +262,8 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" ng-click="UpdateProject(DetailProject)">Cập nhật dự án</button>
+                @*<button type="submit" class="btn btn-primary" ng-click="UpdateProject(DetailProject)">Cập nhật dự án</button>*@
+                <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(DetailProject)">Cập nhật dự án</button>
             </div>
 
         </form>

@@ -299,26 +299,36 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
         location_level: 2,
         is_active: true
     }
+
     $scope.SaveNewLocation = function (newLocation) {
-        var data = {
-            Location: {
-                location_code: newLocation.location_code,
-                location_desciption: newLocation.location_desciption,
-                parent_location_id: newLocation.parent_location_id,
-                location_level: newLocation.location_level,
-                is_active: true
-            },
-            SubLocations: []
-
+        var regex = /\S/;
+        console.log('kiem tra regex', !regex.test(newLocation.location_code));
+        console.log('kiem tra rong', newLocation.location_code == '');
+        if (!regex.test(newLocation.location_code) || newLocation.location_code == '') {
+            $scope.ErrorSystem('Vui lòng điền mã chuẩn.');
+            console.log('name');
         }
-        var partialUrl = origin + '/api/v1/locations/new-location';
-        $http.post(partialUrl, data)
-            .then(function (response) {
-                $scope.SuccessSystem('Thêm mới vị trí thành công!');
+        else {
+            var data = {
+                Location: {
+                    location_code: newLocation.location_code,
+                    location_desciption: newLocation.location_desciption,
+                    parent_location_id: newLocation.parent_location_id,
+                    location_level: newLocation.location_level,
+                    is_active: true
+                },
+                SubLocations: []
 
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+            }
+            var partialUrl = origin + '/api/v1/locations/new-location';
+            $http.post(partialUrl, data)
+                .then(function (response) {
+                    $scope.SuccessSystem('Thêm mới vị trí thành công!');
+
+                }, function (error) {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
     }
 
     $scope.AddEquipToLocation = function () {

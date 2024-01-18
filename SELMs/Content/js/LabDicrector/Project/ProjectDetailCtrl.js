@@ -19,7 +19,12 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
 
-        // You can customize the notification style and appearance here.
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -31,6 +36,13 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
+
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     };
 
     //this gets the full url
@@ -43,6 +55,23 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
     url = url.substring(url.lastIndexOf("/") + 1, url.length);
     //return
 
+    $scope.ValidateDataInput = function (project) {
+        var regex = /\S/;
+
+        var data = {
+            start_date: $('#startDate').val(),
+            end_date: $('#endDate').val(),
+        }
+        console.log('Start Date:', data.start_date);
+        console.log('End Date:', data.end_date);
+        console.log('Comparison Result:', data.end_date < data.start_date);
+        if (data.end_date < data.start_date) {
+            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
+        }
+        else {
+            $scope.UpdateProject(project);
+        }
+    }
 
     $scope.GetDetailProject = function (project_id) {
         var partialUrl = origin + '/api/v1/projects/' + project_id;

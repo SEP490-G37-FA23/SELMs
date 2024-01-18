@@ -38,7 +38,12 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
 
-        // You can customize the notification style and appearance here.
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -50,9 +55,49 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
+
+        // Hiển thị thông báo trong 5 giây
+        var displayTime = 5000; // 5 giây
+        setTimeout(function () {
+            notificationElement.textContent = '';
+            notificationElement.style.display = 'none';
+        }, displayTime);
     };
 
-        // You can customize the notification style and appearance here.
+    $scope.ValidateDataInput = function (newMember) {
+        var regex1 = /\S/;
+        var regex2 = /^\d{10}$/;
+        var regex3 = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var regex4 = /^[\p{L}\s]+$/u;
+
+        console.log('newMember.fullname:', newMember.fullname);
+        console.log('newMember.dateOfBirth:', newMember.dateOfBirth);
+        console.log('newMember.hotline:', newMember.hotline);
+        console.log('check hotline:', regex2.test(newMember.hotline));
+        console.log('newMember.email:', newMember.email);
+        console.log('newMember.work_term:', newMember.work_term);
+
+        if (!regex4.test(newMember.fullname)) {
+            $scope.ErrorSystem('Tên thành viên mới không đúng định dạng.');
+            console.log('name');
+        }
+        else if (!regex2.test(newMember.hotline)) {
+            $scope.ErrorSystem('Số điện thoại không hợp lệ.');
+            console.log('phone');
+        }
+        else if (!regex3.test(newMember.email)) {
+            $scope.ErrorSystem('Địa chỉ email không hợp lệ.');
+            console.log('mail');
+        }
+        else if (!regex1.test(newMember.work_term)) {
+            $scope.ErrorSystem('Vui lòng nhập thời gian hợp đồng.');
+            console.log('time');
+        }
+        else {
+            $scope.CreateNewMember(newMember);
+            console.log('add');
+        }
+    }
 
     $scope.NewMember = {
         fullname: '',
@@ -62,7 +107,7 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         hotline: '',
         email: '',
         gender: true,
-        address:'',
+        address: '',
         avatar_img: '',
         hire_date: '',
         work_term: '',
@@ -111,4 +156,4 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
             });
     }
 
-    });
+});

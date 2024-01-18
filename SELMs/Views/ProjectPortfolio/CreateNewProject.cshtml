@@ -10,7 +10,7 @@
     <input type="hidden" id="role" name="role" value="@Session["role"]" />
     <div id="notification" class="col-md-12"></div>
     <section class="section">
-        <form class="row g-3">
+        <form class="row g-3" id="projectForm" ng-submit="submitForm()">
             <div>
                 <div class="card">
                     <div class="card-body">
@@ -81,6 +81,8 @@
                                     $("#endDate").datetimepicker({ format: 'DD/MM/YYYY', useCurrent: false, stepping: 5, sideBySide: true });
                                 </script>
                             </div>
+
+                            <div id="dateErrorMessage" style="color: red; display: none;">Ngày bắt đầu phải nhỏ hơn ngày kết thúc.</div>
 
                             <div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -263,10 +265,13 @@
             </div>
 
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" ng-click="CreateNewProject(NewProject)">Thêm dự án mới</button>
+                @*<button type="submit" class="btn btn-primary" ng-click="CreateNewProject(NewProject)">Thêm dự án mới</button>*@
+                <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(NewProject)">Thêm dự án mới</button>
             </div>
 
         </form>
     </section>
 </div>
+
+
 
