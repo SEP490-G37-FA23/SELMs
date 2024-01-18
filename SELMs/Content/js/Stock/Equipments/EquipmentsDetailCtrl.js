@@ -146,7 +146,33 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     // Assume raw data is a flat array of RGBA values
     // For example, [R1, G1, B1, A1, R2, G2, B2, A2, ...]
 
-   
+    $scope.ValidateDataInput = function (equip) {
+        var regex1 = /\S/;
+        var regex2 = /^\d+$/;
+        console.log('standard code', equip.standard_equipment_code);
+        console.log('equipment name', equip.equipment_name);
+        console.log('price', equip.price);
+        if (!regex1.test(equip.standard_equipment_code) || equip.standard_equipment_code == '') {
+            $scope.ErrorSystem('Vui lòng nhập mã chuẩn thiết bị.');
+            console.log('standard code error.');
+        }
+        else if (!regex1.test(equip.equipment_name) || equip.equipment_name == '') {
+            $scope.ErrorSystem('Vui lòng nhập tên thiết bị.');
+            console.log('equipment name error.');
+        }
+        else if (!regex2.test(equip.price)) {
+            $scope.ErrorSystem('Vui lòng nhập giá thiết bị.');
+            console.log('price error');
+        }
+        else if (equip.price < 1000) {
+            $scope.ErrorSystem('Giá thiết bị phải lớn hơn 1000VND.');
+            console.log('price error');
+        }
+        else {
+            console.log('no validation error');
+            $scope.UpdateEquip(equip);
+        }
+    }
 
     $scope.UpdateEquip = function (equip) {
         var data = {
@@ -200,5 +226,6 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
-    };
+    }
+
 });

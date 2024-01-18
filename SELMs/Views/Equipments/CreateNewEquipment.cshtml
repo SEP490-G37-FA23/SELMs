@@ -38,7 +38,7 @@
                         <input type="text" class="form-control" ng-model="NewEquip.standard_equipment_code">
                     </div>
                     <div class="col-md-6">
-                        <label for="equipName" class="form-label">Tên thiết bị</label>
+                        <label for="equipName" class="form-label">Tên thiết bị <span style="color:red">*</span></label>
                         <input type="text" class="form-control" ng-model="NewEquip.equipment_name">
                     </div>
 
@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="equipPrice" class="form-label">Giá</label>
+                        <label for="equipPrice" class="form-label">Giá <span style="color:red">*</span></label>
                         <input type="text" format="number" class="form-control" ng-model="NewEquip.price">
                     </div>
                     <div class="col-md-4">
@@ -208,7 +208,7 @@
                         <input class="form-control" type="file" id="formFile" multiple>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary" ng-click="CreateNewEquip(NewEquip)">Thêm mới</button>
+                        <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(NewEquip)">Thêm mới</button>
                         <button type="reset" class="btn btn-secondary" ng-click="ResetNewEquip()">Reset</button>
                     </div>
                 </form><!-- End Multi Columns Form -->

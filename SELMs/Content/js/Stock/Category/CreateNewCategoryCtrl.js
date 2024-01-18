@@ -82,6 +82,26 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
             $scope.ListParentCategories = response.data;
         });
     }
+
+    $scope.ValidateDataInput = function (category) {
+        var regex = /\S/;
+        console.log('category code: ', category.category_code);
+        console.log('category name: ', category.category_name);
+        console.log('category level: ', category.category_level);
+        if (!regex.test(category.category_code) || category.category_code == '') {
+            $scope.ErrorSystem('Vui lòng nhập mã danh mục.');
+            console.log('category code not valid');
+        }
+        else if (!regex.test(category.category_name) || category.category_name == '') {
+            $scope.ErrorSystem('Vui lòng nhập tên danh mục');
+            console.log('category name not valid');
+        }
+        else {
+            console.log('no invalid data');
+            $scope.SaveNewCategory(category);
+        }
+    }
+
     $scope.SaveNewCategory = function (category) {
         var data = {
             username: username,

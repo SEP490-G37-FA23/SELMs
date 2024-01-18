@@ -41,6 +41,7 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
 
     $scope.ValidateDataInput = function (NewLocation) {
         var regex = /\S/;
+        console.log(NewLocation);
 
         if (!regex.test(NewLocation.location_code) || NewLocation.location_code == '') {
             $scope.ErrorSystem('Vui lòng điền mã chuẩn.');
