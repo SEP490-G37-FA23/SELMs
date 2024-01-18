@@ -135,8 +135,8 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Update project
-		[HttpPut]
-		[Route("projects/{id}")]
+		[HttpPost]
+		[Route("projects/update/{id}")]
 		public async Task<IHttpActionResult> UpdateProject(int id, [FromBody] ProjectRequest projectRequest)
 		{
 			try
@@ -158,7 +158,7 @@ namespace SELMs.Api.Controllers
 		#endregion
 
 		#region Cancel project
-		[HttpPut]
+		[HttpPost]
 		[Route("projects/cancel/{id}")]
 		public async Task<IHttpActionResult> CancelProject(int id)
 		{
