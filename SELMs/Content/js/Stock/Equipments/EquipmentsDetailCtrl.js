@@ -165,7 +165,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             console.log('price error');
         }
         else if (equip.price < 1000) {
-            $scope.ErrorSystem('Giá thiết bị phải lớn hơn 1000VND.');
+            $scope.ErrorSystem('Giá thiết bị không được nhỏ hơn 1000VND.');
             console.log('price error');
         }
         else {
