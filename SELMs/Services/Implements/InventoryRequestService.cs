@@ -165,5 +165,14 @@ namespace SELMs.Services.Implements
             }
             return "Thành công";
         }
+
+        public async Task<dynamic> ClearIRAResults(UpdateEquipmentResultDTO updateEquip)
+        {
+            foreach(UpdateDetailDTO item in updateEquip.listUpdate)
+            {
+                repository.DeleteApplicationDetail(item.application_detail_id);
+            }
+            return ("Thành công");
+        }
     }
 }

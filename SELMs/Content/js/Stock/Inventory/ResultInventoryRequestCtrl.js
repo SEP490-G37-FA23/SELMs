@@ -47,7 +47,7 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
             listUpdate: $scope.ListEquipUpdate
         }
         console.log(data)
-        var partialUrl = origin + '/api/v1/inventory-request/update-equipment-result'; 
+        var partialUrl = origin + '/api/v1/inventory-request/equipment-result/update'; 
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật tình trạng thiết bị theo kiểm kê thành công!');
@@ -63,7 +63,7 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
             listUpdate: $scope.ListEquipUpdate
         }
         console.log(data)
-        var partialUrl = origin + '/api/v1/inventory-request/delete-equipment-result';
+        var partialUrl = origin + '/api/v1/inventory-request/equipment-result/clear';
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Xóa các kết quả kiểm kê thành công!');
