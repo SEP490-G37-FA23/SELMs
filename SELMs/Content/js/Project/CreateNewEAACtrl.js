@@ -139,6 +139,18 @@ app.controller('CreateNewEAACtrl', function ($scope, $http, $sce) {
         });
     }
 
+    $scope.ValidateDataInput = function (NewEAA) {
+        console.log(NewEAA);
+        if (NewEAA.project_id == '0') {
+            console.log('pjid not valid');
+            $scope.ErrorSystem('Vui lòng chọn dự án cần cấp phát thiết bị.');
+        }
+        else {
+            console.log('no invalid data');
+            $scope.SaveNewEAA(NewEAA);
+        }
+    }
+
     $scope.SaveNewEAA = function (NewEAA) {
         console.log(NewEAA);
         var data = {
