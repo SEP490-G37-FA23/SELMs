@@ -37,13 +37,6 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
-
-        // Hiển thị thông báo trong 5 giây
-        var displayTime = 5000; // 5 giây
-        setTimeout(function () {
-            notificationElement.textContent = '';
-            notificationElement.style.display = 'none';
-        }, displayTime);
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -55,13 +48,6 @@ app.controller('CreateNewMemberCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
-
-        // Hiển thị thông báo trong 5 giây
-        var displayTime = 5000; // 5 giây
-        setTimeout(function () {
-            notificationElement.textContent = '';
-            notificationElement.style.display = 'none';
-        }, displayTime);
     };
 
     $scope.ValidateDataInput = function (newMember) {
