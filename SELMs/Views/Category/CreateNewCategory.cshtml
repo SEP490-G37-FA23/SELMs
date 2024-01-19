@@ -40,11 +40,14 @@
                     <div class="col-md-6">
                         <label class=" col-form-label">Level <span style="color:red">*</span></label>
                         <div>
-                            <select ng-model="NewCategory.category_level" ng-change="LoadListParentCategories(NewCategory.category_level)" class="form-control">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                            <select ng-model="NewCategory.category_level" 
+                                    ng-change="LoadListParentCategories(NewCategory.category_level)" 
+                                    class="form-control"
+                                     ng-init="NewCategory.category_level=1">
+                                <option value="1" selected>Level 1</option>
+                                <option value="2"> Level2</option>
+                                <option value="3">Level 3</option>
+                                <option value="4">Level4</option>
                             </select>
                         </div>
                     </div>
