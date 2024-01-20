@@ -173,11 +173,11 @@ namespace SELMs.Api.Controllers
 		#region Update equipment
 		[HttpPost]
 		[Route("equipments/update/{id}")]
-		public async Task<Equipment> UpdateEquipment(int id, [FromBody] EquipmentDTO equipment)
+		public async Task<Equipment> UpdateEquipment(int id, [FromBody] EquipmentNew equipment)
 		{
 			try
 			{
-				Equipment equip = mapper.Map<Equipment>(equipment);
+				Equipment equip = mapper.Map<Equipment>(equipment.equip);
 				dynamic result = service.UpdateEquipment(id, equip);
 				var historyResult = equipLocationHistoryService.AddEquipmentLocationHistory(equip.system_equipment_code, equipment.location_id);
 				return Ok(result);

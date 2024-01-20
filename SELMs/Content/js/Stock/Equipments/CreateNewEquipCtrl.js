@@ -202,7 +202,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             console.log('equipment_name error');
         }
         else if (!regex2.test(equip.price)) {
-            $scope.ErrorSystem('Vui lòng nhập giá thiết bị');
+            $scope.ErrorSystem('Vui lòng nhập giá thiết bị là số.');
             console.log('price error');
         }
         else if (equip.price < 0) {

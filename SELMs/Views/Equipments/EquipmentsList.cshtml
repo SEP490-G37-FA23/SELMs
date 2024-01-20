@@ -135,9 +135,9 @@
                                     <th style="min-width:60px" class="text-center">Thông số kĩ thuật</th>
                                     <th style="min-width:60px" class="text-center">Loại thiết bị</th>
                                     <th style="min-width:60px" class="text-center">Ghi chú</th>
-                                    <th style="min-width:60px" class="text-center">Mã nhóm thiết bị</th>
+                                    <th style="min-width:60px" class="text-center">Mã danh mục thiết bị</th>
                                     <th style="min-width:60px" class="text-center">Giá tiền</th>
-
+                                    <th></th>
                                 </tr>
                             </thead>
 
@@ -168,6 +168,7 @@
                         </td>
                         <td class="text-center"> <input ng-model="item.price" class="form-control" type="text" />
                         </td>
+                        <td> <button type="button" class="btn-close" style="color:red" ng-click="DeleteImport($index,ListEquipImport)"></button></td>
                                                </tr>
                         </tbody>
                         </table>

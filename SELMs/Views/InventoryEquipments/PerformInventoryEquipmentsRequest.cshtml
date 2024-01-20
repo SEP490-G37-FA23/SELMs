@@ -16,10 +16,12 @@
             <div class="row">
                 <div class="col-6">
                     <label class=" col-form-label">Phòng Lab</label>
+
                     <div>
                         <select ng-model="location_id" class="form-control" ng-change="GetListIERInLocation(location_id);">
                             <option ng-repeat="item in ListLocations" value="{{item.location_id}}">{{item.location_code}},{{item.location_desciption}}</option>
                         </select>
+                        <span style="color:red">Chọn phòng lab để lấy ra yêu cầu thực hiện kiểm kê</span>
                     </div>
                 </div>
                 <div class="col-6 text-right">
@@ -75,7 +77,7 @@
                                     <td>{{item.requester_name}}</td>
                                     <td>{{item.request_date}}</td>
                                     <td><input class="form-check-input ms-2" type="checkbox" ng-model="item.is_perform"></td>
-                                    <td><textarea ng-model="item.actual_usage_status" class="form-control" ng-click="item.is_perform = true;"></textarea></td>
+                                    <td><textarea ng-model="item.actual_usage_status" class="form-control" ng-click="item.is_perform = true;checked=true;"></textarea></td>
                                 </tr>
 
                             </tbody>

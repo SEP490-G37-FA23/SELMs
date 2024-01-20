@@ -173,6 +173,10 @@ app.controller('EquipmentsListCtrl', function ($scope, $http, $sce) {
             });
     }
 
+    $scope.DeleteImport = function (index, ListEquipImport) {
+        ListEquipImport.splice(index, 1);
+    }
+
     $scope.tableToExcel = function (tableId) { // ex: '#my-table'
         var tab_text = "<table border='2px' style='width:100%'><tr bgcolor='#87AFC6'>";
         var textRange; var j = 0;

@@ -38,17 +38,18 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class=" col-form-label">Level <span style="color:red">*</span></label>
+                        <label class=" col-form-label">Level <span style="color:red">(*)</span></label>
                         <div>
-                            <select ng-model="NewCategory.category_level" 
-                                    ng-change="LoadListParentCategories(NewCategory.category_level)" 
+                            <select ng-model="NewCategory.category_level"
+                                    ng-change="LoadListParentCategories(NewCategory.category_level)"
                                     class="form-control"
-                                     ng-init="NewCategory.category_level=1">
-                                <option value="1" selected>Level 1</option>
-                                <option value="2"> Level2</option>
+                                    ng-init="NewCategory.category_level=1">
+                                <option value="1">Level 1</option>
+                                <option value="2">Level 2</option>
                                 <option value="3">Level 3</option>
-                                <option value="4">Level4</option>
+                                <option value="4">Level 4</option>
                             </select>
+                            <span style="color:red">Mặc định là level 1</span>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -57,6 +58,7 @@
                             <select ng-disabled="NewCategory.category_level==1" class="form-control" ng-model="NewCategory.category_parent_id">
                                 <option value="{{item.category_id}}" ng-repeat="item in ListParentCategories">{{item.category_code}}: {{item.category_name}}</option>
                             </select>
+                            <span style="color:red">Các level khác 1 sẽ được chọn danh mục cha</span>
                         </div>
                     </div>
                 </div>

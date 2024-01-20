@@ -433,10 +433,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMsDatabase.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SELMsDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SELMsDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SELMsDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SELMsDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>SELMsDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SELMsDatabase.tt</DependentUpon>
@@ -798,6 +806,7 @@
     <Content Include="Models\SELMsDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SELMsDatabase.edmx</DependentUpon>
+      <LastGenOutput>SELMsDatabase.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

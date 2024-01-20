@@ -27,7 +27,9 @@
                 <div>
                     <ng-form>
                         <div class="form-member">
-                            <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="performerSearch" ng-change="LoadMembersList(performerSearch)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                            <input type="text" style="color:black"
+                                   placeholder="Tìm kiếm theo tên hoặc username của thành viên"
+                                   class="form-control input-form" autocomplete="off" ng-model="performerSearch" ng-change="LoadMembersList(performerSearch)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
                             <input type="text" class="form-control" ng-model="NewInventory.performer" style="display:none">
                         </div>
 

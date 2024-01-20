@@ -1,6 +1,6 @@
 ﻿var app = angular.module("myApp", []);
 
-app.controller('PerformInventoryRequestCtrl', function ($scope, $http, $sce) {
+app.controller('PerformInventoryRequestCtrl', function ($scope, $http, $filter) {
 
     var username = $('#username').val();
     var fullname = $('#fullname').val();
@@ -54,10 +54,11 @@ app.controller('PerformInventoryRequestCtrl', function ($scope, $http, $sce) {
         });
     }
     $scope.location_id = 0;
+    $scope.checked = false;
     $scope.SavePerformInventory = function () {
         var data = {
             username: username,
-            listPerform: $scope.ListInventoryDetail
+            listPerform: $filter('filter')($scope.ListInventoryDetail, { is_perform: true })
         }
         console.log(data)
         var partialUrl = origin + '/api/v1/inventory-request/perform';

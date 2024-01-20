@@ -37,7 +37,7 @@ app.controller('ResultInventoryRequestCtrl', function ($scope, $http, $sce) {
             username: username
         }
         $http.post(origin + '/api/v1/inventory/result', data).then(function (response) {
-            $scope.ListResultInventory = response.data.Result;
+            $scope.ListResultInventory = response.data;
         });
     }
     $scope.GetResultIER();
