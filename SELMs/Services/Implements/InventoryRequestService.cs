@@ -159,7 +159,7 @@ namespace SELMs.Services.Implements
                 detail.actual_usage_status = item.actual_usage_status;
                 var applicationDetail = repository.UpdateApplicationDetail(detail);
 
-                Equipment equip = await equipmentRepository.GetEquipment(item.equipment_id);
+                Equipment equip = equipmentRepository.GetEquipment(item.equipment_id);
                 equip.usage_status = item.actual_usage_status;
                 var equipment = equipmentRepository.UpdateEquipment(equip);
             }

@@ -28,7 +28,7 @@ namespace SELMs.Repositories.Implements
 
         }
 
-        public async Task<dynamic> GetEquipment(int id)
+        public dynamic GetEquipment(int id)
         {
             dynamic equipment = db.Equipments.Where(e => e.equipment_id == id).FirstOrDefault();
             return equipment;

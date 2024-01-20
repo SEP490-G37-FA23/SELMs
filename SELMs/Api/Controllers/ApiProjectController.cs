@@ -144,7 +144,7 @@ namespace SELMs.Api.Controllers
 				Project project = mapper.Map<Project>(projectRequest.Project);
 				List<string> projectMembers = projectRequest.ProjectMembers;
 				List<string> projectEquipments = projectRequest.ProjectEquipments;
-				await service.UpdateProject(id, project, projectMembers, projectEquipments);
+				service.UpdateProject(id, project, projectMembers, projectEquipments);
 				return Ok();
 			}
 			catch (Exception ex)

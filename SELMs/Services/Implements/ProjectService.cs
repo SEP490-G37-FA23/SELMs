@@ -20,8 +20,8 @@ namespace SELMs.Services.Implements
             try
             {
                 dynamic project = repository.GetProject(id);
-                List<User> projectMembers = await repository.GetProjectMembers(id);
-                List<Equipment> projectEquipments = await repository.GetProjectEquipments(id);
+                List<User> projectMembers = repository.GetProjectMembers(id);
+                List<Equipment> projectEquipments = repository.GetProjectEquipments(id);
                 ProjectModel projectModel = new ProjectModel()
                 {
                     Project = project,
@@ -85,14 +85,14 @@ namespace SELMs.Services.Implements
                 {
                     project.project_id = id;
                     project = repository.UpdateProject(project);
-                    List<User> currentMembers = await repository.GetProjectMembers(id);
+                    List<User> currentMembers = repository.GetProjectMembers(id);
                     List<string> currentMemberCodes = new List<string>();
                     foreach (User user in currentMembers)
                     {
                         currentMemberCodes.Add(user.user_code);
                     }
                     
-                    List<Equipment> currentEquipments = await repository.GetProjectEquipments(id);
+                    List<Equipment> currentEquipments = repository.GetProjectEquipments(id);
                     List<string> currentEquipmentCodes = new List<string>();
 
                     foreach (Equipment equip in currentEquipments)

@@ -51,7 +51,9 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         console.log(project);
         console.log('Start Date:', data.start_date);
         console.log('End Date:', data.end_date);
-        console.log('Comparison Result:', data.end_date < data.start_date);
+        console.log('Comparison Result:', data.end_date >= data.start_date);
+        let start_date = new Date(data.start_date);
+        let end_date = new Date(data.end_date);
         if (project.location_id == '0') {
             $scope.ErrorSystem('Vui lòng chọn phòng Lab.');
         }
@@ -64,7 +66,7 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         else if (!regex.test(data.end_date)) {
             $scope.ErrorSystem('Vui lòng chọn ngày kết thúc dự án.');
         }
-        else if (data.end_date <= data.start_date) {
+        else if (end_date < start_date) {
             $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
         }
         else {

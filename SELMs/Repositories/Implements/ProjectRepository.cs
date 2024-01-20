@@ -84,7 +84,7 @@ namespace SELMs.Repositories.Implements
 		{
 			Project orgProject = db.Projects.Where(p => p.project_id == project.project_id).FirstOrDefault();
 			db.Entry(orgProject).CurrentValues.SetValues(project);
-			db.SaveChangesAsync();
+			db.SaveChanges();
 			return orgProject;
 		}
 
@@ -100,12 +100,12 @@ namespace SELMs.Repositories.Implements
 
 			//    )
 
-			var projectMembers =
+			var projectMembers = 
 				(from u in db.Users
 				 join pu in db.Member_Project_History on u.user_code equals pu.user_code
 				 join p in db.Projects on pu.project_id equals p.project_id
 				 where p.project_id.Equals(id) && u.resignation_date.Equals(null)
-				 select u).ToListAsync();
+				 select u).ToList();
 			return projectMembers;
 		}
 
@@ -116,7 +116,7 @@ namespace SELMs.Repositories.Implements
 				 join pe in db.Equipment_Project_History on e.system_equipment_code equals pe.system_equiment_code
 				 join p in db.Projects on pe.project_id equals p.project_id
 				 where p.project_id.Equals(id) && (pe.to_date == null || pe.to_date >= DateTime.Now)
-				 select e).ToListAsync();
+				 select e).ToList();
 			return projectEquipments;
 		}
 
