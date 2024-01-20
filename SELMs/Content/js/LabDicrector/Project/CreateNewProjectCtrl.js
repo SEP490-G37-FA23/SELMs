@@ -80,10 +80,11 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             project_name: '',
             acronym: '',
             description: '',
-            manager: '',
+            manager: username,
             location_id: 0,
             status: 'Pending'
         }
+        $scope.text = fullname;
         $scope.ListMembersJoinProject = [];
         $scope.ListEquipmentProject = [];
     }
@@ -117,7 +118,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
-    //$scope.LoadMembersList();
+    $scope.LoadMembersList('');
 
 
     $scope.LoadLocationsList = function () {
