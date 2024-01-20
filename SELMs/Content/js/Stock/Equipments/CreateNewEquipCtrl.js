@@ -192,6 +192,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
         console.log('standard code', equip.standard_equipment_code);
         console.log('equipment name', equip.equipment_name);
         console.log('price', equip.price);
+        console.log('responsible', equip.responsibler);
         if (!regex1.test(equip.standard_equipment_code) || equip.standard_equipment_code == '') {
             $scope.ErrorSystem('Vui lòng nhập mã chuẩn thiết bị.');
             console.log('standard code error');

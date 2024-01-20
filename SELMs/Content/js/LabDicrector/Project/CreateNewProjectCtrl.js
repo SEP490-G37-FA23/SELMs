@@ -20,13 +20,6 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
-
-        // Hiển thị thông báo trong 5 giây
-        var displayTime = 5000; // 5 giây
-        setTimeout(function () {
-            notificationElement.textContent = '';
-            notificationElement.style.display = 'none';
-        }, displayTime);
     }
 
     $scope.SuccessSystem = function (successMessage) {
@@ -38,13 +31,6 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         notificationElement.style.height = '50px';
         notificationElement.style.textAlign = 'center';
         notificationElement.style.paddingTop = '15px';
-
-        // Hiển thị thông báo trong 5 giây
-        var displayTime = 5000; // 5 giây
-        setTimeout(function () {
-            notificationElement.textContent = '';
-            notificationElement.style.display = 'none';
-        }, displayTime);
     };
 
     //this gets the full url
@@ -64,16 +50,25 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             start_date: $('#startDate').val(),
             end_date: $('#endDate').val(),
         }
-        console.log('Start Date:', data.start_date);
-        console.log('End Date:', data.end_date);
-        console.log('Comparison Result:', data.end_date < data.start_date);
-        console.log('Project name:', newProject.project_name);
+        console.log(newProject);
 
-        if (data.end_date < data.start_date) {
-            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
-        }
-        else if (!regex.test(newProject.project_name)) {
+        if (!regex.test(newProject.project_name)) {
             $scope.ErrorSystem('Tên dự án không hợp lệ.');
+        }
+        else if (newProject.location_id == '0') {
+            $scope.ErrorSystem('Vui lòng chọn phòng Lab.');
+        }
+        else if (!regex.test(newProject.manager)) {
+            $scope.ErrorSystem('Vui lòng chọn người quản lý.');
+        }
+        else if (!regex.test(data.start_date)) {
+            $scope.ErrorSystem('Vui lòng chọn ngày bắt đầu dự án.');
+        }
+        else if (!regex.test(data.end_date)) {
+            $scope.ErrorSystem('Vui lòng chọn ngày kết thúc dự án.');
+        }
+        else if (data.end_date <= data.start_date) {
+            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
         }
         else {
             $scope.CreateNewProject(newProject);
@@ -220,6 +215,7 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             status: true,
             creater:username
         }
+        console.log($scope.Project);
         var data = {
             Project: $scope.Project,
             ProjectMembers: $scope.ListMembersJoinProject.map(function (member) {

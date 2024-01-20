@@ -38,7 +38,7 @@
                                 <label for="projectManager" class="form-label">Người quản lý <span style="color:red">*</span></label>
                                 <ng-form>
                                     <div class="form-member">
-                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}">
                                         <input type="text" class="form-control" ng-model="NewProject.manager" style="display:none">
                                     </div>
 
@@ -125,7 +125,7 @@
                                                     <td>
                                                         <ng-form>
                                                             <div class="form-member-project">
-                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(item.text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.text" ng-change="LoadMembersList(item.text)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}">
                                                                 <input type="text" class="form-control" ng-model="item.user_code" style="display:none">
                                                             </div>
 
@@ -196,7 +196,7 @@
                                                     <td>
                                                         <ng-form>
                                                             <div class="form-member-project">
-                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.textEquip" ng-change="LoadEquipmentsList(item.textEquip)" ng-focus="showtableEquipPj = true" ng-blur="showtableEquipPj = false" ng-model-options="{debounce:700}" required>
+                                                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="item.textEquip" ng-change="LoadEquipmentsList(item.textEquip)" ng-focus="showtableEquipPj = true" ng-blur="showtableEquipPj = false" ng-model-options="{debounce:700}">
                                                                 <input type="text" class="form-control" ng-model="item.system_equipment_code" style="display:none">
                                                             </div>
 

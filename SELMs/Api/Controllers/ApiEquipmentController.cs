@@ -24,6 +24,8 @@ namespace SELMs.Api.Controllers
 
 		private IEquipmentRepository repository = new EquipmentRepository();
 		private IEquipmentService service = new EquipmentService();
+		private IEquipmentLocationHistoryService equipLocationHistoryService = new EquipmentLocationHistoryService();
+
 		private IMapper mapper = MapperConfig.Initialize();
 
 		// GET: Api_Equipment
@@ -175,8 +177,9 @@ namespace SELMs.Api.Controllers
 		{
 			try
 			{
-				Equipment mem = mapper.Map<Equipment>(equipment);
-				dynamic result = service.UpdateEquipment(id, mem);
+				Equipment equip = mapper.Map<Equipment>(equipment);
+				dynamic result = service.UpdateEquipment(id, equip);
+				var historyResult = equipLocationHistoryService.AddEquipmentLocationHistory(equip.system_equipment_code, equipment.location_id);
 				return Ok(result);
 			}
 			catch (Exception ex)

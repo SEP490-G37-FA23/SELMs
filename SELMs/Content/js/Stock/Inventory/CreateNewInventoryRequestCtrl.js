@@ -141,7 +141,25 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
         console.log($scope.ListNewEquipmentInInventory);
     }
 
+    $scope.ValidateDataInput = function (NewInventory) {
+        console.log('performer: ', NewInventory.performer);
+        console.log('location_id: ', NewInventory.location_id);
+        if (NewInventory.performer == '') {
+            console.log('performer invalid');
+            $scope.ErrorSystem('Vui lòng chọn người thực hiện kiểm kê.');
+        }
+        else if (NewInventory.location_id == '0') {
+            console.log('location_id invalid');
+            $scope.ErrorSystem('Vui lòng chọn phòng lab cần thực hiện kiểm kê.');
+        }
+        else {
+            console.log('no invalid data');
+            $scope.SaveNewInventoryRequest(NewInventory);
+        }
+    }
+
     $scope.SaveNewInventoryRequest = function (NewInventory) {
+        console.log(NewInventory);
         var data = {
             application: {
                 requester: NewInventory.requester,

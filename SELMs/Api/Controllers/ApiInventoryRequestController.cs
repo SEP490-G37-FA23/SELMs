@@ -296,5 +296,25 @@ namespace SELMs.Api.Controllers
             }
         }
         #endregion
+
+        #region Clear all equipment result (custom)
+        [HttpPost]
+        [Route("inventory-request/equipment-result/clear")]
+        public async Task<IHttpActionResult> ClearAllIRAResults([FromBody] UpdateEquipmentResultDTO dto)
+        {
+            try
+            {
+                var result = service.ClearIRAResults(dto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error: ", ex);
+                Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+                return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+                throw;
+            }
+        }
+        #endregion
     }
 }
