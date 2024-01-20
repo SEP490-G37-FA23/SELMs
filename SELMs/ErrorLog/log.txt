@@ -1189,3 +1189,8 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'System.Data.Entity.Dynam
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at SELMs.Api.Controllers.ApiInventoryRequestController.<UpdateEquipmentResult>d__11.MoveNext() in C:\Users\ductm\source\repos\capstone\SELMs\SELMs\Api\Controllers\ApiInventoryRequestController.cs:line 186
+2024-01-20 13:27:05,994 [7] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type 'System.Web.Http.Results.OkNegotiatedContentResult<System.Threading.Tasks.Task<object>>' to 'SELMs.Models.Equipment'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Api.Controllers.ApiEquipmentController.<UpdateEquipment>d__11.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 180
