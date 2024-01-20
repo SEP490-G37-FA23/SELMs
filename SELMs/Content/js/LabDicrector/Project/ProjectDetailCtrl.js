@@ -79,8 +79,8 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
                 console.log(response.data);
                 $scope.DetailProject = response.data.Project;
                 $scope.text = $scope.DetailProject.manager_name;
-                $scope.ListMembersJoinProject = response.data.ListMemberInProject;
-                $scope.ListEquipmentProject = response.data.ListEquipmentInProject;
+                $scope.ListMembersJoinProject = response.data.ProjectMembers;
+                $scope.ListEquipmentProject = response.data.ProjectEquipments;
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
@@ -95,7 +95,7 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
             description: '',
             manager: '',
             location_id: 0,
-            status: 'Pending'
+            status: true
         }
         $scope.ListMembersJoinProject = [];
         $scope.ListEquipmentProject = [];
@@ -236,7 +236,7 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
                 return member.system_equipment_code;
             })
         }
-        var partialUrl = origin + '/api/v1/projects/update-project/' + project.project_id;
+        var partialUrl = origin + '/api/v1/projects/update/' + project.project_id;
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật dự án thành công!');

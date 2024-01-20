@@ -263,7 +263,7 @@
 
             <div class="text-center">
                 @*<button type="submit" class="btn btn-primary" ng-click="UpdateProject(DetailProject)">Cập nhật dự án</button>*@
-                <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(DetailProject)">Cập nhật dự án</button>
+                <button type="submit" class="btn btn-primary" ng-click="ValidateDataInput(DetailProject)" ng-show="DetailProject.status">Cập nhật dự án</button>
             </div>
 
         </form>

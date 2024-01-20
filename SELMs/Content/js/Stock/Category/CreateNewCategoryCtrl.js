@@ -38,12 +38,12 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
             number_equipment: 0,
             desciption: '',
             is_active: true,
-            category_level: 1,
+            category_level: '1',
             category_parent_id: 0
         }
         $scope.ListEquipInCategory = [];
     }
-    $scope.ResetNewCategory();
+    //$scope.ResetNewCategory();
 
     $scope.HandelEquip = function (eq,item) {
         item.standard_equipment_code = eq.standard_equipment_code;
@@ -76,7 +76,7 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
             username: username,
             isadmin: isadmin,
             role: role,
-            level: category_level
+            level: parseInt(category_level)
         }
         $http.post(origin + '/api/v1/parent-categories', data).then(function (response) {
             $scope.ListParentCategories = response.data;
@@ -87,7 +87,7 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
         var regex = /\S/;
         console.log('category code: ', category.category_code);
         console.log('category name: ', category.category_name);
-        console.log('category level: ', category.category_level);
+        console.log('category level: ', parseInt(category.category_level));
         if (!regex.test(category.category_code) || category.category_code == '') {
             $scope.ErrorSystem('Vui lòng nhập mã danh mục.');
             console.log('category code not valid');
@@ -110,7 +110,7 @@ app.controller('CreateNewCategoryCtrl', function ($scope, $http, $sce) {
             category: {
                 category_code: category.category_code,
                 category_name: category.category_name,
-                number_equipment: $scope.ListEquipInCategory.length,
+                number_equipment: $scope.ListEquipInCategory == [] ? $scope.ListEquipInCategory.length:0,
                 desciption: category.desciption,
                 is_active: true,
                 category_level: parseInt(category.category_level),

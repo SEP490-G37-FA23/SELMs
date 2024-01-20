@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="equipPrice" class="form-label">Giá <span style="color:red">*</span></label>
+                        <label for="equipPrice" class="form-label">Giá </label>
                         <input type="text" format="number" class="form-control" ng-model="NewEquip.price">
                     </div>
                     <div class="col-md-4">
@@ -73,7 +73,7 @@
                         <label for="equipLocation" class="form-label">Vị trí <span style="color:red">*</span></label>
                         <select ng-model="NewEquip.location_id" class="form-select">
                             <option ng-repeat="item in ListLocations" value="{{item.location_id}}">
-                                {{item.location_code}}- {{item.location_desciption}}
+                                {{item.location_code}} - {{item.location_desciption}}
                             </option>
                         </select>
                     </div>
@@ -160,7 +160,10 @@
                         <label for="response" class="form-label">Người chịu trách nhiệm <span style="color:red">*</span></label>
                         <ng-form>
                             <div class="form-member">
-                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required>
+                                <input type="text" style="color:black" class="form-control input-form" autocomplete="off"
+                                       ng-model="text" ng-change="LoadMembersList(text)" ng-focus="showtableMB = true" 
+                                       ng-blur="showtableMB = false" ng-model-options="{debounce:700}" required
+                                       placeholder="Điền tên,username thành viên...">
                                 <input type="text" class="form-control" ng-model="NewEquip.responsibler" style="display:none">
                             </div>
 

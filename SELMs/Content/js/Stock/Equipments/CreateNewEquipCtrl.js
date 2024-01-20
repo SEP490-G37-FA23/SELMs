@@ -75,7 +75,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
-    $scope.LoadMembersList();
+    $scope.LoadMembersList('');
 
     $scope.HandelMember = function (mem) {
         $scope.text = mem.fullname;
@@ -122,8 +122,8 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             unit: 'Cái',
             serial_no: '',
             type_equipment: 'private',
-            category_code: '',
-            location_id: url != '' ? parseInt(url) : 1,
+            category_code: 'C-More',
+            location_id: url != '' ? parseInt(url) : -1,
             price: 0,
             create_date: new Date(),
             note: '',
@@ -146,6 +146,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
                     $scope.ErrorSystem(error.data.Message);
                 });
         }
+        $scope.text = fullname;
     }
     $scope.ResetNewEquip();
 
@@ -204,9 +205,13 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
             $scope.ErrorSystem('Vui lòng nhập giá thiết bị');
             console.log('price error');
         }
-        else if (equip.price < 1000) {
-            $scope.ErrorSystem('Giá thiết bị không được nhỏ hơn 1000VND.');
+        else if (equip.price < 0) {
+            $scope.ErrorSystem('Giá thiết bị không được nhỏ hơn 0.');
             console.log('price error');
+        }
+        else if (equip.location_id == -1) {
+            $scope.ErrorSystem('Chọn vị trí thiết bị.');
+            console.log('location_id error');
         }
         else {
             console.log('no validation error');

@@ -74,9 +74,8 @@ namespace SELMs.Controllers
         public ActionResult Logout()
         {
 
-            Session["USERNAME"] = null;
-            Session["PASSWORD"] = null;
-
+            Session["username"] = null;
+            Session["role"] = "";
             return RedirectToAction("Login");
         }
 

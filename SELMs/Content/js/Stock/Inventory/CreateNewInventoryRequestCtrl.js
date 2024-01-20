@@ -69,6 +69,7 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
+    $scope.LoadMembersList('');
     $scope.HandelMemberPerformer = function (mb, NewInventory) {
         NewInventory.performer = mb.user_code;
         $scope.performerSearch = mb.fullname;

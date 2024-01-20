@@ -51,11 +51,11 @@
                             <th scope="row">{{$index+1}}</th>
                             <td>{{item.category_code}}</td>
                             <td>{{item.category_name}}</td>
-                            <td>{{item.desciption}}</td>
+                            <td style="max-width:200px">{{item.desciption}}</td>
                             <td>{{item.category_level}}</td>
                             <td>{{item.category_parent}}</td>
                             <td>{{item.number_equip}}</td>
-                            <td>
+                            <td style="min-width:200px">
                                 <button class="btn btn-primary mx-3" ng-click="LoadCategoryDetails(item)"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-danger " ng-click="DeleteCategory(item)"><i class="fas fa-trash-alt"></i></button>
                             </td>
