@@ -145,7 +145,7 @@ namespace SELMs.Services.Implements
                 detail.inventory_date = DateTime.Now;
                 detail.actual_usage_status = item.actual_usage_status;
                 detail.is_perform = item.is_perform;
-                await repository.UpdateApplicationDetail(detail);
+                repository.UpdateApplicationDetail(detail);
             }
             return "Thành công";
         }

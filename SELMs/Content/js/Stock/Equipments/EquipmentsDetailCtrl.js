@@ -177,6 +177,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
     $scope.UpdateEquip = function (equip) {
         var data = {
             equip: {
+                system_equipment_code: url,
                 standard_equipment_code: equip.standard_equipment_code,
                 equipment_name: equip.equipment_name,
                 unit: equip.unit,
@@ -184,7 +185,7 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
                 type_equipment: equip.type_equipment,
                 category_code: equip.category_code,
                 price: equip.price,
-                create_date: new Date(),
+                create_date: equip.create_date,
                 note: equip.note,
                 responsibler: equip.responsibler,
                 usage_status: equip.usage_status,
