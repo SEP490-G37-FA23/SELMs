@@ -50,7 +50,13 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
             start_date: $('#startDate').val(),
             end_date: $('#endDate').val(),
         }
-        console.log(newProject);
+
+        var startDate = moment(data.start_date, 'DD/MM/YYYY', true);
+        var endDate = moment(data.end_date, 'DD/MM/YYYY', true);
+
+        console.log('Start Date:', startDate);
+        console.log('End Date:', endDate);
+        console.log('Comparison Result:', endDate.isBefore(startDate));
 
         if (!regex.test(newProject.project_name)) {
             $scope.ErrorSystem('Tên dự án không hợp lệ.');
@@ -67,8 +73,8 @@ app.controller('CreateNewProjectCtrl', function ($scope, $http, $sce) {
         else if (!regex.test(data.end_date)) {
             $scope.ErrorSystem('Vui lòng chọn ngày kết thúc dự án.');
         }
-        else if (data.end_date <= data.start_date) {
-            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
+        else if (endDate.isBefore(startDate)) {
+            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn hoặc cùng ngày kết thúc dự án.');
         }
         else {
             $scope.CreateNewProject(newProject);

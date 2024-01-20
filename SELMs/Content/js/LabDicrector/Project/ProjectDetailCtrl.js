@@ -47,32 +47,34 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         var data = {
             start_date: $('#startDate').val(),
             end_date: $('#endDate').val(),
-        }
-        console.log(project);
-        console.log('Start Date:', data.start_date);
-        console.log('End Date:', data.end_date);
-        console.log('Comparison Result:', data.end_date >= data.start_date);
-        let start_date = new Date(data.start_date);
-        let end_date = new Date(data.end_date);
+        };
+
+        var startDate = moment(data.start_date, 'DD/MM/YYYY', true);
+        var endDate = moment(data.end_date, 'DD/MM/YYYY', true);
+
+        console.log('Start Date:', startDate);
+        console.log('End Date:', endDate);
+        console.log('Comparison Result:', endDate.isBefore(startDate));
+
         if (project.location_id == '0') {
             $scope.ErrorSystem('Vui lòng chọn phòng Lab.');
         }
         else if (!regex.test(project.manager)) {
             $scope.ErrorSystem('Vui lòng chọn người quản lý.');
         }
-        else if (!regex.test(data.start_date)) {
+        else if (!startDate.isValid()) {
             $scope.ErrorSystem('Vui lòng chọn ngày bắt đầu dự án.');
         }
-        else if (!regex.test(data.end_date)) {
+        else if (!endDate.isValid()) {
             $scope.ErrorSystem('Vui lòng chọn ngày kết thúc dự án.');
         }
-        else if (end_date < start_date) {
-            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn ngày kết thúc dự án.');
+        else if (endDate.isBefore(startDate)) {
+            $scope.ErrorSystem('Ngày bắt đầu phải nhỏ hơn hoặc cùng ngày kết thúc dự án.');
         }
         else {
             $scope.UpdateProject(project);
         }
-    }
+    };
 
     $scope.GetDetailProject = function (project_id) {
         var partialUrl = origin + '/api/v1/projects/' + project_id;
@@ -229,6 +231,7 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
             status: true,
             creater: username
         }
+        console.log($scope.Project);
         var data = {
             Project: $scope.Project,
             ProjectMembers: $scope.ListMembersJoinProject.map(function (member) {
