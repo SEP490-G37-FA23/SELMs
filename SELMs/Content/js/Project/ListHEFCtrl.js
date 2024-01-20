@@ -135,7 +135,7 @@ app.controller('ListHEFCtrl', function ($scope, $http, $sce) {
             $http.post(partialUrl)
                 .then(function (response) {
                     $scope.SuccessSystem('Hủy đơn bàn giao thiết bị thành công!');
-
+                    $scope.LoadHEFList();
                 }, function (error) {
                     $scope.ErrorSystem(error.data.Message);
                 });

@@ -29,6 +29,7 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
+                            <span style="color:red;">Cấp độ mặc định là cấp 1</span>
                         </div>
                     </div>                    
                     <div class="col-md-6 mb-3">
@@ -36,7 +37,7 @@
                         <div>
                             <ng-form>
                                 <div class="form-all-sub-location">
-                                    <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadAllLocationList(text)" ng-focus="showtableSL = true" ng-blur="showtableSL = false" ng-model-options="{debounce:700}" required>
+                                    <input type="text" style="color:black" ng-disabled="NewLocation.location_level==1" class="form-control input-form" autocomplete="off" ng-model="text" ng-change="LoadAllLocationList(text)" ng-focus="showtableSL = true" ng-blur="showtableSL = false" ng-model-options="{debounce:700}" required>
                                     <input type="text" class="form-control" ng-model="NewLocation.parent_location_id" style="display:none">
                                 </div>
 
@@ -68,6 +69,7 @@
                                 </div>
 
                             </ng-form>
+                            <span style="color:red;">Chọn từ cấp độ 2 trở lên để chọn vị trí cha</span>
                         </div>
                     </div>
                 </div>
