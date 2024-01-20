@@ -34,7 +34,7 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
     $scope.NewLocation = {
         location_code: '',
         location_desciption: '',
-        parent_location_id: 0,
+        parent_location_id: 1,
         location_level: 1,
         is_active: true
     }
@@ -56,7 +56,7 @@ app.controller('CreateNewLocationCtrl', function ($scope, $http, $sce) {
     $scope.LoadAllLocationList = function (text,id) {
         data = {
             username: username,
-            id: id,
+            id: parseInt(id)- 1,
             text: text
             }
         $http.post(origin + '/api/v1/locations', data).then(function (response) {

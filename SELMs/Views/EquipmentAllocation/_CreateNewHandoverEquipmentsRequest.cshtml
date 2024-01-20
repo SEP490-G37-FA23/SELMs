@@ -46,10 +46,12 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="receiver" class="form-label">Người tiếp nhận</label>
+                                                <label for="receiver" class="form-label">Người tiếp nhận <span style="color:red;">*</span></label>
                                                 <ng-form>
                                                     <div class="form-member-project">
-                                                        <input type="text" style="color:black" class="form-control input-form" autocomplete="off" ng-model="NewHandover.receipter_name" ng-change="LoadMembersList(NewHandover.receipter_name)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
+                                                        <input type="text" style="color:black" class="form-control input-form"
+                                                               placeholder="Điền tên hoặc username để tìm kiếm..."
+                                                               autocomplete="off" ng-model="NewHandover.receipter_name" ng-change="LoadMembersList(NewHandover.receipter_name)" ng-focus="showtableMBPj = true" ng-blur="showtableMBPj = false" ng-model-options="{debounce:700}" required>
                                                         <input type="text" class="form-control" ng-model="NewHandover.receipter" style="display:none">
                                                     </div>
 

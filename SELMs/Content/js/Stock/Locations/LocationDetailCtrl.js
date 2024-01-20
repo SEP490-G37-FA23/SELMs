@@ -324,7 +324,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             $http.post(partialUrl, data)
                 .then(function (response) {
                     $scope.SuccessSystem('Thêm mới vị trí thành công!');
-
+                    $scope.GetDetailLocation(url);
                 }, function (error) {
                     $scope.ErrorSystem(error.data.Message);
                 });
