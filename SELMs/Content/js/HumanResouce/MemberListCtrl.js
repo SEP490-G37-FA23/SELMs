@@ -22,7 +22,7 @@ app.controller('MemberListCtrl', function ($scope, $http, $sce) {
     }
     $scope.NgayHomNay = dd + '/' + mm + '/' + yyyy;
 
-
+    $scope.show = false;
     $scope.ErrorSystem = function (errorMessage) {
         // This function handles errors and displays the error message as a notification.
         var notificationElement = document.getElementById('notification');
