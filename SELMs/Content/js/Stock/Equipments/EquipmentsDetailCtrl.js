@@ -173,7 +173,8 @@ app.controller('EquipmentsDetailCtrl', function ($scope, $http, $sce) {
             $scope.UpdateEquip(equip);
         }
     }
-
+    $scope.show = false;
+  
     $scope.UpdateEquip = function (equip) {
         var data = {
             equip: {

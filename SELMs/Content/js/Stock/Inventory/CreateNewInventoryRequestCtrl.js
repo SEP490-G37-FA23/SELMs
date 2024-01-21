@@ -160,26 +160,31 @@ app.controller('CreateNewInventoryRequestCtrl', function ($scope, $http, $sce) {
 
     $scope.SaveNewInventoryRequest = function (NewInventory) {
         console.log(NewInventory);
-        var data = {
-            application: {
-                requester: NewInventory.requester,
-                performer: NewInventory.performer,
-                total_equipment: $scope.ListNewEquipmentInInventory.length,
-                status: false,
-                location_id: parseInt(NewInventory.location_id)
-            },
-            application_details:  $scope.ListNewEquipmentInInventory.map(function (item) {
+        if ($scope.ListNewEquipmentInInventory.length <= 0) {
+            $scope.ErrorSystem('Phòng lab không có thiết bị nào để kiểm kê!!.');
+        } else {
+            var data = {
+                application: {
+                    requester: NewInventory.requester,
+                    performer: NewInventory.performer,
+                    total_equipment: $scope.ListNewEquipmentInInventory.length,
+                    status: false,
+                    location_id: parseInt(NewInventory.location_id)
+                },
+                application_details: $scope.ListNewEquipmentInInventory.map(function (item) {
                     return item.system_equipment_code;
                 })
-        }
-        var partialUrl = origin + '/api/v1/inventory-request/new-application';
-        $http.post(partialUrl, data)
-            .then(function (response) {
-                $scope.SuccessSystem('Thêm mới đơn kiểm kê thành công!');
-                $scope.ResetNewInventory();
+            }
+            var partialUrl = origin + '/api/v1/inventory-request/new-application';
+            $http.post(partialUrl, data)
+                .then(function (response) {
+                    $scope.SuccessSystem('Thêm mới đơn kiểm kê thành công!');
+                    $scope.ResetNewInventory();
 
-            }, function (error) {
-                $scope.ErrorSystem(error.data.Message);
-            });
+                }, function (error) {
+                    $scope.ErrorSystem(error.data.Message);
+                });
+        }
+        
     }
 });
