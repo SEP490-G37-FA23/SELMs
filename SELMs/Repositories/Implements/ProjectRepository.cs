@@ -109,7 +109,18 @@ namespace SELMs.Repositories.Implements
 			return projectMembers;
 		}
 
-		public dynamic GetProjectEquipments(int id)
+        public void RemoveProjectMember(int projectId, string userCode)
+		{
+			var histories = db.Member_Project_History.Where(h => h.project_id == projectId && h.user_code == userCode).ToList();
+			if (histories != null && histories.Count > 0)
+			{
+				db.Member_Project_History.RemoveRange(histories);
+			}
+			db.SaveChanges();
+		}
+
+
+        public dynamic GetProjectEquipments(int id)
 		{
 			var projectEquipments =
 				(from e in db.Equipments
