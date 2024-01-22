@@ -56,7 +56,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="inputGender" class="form-label">Giới tính</label>
-                                                <select id="inputGender" class="form-select" ng-model="DetailMember.gender">
+                                                <p ng-click="show=true">{{DetailMember.gender==1?'Nam':'Nữ'}}</p>
+                                                <select id="inputGender" class="form-select" ng-model="DetailMember.gender" ng-show="show">
                                                     <option value="1">Nam</option>
                                                     <option value="0">Nữ</option>
                                                 </select>
@@ -111,8 +112,8 @@
                                             <label for="inputPosition" class="form-label">Vị trí công việc</label>
                                             <select ng-model="DetailMember.role_code" class="form-control">
                                                 <option ng-repeat="item in ListRoles" value="{{item.role_code}}">{{item.role_name}}</option>
-                                            </select>
-                                        </div>
+                                                    </select>
+</div>
                                         <div class="col-md-6">
                                             <label for="inputExperience" class="form-label">Kinh nghiệm</label>
                                             <input type="text" class="form-control" ng-model="DetailMember.skill">

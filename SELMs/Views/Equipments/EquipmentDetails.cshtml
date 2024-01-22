@@ -82,7 +82,9 @@
                     </div>
                     <div class="col-md-4">
                         <label for="equipLocation" class="form-label">Vị trí</label>
-                        <select ng-model="DetailEquip.location_id" class="form-select">
+                        <p ng-click="show=true;">{{DetailEquip.location_desciption}}</p> 
+                        <span style="color:red;">Click vào để chọn vị trí mới </span>
+                        <select ng-model="DetailEquip.location_id" class="form-select" ng-show="show">
                             <option ng-repeat="item in ListLocations" value="{{item.location_id}}">
                                 {{item.location_code}}- {{item.location_desciption}}
                             </option>

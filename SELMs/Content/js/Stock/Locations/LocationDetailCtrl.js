@@ -177,6 +177,15 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
     }
     $scope.DeleteMemberProject = function (ListSubLocation_L3, index) {
         ListSubLocation_L3.splice(index, 1);
+        var partialUrl = origin + '/api/v1/projects/'++'update-sub-location/' + location.location_id;
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
+        projects / { projectId } / remove - member / { userCode }
     }
 
     $scope.UpdateLocation = function (location) {
