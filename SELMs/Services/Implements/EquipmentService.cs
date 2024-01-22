@@ -64,7 +64,7 @@ namespace SELMs.Services.Implements
 
         public async Task<dynamic> AddImages(int id, List<HttpPostedFile> files)
         {
-            Equipment equipment = await repository.GetEquipment(id);
+            Equipment equipment = repository.GetEquipment(id);
             int order = 1;
             List<Image> imgs = new List<Image>();
             foreach (HttpPostedFile item in files)

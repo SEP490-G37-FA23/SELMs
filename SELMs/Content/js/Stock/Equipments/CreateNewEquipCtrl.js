@@ -177,6 +177,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Thêm mới thiết bị thành công!');
+                console.log(response.data)
                 $scope.UpdateImageEquip(response.data)
                 $scope.ResetNewEquip();
 
@@ -240,7 +241,7 @@ app.controller('CreateNewEquipCtrl', function ($scope, $http, $sce) {
         })
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật ảnh thiết bị thành công!');
-                $scope.LoadEquipDetailsBySystemCode(equip.system_equipment_code);
+          /*      $scope.LoadEquipDetailsBySystemCode(equip.system_equipment_code);*/
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
