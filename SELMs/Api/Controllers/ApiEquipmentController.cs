@@ -99,7 +99,7 @@ namespace SELMs.Api.Controllers
 		{
 			DetailEquipDTO returnedData = new DetailEquipDTO();
 			returnedData.equip = await repository.GetDetailEquipment(code);
-			returnedData.ListComponentEquips =  repository.GetListComponentEquips(code);
+			returnedData.ListComponentEquips = repository.GetListComponentEquips(code);
             returnedData.ListImageEquips = repository.GetEquipmentImages(returnedData.equip.equipment_id);
             return returnedData;
 
