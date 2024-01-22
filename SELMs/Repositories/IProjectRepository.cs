@@ -18,6 +18,7 @@ namespace SELMs.Repositories
         dynamic UpdateProject(Project project);
         void DeleteProject(int id);
         dynamic GetProjectMembers(int id);
+        void RemoveProjectMember(int projectId, string userCode);
         dynamic GetProjectEquipments(int id);
 
         dynamic FindActiveMember(int projectId, string memberCode);

@@ -197,6 +197,27 @@ namespace SELMs.Api.Controllers
 		}
 		#endregion
 
+
+		#region Remove Project Member
+		[HttpPost]
+		[Route("projects/{projectId}/remove-member/{userCode}")]
+		public async Task<IHttpActionResult> RemoveProjectMember(int projectId, string userCode)
+		{
+			try
+			{
+				repository.RemoveProjectMember(projectId,userCode);
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				Log.Error("Error: ", ex);
+				Console.WriteLine($"{ex.Message} \n {ex.StackTrace}");
+				return BadRequest($"{ex.Message} \n {ex.StackTrace}");
+				throw;
+			}
+		}
+		#endregion
+
 		//#region Get detail project
 		//[HttpGet]
 		//[Route("projects/detail/{id}")]
