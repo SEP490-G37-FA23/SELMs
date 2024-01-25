@@ -28,5 +28,7 @@ namespace SELMs.Repositories
         dynamic AddNewEquipLocationHistory(Equipment_Location_History item);
         void UpdateEquipLocationHistory(Equipment_Location_History item);
         List<UserDTO> GetListMemberInLocation(int id);
+
+        void RemoveLocationMember(int locationId, string userCode);
     }
 }

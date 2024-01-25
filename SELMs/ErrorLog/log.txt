@@ -1232,3 +1232,8 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'System.Collections.Gener
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at SELMs.Api.Controllers.ApiProjectController.<GetProject>d__7.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiProjectController.cs:line 99
+2024-01-22 18:32:58,787 [6] ERROR SELMs.Api.Controllers.ApiEquipmentController [(null)] - Error: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type 'System.Web.Http.Results.OkNegotiatedContentResult<System.Threading.Tasks.Task<object>>' to 'SELMs.Models.Equipment'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at SELMs.Api.Controllers.ApiEquipmentController.<UpdateEquipment>d__12.MoveNext() in E:\FU\Semester 9\SEP490\Projects\Repos\SELMs\SELMs\Api\Controllers\ApiEquipmentController.cs:line 183

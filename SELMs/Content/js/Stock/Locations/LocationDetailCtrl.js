@@ -147,7 +147,18 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
 
     }
     $scope.DeleteMemberLocation = function (list, index) {
+        let mem = list[index];
+        let partialUrl = origin + '/api/v1/locations/' + url + '/remove-member/' + mem.user_code;
+        var data = { }
+        $http.post(partialUrl, data)
+            .then(function (response) {
+                $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
+
+            }, function (error) {
+                $scope.ErrorSystem(error.data.Message);
+            });
         list.splice(index, 1);
+
     }
 
 

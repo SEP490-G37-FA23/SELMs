@@ -153,5 +153,15 @@ namespace SELMs.Repositories.Implements
                 , commandType: CommandType.StoredProcedure).ToList(); ;
             return categories;
         }
+
+        public void RemoveLocationMember(int locationId, string userCode)
+        {
+            var histories = db.Member_Location_History.Where(h => h.location_id == locationId && h.user_code == userCode).ToList();
+            if (histories != null && histories.Count > 0)
+            {
+                db.Member_Location_History.RemoveRange(histories);
+            }
+            db.SaveChanges();
+        }
     }
 }

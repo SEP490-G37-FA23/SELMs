@@ -112,7 +112,7 @@ namespace SELMs.Repositories.Implements
         public dynamic GetDetailEquipment(string code)
         {
             dynamic equipments = null;
-            equipments = db.Database.Connection.QuerySingleAsync<dynamic>("Proc_GetDetailEquipment", new
+            equipments = db.Database.Connection.QueryFirstAsync<dynamic>("Proc_GetDetailEquipment", new
             {
                 system_code = code
 
