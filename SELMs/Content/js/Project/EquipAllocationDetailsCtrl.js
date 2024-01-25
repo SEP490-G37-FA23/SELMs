@@ -124,6 +124,7 @@ app.controller('EquipAllocationDetailsCtrl', function ($scope, $http, $sce) {
             $scope.ListMembers = response.data;
         });
     }
+    $scope.LoadMembersList();
     $scope.HandelMemberLocation = function (mb, NewHandover) {
         NewHandover.receipter = mb.user_code;
         NewHandover.receipter_name = mb.fullname;
