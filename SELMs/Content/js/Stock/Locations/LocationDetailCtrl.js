@@ -186,11 +186,11 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             is_active: true,
             ListSubLocation: $scope.ListSubLocation_L3
             }
-        var partialUrl = origin + '/api/v1/locations/update-sub-location/' + location.location_id;
+        var partialUrl = origin + '/api/v1/locations/update/' + location.location_id;
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật thông tin vị trí thành công!');
-
+                $scope.GetDetailLocation(url);
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });

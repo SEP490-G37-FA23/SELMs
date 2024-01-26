@@ -64,9 +64,10 @@
                                                 <th scope="col">Phòng lab</th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Dự án yêu cầu</th>
+                                                <th scope="col">Đơn yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
-                                            
+
                                                 <th scope="col" ng-show="role == 'SM'">Mã thiết bị tương ứng</th>
                                             </tr>
                                         </thead>
@@ -82,8 +83,10 @@
                                                         <option value="Thiết bị đang đợi nhập">Thiết bị đang đợi nhập	</option>
                                                         <option value="Thiết bị đã nhập về">Thiết bị đã nhập về	</option>
                                                         <option value="Thiết bị đã hoàn thành">Thiết bị đã hoàn thành	</option>
-                                                    </select></td>
+                                                    </select>
+                                                </td>
                                                 <td>{{item.project_name}}</td>
+                                                <td>{{item.ea_application_code}}</td>
                                                 <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
                                                 <td>{{item.fullname}}</td>
                                                 <td ng-show="role == 'SM'">
@@ -157,6 +160,7 @@
                                                 <th scope="col">Vị trí</th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Dự án yêu cầu</th>
+                                                <th scope="col">Đơn yêu cầu</th>
                                                 <th scope="col">Ngày yêu cầu</th>
                                                 <th scope="col">Người yêu cầu</th>
                                                 <th scope="col">Ghi chú</th>
@@ -175,6 +179,7 @@
                                                 <td>{{item.location_desciption}}</td>
                                                 <td>{{item.status}}</td>
                                                 <td>{{item.project_name}}</td>
+                                                <td>{{item.ea_application_code}}</td>
                                                 <td>{{item.application_date|date:'dd/MM/yyyy'}}</td>
                                                 <td>{{item.fullname}}</td>
                                                 <td>{{item.note}}</td>
