@@ -132,7 +132,7 @@
                     <tbody>
                         <tr ng-repeat="item in filtered = (ListEquipmentInLocation |filter: {equipment_name:equip_search})">
                             <td scope="row">{{$index+1}}</td>
-                            <td scope="row">{{item.system_equipment_code}}</td>
+                            <td scope="row" ng-click="GetDetailEqui(item.system_equipment_code)">{{item.system_equipment_code}}</td>
                             <td scope="row">{{item.standard_equipment_code}}</td>
                             <td scope="row">{{item.equipment_name}}</td>
                             <td scope="row">{{item.location_desciption}}</td>
@@ -277,8 +277,8 @@
                         <input type="text" class="form-control" ng-model="DetailSubLocation.location_code">
                     </div>
                     <div class="col-12">
-                        <label for="inputEmail4" class="form-label">Miêu tả</label>
-                        <input type="email" class="form-control" ng-model="DetailSubLocation.location_desciption">
+                        <label class="form-label">Miêu tả</label>
+                        <input type="text" class="form-control" ng-model="DetailSubLocation.location_desciption">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -341,7 +341,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in filtered = (ListEquipmentInSubLocation |filter: {equipment_name:equip_search})">
+                    <tr ng-repeat="item in filtered = (ListEquipmentInSubLocation |filter: {equipment_name:equip_search})"  ng-click="GetDetailEqui(item.system_equipment_code)"> 
                         <td scope="row">{{$index+1}}</td>
                         <td scope="row">{{item.system_equipment_code}}</td>
                         <td scope="row">{{item.standard_equipment_code}}</td>

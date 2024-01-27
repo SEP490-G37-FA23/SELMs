@@ -178,6 +178,7 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
    
 
     $scope.UpdateLocation = function (location) {
+        console.log(location)
         var data = {
             location_code: location.location_code,
             location_desciption: location.location_desciption,
@@ -342,5 +343,10 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
 
     $scope.AddEquipToLocation = function () {
         window.location.href = "/Equipments/CreateNewEquipment/ToLocationId?" + url;
+    }
+
+    $scope.GetDetailEqui = function (system_equipment_code) {
+      
+        window.location.href = "/Equipments/EquipmentDetails/" + system_equipment_code;
     }
 });
