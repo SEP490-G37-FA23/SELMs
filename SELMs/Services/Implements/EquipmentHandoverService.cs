@@ -68,7 +68,7 @@ namespace SELMs.Services.Implements
             return application;
         }
 
-        public async Task<dynamic> AddAttachment(int id, HttpPostedFile file)
+        public async Task<dynamic> SaveAttachment(int id, HttpPostedFile file)
         {
             Equipment_Handover_Form application = repository.GetApplication(id);
             if (application != null)
@@ -76,6 +76,13 @@ namespace SELMs.Services.Implements
                 Attachment attachment = CreateAttachment(file);
                 attachment.name = file.FileName;
                 attachment.date = DateTime.Now;
+
+                Attachment currentAttachment = repository.GetApplicationAttachment(application.form_id);
+
+                if(currentAttachment != null)
+                {
+                    repository.DeleteAttachment(application.form_id, currentAttachment.attach_id);
+                }
                 attachment = attachmentRepository.SaveAttachment(attachment);
                 repository.AddAttachment(application.form_id, attachment.attach_id);
                 return attachment;

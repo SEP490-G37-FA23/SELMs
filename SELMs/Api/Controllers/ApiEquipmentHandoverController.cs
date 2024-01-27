@@ -126,7 +126,7 @@ namespace SELMs.Api.Controllers
                 var files = HttpContext.Current.Request.Files.GetMultiple("file_attach");
                 foreach (var file in files)
                 {
-                    var item = await service.AddAttachment(Convert.ToInt32(applicationId), file);
+                    var item = await service.SaveAttachment(Convert.ToInt32(applicationId), file);
                     result.Add(item);
                 }
                 return Ok(result);
