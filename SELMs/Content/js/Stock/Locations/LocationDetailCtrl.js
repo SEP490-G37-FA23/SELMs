@@ -175,7 +175,18 @@ app.controller('LocationDetailCtrl', function ($scope, $http, $sce) {
             is_active: true
         })
     }
-   
+
+    $scope.ValidateDataInput = function (location) {
+        var regex = /\S/;
+        console.log('location code: ', location.location_code);
+        if (!regex.test(location.location_code)) {
+            console.log('invalid location code');
+            $scope.ErrorSystem('Vui lòng nhập mã chuẩn vị trí.');
+        }
+        else {
+            $scope.UpdateLocation(location);
+        }
+    }
 
     $scope.UpdateLocation = function (location) {
         var data = {
