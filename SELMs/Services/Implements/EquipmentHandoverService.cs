@@ -77,12 +77,12 @@ namespace SELMs.Services.Implements
                 attachment.name = file.FileName;
                 attachment.date = DateTime.Now;
 
-                Attachment currentAttachment = repository.GetApplicationAttachment(application.form_id);
+                //Attachment currentAttachment = repository.GetApplicationAttachment(application.form_id);
 
-                if(currentAttachment != null)
-                {
-                    repository.DeleteAttachment(application.form_id, currentAttachment.attach_id);
-                }
+                //if(currentAttachment != null)
+                //{
+                //    repository.DeleteAttachment(application.form_id, currentAttachment.attach_id);
+                //}
                 attachment = attachmentRepository.SaveAttachment(attachment);
                 repository.AddAttachment(application.form_id, attachment.attach_id);
                 return attachment;
