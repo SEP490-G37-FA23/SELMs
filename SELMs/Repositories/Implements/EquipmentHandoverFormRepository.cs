@@ -182,6 +182,7 @@ namespace SELMs.Repositories.Implements
             Attachment attachment = db.Attachments.Where(a => a.attach_id == attachmentId).FirstOrDefault();
             db.Application_Attachment.Remove(appAttach);
             db.Attachments.Remove(attachment);
+            db.SaveChanges();
         }
     }
 }
