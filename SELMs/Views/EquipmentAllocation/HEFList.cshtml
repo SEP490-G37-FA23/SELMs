@@ -83,7 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ListHEF">
+                                <tr ng-repeat="item in ListHEF | filter:{form_code: application_code, name_creater:creater_name,project_name: project_name, location_code:location_name }">
                                     <td>{{$index+1}}</td>
                                     <td ng-click="GetDetailHandoverForm(item)" style="cursor: pointer;">{{item.form_code}}</td>
                                     <td>{{item.description}}</td>
@@ -98,7 +98,7 @@
                                     <td>{{item.is_finish == 1?'Đã hoàn thành':'Chưa hoàn thành'}}</td>
                                     <td>
                                         <a href="{{item.url}}">{{item.attachment_name}} </a>
-                                        
+
                                         <input ng-model="item.attach_file" type="file" id="attach_file{{item.form_code}}" class="form-control" />
                                     </td>
                                     <td>

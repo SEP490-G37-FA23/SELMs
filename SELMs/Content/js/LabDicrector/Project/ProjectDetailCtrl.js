@@ -1,5 +1,4 @@
-﻿
-var app = angular.module("myApp", []);
+﻿var app = angular.module("myApp", []);
 
 app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
 
@@ -85,6 +84,12 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
                 $scope.text = $scope.DetailProject.manager_name;
                 $scope.ListMembersJoinProject = response.data.ProjectMembers;
                 $scope.ListEquipmentProject = response.data.ProjectEquipments;
+                $scope.ListEquipmentProject.forEach(item => {
+                    item.textEquip = item.system_equipment_code;
+                });
+                $scope.ListMembersJoinProject.forEach(item => {
+                    item.text
+                });
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
@@ -245,7 +250,7 @@ app.controller('ProjectDetailCtrl', function ($scope, $http, $sce) {
         $http.post(partialUrl, data)
             .then(function (response) {
                 $scope.SuccessSystem('Cập nhật dự án thành công!');
-                $scope.Resetproject();
+                $scope.GetDetailProject(url);
             }, function (error) {
                 $scope.ErrorSystem(error.data.Message);
             });
